@@ -1,0 +1,16 @@
+{
+  "name": "dirigent-access-bot",
+  "version": "1.0.0",
+  "description": "Dirigent — бот управления доступом",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "grammy": "^1.21.1",
+    "uuid": "^14.0.0"
+  }
+}

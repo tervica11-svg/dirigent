@@ -1,0 +1,5 @@
+# Скопируй этот файл в .env и заполни:
+# cp config.template .env
+
+BOT_TOKEN=сюда_токен_от_BotFather
+ADMIN_ID=сюда_твой_числовой_Telegram_ID

@@ -1,0 +1,17 @@
+[Unit]
+Description=Dirigent Access Bot
+After=network.target
+
+[Service]
+Type=simple
+User=agent
+WorkingDirectory=/home/agent/projects/dirigent/access-bot
+EnvironmentFile=/home/agent/projects/dirigent/access-bot/.env
+ExecStart=/usr/bin/node index.js
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

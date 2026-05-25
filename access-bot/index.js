@@ -174,6 +174,10 @@ const T = {
     about: `<b>Dirigent</b> — это персональный AI-агент на базе Claude Code.\n\n• Общается в Telegram 24/7\n• Помнит ваши проекты и привычки\n• Понимает голос, фото, документы\n• Пишет код, создаёт контент, ведёт задачи\n• Живёт на вашем сервере — данные только у вас\n\nЧтобы получить своего агента — нажмите <b>«Получить доступ»</b>.`,
     faq: `<b>Частые вопросы</b>\n\n<b>Сколько стоит?</b>\n1 000 € — разовый платёж, включает установку и настройку.\n\n<b>Нужен ли сервер?</b>\nДа, VPS Ubuntu 22/24 (~5–10 €/мес). Помогаем настроить.\n\n<b>Нужна ли подписка Claude?</b>\nДа, Claude Pro ($20/мес) или Max ($100/мес).\n\n<b>Мои данные в безопасности?</b>\nАгент живёт на вашем сервере. Мы не имеем доступа к вашим данным.\n\nПо другим вопросам — @tervica11`,
     knowledge: `<b>📚 База знаний — Как получить личного AI-агента</b>\n\n<b>Что такое Dirigent?</b>\nDirigent — это завод персональных AI-агентов на базе Claude. Ваш агент живёт на вашем сервере, общается с вами в Telegram 24/7, помнит проекты и становится умнее с каждым разговором.\n\n<b>Что нужно подготовить:</b>\n\n1️⃣ <b>Claude Code</b> — установить на ваш компьютер\nСкачать: claude.ai/code (бесплатно)\nПодписка: Pro — $20/мес или Max — $100/мес\n\n2️⃣ <b>VPS-сервер</b> — арендованный сервер для работы агента 24/7\nЦена: ~5–10 €/мес (Hetzner, DigitalOcean, TimeWeb и др.)\nСистема: Ubuntu 22 или 24\nПомогаем выбрать и настроить — просто напишите нам.\n\n3️⃣ <b>15 минут свободного времени</b>\nВсё остальное Claude Code сделает сам.\n\n<b>Как это происходит:</b>\n1. Вы оплачиваете → пишете нам @tervica11\n2. Мы открываем вам доступ в этом боте\n3. Нажимаете «Получить доступ» → получаете токен\n4. Вставляете токен в Claude Code → агент устанавливается сам\n\n<b>Стоимость: 1 000 €</b> — разовый платёж\nВключает: установку, настройку, поддержку при старте.\n\nГотовы? Напишите <b>@tervica11</b>`,
+    no_username: `⚠️ У вас не установлен username в Telegram.\n\nЗайдите в Настройки → задайте имя пользователя, затем попробуйте снова.`,
+    no_access: (u) => `🔒 Ваш username <code>@${u}</code> не найден в списке доступа.\n\nЧтобы получить доступ — напишите <b>@tervica11</b>.`,
+    token_issued: (prompt) => `✅ Доступ подтверждён! Вот ваш установочный промпт:\n\n<pre>${prompt}</pre>\n\n<b>Как использовать:</b>\n1. Откройте Claude Code на вашем компьютере\n2. Вставьте промпт выше и нажмите Enter\n3. Claude Code настроит агента сам (~10–15 минут)\n\n⚠️ Токен одноразовый. Если потребуется переустановка — нажмите /get снова.`,
+    token_notify: (u, id) => `🔑 Выдан токен\nПользователь: @${u}\nТокен: <code>${id}</code>`,
   },
   de: {
     start_text: `👋 Willkommen bei <b>Dirigent</b> — der Fabrik für persönliche AI-Agenten.\n\nIhr persönlicher Agent arbeitet 24/7 in Telegram, merkt sich Ihre Projekte und wird mit jedem Gespräch klüger.\n\nWählen Sie eine Aktion:`,
@@ -184,6 +188,10 @@ const T = {
     about: `<b>Dirigent</b> — Ihr persönlicher AI-Agent auf Basis von Claude Code.\n\n• Kommuniziert 24/7 über Telegram\n• Merkt sich Ihre Projekte und Gewohnheiten\n• Versteht Sprachnachrichten, Fotos, Dokumente\n• Schreibt Code, erstellt Inhalte, verwaltet Aufgaben\n• Läuft auf Ihrem Server — Ihre Daten bleiben bei Ihnen\n\nUm Ihren Agenten zu erhalten — klicken Sie auf <b>«Zugang erhalten»</b>.`,
     faq: `<b>Häufige Fragen</b>\n\n<b>Was kostet es?</b>\n1.000 € — Einmalzahlung, inkl. Installation und Einrichtung.\n\n<b>Brauche ich einen Server?</b>\nJa, VPS Ubuntu 22/24 (~5–10 €/Mon.). Wir helfen bei der Einrichtung.\n\n<b>Brauche ich ein Claude-Abo?</b>\nJa, Claude Pro ($20/Mon.) oder Max ($100/Mon.).\n\n<b>Sind meine Daten sicher?</b>\nDer Agent läuft auf Ihrem Server. Wir haben keinen Zugriff auf Ihre Daten.\n\nWeitere Fragen — @tervica11`,
     knowledge: `<b>📚 Wissensbasis — So erhalten Sie Ihren persönlichen AI-Agenten</b>\n\n<b>Was ist Dirigent?</b>\nDirigent ist eine Fabrik für persönliche AI-Agenten auf Basis von Claude. Ihr Agent läuft auf Ihrem eigenen Server, kommuniziert 24/7 über Telegram, merkt sich Ihre Projekte und wird mit jedem Gespräch klüger.\n\n<b>Was Sie vorbereiten müssen:</b>\n\n1️⃣ <b>Claude Code</b> — auf Ihrem Computer installieren\nDownload: claude.ai/code (kostenlos)\nAbo: Pro — $20/Mon. oder Max — $100/Mon.\n\n2️⃣ <b>VPS-Server</b> — gemieteter Server für den 24/7-Betrieb\nPreis: ~5–10 €/Mon. (Hetzner, DigitalOcean u.a.)\nSystem: Ubuntu 22 oder 24\nWir helfen bei Auswahl und Einrichtung — schreiben Sie uns einfach.\n\n3️⃣ <b>15 Minuten Zeit</b>\nDen Rest erledigt Claude Code automatisch.\n\n<b>So läuft es ab:</b>\n1. Sie bezahlen → schreiben Sie uns @tervica11\n2. Wir schalten Sie in diesem Bot frei\n3. Klicken Sie «Zugang erhalten» → erhalten Ihren Token\n4. Token in Claude Code einfügen → Agent installiert sich selbst\n\n<b>Preis: 1.000 €</b> — Einmalzahlung\nInklusive: Installation, Einrichtung, Support beim Start.\n\nBereit? Schreiben Sie <b>@tervica11</b>`,
+    no_username: `⚠️ Sie haben keinen Telegram-Benutzernamen.\n\nGehen Sie zu Einstellungen → legen Sie einen Benutzernamen fest und versuchen Sie es erneut.`,
+    no_access: (u) => `🔒 Ihr Benutzername <code>@${u}</code> wurde nicht in der Zugriffsliste gefunden.\n\nUm Zugang zu erhalten — schreiben Sie <b>@tervica11</b>.`,
+    token_issued: (prompt) => `✅ Zugang bestätigt! Hier ist Ihr Installations-Prompt:\n\n<pre>${prompt}</pre>\n\n<b>So verwenden Sie ihn:</b>\n1. Öffnen Sie Claude Code auf Ihrem Computer\n2. Fügen Sie den obigen Prompt ein und drücken Sie Enter\n3. Claude Code richtet den Agenten automatisch ein (~10–15 Min.)\n\n⚠️ Der Token ist einmalig. Bei Neuinstallation — tippen Sie erneut /get.`,
+    token_notify: (u, id) => `🔑 Token ausgestellt\nBenutzer: @${u}\nToken: <code>${id}</code>`,
   }
 };
 
@@ -311,12 +319,10 @@ bot.command("get", async (ctx) => {
 
 async function handleGet(ctx) {
   const username = ctx.from?.username;
+  const t = T[getLang(ctx)];
 
   if (!username) {
-    await ctx.reply(
-      `⚠️ У вас не установлен username в Telegram.\n\n` +
-      `Зайдите в Настройки → задайте имя пользователя, затем попробуйте снова.`
-    );
+    await ctx.reply(t.no_username);
     return;
   }
 
@@ -324,11 +330,7 @@ async function handleGet(ctx) {
   const key = normalizeUsername(username);
 
   if (!whitelist[key] || !whitelist[key].active) {
-    await ctx.reply(
-      `🔒 Ваш username <code>@${username}</code> не найден в списке доступа.\n\n` +
-      `Чтобы получить доступ — напишите <b>@tervica11</b>.`,
-      { parse_mode: "HTML" }
-    );
+    await ctx.reply(t.no_access(username), { parse_mode: "HTML" });
     return;
   }
 
@@ -336,23 +338,15 @@ async function handleGet(ctx) {
   const tokenId = await issueToken(key);
   const prompt  = buildPrompt(key, tokenId);
 
-  await ctx.reply(
-    `✅ Доступ подтверждён! Вот ваш установочный промпт:\n\n` +
-    `<pre>${prompt}</pre>\n\n` +
-    `<b>Как использовать:</b>\n` +
-    `1. Откройте Claude Code на вашем компьютере\n` +
-    `2. Вставьте промпт выше и нажмите Enter\n` +
-    `3. Claude Code настроит агента сам (~10–15 минут)\n\n` +
-    `⚠️ Токен одноразовый. Если потребуется переустановка — нажмите /get снова.`,
-    { parse_mode: "HTML" }
-  );
+  await ctx.reply(t.token_issued(prompt), { parse_mode: "HTML" });
 
-  // Уведомляем администратора
+  // Уведомляем администратора (всегда на русском)
   await bot.api.sendMessage(
     ADMIN_ID,
     `🔑 Выдан токен\nПользователь: @${username}\nТокен: <code>${tokenId}</code>`,
     { parse_mode: "HTML" }
   );
+
 }
 
 // /help

@@ -145,25 +145,135 @@ async function issueToken(username) {
   return id;
 }
 
-// Промпт, который отправляется клиенту
+// URL для скачивания ZIP (используется внутри промпта)
+const DOWNLOAD_URL = "https://dirigent-gray.vercel.app/api/zip";
+
+// Промпт, который отправляется клиенту — полностью самодостаточный
 function buildPrompt(username, tokenId, lang = "ru") {
-  const issued = humanDate(new Date().toISOString());
+  const issued  = humanDate(new Date().toISOString());
+  const last4   = tokenId.slice(-4);
+  const zipUrl  = `${DOWNLOAD_URL}/${tokenId}`;
+
   if (lang === "de") {
-    return (
-      `Lade die Anleitung von ${INSTALL_URL}\n` +
-      `und führe alles aus, was darin steht.\n\n` +
-      `Telegram: @${username}\n` +
-      `Token: ${tokenId}\n` +
-      `Ausgestellt: ${issued}`
-    );
+    return [
+      `Hallo Claude. Du bist der Installationsassistent für Dirigent — einen persönlichen AI-Agenten.`,
+      ``,
+      `Kundendaten:`,
+      `Telegram: @${username}`,
+      `Token: ${tokenId}`,
+      `Ausgestellt: ${issued}`,
+      ``,
+      `Führe die Installation Schritt für Schritt durch:`,
+      ``,
+      `## Schritt 1 — Paket herunterladen`,
+      ``,
+      `Sage: «Hallo! Ich lade Ihr Dirigent-Paket herunter — einen Moment.»`,
+      ``,
+      `Führe aus:`,
+      ``,
+      `\`\`\`bash`,
+      `mkdir -p ~/dirigent`,
+      `cd ~/dirigent`,
+      `curl -fsSL "${zipUrl}" -o package.zip`,
+      `unzip -q package.zip`,
+      `inner=$(ls -d dirigent-*/ 2>/dev/null | head -n 1)`,
+      `if [ -n "$inner" ]; then mv "$inner"* . 2>/dev/null || true; rmdir "$inner" 2>/dev/null || true; fi`,
+      `rm -f package.zip`,
+      `ls -1 ~/dirigent | head -20`,
+      `\`\`\``,
+      ``,
+      `Wenn curl HTTP 403 oder 429 zurückgibt — Token abgelaufen. Sage:`,
+      `«Token abgelaufen. Schreiben Sie dem Bot @dirigent_access_bot den Befehl /new — ich stelle einen neuen aus.»`,
+      `Und stop.`,
+      ``,
+      `## Schritt 2 — Wasserzeichen setzen`,
+      ``,
+      `Lese ~/dirigent/LICENSE.md, ersetze {{LICENSED_TO}} durch:`,
+      `@${username} (ausgestellt ${issued}, Token ...${last4})`,
+      ``,
+      `## Schritt 3 — Konfigurationsdateien lesen`,
+      ``,
+      `Lese per Read-Tool:`,
+      `- ~/dirigent/.claude/CLAUDE.md`,
+      `- ~/dirigent/INSTALL.md`,
+      ``,
+      `## Schritt 4 — Frage, wohin installiert werden soll`,
+      ``,
+      `Frage genau so:`,
+      `«Wohin soll Ihr Agent installiert werden?`,
+      `1. Auf diesen Computer — ~10 Minuten, Agent läuft wenn der Computer an ist`,
+      `2. Auf einen Server (VPS) — 24/7-Betrieb, benötige IP und Passwort`,
+      `3. In ein bestehendes Projekt — füge zu einem bereits eingerichteten Agenten hinzu»`,
+      ``,
+      `Warte auf die Antwort. Tue nichts, bis Sie die Wahl getroffen haben.`,
+      ``,
+      `## Schritt 5 — Handeln nach Wahl`,
+      ``,
+      `A — «Auf diesen Computer»: Führe ~/dirigent/INSTALL.md vollständig aus.`,
+      `B — «Auf Server»: Frage nach IP, Root-Passwort und Telegram-Bot-Token. Dann ~/dirigent/server/INSTALL-SERVER.md.`,
+      `C — «Bestehendes Projekt»: Frage nach dem Projektpfad. Lese MEMORY.md — nicht überschreiben. Ergänze nur fehlende Teile.`,
+    ].join("\n");
   }
-  return (
-    `Скачай инструкцию с ${INSTALL_URL}\n` +
-    `и выполни всё что в ней написано.\n\n` +
-    `Telegram: @${username}\n` +
-    `Токен: ${tokenId}\n` +
-    `Выдан: ${issued}`
-  );
+
+  // RU
+  return [
+    `Привет, Claude. Ты — установщик Dirigent, персонального AI-агента.`,
+    ``,
+    `Данные пользователя:`,
+    `Telegram: @${username}`,
+    `Токен: ${tokenId}`,
+    `Выдан: ${issued}`,
+    ``,
+    `Выполни установку пошагово:`,
+    ``,
+    `## Шаг 1 — Скачать пакет`,
+    ``,
+    `Скажи: «Привет! Скачиваю ваш пакет Dirigent — пару секунд.»`,
+    ``,
+    `Выполни:`,
+    ``,
+    `\`\`\`bash`,
+    `mkdir -p ~/dirigent`,
+    `cd ~/dirigent`,
+    `curl -fsSL "${zipUrl}" -o package.zip`,
+    `unzip -q package.zip`,
+    `inner=$(ls -d dirigent-*/ 2>/dev/null | head -n 1)`,
+    `if [ -n "$inner" ]; then mv "$inner"* . 2>/dev/null || true; rmdir "$inner" 2>/dev/null || true; fi`,
+    `rm -f package.zip`,
+    `ls -1 ~/dirigent | head -20`,
+    `\`\`\``,
+    ``,
+    `Если curl вернул HTTP 403 или 429 — токен сгорел. Скажи:`,
+    `«Токен сгорел. Напишите боту @dirigent_access_bot команду /new — выдам новый.»`,
+    `И остановись.`,
+    ``,
+    `## Шаг 2 — Водяной знак`,
+    ``,
+    `Прочитай ~/dirigent/LICENSE.md, замени {{LICENSED_TO}} на:`,
+    `@${username} (выдано ${issued}, токен ...${last4})`,
+    ``,
+    `## Шаг 3 — Прочитай конфиг-файлы`,
+    ``,
+    `Прочитай через Read:`,
+    `- ~/dirigent/.claude/CLAUDE.md`,
+    `- ~/dirigent/INSTALL.md`,
+    ``,
+    `## Шаг 4 — Спроси куда ставим`,
+    ``,
+    `Спроси точно так:`,
+    `«Куда устанавливаем вашего Агента?`,
+    `1. На этот компьютер — ~10 минут, агент работает пока компьютер включён`,
+    `2. На сервер (VPS) — работает 24/7, нужны IP и пароль`,
+    `3. В существующий проект — добавлю в уже настроенного агента»`,
+    ``,
+    `Жди ответа. Ничего не делай пока не получишь выбор.`,
+    ``,
+    `## Шаг 5 — Действуй по выбору`,
+    ``,
+    `A — «На компьютер»: выполни ~/dirigent/INSTALL.md полностью.`,
+    `B — «На сервер»: спроси IP, пароль root и токен Telegram-бота. Затем ~/dirigent/server/INSTALL-SERVER.md.`,
+    `C — «В существующий проект»: спроси путь к проекту. Прочти MEMORY.md — не перетирай. Добавь только недостающие части.`,
+  ].join("\n");
 }
 
 // ─── БОТ ──────────────────────────────────────────────────────────────────────

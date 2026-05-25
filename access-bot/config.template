@@ -3,3 +3,7 @@
 
 BOT_TOKEN=сюда_токен_от_BotFather
 ADMIN_ID=сюда_твой_числовой_Telegram_ID
+
+# Upstash Redis — для синхронизации токенов с Vercel API
+UPSTASH_REDIS_REST_URL=сюда_url_из_upstash
+UPSTASH_REDIS_REST_TOKEN=сюда_токен_из_upstash

@@ -1,0 +1,9 @@
+{
+  "name": "dirigent",
+  "version": "1.0.0",
+  "description": "Dirigent — завод персональных AI-агентов",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  }
+}

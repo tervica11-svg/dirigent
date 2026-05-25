@@ -74,24 +74,68 @@ function humanDate(iso) {
   });
 }
 
+// ─── UPSTASH REDIS ────────────────────────────────────────────────────────────
+
+const UPSTASH_URL   = process.env.UPSTASH_REDIS_REST_URL;
+const UPSTASH_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
+
+async function redisSet(key, value) {
+  if (!UPSTASH_URL || !UPSTASH_TOKEN) return; // пропускаем если не настроено
+  try {
+    await fetch(`${UPSTASH_URL}/set/${encodeURIComponent(key)}`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${UPSTASH_TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(typeof value === 'string' ? value : JSON.stringify(value)),
+    });
+  } catch (err) {
+    console.error('Redis set error:', err.message);
+  }
+}
+
+async function redisRevoke(key) {
+  if (!UPSTASH_URL || !UPSTASH_TOKEN) return;
+  try {
+    // Читаем текущее значение
+    const res = await fetch(`${UPSTASH_URL}/get/${encodeURIComponent(key)}`, {
+      headers: { Authorization: `Bearer ${UPSTASH_TOKEN}` },
+    });
+    const json = await res.json();
+    if (!json.result) return;
+    const data = JSON.parse(json.result);
+    data.revoked = true;
+    await redisSet(key, data);
+  } catch (err) {
+    console.error('Redis revoke error:', err.message);
+  }
+}
+
+// ─── ТОКЕНЫ ───────────────────────────────────────────────────────────────────
+
 // Генерируем токен и сохраняем
-function issueToken(username) {
+async function issueToken(username) {
   const tokens = tk();
   // Аннулируем предыдущие неиспользованные токены этого пользователя
   for (const [id, t] of Object.entries(tokens)) {
     if (t.username === username && !t.used) {
       tokens[id].revoked = true;
+      await redisRevoke(`token:${id}`);
     }
   }
   const id = uuidv4();
-  tokens[id] = {
+  const tokenData = {
     username,
     issued: new Date().toISOString(),
     used: false,
     usedAt: null,
     revoked: false
   };
+  tokens[id] = tokenData;
   saveTK(tokens);
+  // Сохраняем токен в Redis для Vercel API
+  await redisSet(`token:${id}`, tokenData);
   return id;
 }
 
@@ -194,7 +238,7 @@ async function handleGet(ctx) {
   }
 
   // Выдаём токен
-  const tokenId = issueToken(key);
+  const tokenId = await issueToken(key);
   const prompt  = buildPrompt(key, tokenId);
 
   await ctx.reply(

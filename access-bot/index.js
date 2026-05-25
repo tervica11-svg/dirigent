@@ -183,7 +183,7 @@ const T = {
   ru: {
     start_text: `👋 Добро пожаловать в <b>Dirigent</b> — завод персональных AI-агентов.\n\nВаш личный агент работает 24/7 в Telegram, помнит ваши проекты и становится умнее с каждым разговором.\n\nВыберите действие:`,
     btn_about:   "🤖 Что такое Dirigent?",
-    btn_access:  "🔑 Получить доступ",
+    btn_access:  "▶ Получить промпт",
     btn_knowledge: "📚 База знаний",
     btn_faq:     "❓ Частые вопросы",
     about: `<b>Dirigent</b> — это персональный AI-агент на базе Claude Code.\n\n• Общается в Telegram 24/7\n• Помнит ваши проекты и привычки\n• Понимает голос, фото, документы\n• Пишет код, создаёт контент, ведёт задачи\n• Живёт на вашем сервере — данные только у вас\n\nЧтобы получить своего агента — нажмите <b>«Получить доступ»</b>.`,
@@ -197,7 +197,7 @@ const T = {
   de: {
     start_text: `👋 Willkommen bei <b>Dirigent</b> — der Fabrik für persönliche AI-Agenten.\n\nIhr persönlicher Agent arbeitet 24/7 in Telegram, merkt sich Ihre Projekte und wird mit jedem Gespräch klüger.\n\nWählen Sie eine Aktion:`,
     btn_about:   "🤖 Was ist Dirigent?",
-    btn_access:  "🔑 Zugang erhalten",
+    btn_access:  "▶ Prompt erhalten",
     btn_knowledge: "📚 Wissensbasis",
     btn_faq:     "❓ Häufige Fragen",
     about: `<b>Dirigent</b> — Ihr persönlicher AI-Agent auf Basis von Claude Code.\n\n• Kommuniziert 24/7 über Telegram\n• Merkt sich Ihre Projekte und Gewohnheiten\n• Versteht Sprachnachrichten, Fotos, Dokumente\n• Schreibt Code, erstellt Inhalte, verwaltet Aufgaben\n• Läuft auf Ihrem Server — Ihre Daten bleiben bei Ihnen\n\nUm Ihren Agenten zu erhalten — klicken Sie auf <b>«Zugang erhalten»</b>.`,

@@ -104,7 +104,13 @@ async function redisRevoke(key) {
     });
     const json = await res.json();
     if (!json.result) return;
-    const data = JSON.parse(json.result);
+    // Парсим до объекта (защита от двойного кодирования)
+    let data = json.result;
+    for (let i = 0; i < 3; i++) {
+      if (typeof data !== 'string') break;
+      try { data = JSON.parse(data); } catch { break; }
+    }
+    if (typeof data !== 'object' || data === null) return;
     data.revoked = true;
     await redisSet(key, data);
   } catch (err) {

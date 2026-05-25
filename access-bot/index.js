@@ -155,10 +155,12 @@ function buildPrompt(username, tokenId) {
 
 const bot = new Bot(BOT_TOKEN);
 
-// Определяем язык пользователя: 'de' если Telegram-язык немецкий, иначе 'ru'
+// Хранилище выбранного языка по userId (сбрасывается при рестарте бота)
+const userLang = new Map();
+
+// Получить язык пользователя (default: ru)
 function getLang(ctx) {
-  const lang = ctx.from?.language_code || "";
-  return lang.startsWith("de") ? "de" : "ru";
+  return userLang.get(ctx.from?.id) || "ru";
 }
 
 // Тексты на двух языках
@@ -185,15 +187,39 @@ const T = {
   }
 };
 
-// /start
-bot.command("start", async (ctx) => {
-  const lang = getLang(ctx);
+// Показать главное меню на нужном языке
+async function showMainMenu(ctx, lang) {
   const t = T[lang];
   const kb = new InlineKeyboard()
     .text(t.btn_about, "about").row()
     .text(t.btn_access, "get_token").row()
     .text(t.btn_knowledge, "knowledge").text(t.btn_faq, "faq");
   await ctx.reply(t.start_text, { parse_mode: "HTML", reply_markup: kb });
+}
+
+// /start — сначала выбор языка
+bot.command("start", async (ctx) => {
+  const kb = new InlineKeyboard()
+    .text("🇷🇺 Русский", "lang_ru")
+    .text("🇩🇪 Deutsch", "lang_de");
+  await ctx.reply(
+    `👋 <b>Dirigent</b>\n\nВыберите язык / Sprache wählen:`,
+    { parse_mode: "HTML", reply_markup: kb }
+  );
+});
+
+// Выбор языка — русский
+bot.callbackQuery("lang_ru", async (ctx) => {
+  await ctx.answerCallbackQuery();
+  userLang.set(ctx.from.id, "ru");
+  await showMainMenu(ctx, "ru");
+});
+
+// Выбор языка — немецкий
+bot.callbackQuery("lang_de", async (ctx) => {
+  await ctx.answerCallbackQuery();
+  userLang.set(ctx.from.id, "de");
+  await showMainMenu(ctx, "de");
 });
 
 // Кнопка — о продукте

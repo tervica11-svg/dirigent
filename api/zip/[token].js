@@ -17,8 +17,13 @@ async function redisGet(key) {
   });
   const json = await res.json();
   if (!json.result) return null;
-  try { return JSON.parse(json.result); }
-  catch { return json.result; }
+  // Парсим до объекта (защита от двойного JSON-кодирования)
+  let value = json.result;
+  for (let i = 0; i < 3; i++) {
+    if (typeof value !== 'string') break;
+    try { value = JSON.parse(value); } catch { break; }
+  }
+  return value;
 }
 
 async function redisSet(key, value) {

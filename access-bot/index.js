@@ -146,8 +146,17 @@ async function issueToken(username) {
 }
 
 // Промпт, который отправляется клиенту
-function buildPrompt(username, tokenId) {
+function buildPrompt(username, tokenId, lang = "ru") {
   const issued = humanDate(new Date().toISOString());
+  if (lang === "de") {
+    return (
+      `Lade die Anleitung von ${INSTALL_URL}\n` +
+      `und führe alles aus, was darin steht.\n\n` +
+      `Telegram: @${username}\n` +
+      `Token: ${tokenId}\n` +
+      `Ausgestellt: ${issued}`
+    );
+  }
   return (
     `Скачай инструкцию с ${INSTALL_URL}\n` +
     `и выполни всё что в ней написано.\n\n` +
@@ -341,8 +350,9 @@ async function handleGet(ctx) {
   }
 
   // Выдаём токен
+  const lang    = getLang(ctx);
   const tokenId = await issueToken(key);
-  const prompt  = buildPrompt(key, tokenId);
+  const prompt  = buildPrompt(key, tokenId, lang);
 
   await ctx.reply(t.token_issued(prompt), { parse_mode: "HTML" });
 

@@ -28,7 +28,7 @@
 ```bash
 mkdir -p ~/dirigent
 cd ~/dirigent
-curl -fsSL "https://dirigent.vercel.app/zip/ВАШ_ТОКЕН" -o package.zip
+curl -fsSL "https://dirigent-gray.vercel.app/api/zip/ВАШ_ТОКЕН" -o package.zip
 unzip -q package.zip
 inner=$(ls -d dirigent-*/ 2>/dev/null | head -n 1)
 if [ -n "$inner" ]; then

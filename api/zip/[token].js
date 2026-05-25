@@ -3,13 +3,13 @@
  * GET /api/zip/:token
  */
 
-import { readFileSync } from 'fs';
-import { join } from 'path';
+const { readFileSync } = require('fs');
+const { join } = require('path');
 
 const UPSTASH_URL   = process.env.UPSTASH_REDIS_REST_URL;
 const UPSTASH_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
 
-// ─── Redis helpers (через REST API, без SDK) ──────────────────────────────────
+// ─── Redis helpers ────────────────────────────────────────────────────────────
 
 async function redisGet(key) {
   const res = await fetch(`${UPSTASH_URL}/get/${encodeURIComponent(key)}`, {
@@ -34,7 +34,7 @@ async function redisSet(key, value) {
 
 // ─── Handler ──────────────────────────────────────────────────────────────────
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   const { token } = req.query;
 
   if (!token) {
@@ -69,7 +69,7 @@ export default async function handler(req, res) {
   }
 
   // Помечаем токен как использованный
-  tokenData.used  = true;
+  tokenData.used   = true;
   tokenData.usedAt = new Date().toISOString();
   await redisSet(`token:${token}`, tokenData);
 
@@ -88,4 +88,4 @@ export default async function handler(req, res) {
   res.setHeader('Content-Disposition', 'attachment; filename="dirigent-agent.zip"');
   res.setHeader('Content-Length', zipData.length);
   return res.send(zipData);
-}
+};

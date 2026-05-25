@@ -155,67 +155,66 @@ function buildPrompt(username, tokenId) {
 
 const bot = new Bot(BOT_TOKEN);
 
+// Определяем язык пользователя: 'de' если Telegram-язык немецкий, иначе 'ru'
+function getLang(ctx) {
+  const lang = ctx.from?.language_code || "";
+  return lang.startsWith("de") ? "de" : "ru";
+}
+
+// Тексты на двух языках
+const T = {
+  ru: {
+    start_text: `👋 Добро пожаловать в <b>Dirigent</b> — завод персональных AI-агентов.\n\nВаш личный агент работает 24/7 в Telegram, помнит ваши проекты и становится умнее с каждым разговором.\n\nВыберите действие:`,
+    btn_about:   "🤖 Что такое Dirigent?",
+    btn_access:  "🔑 Получить доступ",
+    btn_knowledge: "📚 База знаний",
+    btn_faq:     "❓ Частые вопросы",
+    about: `<b>Dirigent</b> — это персональный AI-агент на базе Claude Code.\n\n• Общается в Telegram 24/7\n• Помнит ваши проекты и привычки\n• Понимает голос, фото, документы\n• Пишет код, создаёт контент, ведёт задачи\n• Живёт на вашем сервере — данные только у вас\n\nЧтобы получить своего агента — нажмите <b>«Получить доступ»</b>.`,
+    faq: `<b>Частые вопросы</b>\n\n<b>Сколько стоит?</b>\n1 000 € — разовый платёж, включает установку и настройку.\n\n<b>Нужен ли сервер?</b>\nДа, VPS Ubuntu 22/24 (~5–10 €/мес). Помогаем настроить.\n\n<b>Нужна ли подписка Claude?</b>\nДа, Claude Pro ($20/мес) или Max ($100/мес).\n\n<b>Мои данные в безопасности?</b>\nАгент живёт на вашем сервере. Мы не имеем доступа к вашим данным.\n\nПо другим вопросам — @tervica11`,
+    knowledge: `<b>📚 База знаний — Как получить личного AI-агента</b>\n\n<b>Что такое Dirigent?</b>\nDirigent — это завод персональных AI-агентов на базе Claude. Ваш агент живёт на вашем сервере, общается с вами в Telegram 24/7, помнит проекты и становится умнее с каждым разговором.\n\n<b>Что нужно подготовить:</b>\n\n1️⃣ <b>Claude Code</b> — установить на ваш компьютер\nСкачать: claude.ai/code (бесплатно)\nПодписка: Pro — $20/мес или Max — $100/мес\n\n2️⃣ <b>VPS-сервер</b> — арендованный сервер для работы агента 24/7\nЦена: ~5–10 €/мес (Hetzner, DigitalOcean, TimeWeb и др.)\nСистема: Ubuntu 22 или 24\nПомогаем выбрать и настроить — просто напишите нам.\n\n3️⃣ <b>15 минут свободного времени</b>\nВсё остальное Claude Code сделает сам.\n\n<b>Как это происходит:</b>\n1. Вы оплачиваете → пишете нам @tervica11\n2. Мы открываем вам доступ в этом боте\n3. Нажимаете «Получить доступ» → получаете токен\n4. Вставляете токен в Claude Code → агент устанавливается сам\n\n<b>Стоимость: 1 000 €</b> — разовый платёж\nВключает: установку, настройку, поддержку при старте.\n\nГотовы? Напишите <b>@tervica11</b>`,
+  },
+  de: {
+    start_text: `👋 Willkommen bei <b>Dirigent</b> — der Fabrik für persönliche AI-Agenten.\n\nIhr persönlicher Agent arbeitet 24/7 in Telegram, merkt sich Ihre Projekte und wird mit jedem Gespräch klüger.\n\nWählen Sie eine Aktion:`,
+    btn_about:   "🤖 Was ist Dirigent?",
+    btn_access:  "🔑 Zugang erhalten",
+    btn_knowledge: "📚 Wissensbasis",
+    btn_faq:     "❓ Häufige Fragen",
+    about: `<b>Dirigent</b> — Ihr persönlicher AI-Agent auf Basis von Claude Code.\n\n• Kommuniziert 24/7 über Telegram\n• Merkt sich Ihre Projekte und Gewohnheiten\n• Versteht Sprachnachrichten, Fotos, Dokumente\n• Schreibt Code, erstellt Inhalte, verwaltet Aufgaben\n• Läuft auf Ihrem Server — Ihre Daten bleiben bei Ihnen\n\nUm Ihren Agenten zu erhalten — klicken Sie auf <b>«Zugang erhalten»</b>.`,
+    faq: `<b>Häufige Fragen</b>\n\n<b>Was kostet es?</b>\n1.000 € — Einmalzahlung, inkl. Installation und Einrichtung.\n\n<b>Brauche ich einen Server?</b>\nJa, VPS Ubuntu 22/24 (~5–10 €/Mon.). Wir helfen bei der Einrichtung.\n\n<b>Brauche ich ein Claude-Abo?</b>\nJa, Claude Pro ($20/Mon.) oder Max ($100/Mon.).\n\n<b>Sind meine Daten sicher?</b>\nDer Agent läuft auf Ihrem Server. Wir haben keinen Zugriff auf Ihre Daten.\n\nWeitere Fragen — @tervica11`,
+    knowledge: `<b>📚 Wissensbasis — So erhalten Sie Ihren persönlichen AI-Agenten</b>\n\n<b>Was ist Dirigent?</b>\nDirigent ist eine Fabrik für persönliche AI-Agenten auf Basis von Claude. Ihr Agent läuft auf Ihrem eigenen Server, kommuniziert 24/7 über Telegram, merkt sich Ihre Projekte und wird mit jedem Gespräch klüger.\n\n<b>Was Sie vorbereiten müssen:</b>\n\n1️⃣ <b>Claude Code</b> — auf Ihrem Computer installieren\nDownload: claude.ai/code (kostenlos)\nAbo: Pro — $20/Mon. oder Max — $100/Mon.\n\n2️⃣ <b>VPS-Server</b> — gemieteter Server für den 24/7-Betrieb\nPreis: ~5–10 €/Mon. (Hetzner, DigitalOcean u.a.)\nSystem: Ubuntu 22 oder 24\nWir helfen bei Auswahl und Einrichtung — schreiben Sie uns einfach.\n\n3️⃣ <b>15 Minuten Zeit</b>\nDen Rest erledigt Claude Code automatisch.\n\n<b>So läuft es ab:</b>\n1. Sie bezahlen → schreiben Sie uns @tervica11\n2. Wir schalten Sie in diesem Bot frei\n3. Klicken Sie «Zugang erhalten» → erhalten Ihren Token\n4. Token in Claude Code einfügen → Agent installiert sich selbst\n\n<b>Preis: 1.000 €</b> — Einmalzahlung\nInklusive: Installation, Einrichtung, Support beim Start.\n\nBereit? Schreiben Sie <b>@tervica11</b>`,
+  }
+};
+
 // /start
 bot.command("start", async (ctx) => {
+  const lang = getLang(ctx);
+  const t = T[lang];
   const kb = new InlineKeyboard()
-    .text("🤖 Что такое Dirigent?", "about").row()
-    .text("🔑 Получить доступ", "get_token").row()
-    .text("📚 База знаний", "knowledge").text("❓ Частые вопросы", "faq");
-
-  await ctx.reply(
-    `👋 Добро пожаловать в <b>Dirigent</b> — завод персональных AI-агентов.\n\n` +
-    `Ваш личный агент работает 24/7 в Telegram, помнит ваши проекты и становится умнее с каждым разговором.\n\n` +
-    `Выберите действие:`,
-    { parse_mode: "HTML", reply_markup: kb }
-  );
+    .text(t.btn_about, "about").row()
+    .text(t.btn_access, "get_token").row()
+    .text(t.btn_knowledge, "knowledge").text(t.btn_faq, "faq");
+  await ctx.reply(t.start_text, { parse_mode: "HTML", reply_markup: kb });
 });
 
 // Кнопка — о продукте
 bot.callbackQuery("about", async (ctx) => {
   await ctx.answerCallbackQuery();
-  await ctx.reply(
-    `<b>Dirigent</b> — это персональный AI-агент на базе Claude Code.\n\n` +
-    `• Общается в Telegram 24/7\n` +
-    `• Помнит ваши проекты и привычки\n` +
-    `• Понимает голос, фото, документы\n` +
-    `• Пишет код, создаёт контент, ведёт задачи\n` +
-    `• Живёт на вашем сервере — данные только у вас\n\n` +
-    `Чтобы получить своего агента — нажмите <b>«Получить доступ»</b>.`,
-    { parse_mode: "HTML" }
-  );
+  await ctx.reply(T[getLang(ctx)].about, { parse_mode: "HTML" });
 });
 
 // Кнопка — FAQ
 bot.callbackQuery("faq", async (ctx) => {
   await ctx.answerCallbackQuery();
-  await ctx.reply(
-    `<b>Частые вопросы</b>\n\n` +
-    `<b>Сколько стоит?</b>\n` +
-    `1 000 € — разовый платёж, включает установку и настройку.\n\n` +
-    `<b>Нужен ли сервер?</b>\n` +
-    `Да, VPS Ubuntu 22/24 (~5–10 €/мес). Помогаем настроить.\n\n` +
-    `<b>Нужна ли подписка Claude?</b>\n` +
-    `Да, Claude Pro ($20/мес) или Max ($100/мес).\n\n` +
-    `<b>Мои данные в безопасности?</b>\n` +
-    `Агент живёт на вашем сервере. Мы не имеем доступа к вашим данным.\n\n` +
-    `По другим вопросам — @tervica11`,
-    { parse_mode: "HTML" }
-  );
+  await ctx.reply(T[getLang(ctx)].faq, { parse_mode: "HTML" });
 });
 
-// Кнопка — База знаний (выбор языка)
+// Кнопка — База знаний (сразу на языке пользователя)
 bot.callbackQuery("knowledge", async (ctx) => {
   await ctx.answerCallbackQuery();
-  const kb = new InlineKeyboard()
-    .text("🇷🇺 Русский", "knowledge_ru")
-    .text("🇩🇪 Deutsch", "knowledge_de");
-  await ctx.reply(
-    `<b>📚 База знаний</b>\n\nВыберите язык / Sprache wählen:`,
-    { parse_mode: "HTML", reply_markup: kb }
-  );
+  await ctx.reply(T[getLang(ctx)].knowledge, { parse_mode: "HTML" });
 });
 
-// База знаний — русский
+// (устаревший обработчик — оставлен для совместимости со старыми сообщениями)
 bot.callbackQuery("knowledge_ru", async (ctx) => {
   await ctx.answerCallbackQuery();
   await ctx.reply(

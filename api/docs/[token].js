@@ -1,71 +1,98 @@
 /**
  * Dirigent API — база знаний по персональному токену
- * GET /api/docs/:token?lang=de|ru
+ * GET /api/docs/:token
+ * Токен проверяется в Redis (TTL 30 дней), выдаётся ботом
  */
 
 const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
-module.exports = async function handler(req, res) {
-  const { token, lang } = req.query;
-  const language = (lang === 'ru') ? 'ru' : 'de'; // default: de
+const UPSTASH_URL   = process.env.UPSTASH_REDIS_REST_URL;
+const UPSTASH_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
 
+async function redisGet(key) {
+  const res = await fetch(`${UPSTASH_URL}/get/${encodeURIComponent(key)}`, {
+    headers: { Authorization: `Bearer ${UPSTASH_TOKEN}` },
+  });
+  const json = await res.json();
+  if (!json.result) return null;
+  let value = json.result;
+  for (let i = 0; i < 3; i++) {
+    if (typeof value !== 'string') break;
+    try { value = JSON.parse(value); } catch { break; }
+  }
+  return value;
+}
+
+module.exports = async function handler(req, res) {
+  const { token } = req.query;
+
+  // 1. Формат токена
   if (!token || !UUID_RE.test(token)) {
-    return res.status(400).send(errorPage(language));
+    return res.status(400).send(errorPage());
   }
 
+  // 2. Проверка в Redis
+  let data = null;
+  try {
+    data = await redisGet(`docs:${token}`);
+  } catch (err) {
+    console.error('Redis error:', err);
+  }
+
+  if (!data) {
+    return res.status(403).send(expiredPage());
+  }
+
+  // 3. Отдаём docs.html
   const { readFileSync } = require('fs');
   const { join } = require('path');
 
   try {
-    let html = readFileSync(join(process.cwd(), 'public', 'docs.html'), 'utf8');
-
-    // Устанавливаем язык прямо в HTML — убираем переключатель, фиксируем язык
-    html = html
-      .replace(`<body class="lang-de">`, `<body class="lang-${language}">`)
-      .replace(
-        `<div class="lang-switch">
-    <button class="lang-btn active" onclick="setLang('de')">🇩🇪 DE</button>
-    <button class="lang-btn" onclick="setLang('ru')">🇷🇺 RU</button>
-  </div>`,
-        '' // убираем переключатель языка
-      )
-      // Убираем JS-функцию setLang и восстановление языка из localStorage
-      .replace(
-        `function setLang(lang) {
-    document.body.className = 'lang-' + lang;
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.textContent.toLowerCase().includes(lang));
-    });
-    localStorage.setItem('dirigent-lang', lang);
-  }`,
-        `function setLang(lang) {}` // no-op
-      )
-      .replace(
-        `// Restore language preference
-  const saved = localStorage.getItem('dirigent-lang') || 'de';
-  setLang(saved);`,
-        '' // язык уже зафиксирован в body class
-      );
-
+    const html = readFileSync(join(process.cwd(), 'public', 'docs.html'), 'utf8');
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
-    res.setHeader('Cache-Control', 'private, max-age=86400');
+    res.setHeader('Cache-Control', 'private, max-age=3600');
     return res.send(html);
   } catch (err) {
-    // Fallback — редирект на публичную страницу с языком
-    res.setHeader('Location', `/docs.html?lang=${language}`);
-    return res.status(302).send('');
+    console.error('File read error:', err);
+    return res.status(500).send('Internal error');
   }
 };
 
-function errorPage(lang) {
-  const de = lang === 'de';
+function errorPage() {
   return `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Dirigent</title>
-<style>body{font-family:sans-serif;background:#0f0f13;color:#e8e8f0;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;text-align:center}</style>
-</head><body><div>
-<h2>🔒 ${de ? 'Ungültiger Link' : 'Неверная ссылка'}</h2>
-<p style="color:#8080a0">${de
-  ? 'Schreiben Sie dem Bot /docs — ich stelle einen neuen aus.'
-  : 'Напишите боту /docs — выдам новую.'}</p>
-<p><a href="https://t.me/dirigent_access_bot" style="color:#a78bfa">@dirigent_access_bot</a></p>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #f7f7f8;
+    display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+  .box { text-align: center; padding: 40px; background: #fff; border-radius: 16px;
+    border: 1px solid #e8e8e8; max-width: 400px; }
+  h2 { font-size: 20px; color: #111; margin-bottom: 12px; }
+  p { color: #888; font-size: 14px; line-height: 1.6; margin-bottom: 16px; }
+  a { color: #7c5cfc; text-decoration: none; font-weight: 600; }
+</style>
+</head><body><div class="box">
+  <h2>🔒 Ungültiger Link / Неверная ссылка</h2>
+  <p>Der Link ist ungültig oder wurde nicht gefunden.<br>Ссылка недействительна или не найдена.</p>
+  <p><a href="https://t.me/dirigent_access_bot">@dirigent_access_bot</a></p>
+</div></body></html>`;
+}
+
+function expiredPage() {
+  return `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Dirigent</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #f7f7f8;
+    display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+  .box { text-align: center; padding: 40px; background: #fff; border-radius: 16px;
+    border: 1px solid #e8e8e8; max-width: 400px; }
+  h2 { font-size: 20px; color: #111; margin-bottom: 12px; }
+  p { color: #888; font-size: 14px; line-height: 1.6; margin-bottom: 16px; }
+  a { color: #7c5cfc; text-decoration: none; font-weight: 600; }
+</style>
+</head><body><div class="box">
+  <h2>🔒 Link abgelaufen / Ссылка истекла</h2>
+  <p>Der Link ist abgelaufen (30 Tage). Schreiben Sie dem Bot — er stellt einen neuen aus.<br>
+  Ссылка истекла (30 дней). Напишите боту — выдаст новую.</p>
+  <p><a href="https://t.me/dirigent_access_bot">@dirigent_access_bot</a></p>
 </div></body></html>`;
 }

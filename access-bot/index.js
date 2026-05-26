@@ -640,6 +640,43 @@ bot.command("stats", async (ctx) => {
   );
 });
 
+// ─── /update — обновление бота из GitHub (только admin) ──────────────────────
+
+bot.command("update", async (ctx) => {
+  if (!isAdmin(ctx)) { await ctx.reply("⛔ Нет доступа."); return; }
+
+  await ctx.reply("🔄 Запускаю обновление...");
+
+  const { exec } = require("child_process");
+  const PROJECT_DIR = join(__dirname, "..");
+
+  // Шаг 1: исправить права .git и сделать git pull
+  const pullCmd = `
+    chown -R $(whoami):$(whoami) ${PROJECT_DIR}/.git 2>/dev/null || true;
+    cd ${PROJECT_DIR} && git pull 2>&1
+  `;
+
+  exec(pullCmd, async (err, stdout, stderr) => {
+    const pullOutput = (stdout + stderr).trim().slice(0, 500);
+
+    if (err && !stdout.includes("Already up to date") && !stdout.includes("Updating")) {
+      await ctx.reply(`⚠️ git pull завершился с ошибкой:\n<pre>${pullOutput}</pre>`, { parse_mode: "HTML" });
+      return;
+    }
+
+    await ctx.reply(`✅ git pull:\n<pre>${pullOutput || "Already up to date"}</pre>`, { parse_mode: "HTML" });
+
+    // Шаг 2: перезапустить сервис
+    exec("sudo /usr/bin/systemctl restart dirigent-access", async (err2) => {
+      if (err2) {
+        await ctx.reply(`⚠️ Не удалось перезапустить сервис: ${err2.message}\nПерезапусти вручную: <code>sudo systemctl restart dirigent-access</code>`, { parse_mode: "HTML" });
+      } else {
+        await ctx.reply("🎼 Бот перезапущен с новым кодом!");
+      }
+    });
+  });
+});
+
 // ─── ЗАПУСК ───────────────────────────────────────────────────────────────────
 
 // Создаём папку data если нет

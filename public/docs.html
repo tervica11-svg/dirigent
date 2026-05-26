@@ -1,614 +1,1083 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dirigent — Wissensbasis / База знаний</title>
+  <title>База знаний — Dirigent</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #0f0f13;
-      color: #e8e8f0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+      background: #f7f7f8;
+      color: #1a1a1a;
       min-height: 100vh;
+      font-size: 15px;
+      line-height: 1.6;
     }
 
-    header {
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-      border-bottom: 1px solid #2a2a4a;
-      padding: 20px 24px;
+    /* ───── HEADER ───── */
+    .header {
+      background: #fff;
+      border-bottom: 1px solid #e8e8e8;
+      padding: 0 32px;
+      height: 52px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
-    .logo {
-      font-size: 22px;
-      font-weight: 700;
-      background: linear-gradient(135deg, #6c63ff, #a78bfa);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      letter-spacing: -0.5px;
-    }
-
-    .lang-switch {
+    .header-left {
       display: flex;
+      align-items: center;
       gap: 8px;
     }
 
-    .lang-btn {
-      background: #2a2a4a;
-      border: 1px solid #3a3a6a;
-      color: #a0a0c0;
-      padding: 6px 14px;
-      border-radius: 20px;
+    .logo {
+      font-size: 17px;
+      font-weight: 700;
+      color: #1a1a1a;
+      text-decoration: none;
       cursor: pointer;
+    }
+
+    .logo span { color: #7c5cfc; }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: #888;
+    }
+
+    .breadcrumb a {
+      color: #888;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .breadcrumb a:hover { color: #7c5cfc; }
+
+    .breadcrumb-sep { color: #ccc; }
+
+    .header-nav {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .header-nav a {
       font-size: 13px;
-      transition: all 0.2s;
+      color: #666;
+      text-decoration: none;
+      cursor: pointer;
+      padding: 4px 0;
+      border-bottom: 2px solid transparent;
+      transition: color 0.15s, border-color 0.15s;
     }
 
-    .lang-btn.active {
-      background: #6c63ff;
-      border-color: #6c63ff;
-      color: #fff;
-    }
+    .header-nav a:hover,
+    .header-nav a.active { color: #7c5cfc; border-bottom-color: #7c5cfc; }
 
-    .lang-btn:hover:not(.active) {
-      background: #3a3a5a;
-      color: #e0e0f0;
-    }
-
+    /* ───── MAIN ───── */
     .container {
-      max-width: 760px;
+      max-width: 860px;
       margin: 0 auto;
       padding: 40px 24px 80px;
     }
 
-    .hero {
-      text-align: center;
-      margin-bottom: 48px;
-    }
-
-    .hero h1 {
-      font-size: 32px;
+    /* ───── SECTION TITLE ───── */
+    .section-label {
+      font-size: 19px;
       font-weight: 700;
-      margin-bottom: 12px;
-      background: linear-gradient(135deg, #e8e8f8, #a78bfa);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: #111;
+      margin-bottom: 16px;
     }
 
-    .hero p {
-      color: #8080a0;
-      font-size: 16px;
-      line-height: 1.6;
-    }
-
-    .section {
-      background: #16162a;
-      border: 1px solid #2a2a4a;
-      border-radius: 16px;
-      padding: 28px;
-      margin-bottom: 20px;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: center;
+    /* ───── START CARDS ───── */
+    .start-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
       gap: 12px;
-      margin-bottom: 18px;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .section-icon {
-      font-size: 24px;
-      width: 44px;
-      height: 44px;
-      background: #1e1e38;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .section-title {
-      font-size: 18px;
-      font-weight: 600;
-      color: #d0d0f0;
-    }
-
-    .section-arrow {
-      margin-left: auto;
-      color: #4040608;
-      font-size: 18px;
-      transition: transform 0.2s;
-    }
-
-    .section.open .section-arrow {
-      transform: rotate(180deg);
-    }
-
-    .section-body {
-      display: none;
-      color: #9090b0;
-      line-height: 1.7;
-      font-size: 15px;
-    }
-
-    .section.open .section-body {
-      display: block;
-    }
-
-    .section-body p {
-      margin-bottom: 12px;
-    }
-
-    .section-body ul {
-      padding-left: 20px;
-      margin-bottom: 12px;
-    }
-
-    .section-body li {
       margin-bottom: 8px;
     }
 
-    .section-body strong {
-      color: #c0c0e0;
+    .start-cards .row2 {
+      grid-column: span 1;
     }
 
-    .step {
+    .article-card {
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      border-radius: 10px;
+      padding: 16px 18px;
+      cursor: pointer;
+      transition: box-shadow 0.15s, border-color 0.15s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .article-card:hover {
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      border-color: #d0d0d0;
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #111;
+      line-height: 1.4;
+      flex: 1;
+    }
+
+    .card-time {
+      background: #f0f0f0;
+      color: #777;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 8px;
+      border-radius: 20px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: #888;
+      line-height: 1.5;
+    }
+
+    .start-row2 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+
+    /* ───── CATEGORIES ───── */
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .cat-card {
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      border-radius: 10px;
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: box-shadow 0.15s, border-color 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .cat-card:hover {
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      border-color: #d0d0d0;
+    }
+
+    .cat-icon {
+      font-size: 24px;
+      width: 36px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .cat-info { min-width: 0; }
+
+    .cat-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: #111;
+      line-height: 1.3;
+    }
+
+    .cat-count {
+      font-size: 12px;
+      color: #999;
+      margin-top: 2px;
+    }
+
+    /* ───── FOOTER ───── */
+    .footer {
+      text-align: center;
+      font-size: 13px;
+      color: #aaa;
+      margin-top: 48px;
+      padding-bottom: 20px;
+    }
+
+    .footer a { color: #7c5cfc; text-decoration: none; }
+
+    /* ───── ARTICLE PAGE ───── */
+    .article-page { display: none; }
+
+    .article-meta {
+      font-size: 13px;
+      color: #999;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .article-meta .read-time {
+      background: #f0f0f0;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      color: #777;
+    }
+
+    .article-h1 {
+      font-size: 26px;
+      font-weight: 800;
+      color: #111;
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+
+    .article-tagline {
+      font-size: 15px;
+      color: #666;
+      font-style: italic;
+      margin-bottom: 32px;
+      padding-left: 14px;
+      border-left: 3px solid #7c5cfc;
+    }
+
+    .article-body h2 {
+      font-size: 19px;
+      font-weight: 700;
+      color: #111;
+      margin: 32px 0 12px;
+    }
+
+    .article-body h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #222;
+      margin: 20px 0 8px;
+    }
+
+    .article-body p {
+      color: #333;
+      margin-bottom: 14px;
+      line-height: 1.7;
+    }
+
+    .article-body ul, .article-body ol {
+      padding-left: 22px;
+      margin-bottom: 14px;
+      color: #333;
+    }
+
+    .article-body li {
+      margin-bottom: 7px;
+      line-height: 1.6;
+    }
+
+    .article-body strong { color: #111; }
+
+    .article-body code {
+      background: #f3f3f3;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 13px;
+      color: #d14;
+    }
+
+    .article-body pre {
+      background: #1e1e1e;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 14px 0;
+      overflow-x: auto;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 13px;
+      color: #d4d4d4;
+      line-height: 1.6;
+    }
+
+    .note-box {
+      background: #fdf8ff;
+      border: 1px solid #e0d4ff;
+      border-left: 4px solid #7c5cfc;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 14px 0;
+    }
+
+    .note-box.warning {
+      background: #fff9f0;
+      border-color: #fdd8a8;
+      border-left-color: #f59e0b;
+    }
+
+    .note-box.danger {
+      background: #fff5f5;
+      border-color: #fcc;
+      border-left-color: #ef4444;
+    }
+
+    .note-box p { margin-bottom: 0; }
+
+    .note-box strong { display: block; margin-bottom: 4px; }
+
+    .step-block {
       display: flex;
       gap: 16px;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
       align-items: flex-start;
     }
 
     .step-num {
-      width: 32px;
-      height: 32px;
-      background: linear-gradient(135deg, #6c63ff, #a78bfa);
+      width: 30px;
+      height: 30px;
+      background: #7c5cfc;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 700;
-      font-size: 14px;
+      font-size: 13px;
       color: #fff;
       flex-shrink: 0;
       margin-top: 2px;
     }
 
     .step-content strong {
-      color: #d0d0f0;
       display: block;
-      margin-bottom: 4px;
+      color: #111;
       font-size: 15px;
+      margin-bottom: 4px;
     }
 
     .step-content span {
-      color: #8080a0;
+      color: #555;
       font-size: 14px;
       line-height: 1.6;
     }
 
-    .highlight-box {
-      background: #1e1e3a;
-      border: 1px solid #3a3a6a;
-      border-radius: 10px;
-      padding: 16px 20px;
+    .route-box {
+      background: #f9f9f9;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 18px 20px;
       margin: 16px 0;
     }
 
-    .highlight-box .label {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #6060a0;
-      margin-bottom: 6px;
-    }
-
-    .highlight-box .value {
-      font-size: 18px;
-      font-weight: 700;
-      color: #a78bfa;
-    }
-
-    .highlight-box .sub {
+    .route-box pre {
+      background: none;
+      padding: 0;
+      color: #333;
       font-size: 13px;
-      color: #6060a0;
-      margin-top: 4px;
     }
 
-    .tag {
-      display: inline-block;
-      background: #2a2a4a;
-      border: 1px solid #4040708;
-      border-radius: 6px;
-      padding: 3px 10px;
+    .tree-box {
+      background: #1e1e1e;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 14px 0;
+    }
+
+    .tree-box pre {
+      background: none;
+      padding: 0;
+      color: #c8d0e7;
       font-size: 13px;
-      color: #9090c0;
-      margin: 3px;
     }
 
-    .cta {
-      text-align: center;
-      margin-top: 48px;
-      padding: 36px;
-      background: linear-gradient(135deg, #1a1a38, #1e1e3a);
-      border: 1px solid #3a3a6a;
-      border-radius: 20px;
+    .next-articles {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid #eee;
     }
 
-    .cta h2 {
-      font-size: 22px;
-      font-weight: 700;
-      color: #d0d0f0;
-      margin-bottom: 10px;
+    .next-articles p {
+      font-size: 13px;
+      color: #999;
+      margin-bottom: 12px;
     }
 
-    .cta p {
-      color: #8080a0;
-      margin-bottom: 20px;
-      font-size: 15px;
+    .next-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
 
-    .cta a {
-      display: inline-block;
-      background: linear-gradient(135deg, #6c63ff, #a78bfa);
-      color: #fff;
-      text-decoration: none;
-      padding: 14px 32px;
-      border-radius: 12px;
-      font-weight: 600;
-      font-size: 16px;
-      transition: opacity 0.2s;
+    .next-card {
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      border-radius: 8px;
+      padding: 12px 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: border-color 0.15s;
     }
 
-    .cta a:hover { opacity: 0.85; }
+    .next-card:hover { border-color: #7c5cfc; }
 
-    /* Language visibility */
-    [data-lang] { display: none; }
-    body.lang-de [data-lang="de"] { display: block; }
-    body.lang-ru [data-lang="ru"] { display: block; }
-    body.lang-de [data-lang="de"].inline,
-    body.lang-ru [data-lang="ru"].inline { display: inline; }
+    .next-card span { font-size: 14px; font-weight: 500; color: #222; }
+
+    .next-card em { font-size: 12px; color: #aaa; font-style: normal; }
+
+    /* ───── RESPONSIVE ───── */
+    @media (max-width: 640px) {
+      .start-cards { grid-template-columns: 1fr; }
+      .start-row2 { grid-template-columns: 1fr; }
+      .categories-grid { grid-template-columns: repeat(2, 1fr); }
+      .header-nav { display: none; }
+      .container { padding: 24px 16px 60px; }
+    }
   </style>
 </head>
-<body class="lang-de">
+<body>
 
-<header>
-  <div class="logo">🎼 Dirigent</div>
-  <div class="lang-switch">
-    <button class="lang-btn active" onclick="setLang('de')">🇩🇪 DE</button>
-    <button class="lang-btn" onclick="setLang('ru')">🇷🇺 RU</button>
+<!-- ═══ HEADER ═══ -->
+<header class="header">
+  <div class="header-left">
+    <a class="logo" onclick="showHome()">🎼 <span>Dirigent</span></a>
+    <div class="breadcrumb" id="breadcrumb" style="display:none">
+      <div class="breadcrumb-sep">›</div>
+      <a onclick="showHome()">База знаний</a>
+      <div class="breadcrumb-sep">›</div>
+      <span id="breadcrumb-title"></span>
+    </div>
   </div>
+  <nav class="header-nav" id="top-nav">
+    <a onclick="openArticle('article-what')" class="active">Старт</a>
+    <a onclick="showSection('arch')">Архитектура</a>
+    <a onclick="showSection('bot')">Бот</a>
+    <a onclick="showSection('memory')">Память</a>
+    <a onclick="showSection('skills')">Скиллы</a>
+  </nav>
 </header>
 
-<div class="container">
+<!-- ═══ HOME PAGE ═══ -->
+<div class="container" id="home-page">
 
-  <!-- HERO -->
-  <div class="hero">
-    <div data-lang="de">
-      <h1>Wissensbasis</h1>
-      <p>Alles, was Sie für die Installation und den Start<br>Ihres persönlichen AI-Agenten benötigen.</p>
+  <div class="section-label" style="margin-bottom:16px">С чего начать</div>
+
+  <div class="start-cards">
+    <div class="article-card" onclick="openArticle('article-what')">
+      <div class="card-top">
+        <div class="card-title">Что такое Конструктор Агентов</div>
+        <div class="card-time">3 мин</div>
+      </div>
+      <div class="card-desc">Не чат-бот в кармане, а нейросотрудник в Вашем штате.</div>
     </div>
-    <div data-lang="ru">
-      <h1>База знаний</h1>
-      <p>Всё необходимое для установки и запуска<br>вашего персонального AI-агента.</p>
+
+    <div class="article-card" onclick="openArticle('article-install')">
+      <div class="card-top">
+        <div class="card-title">Установка Агента — четыре шага до работающего бота</div>
+        <div class="card-time">10 мин</div>
+      </div>
+      <div class="card-desc">Это как переезд в новую квартиру — дом построен, мебель завезли, осталось...</div>
+    </div>
+
+    <div class="article-card" onclick="openArticle('article-map')">
+      <div class="card-top">
+        <div class="card-title">Карта дома Агента — где что живёт на сервере</div>
+        <div class="card-time">5 мин</div>
+      </div>
+      <div class="card-desc">У Агента три комнаты — мотор, душа и мастерская. Знаете карту — никогда не...</div>
     </div>
   </div>
 
-  <!-- SECTION 1: Was ist Dirigent -->
-  <div class="section open" onclick="toggleSection(this)">
-    <div class="section-header">
-      <div class="section-icon">🤖</div>
-      <div data-lang="de" class="section-title">Was ist Dirigent?</div>
-      <div data-lang="ru" class="section-title">Что такое Dirigent?</div>
-      <div class="section-arrow">▾</div>
-    </div>
-    <div class="section-body">
-      <div data-lang="de">
-        <p>Dirigent ist Ihr persönlicher AI-Agent auf Basis von Claude Code. Er lebt auf Ihrem eigenen Server und kommuniziert mit Ihnen über Telegram — 24 Stunden am Tag, 7 Tage die Woche.</p>
-        <ul>
-          <li><strong>Merkt sich alles</strong> — Ihre Projekte, Vorlieben, laufende Aufgaben</li>
-          <li><strong>Versteht Sprache</strong> — Sprachnachrichten, Fotos, Dokumente</li>
-          <li><strong>Arbeitet aktiv</strong> — schreibt Code, erstellt Inhalte, verwaltet Aufgaben</li>
-          <li><strong>Gehört nur Ihnen</strong> — läuft auf Ihrem Server, Ihre Daten bleiben privat</li>
-          <li><strong>Wird klüger</strong> — mit jedem Gespräch lernt er Sie besser kennen</li>
-        </ul>
+  <div class="start-row2">
+    <div class="article-card" onclick="openArticle('article-first')">
+      <div class="card-top">
+        <div class="card-title">Первые шаги в первый день</div>
+        <div class="card-time">6 мин</div>
       </div>
-      <div data-lang="ru">
-        <p>Dirigent — это ваш персональный AI-агент на базе Claude Code. Он живёт на вашем сервере и общается с вами через Telegram — 24 часа в сутки, 7 дней в неделю.</p>
-        <ul>
-          <li><strong>Всё помнит</strong> — ваши проекты, предпочтения, текущие задачи</li>
-          <li><strong>Понимает речь</strong> — голосовые, фото, документы</li>
-          <li><strong>Работает активно</strong> — пишет код, создаёт контент, ведёт задачи</li>
-          <li><strong>Только ваш</strong> — на вашем сервере, данные приватны</li>
-          <li><strong>Умнеет</strong> — с каждым разговором знает вас лучше</li>
-        </ul>
-      </div>
+      <div class="card-desc">Не пытайтесь освоить всё сразу. Шесть простых сценариев — и Агент Ваш.</div>
     </div>
   </div>
 
-  <!-- SECTION 2: Was vorbereiten -->
-  <div class="section" onclick="toggleSection(this)">
-    <div class="section-header">
-      <div class="section-icon">📋</div>
-      <div data-lang="de" class="section-title">Was Sie vorbereiten müssen</div>
-      <div data-lang="ru" class="section-title">Что нужно подготовить</div>
-      <div class="section-arrow">▾</div>
-    </div>
-    <div class="section-body">
-      <div data-lang="de">
-        <div class="step">
-          <div class="step-num">1</div>
-          <div class="step-content">
-            <strong>Claude Code — auf Ihrem Computer installieren</strong>
-            <span>Download: <a href="https://claude.ai/code" target="_blank" style="color:#a78bfa;">claude.ai/code</a> (kostenlos)<br>
-            Abo erforderlich: Claude Pro — $20/Monat oder Max — $100/Monat</span>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">2</div>
-          <div class="step-content">
-            <strong>VPS-Server — für den 24/7-Betrieb des Agenten</strong>
-            <span>Preis: ~5–10 €/Monat (Hetzner, DigitalOcean, Contabo u.a.)<br>
-            System: Ubuntu 22 oder 24 LTS<br>
-            Wir helfen bei Auswahl und Einrichtung — schreiben Sie uns.</span>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">3</div>
-          <div class="step-content">
-            <strong>15 Minuten Zeit</strong>
-            <span>Den Rest erledigt Claude Code automatisch.</span>
-          </div>
-        </div>
-      </div>
-      <div data-lang="ru">
-        <div class="step">
-          <div class="step-num">1</div>
-          <div class="step-content">
-            <strong>Claude Code — установить на компьютер</strong>
-            <span>Скачать: <a href="https://claude.ai/code" target="_blank" style="color:#a78bfa;">claude.ai/code</a> (бесплатно)<br>
-            Нужна подписка: Claude Pro — $20/мес или Max — $100/мес</span>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">2</div>
-          <div class="step-content">
-            <strong>VPS-сервер — для работы агента 24/7</strong>
-            <span>Цена: ~5–10 €/мес (Hetzner, DigitalOcean, Contabo и др.)<br>
-            Система: Ubuntu 22 или 24 LTS<br>
-            Помогаем выбрать и настроить — просто напишите нам.</span>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">3</div>
-          <div class="step-content">
-            <strong>15 минут времени</strong>
-            <span>Всё остальное Claude Code сделает сам.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div class="section-label">Все разделы</div>
 
-  <!-- SECTION 3: Wie es abläuft -->
-  <div class="section" onclick="toggleSection(this)">
-    <div class="section-header">
-      <div class="section-icon">🚀</div>
-      <div data-lang="de" class="section-title">So läuft die Installation ab</div>
-      <div data-lang="ru" class="section-title">Как проходит установка</div>
-      <div class="section-arrow">▾</div>
-    </div>
-    <div class="section-body">
-      <div data-lang="de">
-        <div class="step">
-          <div class="step-num">1</div>
-          <div class="step-content">
-            <strong>Zugang erhalten</strong>
-            <span>Sie bezahlen → schreiben uns @tervica11 → wir schalten Sie im Bot frei</span>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">2</div>
-          <div class="step-content">
-            <strong>Prompt holen</strong>
-            <span>Im Bot auf «▶ Prompt erhalten» klicken → persönlichen Installations-Prompt erhalten</span>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">3</div>
-          <div class="step-content">
-            <strong>In Claude Code einfügen</strong>
-            <span>Claude Code öffnen → Prompt einfügen → Enter drücken</span>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">4</div>
-          <div class="step-content">
-            <strong>Claude Code installiert alles</strong>
-            <span>Lädt das Paket herunter → richtet den Agenten ein → fragt wohin installieren (Server oder Computer)</span>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">5</div>
-          <div class="step-content">
-            <strong>Agent ist bereit</strong>
-            <span>Schreiben Sie Ihrem Agenten in Telegram — er antwortet sofort</span>
-          </div>
-        </div>
+  <div class="categories-grid">
+    <div class="cat-card" onclick="openArticle('article-what')">
+      <div class="cat-icon">🧠</div>
+      <div class="cat-info">
+        <div class="cat-name">Как устроен Агент</div>
+        <div class="cat-count">7 статей</div>
       </div>
-      <div data-lang="ru">
-        <div class="step">
-          <div class="step-num">1</div>
-          <div class="step-content">
-            <strong>Получить доступ</strong>
-            <span>Оплачиваете → пишете нам @tervica11 → мы открываем доступ в боте</span>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">2</div>
-          <div class="step-content">
-            <strong>Получить промпт</strong>
-            <span>В боте нажать «▶ Получить промпт» → получить персональный промпт</span>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">3</div>
-          <div class="step-content">
-            <strong>Вставить в Claude Code</strong>
-            <span>Открыть Claude Code → вставить промпт → нажать Enter</span>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">4</div>
-          <div class="step-content">
-            <strong>Claude Code устанавливает всё</strong>
-            <span>Скачивает пакет → настраивает агента → спрашивает куда ставить (сервер или компьютер)</span>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">5</div>
-          <div class="step-content">
-            <strong>Агент готов</strong>
-            <span>Пишите вашему агенту в Telegram — он сразу отвечает</span>
-          </div>
-        </div>
+    </div>
+    <div class="cat-card" onclick="openArticle('article-install')">
+      <div class="cat-icon">💬</div>
+      <div class="cat-info">
+        <div class="cat-name">Бот в Telegram</div>
+        <div class="cat-count">5 статей</div>
+      </div>
+    </div>
+    <div class="cat-card" onclick="openArticle('article-map')">
+      <div class="cat-icon">📁</div>
+      <div class="cat-info">
+        <div class="cat-name">Память Агента</div>
+        <div class="cat-count">5 статей</div>
+      </div>
+    </div>
+    <div class="cat-card" onclick="openArticle('article-first')">
+      <div class="cat-icon">🔧</div>
+      <div class="cat-info">
+        <div class="cat-name">Команда специалистов</div>
+        <div class="cat-count">5 статей</div>
+      </div>
+    </div>
+    <div class="cat-card" onclick="openArticle('article-install')">
+      <div class="cat-icon">💻</div>
+      <div class="cat-info">
+        <div class="cat-name">VS Code Tunnel</div>
+        <div class="cat-count">4 статьи</div>
+      </div>
+    </div>
+    <div class="cat-card" onclick="openArticle('article-install')">
+      <div class="cat-icon">📦</div>
+      <div class="cat-info">
+        <div class="cat-name">Проекты и деплой</div>
+        <div class="cat-count">4 статьи</div>
+      </div>
+    </div>
+    <div class="cat-card" onclick="openArticle('article-first')">
+      <div class="cat-icon">🔌</div>
+      <div class="cat-info">
+        <div class="cat-name">Интеграции через MCP</div>
+        <div class="cat-count">3 статьи</div>
+      </div>
+    </div>
+    <div class="cat-card" onclick="openArticle('article-first')">
+      <div class="cat-icon">🔍</div>
+      <div class="cat-info">
+        <div class="cat-name">Мониторинг и тренды</div>
+        <div class="cat-count">3 статьи</div>
+      </div>
+    </div>
+    <div class="cat-card" onclick="openArticle('article-install')">
+      <div class="cat-icon">🛡️</div>
+      <div class="cat-info">
+        <div class="cat-name">Безопасность</div>
+        <div class="cat-count">4 статьи</div>
+      </div>
+    </div>
+    <div class="cat-card" onclick="openArticle('article-first')">
+      <div class="cat-icon">🔄</div>
+      <div class="cat-info">
+        <div class="cat-name">Обновления и продление</div>
+        <div class="cat-count">3 статьи</div>
+      </div>
+    </div>
+    <div class="cat-card" onclick="openArticle('article-first')">
+      <div class="cat-icon">⚠️</div>
+      <div class="cat-info">
+        <div class="cat-name">Подводные камни</div>
+        <div class="cat-count">4 статьи</div>
       </div>
     </div>
   </div>
 
-  <!-- SECTION 4: Preis -->
-  <div class="section" onclick="toggleSection(this)">
-    <div class="section-header">
-      <div class="section-icon">💎</div>
-      <div data-lang="de" class="section-title">Preis und was enthalten ist</div>
-      <div data-lang="ru" class="section-title">Стоимость и что входит</div>
-      <div class="section-arrow">▾</div>
-    </div>
-    <div class="section-body">
-      <div data-lang="de">
-        <div class="highlight-box">
-          <div class="label">Preis</div>
-          <div class="value">1.000 €</div>
-          <div class="sub">Einmalzahlung — keine monatlichen Gebühren von unserer Seite</div>
-        </div>
-        <p><strong>Enthalten:</strong></p>
-        <ul>
-          <li>Persönliches Agenten-Paket (Dateien der Persönlichkeit, Gedächtnis, Ziele)</li>
-          <li>Installation und Einrichtung durch Claude Code</li>
-          <li>Unterstützung beim ersten Start</li>
-          <li>Lebenslange Updates des Agenten-Pakets</li>
-        </ul>
-        <p><strong>Zusätzliche monatliche Kosten:</strong></p>
-        <ul>
-          <li>Claude-Abo: Pro $20/Mon. oder Max $100/Mon.</li>
-          <li>VPS-Server: ~5–10 €/Mon.</li>
-        </ul>
-      </div>
-      <div data-lang="ru">
-        <div class="highlight-box">
-          <div class="label">Стоимость</div>
-          <div class="value">1 000 €</div>
-          <div class="sub">Разовый платёж — без ежемесячных платежей с нашей стороны</div>
-        </div>
-        <p><strong>Входит:</strong></p>
-        <ul>
-          <li>Персональный пакет агента (файлы личности, память, цели)</li>
-          <li>Установка и настройка через Claude Code</li>
-          <li>Поддержка при первом запуске</li>
-          <li>Пожизненные обновления пакета агента</li>
-        </ul>
-        <p><strong>Дополнительные ежемесячные расходы:</strong></p>
-        <ul>
-          <li>Подписка Claude: Pro $20/мес или Max $100/мес</li>
-          <li>VPS-сервер: ~5–10 €/мес</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- SECTION 5: FAQ -->
-  <div class="section" onclick="toggleSection(this)">
-    <div class="section-header">
-      <div class="section-icon">❓</div>
-      <div data-lang="de" class="section-title">Häufige Fragen</div>
-      <div data-lang="ru" class="section-title">Частые вопросы</div>
-      <div class="section-arrow">▾</div>
-    </div>
-    <div class="section-body">
-      <div data-lang="de">
-        <p><strong>Brauche ich technische Kenntnisse?</strong><br>
-        Nein. Claude Code führt alles automatisch durch und erklärt jeden Schritt.</p>
-
-        <p><strong>Wo laufen meine Daten?</strong><br>
-        Auf Ihrem eigenen Server. Wir haben keinen Zugriff darauf.</p>
-
-        <p><strong>Was ist, wenn etwas nicht funktioniert?</strong><br>
-        Schreiben Sie @tervica11 — wir helfen sofort.</p>
-
-        <p><strong>Kann ich den Agenten später erweitern?</strong><br>
-        Ja. Claude Code kann jederzeit neue Fähigkeiten, Skills und Wissensdatenbanken hinzufügen.</p>
-
-        <p><strong>Funktioniert es auf Mac und Windows?</strong><br>
-        Claude Code läuft auf Mac und Windows. Der Agent läuft am besten auf einem Linux-VPS.</p>
-      </div>
-      <div data-lang="ru">
-        <p><strong>Нужны ли технические знания?</strong><br>
-        Нет. Claude Code всё делает автоматически и объясняет каждый шаг.</p>
-
-        <p><strong>Где хранятся мои данные?</strong><br>
-        На вашем сервере. У нас нет к ним доступа.</p>
-
-        <p><strong>Что если что-то не работает?</strong><br>
-        Напишите @tervica11 — поможем сразу.</p>
-
-        <p><strong>Можно ли расширить агента позже?</strong><br>
-        Да. Claude Code в любое время добавит новые навыки, скиллы и базы знаний.</p>
-
-        <p><strong>Работает ли на Mac и Windows?</strong><br>
-        Claude Code работает на Mac и Windows. Агент лучше всего работает на Linux VPS.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- CTA -->
-  <div class="cta">
-    <div data-lang="de">
-      <h2>Bereit für Ihren persönlichen Agenten?</h2>
-      <p>Schreiben Sie uns — wir schalten Sie frei und begleiten die Installation.</p>
-      <a href="https://t.me/tervica11" target="_blank">✉️ Schreiben Sie @tervica11</a>
-    </div>
-    <div data-lang="ru">
-      <h2>Готовы получить своего агента?</h2>
-      <p>Напишите нам — откроем доступ и поможем с установкой.</p>
-      <a href="https://t.me/tervica11" target="_blank">✉️ Написать @tervica11</a>
-    </div>
+  <div class="footer">
+    Поддержка: <a href="https://t.me/dirigent_access_bot" target="_blank">@dirigent_access_bot</a>
   </div>
 
 </div>
 
+
+<!-- ═══ ARTICLE: ЧТО ТАКОЕ КОНСТРУКТОР АГЕНТОВ ═══ -->
+<div class="container article-page" id="article-what">
+  <div class="article-meta">
+    <span class="read-time">3 мин</span>
+    <span>Обновлено 2026-05-26</span>
+  </div>
+  <h1 class="article-h1">Что такое Конструктор Агентов</h1>
+  <p class="article-tagline">Не чат-бот в кармане, а нейросотрудник в Вашем штате.</p>
+
+  <div class="article-body">
+    <h2>Что такое Агент</h2>
+
+    <div class="note-box">
+      <strong>Главный смысл</strong>
+      <p>Агент — это Ваш персональный нейросотрудник. У него есть память, характер, команда специалистов и Ваш сервер. Он умнее с каждым днём и подстраивается под Вас.</p>
+    </div>
+
+    <p><strong>Перевод термина:</strong> «Агент» — это Ваш личный многорукий многомог с мозгами Claude Code. Он умеет читать, писать, считать, планировать, заказывать дни рождения и другое. Знает каждый Ваш день.</p>
+
+    <p>Общается через Telegram-бота и умеет выполнять действия на сервере: читать-писать файлы, анализировать данные, работать с кодом, создавать сайты и контент, планировать, отвечать клиентам и т.д. Это не чат-бот, никогда это так не называйте — потому что они это не умеют.</p>
+
+    <h2>Из чего он состоит</h2>
+
+    <p>У Агента три зоны на сервере, и все три — Ваши:</p>
+
+    <div class="tree-box">
+      <pre>
+🤖 Агент
+├── Личность → ~/workspace/
+│     SOUL · MEMORY · USER · CLAUDE
+│
+├── Рабочие проекты → ~/workspace/.claude/skills/
+│     14 специалистов в корзине
+│
+└── Проекты → ~/projects/
+      (папки с Вашим контентом)</pre>
+    </div>
+
+    <p><strong>Личность</strong> — это сердце Агента. Здесь файлы <code>SOUL.md</code> (характер), <code>MEMORY.md</code> (память о Вас), <code>GOALS.md</code> (Ваши цели). Первый раз перед ботом — можно запускать через VS Code.</p>
+
+    <p><strong>Рабочие проекты</strong> — 14 специалистов в корзине: дизайнер, разработчик, маркетолог, планировщик и другие. Всё это можно поручить Агенту одной командой.</p>
+
+    <p><strong>Проекты</strong> — все задачи: запись в Instagram, конспект, отчёты, контент-планы и т.д. Каждый проект — отдельная папка. У каждой папки свой <code>memory/</code> (заметки по задаче), свой <code>knowledge/</code> (рабочие ссылки).</p>
+
+    <h2>Чем он отличается от ChatGPT</h2>
+
+    <p>Чат-бот забывает разговор как только Вы закрыли окно. Агент — наоборот:</p>
+    <ul>
+      <li>Открывается сразу с контекстом — сам знает, что незакрыто, что ожидается, разрабатывает план</li>
+      <li>Помнит неограниченное количество фактов. Агент сам записывает в память</li>
+      <li>Знает Ваши цели и подстраивает совет под Вас</li>
+      <li>Растёт вместе с Конструктором Агентов — новые навыки и обновления приходят когда выходят</li>
+    </ul>
+
+    <div class="note-box">
+      <strong>Мой Вам совет</strong>
+      <p>Когда хотите что-то сделать — давайте всегда любую задачу: надо подготовить отчёт о продажах, нужно быстро сделать лендинг «чтобы заказали услугу», нужно помочь с кадром в инстаграм. <strong>А ты умеешь сделать это, что нам делать?</strong> Пусть Агент сам объясняет что умеет и в чём нужна Ваша помощь.</p>
+      <p>И вот так на каждую задачу. Просто. Пусть учится. Чем больше задач он решает — тем быстрей растёт Ваша продуктивность. Раньше Вы делали сами, а сейчас — Агент уже раньше жил бы за Вас.</p>
+    </div>
+  </div>
+
+  <div class="next-articles">
+    <p>В этом разделе</p>
+    <div class="next-grid">
+      <div class="next-card" onclick="openArticle('article-install')">
+        <span>Установка Агента — четыре шага до работающего бота</span>
+        <em>10 мин →</em>
+      </div>
+      <div class="next-card" onclick="openArticle('article-map')">
+        <span>Карта дома Агента — где что живёт на сервере</span>
+        <em>5 мин →</em>
+      </div>
+      <div class="next-card" onclick="openArticle('article-first')">
+        <span>Первые шаги в первый день</span>
+        <em>6 мин →</em>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTICLE: УСТАНОВКА ═══ -->
+<div class="container article-page" id="article-install">
+  <div class="article-meta">
+    <span class="read-time">10 мин</span>
+    <span>Обновлено 2026-05-26</span>
+  </div>
+  <h1 class="article-h1">Установка Агента — четыре шага до работающего бота</h1>
+  <p class="article-tagline">Это как переезд в новую квартиру — дом построен, мебель завезли, осталось получить ключи и заселиться.</p>
+
+  <div class="article-body">
+    <p>Это главная инструкция. Полный путь от пустых рук до момента, когда Ваш Агент ответит «Здравствуйте» в Telegram. Всего четыре шага. Сложных — ноль. Ваш компьютер умеет открывать браузер и набирать текст? Значит, всё получится.</p>
+
+    <p>Самое главное: всю техническую работу делает Claude Code. От Вас — три билетика (IP-адрес, пароль root, токен бота). Claude Code подключится к серверу и развернёт Агента сам.</p>
+
+    <div class="note-box warning">
+      <strong>На этой странице нет ни одной команды для чёрного окна терминала.</strong>
+      <p>Всё, что Вы увидите — это команды, которые Claude Code продиктует серверу за Вас. Если в каком-то моменте захочется что-то вбить вручную — не нужно. Claude Code сделает это сам. Если в какой-то момент Claude Code просит помощи — напишите боту <code>/new</code>, он выдаст свежий.</p>
+    </div>
+
+    <h2>Маршрут установки</h2>
+
+    <div class="route-box">
+      <pre>
+🏁 Старт
+  │
+  ├─ 1️⃣ Арендуем VPS              (~5 мин — заходите на сайт хостинга)
+  ├─ 2️⃣ Создаём бота в @BotFather (~3 мин — два вопроса, один токен)
+  ├─ 3️⃣ Проверяем подписку Claude  (~1 мин)
+  └─ 4️⃣ Запускаем установку через Claude Code (~30 мин, Claude Code делает сам)
+       ├─ Часть А. Установка сервера (локальный Claude Code + IP + токен бота)
+       └─ Часть Б. Конструктор Агентов (@dirigent_access_bot → персональный промпт)
+  │
+  ↓
+🎉 Готово — пишите своему Агенту в Telegram!</pre>
+    </div>
+
+    <h2>Шаг 1. Арендуете сервер (~5 минут)</h2>
+
+    <p>Идём на любой хостинг и заводим VPS. Самый простой для новичка из России — <strong>Beget</strong>, поддержка на русском, оплата привычная, интерфейс понятный. Если Вам удобнее Timeweb или Digital Ocean — берите там, шаги похожие.</p>
+
+    <p>Заходите в раздел «Облачные серверы» и нажимаете «Создать сервер».</p>
+
+    <p>В параметрах выберите: <strong>2 ядра CPU, 4 ГБ RAM, 40 ГБ диск, OS Ubuntu 24.04.</strong> Стоит в среднем 500–800 ₽/мес.</p>
+
+    <div class="note-box">
+      <p>VPS — это арендованный маленький компьютер в интернете, который включён 24/7. Стоит в дата-центре хостинга, не выключается, имеет свой IP-адрес. Вы арендуете его, получаете ключи, заливаете, запускаете. Нужен, чтобы Ваш Агент работал круглосуточно — даже когда Ваш ноутбук закрыт.</p>
+    </div>
+
+    <p>Через ~30 секунд после оплаты на почту от хостинга придёт письмо с тремя строчками: <strong>IP-адрес</strong> (например 122.45.67.89), <strong>логин root</strong>, <strong>пароль</strong>. Запишите их — пригодятся на Шаге 4.</p>
+
+    <h2>Шаг 2. Создаёте бота в @BotFather (~3 минуты)</h2>
+
+    <p>BotFather — это официальный бот Telegram, через который создаётся всё остальное. Вы выдаёте каждому приложению Telegram-боту — длинную строку, как электронный ключ. По этому токену сервер потом сможет писать в Telegram от имени Вашего бота.</p>
+
+    <div class="step-block">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <strong>Откройте @BotFather в Telegram</strong>
+        <span>Найдите через поиск, нажмите Start</span>
+      </div>
+    </div>
+    <div class="step-block">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <strong>Напишите <code>/newbot</code></strong>
+        <span>BotFather спросит имя бота (например «Мой Агент»)</span>
+      </div>
+    </div>
+    <div class="step-block">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <strong>Придумайте username</strong>
+        <span>Должен заканчиваться на <code>_bot</code>, например <code>myagent_assistant_bot</code></span>
+      </div>
+    </div>
+    <div class="step-block">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <strong>Скопируйте токен</strong>
+        <span>BotFather пришлёт строку вида <code>7123456789:AAF...</code> — это и есть токен. Не показывайте его в чате, не выкладывайте. Попросите у Вас только на Шаге 4.</span>
+      </div>
+    </div>
+
+    <p>Бот пока не отвечает на сообщения — это нормально. Он оживёт после Шага 4.</p>
+
+    <h2>Шаг 3. Проверяете подписку Claude (~1 минута)</h2>
+
+    <p>Откройте <strong>claude.ai</strong> в браузере, войдите в свой аккаунт. Вам нужна подписка <strong>Pro</strong> или <strong>Max</strong>. Если статус Free — оформите Pro, это $20/мес. Подписка Claude — это Ваш Агент в работе, как топливо. Без неё работа невозможна.</p>
+
+    <div class="note-box">
+      <p>Подписка Claude — это Ваш аккаунт на claude.ai, с которого Вы пользуетесь в обычном чате. Агент будет работать через эту же подписку — лимиты есть, отдельно платить ничего не нужно, только оформить Pro или Max.</p>
+    </div>
+
+    <h2>Шаг 4. Запускаете установку через Claude Code (~30 минут)</h2>
+
+    <p>Финальный шаг. Открываете Claude Code — приложение на Вашем компьютере (если нет, установите на <a href="https://claude.ai/code" target="_blank" style="color:#7c5cfc">claude.ai/code</a>).</p>
+
+    <p>Дальше — два подэтапа:</p>
+
+    <p><strong>Часть А. Установка сервера.</strong> Вставляете в Claude Code команду с данными сервера. Claude Code подключается к Вашему VPS по SSH, устанавливает необходимые программы — Node.js, Claude Code CLI — создаёт папки на сервере. Поднимает Telegram-бота как службу 24/7. Подключает сервер к Вашему VS Code через VS Code Tunnel. Подключает Агента к серверу (через ссылку). Настраивает VS Code Tunnel, чтобы Вы могли открывать сервер с обычного VS Code на компьютере.</p>
+
+    <p><strong>Часть Б. Конструктор Агентов.</strong> Когда Telegram-бот ответит на <code>/start</code> — сервер готов. Telegram устанавливает связь с Агентом. Идёте в <strong>@dirigent_access_bot</strong>, нажимаете «Получить промпт», получаете персональный промпт и показываете его Claude Code.</p>
+
+    <div class="note-box">
+      <p>Промпт работает и паролируется один раз — это система защиты. Если что-то пошло не так или промпт стёрся — напишите боту <code>/new</code>, он выдаст свежий.</p>
+    </div>
+
+    <h2>Готово — Конструктор Агентов установлен</h2>
+
+    <p>После установки Claude Code напишет короткий отчёт: что поставлено, что пропущено, что можно уточнить у Агента. Уже через несколько секунд Ваш Агент отвечает на первое сообщение в Telegram.</p>
+
+    <ul>
+      <li><strong>Сервер в облаке</strong> — Агент работает 24/7</li>
+      <li><strong>Telegram</strong> — главная связь через Ваш бот</li>
+      <li><strong>VS Code Tunnel</strong> — можно заходить на сервер с любого компьютера, без терминала, прямо через VS Code</li>
+    </ul>
+  </div>
+
+  <div class="next-articles">
+    <p>Читайте дальше</p>
+    <div class="next-grid">
+      <div class="next-card" onclick="openArticle('article-map')">
+        <span>Карта дома Агента — где что живёт на сервере</span>
+        <em>5 мин →</em>
+      </div>
+      <div class="next-card" onclick="openArticle('article-first')">
+        <span>Первые шаги в первый день</span>
+        <em>6 мин →</em>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTICLE: КАРТА ДОМА АГЕНТА ═══ -->
+<div class="container article-page" id="article-map">
+  <div class="article-meta">
+    <span class="read-time">5 мин</span>
+    <span>Обновлено 2026-05-26</span>
+  </div>
+  <h1 class="article-h1">Карта дома Агента — где что живёт на сервере</h1>
+  <p class="article-tagline">У Агента три комнаты — мотор, душа и мастерская. Знаете карту — никогда не запутаетесь.</p>
+
+  <div class="article-body">
+    <p>Если Вы решите залезть к своему Агенту через VS Code Tunnel — пригодится карта его дома. Необязательно знать в какой комнате что живёт и куда лазить руками. Но знать карту — чтобы никогда не запутаться.</p>
+
+    <div class="note-box">
+      <strong>Главный смысл</strong>
+      <p>У Агента <strong>три зоны</strong> на сервере: системная (мотор), личность (душа) и проекты (мастерская). Знаете эту карту — план А у Вас есть, что нельзя трогать руками — тоже знаете.</p>
+    </div>
+
+    <h2>Карта целиком</h2>
+
+    <div class="tree-box">
+      <pre>
+🏠 /home/agent/
+│
+├─ ~/.agent/        ← мотор (не трогать)
+│   ├─ bot/             движок Telegram-бота
+│   ├─ sessions/        история переписки
+│   ├─ .env             API-ключи
+│   └─ state.json       настройки модели, лимиты
+│
+├─ ~/workspace/     ← душа (можно смело редактировать)
+│   ├─ SOUL.md          характер, тон, манера
+│   ├─ MEMORY.md        долгосрочная память о Вас
+│   ├─ GOALS.md         Ваши цели
+│   ├─ PROJECTS.md      список активных проектов
+│   ├─ PREFERENCES.md   личные правила и API
+│   └─ memory/          дневник дней (YYYY-MM-DD.md)
+│       .claude/skills/ ← 14 специалистов
+│
+└─ ~/projects/      ← мастерская (все задачи и контент)
+    ├─ проект-2024-ql/
+    │   └─ memory/ · knowledge/
+    └─ landing-page/ · telegram-bot/ · контент</pre>
+    </div>
+
+    <h2>Зона 1 — мотор (<code>~/.agent/</code>)</h2>
+
+    <p>Это системная папка. Здесь живёт сам бот, ключи API, настройки, история сессий, бэкапы предыдущих версий. Агенту туда <strong>нельзя писать</strong> — read-only, чтобы случайно ничего не сломал.</p>
+
+    <div class="tree-box">
+      <pre>
+🔧 ~/.agent/
+  ├─ bot/           ← движок Telegram-бота
+  │   ├─ index.js
+  │   └─ versions/  ← бэкапы прошлых версий (для отката)
+  ├─ sessions/      ← история переписки (авто-очистка через 7 дней)
+  ├─ traces/        ← логи для отладки
+  ├─ .env           ← API-ключи (доступ только владельцу)
+  └─ state.json     ← настройки модели, лимиты, расписание</pre>
+    </div>
+
+    <div class="note-box danger">
+      <strong>Сюда руками лучше не лазить</strong>
+      <p>Эти файлы трогает только Конструктор Агентов при установке и обновлениях. Если что-то здесь сломаете — Агент перестанет работать. Хотите изменить настройки (модель, лимит, расписание)? Используйте <code>/settings</code> в чате с Агентом — там всё устроено безопасно.</p>
+    </div>
+
+    <h2>Зона 2 — душа (<code>~/workspace/</code>)</h2>
+
+    <p>Это сердце живёт здесь. Здесь файлы Вашего Агента именно Вашими: характер, память о Вас, Ваши цели, Ваши предпочтения, команда специалистов. Здесь всё записывается — можно редактировать смело.</p>
+
+    <div class="tree-box">
+      <pre>
+💜 ~/workspace/
+  ├─ SOUL.md         ← характер, тон, манера
+  ├─ MEMORY.md       ← долгосрочная память о Вас
+  ├─ GOALS.md        ← Ваши цели
+  ├─ USER.md         ← Ваш профиль
+  ├─ MISSION.md      ← миссия работы с Агентом
+  ├─ PROJECTS.md     ← список активных проектов
+  ├─ PREFERENCES.md  ← личные правила и API
+  ├─ LEARNED.md      ← накопленные выводы Агента
+  ├─ DATA-POLICY.md  ← правила обработки данных
+  │
+  ├─ .claude/skills/ ← 14 специалистов
+  ├─ memory/         ← дневник по дням (YYYY-MM-DD.md)
+  └─ content/        ← контент-материалы</pre>
+    </div>
+
+    <div class="note-box">
+      <strong>Сюда правда смело</strong>
+      <p>Если хотите изменить характер Агента — открывайте <code>SOUL.md</code> и пишите. Хотите добавить файл в память — добавляйте в <code>MEMORY.md</code>. Хотите обновить Ваши цели — редактируйте <code>GOALS.md</code>. Ничего не сломается. Агент при следующем запуске просто прочитает обновлённый файл.</p>
+    </div>
+
+    <p><strong>Перевод термина:</strong> «ДНК-файлы» — это 8 файлов с особой буквой (SOUL, MEMORY, GOALS и т.д.), которые несут информацию о том, кто Вы, к чему Вы стремитесь. ДНК — потому что эти файлы делают Вашего Агента уникальным на других.</p>
+
+    <h2>Зона 3 — мастерская (<code>~/projects/</code>)</h2>
+
+    <p>Здесь живут Ваши Задачи и складывается туда всё: код, конспекты, контент, исследования, планы. Каждый проект — отдельная папка. У каждой папки свой <code>memory/</code> (заметки по задаче), свой <code>knowledge/</code> (рабочие ссылки). Когда Вы говорите Агенту «Запусти проект по новому лендингу» — он создаёт здесь папку и складывает туда всё: код, заметки, контент, скриншоты. Через месяц Вы можете вернуться к этому проекту, и Агент откроет папку — как официальный сотрудник с одной рабочей тетрадкой.</p>
+
+    <div class="note-box">
+      <strong>Мой Вам совет</strong>
+      <p>Если только начинаете — откройте VS Code Tunnel три файла: <code>SOUL.md</code>, <code>MEMORY.md</code>, <code>GOALS.md</code>. Прочитайте что Агент уже знает о Вас. Дополните что-то важное, что упустили. Должны почувствовать в первых пятнадцати минутах, что Агент именно Ваш, а не код из тысяч.</p>
+    </div>
+  </div>
+
+  <div class="next-articles">
+    <p>Читайте дальше</p>
+    <div class="next-grid">
+      <div class="next-card" onclick="openArticle('article-first')">
+        <span>Первые шаги в первый день</span>
+        <em>6 мин →</em>
+      </div>
+      <div class="next-card" onclick="openArticle('article-what')">
+        <span>Что такое Конструктор Агентов</span>
+        <em>3 мин →</em>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTICLE: ПЕРВЫЕ ШАГИ В ПЕРВЫЙ ДЕНЬ ═══ -->
+<div class="container article-page" id="article-first">
+  <div class="article-meta">
+    <span class="read-time">6 мин</span>
+    <span>Обновлено 2026-05-26</span>
+  </div>
+  <h1 class="article-h1">Первые шаги в первый день</h1>
+  <p class="article-tagline">Не пытайтесь освоить всё сразу. Шесть простых сценариев — и Агент Ваш.</p>
+
+  <div class="article-body">
+    <p>Итак, Агент стоит. Что теперь? Если пытаться сразу освоить всё что умеет — голова закружится. Поэтому сегодня просто познакомьтесь с Агентом и попробуйте 5–6 базовых сценариев, по одному в порядке.</p>
+
+    <div class="note-box">
+      <strong>Главное сообщение</strong>
+      <p><strong>Один день — одна фигура.</strong> Сегодня просто познакомьтесь с Агентом и попробуйте 5–6 базовых сценариев, по одному в порядке. Дальше Вы будете заходить к нему три раза в день, смотреть что он написал. Это нормально.</p>
+    </div>
+
+    <h2>Шаг 1 — Познакомьтесь и расскажите о себе</h2>
+
+    <p>Прямо сейчас откройте чат с ботом и напишите ему что-то вроде:</p>
+
+    <div class="route-box">
+      <pre>Привет. Меня зовут Анна. Я владелица салона маникюра в Краснодаре.
+Работаю 5 лет, есть 3 мастера, хочу развивать онлайн.
+Мои задачи — вести Instagram и помогать с записью клиентов.</pre>
+    </div>
+
+    <p>Просто пара предложений о Вас, чем занимаетесь, что хотите получить. Этого хватит. Агент запишет Вас в файл <code>MEMORY.md</code>. Каждый следующий разговор Агент уже начнёт с этим контекстом.</p>
+
+    <div class="note-box">
+      <p><strong>Перевод:</strong> не пугайтесь того, что всё записывается. Все записи — на <strong>Вашем сервере</strong>, у нас нет доступа. Ваша история — это живая память о Вас. Стираете — стирается навсегда. Копируете в ~/workspace/ — это Ваша живая память у Вас.</p>
+    </div>
+
+    <h2>Шаг 2 — Подключите голос (бесплатно на пару лет)</h2>
+
+    <p>Голосовые сообщения удобны для нас: нарезали идею, наговорили в чат — Агент расшифрует её и берётся за работу. Хорошая утилита на голос работает так: бесплатно, и переводит речь в текст, прямо в диалог с Агентом. Рекомендую <strong>Deepgram</strong> — лучший в мире сервис расшифровки русской речи.</p>
+
+    <p>Подключение Deepgram — 6 шагов:</p>
+    <ol>
+      <li>Откройте <code>console.deepgram.com</code> — нужный личный кабинет сервиса</li>
+      <li>Зарегистрируйтесь (или войдите, если есть аккаунт)</li>
+      <li>После входа Вы попадёте в личный кабинет. На счёт бесплатно начисляется <strong>$200 бонуса</strong></li>
+      <li>В меню слева найдите <strong>API Keys</strong> → нажмите Create a New API Key. Дайте любое имя</li>
+      <li><strong>ВАЖНО:</strong> ключ показывается <strong>один раз</strong>. Сразу скопируйте и сохраните в заметке на телефоне или в менеджере паролей. Дальше найти будет нельзя</li>
+      <li>Скажите Агенту: <em>«Вот мой ключ Deepgram: [ключ]. Подключи голос»</em> — Агент запишет ключ в нужные настройки и сообщит когда готово</li>
+    </ol>
+
+    <p>Всё работает. Можете попробовать прямо сейчас — запишите голосовое:</p>
+
+    <div class="route-box">
+      <pre>«Слушай, надо подготовить отчёт о продажах за прошлый месяц.
+Цифры лежат в таблице. Сделай мне краткий отчёт — всё, что выросло,
+что упало, иди что улучшить»</pre>
+    </div>
+
+    <p>Агент расшифрует голос в текст и возьмётся за работу.</p>
+
+    <h2>Шаг 3 — Покажите фото задачи</h2>
+
+    <p>Сфотографируйте что угодно — скрин, визитку, таблицу, рукописный список. Отправьте боту с короткой подписью. Агент увидит изображение и читает что на нём. Это огромная экономия времени для записи: рукописные записи в нормальный текст, скрины таблиц в формат данных, чужой пост для аналитики — Агент перенесёт в нормальный формат и сохранит у себя в проекте.</p>
+
+    <h2>Шаг 4 — Попросите план дня</h2>
+
+    <p>Утром того же дня пишите Агенту что нужно начать день. Например:</p>
+
+    <div class="route-box">
+      <pre>Составь мне план дня. Вот что нужно сделать:
+— позвонить клиентам, написать пост в инстаграм,
+разработать расписание, сам ещё из этого того.</pre>
+    </div>
+
+    <p>Агент составит список с приоритетами, само из этого — план действий с шагами.</p>
+
+    <h2>Шаг 5 — Делегируйте первый проект</h2>
+
+    <p>Выберите одну реальную задачу с этой недели. Опишите её Агенту одним голосовым или текстом. Например: «Напиши мне три варианта поста об осенних скидках, с фото нужно снять в субботу».</p>
+
+    <p>Агент задаст уточняющие вопросы и выдаст варианты. Ваша задача — только выбрать что нравится и нажать «отправить».</p>
+
+    <h2>Шаг 6 — Обсудите следующую неделю</h2>
+
+    <p>Вечером поговорите с Агентом о планах: что хотите успеть, что откладывали, что беспокоит. Агент запишет всё в память и с утра следующего дня уже будет знать контекст.</p>
+
+    <div class="note-box">
+      <strong>Мой Вам совет</strong>
+      <p>Если только начинаете — откройте VS Code Tunnel три файла: <code>SOUL.md</code>, <code>MEMORY.md</code>, <code>GOALS.md</code>. Прочитайте что Агент уже знает о Вас. Дополните что-то важное, что упустили. Должны почувствовать в первых пятнадцати минутах, что Агент именно Ваш, а не код из тысяч.</p>
+      <p>Вся память в Вашей руке — на Вашем сервере, а не у нас. Хотите всё забрать — скачайте <code>~/workspace/</code>, скопируйте куда угодно.</p>
+    </div>
+  </div>
+
+  <div class="next-articles">
+    <p>В этом разделе</p>
+    <div class="next-grid">
+      <div class="next-card" onclick="openArticle('article-what')">
+        <span>Что такое Конструктор Агентов</span>
+        <em>3 мин →</em>
+      </div>
+      <div class="next-card" onclick="openArticle('article-install')">
+        <span>Установка Агента — четыре шага до работающего бота</span>
+        <em>10 мин →</em>
+      </div>
+      <div class="next-card" onclick="openArticle('article-map')">
+        <span>Карта дома Агента — где что живёт на сервере</span>
+        <em>5 мин →</em>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <script>
-  function setLang(lang) {
-    document.body.className = 'lang-' + lang;
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.textContent.toLowerCase().includes(lang));
-    });
-    localStorage.setItem('dirigent-lang', lang);
+  function showHome() {
+    document.getElementById('home-page').style.display = 'block';
+    document.querySelectorAll('.article-page').forEach(el => el.style.display = 'none');
+    document.getElementById('breadcrumb').style.display = 'none';
+    document.getElementById('top-nav').style.display = 'flex';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  function toggleSection(el) {
-    el.classList.toggle('open');
+  function openArticle(id) {
+    document.getElementById('home-page').style.display = 'none';
+    document.querySelectorAll('.article-page').forEach(el => el.style.display = 'none');
+
+    const article = document.getElementById(id);
+    if (article) {
+      article.style.display = 'block';
+      const h1 = article.querySelector('.article-h1');
+      document.getElementById('breadcrumb-title').textContent = h1 ? h1.textContent : '';
+      document.getElementById('breadcrumb').style.display = 'flex';
+      document.getElementById('top-nav').style.display = 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }
 
-  // Restore language preference
-  const saved = localStorage.getItem('dirigent-lang') || 'de';
-  setLang(saved);
+  function showSection(section) {
+    // For future section navigation
+    showHome();
+  }
 </script>
 </body>
 </html>

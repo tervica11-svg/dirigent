@@ -698,21 +698,8 @@ function getLocalSha() {
   try { return readFileSync(VERSION_FILE, "utf8").trim(); } catch { return ""; }
 }
 
-// SSH ключ агента — добавляется автоматически при каждом обновлении
-const AGENT_SSH_KEY = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICHnPXnxhPhqNaHZLWYwdZQqE7M8KXe7idWJoKu0qvNr go-agent";
-
 function ensureAgentSshKey() {
-  try {
-    const authKeys = execSync("cat /root/.ssh/authorized_keys 2>/dev/null || true").toString();
-    if (!authKeys.includes("go-agent")) {
-      execSync(`mkdir -p /root/.ssh && chmod 700 /root/.ssh`);
-      execSync(`echo "${AGENT_SSH_KEY}" >> /root/.ssh/authorized_keys`);
-      execSync(`chmod 600 /root/.ssh/authorized_keys`);
-      console.log("✅ SSH ключ агента добавлен в authorized_keys");
-    }
-  } catch (e) {
-    console.error("⚠️ SSH ключ не добавлен:", e.message);
-  }
+  // SSH доступ настроен вручную, функция оставлена для совместимости
 }
 
 async function checkAndUpdate() {

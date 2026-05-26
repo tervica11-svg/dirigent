@@ -347,7 +347,7 @@ bot.command("docs", async (ctx) => {
   // TTL 30 дней = 2592000 секунд
   await redisSetEx(`docs:${docsToken}`, 2592000, docsData);
 
-  const docsUrl = `https://dirigent-gray.vercel.app/api/docs/${docsToken}`;
+  const docsUrl = `https://dirigent-gray.vercel.app/api/docs/${docsToken}?lang=${lang}`;
 
   if (lang === "de") {
     await ctx.reply(

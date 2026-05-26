@@ -347,7 +347,12 @@ bot.callbackQuery("knowledge", async (ctx) => {
 
   // Генерируем токен, сохраняем в Redis на 30 дней
   const docsToken = uuidv4();
-  await redisSetEx(`docs:${docsToken}`, 2592000, { username, issued: new Date().toISOString() });
+  try {
+    await redisSetEx(`docs:${docsToken}`, 2592000, { username, issued: new Date().toISOString() });
+    console.log(`✅ docs token saved: docs:${docsToken} for @${username}`);
+  } catch (e) {
+    console.error(`❌ Redis error saving docs token:`, e.message);
+  }
 
   const docsUrl = `https://dirigent-gray.vercel.app/api/docs/${docsToken}`;
 

@@ -145,134 +145,74 @@ async function issueToken(username) {
   return id;
 }
 
-// URL для скачивания ZIP (используется внутри промпта)
+// URL для скачивания ZIP
 const DOWNLOAD_URL = "https://dirigent-gray.vercel.app/api/zip";
 
-// Промпт, который отправляется клиенту — полностью самодостаточный
+// Промпт в стиле Дмитрия — чистый, лаконичный, для Claude Code
 function buildPrompt(username, tokenId, lang = "ru") {
-  const issued  = humanDate(new Date().toISOString());
-  const last4   = tokenId.slice(-4);
-  const zipUrl  = `${DOWNLOAD_URL}/${tokenId}`;
+  const issued = humanDate(new Date().toISOString());
+  const last4  = tokenId.slice(-4);
+  const zipUrl = `${DOWNLOAD_URL}/${tokenId}`;
 
   if (lang === "de") {
     return [
-      `Hallo Claude. Du bist der Installationsassistent für Dirigent — einen persönlichen AI-Agenten.`,
+      `Ich habe einen persönlichen AI-Agenten Dirigent erworben. Hilf mir bei der Installation.`,
       ``,
-      `Kundendaten:`,
-      `Telegram: @${username}`,
-      `Token: ${tokenId}`,
-      `Ausgestellt: ${issued}`,
+      `Meine Daten:`,
+      `- Mein Telegram: @${username}`,
+      `- Ausstellungsdatum: ${issued}`,
       ``,
-      `Führe die Installation Schritt für Schritt durch:`,
-      ``,
-      `## Schritt 1 — Paket herunterladen`,
-      ``,
-      `Sage: «Hallo! Ich lade Ihr Dirigent-Paket herunter — einen Moment.»`,
-      ``,
-      `Führe aus:`,
-      ``,
-      `\`\`\`bash`,
-      `mkdir -p ~/dirigent`,
-      `cd ~/dirigent`,
+      `Schritt 1: Erstelle den Ordner, lade das Archiv herunter und entpacke es:`,
+      `mkdir -p ~/dirigent && cd ~/dirigent`,
       `curl -fsSL "${zipUrl}" -o package.zip`,
-      `unzip -q package.zip`,
-      `inner=$(ls -d dirigent-*/ 2>/dev/null | head -n 1)`,
-      `if [ -n "$inner" ]; then mv "$inner"* . 2>/dev/null || true; rmdir "$inner" 2>/dev/null || true; fi`,
-      `rm -f package.zip`,
-      `ls -1 ~/dirigent | head -20`,
-      `\`\`\``,
+      `unzip -q package.zip && rm package.zip`,
       ``,
-      `Wenn curl HTTP 403 oder 429 zurückgibt — Token abgelaufen. Sage:`,
-      `«Token abgelaufen. Schreiben Sie dem Bot @dirigent_access_bot den Befehl /new — ich stelle einen neuen aus.»`,
-      `Und stop.`,
+      `Falls curl einen Fehler zurückgibt — Token abgelaufen. Sage: «Schreiben Sie dem Bot /new — ich stelle einen neuen aus.» Und stop.`,
       ``,
-      `## Schritt 2 — Wasserzeichen setzen`,
-      ``,
-      `Lese ~/dirigent/LICENSE.md, ersetze {{LICENSED_TO}} durch:`,
+      `Schritt 2: Ersetze in ~/dirigent/LICENSE.md {{LICENSED_TO}} durch:`,
       `@${username} (ausgestellt ${issued}, Token ...${last4})`,
       ``,
-      `## Schritt 3 — Konfigurationsdateien lesen`,
+      `Schritt 3: Frage mich — wohin soll der Agent installiert werden:`,
       ``,
-      `Lese per Read-Tool:`,
-      `- ~/dirigent/.claude/CLAUDE.md`,
-      `- ~/dirigent/INSTALL.md`,
+      `Variante A — auf Server (VPS, läuft 24/7):`,
+      `Frage mich in einer Nachricht: 1) IP-Adresse 2) Root-Passwort 3) Telegram-Bot-Token von @BotFather (optional)`,
+      `Dann lese server/INSTALL-SERVER.md und folge den Schritten.`,
       ``,
-      `## Schritt 4 — Frage, wohin installiert werden soll`,
+      `Variante B — auf diesen Computer:`,
+      `Lese INSTALL.md und führe die Installation durch.`,
       ``,
-      `Frage genau so:`,
-      `«Wohin soll Ihr Agent installiert werden?`,
-      `1. Auf diesen Computer — ~10 Minuten, Agent läuft wenn der Computer an ist`,
-      `2. Auf einen Server (VPS) — 24/7-Betrieb, benötige IP und Passwort`,
-      `3. In ein bestehendes Projekt — füge zu einem bereits eingerichteten Agenten hinzu»`,
-      ``,
-      `Warte auf die Antwort. Tue nichts, bis Sie die Wahl getroffen haben.`,
-      ``,
-      `## Schritt 5 — Handeln nach Wahl`,
-      ``,
-      `A — «Auf diesen Computer»: Führe ~/dirigent/INSTALL.md vollständig aus.`,
-      `B — «Auf Server»: Frage nach IP, Root-Passwort und Telegram-Bot-Token. Dann ~/dirigent/server/INSTALL-SERVER.md.`,
-      `C — «Bestehendes Projekt»: Frage nach dem Projektpfad. Lese MEMORY.md — nicht überschreiben. Ergänze nur fehlende Teile.`,
+      `Alle Dateien befinden sich im entpackten Ordner ~/dirigent.`,
     ].join("\n");
   }
 
   // RU
   return [
-    `Привет, Claude. Ты — установщик Dirigent, персонального AI-агента.`,
+    `Я приобрёл персонального AI-агента Dirigent. Помоги мне его установить.`,
     ``,
-    `Данные пользователя:`,
-    `Telegram: @${username}`,
-    `Токен: ${tokenId}`,
-    `Выдан: ${issued}`,
+    `Мои данные:`,
+    `- Мой Telegram: @${username}`,
+    `- Дата выдачи: ${issued}`,
     ``,
-    `Выполни установку пошагово:`,
-    ``,
-    `## Шаг 1 — Скачать пакет`,
-    ``,
-    `Скажи: «Привет! Скачиваю ваш пакет Dirigent — пару секунд.»`,
-    ``,
-    `Выполни:`,
-    ``,
-    `\`\`\`bash`,
-    `mkdir -p ~/dirigent`,
-    `cd ~/dirigent`,
+    `Шаг 1: создай папку, скачай архив и распакуй:`,
+    `mkdir -p ~/dirigent && cd ~/dirigent`,
     `curl -fsSL "${zipUrl}" -o package.zip`,
-    `unzip -q package.zip`,
-    `inner=$(ls -d dirigent-*/ 2>/dev/null | head -n 1)`,
-    `if [ -n "$inner" ]; then mv "$inner"* . 2>/dev/null || true; rmdir "$inner" 2>/dev/null || true; fi`,
-    `rm -f package.zip`,
-    `ls -1 ~/dirigent | head -20`,
-    `\`\`\``,
+    `unzip -q package.zip && rm package.zip`,
     ``,
-    `Если curl вернул HTTP 403 или 429 — токен сгорел. Скажи:`,
-    `«Токен сгорел. Напишите боту @dirigent_access_bot команду /new — выдам новый.»`,
-    `И остановись.`,
+    `Если curl вернул ошибку — токен сгорел. Скажи: «Напишите боту /new — выдам новый.» И остановись.`,
     ``,
-    `## Шаг 2 — Водяной знак`,
-    ``,
-    `Прочитай ~/dirigent/LICENSE.md, замени {{LICENSED_TO}} на:`,
+    `Шаг 2: в файле ~/dirigent/LICENSE.md замени {{LICENSED_TO}} на:`,
     `@${username} (выдано ${issued}, токен ...${last4})`,
     ``,
-    `## Шаг 3 — Прочитай конфиг-файлы`,
+    `Шаг 3: спроси меня — куда установить Агента:`,
     ``,
-    `Прочитай через Read:`,
-    `- ~/dirigent/.claude/CLAUDE.md`,
-    `- ~/dirigent/INSTALL.md`,
+    `Вариант A — на сервер (VPS, работает 24/7):`,
+    `Спроси у меня одним сообщением: 1) IP-адрес сервера 2) Пароль root 3) Токен Telegram-бота от @BotFather (опционально)`,
+    `Потом прочитай server/INSTALL-SERVER.md и выполняй по шагам.`,
     ``,
-    `## Шаг 4 — Спроси куда ставим`,
+    `Вариант B — на этот компьютер:`,
+    `Прочитай INSTALL.md и проведи установку.`,
     ``,
-    `Спроси точно так:`,
-    `«Куда устанавливаем вашего Агента?`,
-    `1. На этот компьютер — ~10 минут, агент работает пока компьютер включён`,
-    `2. На сервер (VPS) — работает 24/7, нужны IP и пароль`,
-    `3. В существующий проект — добавлю в уже настроенного агента»`,
-    ``,
-    `Жди ответа. Ничего не делай пока не получишь выбор.`,
-    ``,
-    `## Шаг 5 — Действуй по выбору`,
-    ``,
-    `A — «На компьютер»: выполни ~/dirigent/INSTALL.md полностью.`,
-    `B — «На сервер»: спроси IP, пароль root и токен Telegram-бота. Затем ~/dirigent/server/INSTALL-SERVER.md.`,
-    `C — «В существующий проект»: спроси путь к проекту. Прочти MEMORY.md — не перетирай. Добавь только недостающие части.`,
+    `Все файлы лежат в распакованной папке ~/dirigent.`,
   ].join("\n");
 }
 
@@ -301,7 +241,7 @@ const T = {
     knowledge: `<b>📚 База знаний — Как получить личного AI-агента</b>\n\n<b>Что такое Dirigent?</b>\nDirigent — это завод персональных AI-агентов на базе Claude. Ваш агент живёт на вашем сервере, общается с вами в Telegram 24/7, помнит проекты и становится умнее с каждым разговором.\n\n<b>Что нужно подготовить:</b>\n\n1️⃣ <b>Claude Code</b> — установить на ваш компьютер\nСкачать: claude.ai/code (бесплатно)\nПодписка: Pro — $20/мес или Max — $100/мес\n\n2️⃣ <b>VPS-сервер</b> — арендованный сервер для работы агента 24/7\nЦена: ~5–10 €/мес (Hetzner, DigitalOcean, TimeWeb и др.)\nСистема: Ubuntu 22 или 24\nПомогаем выбрать и настроить — просто напишите нам.\n\n3️⃣ <b>15 минут свободного времени</b>\nВсё остальное Claude Code сделает сам.\n\n<b>Как это происходит:</b>\n1. Вы оплачиваете → пишете нам @tervica11\n2. Мы открываем вам доступ в этом боте\n3. Нажимаете «Получить доступ» → получаете токен\n4. Вставляете токен в Claude Code → агент устанавливается сам\n\n<b>Стоимость: 1 000 €</b> — разовый платёж\nВключает: установку, настройку, поддержку при старте.\n\nГотовы? Напишите <b>@tervica11</b>`,
     no_username: `⚠️ У вас не установлен username в Telegram.\n\nЗайдите в Настройки → задайте имя пользователя, затем попробуйте снова.`,
     no_access: (u) => `🔒 Ваш username <code>@${u}</code> не найден в списке доступа.\n\nЧтобы получить доступ — напишите <b>@tervica11</b>.`,
-    token_issued: (prompt) => `✅ Доступ подтверждён! Вот ваш установочный промпт:\n\n<pre>${prompt}</pre>\n\n<b>Как использовать:</b>\n1. Откройте Claude Code на вашем компьютере\n2. Вставьте промпт выше и нажмите Enter\n3. Claude Code настроит агента сам (~10–15 минут)\n\n⚠️ Токен одноразовый. Если потребуется переустановка — нажмите /get снова.`,
+    token_issued: (prompt) => `✅ Готово, Ваш персональный промпт для Claude Code:\n\n<pre>${prompt}</pre>\n\n<b>Что сделать:</b>\n1. Откройте Claude Code на компьютере\n2. Скопируйте весь текст промпта выше\n3. Вставьте в Claude Code и нажмите Enter\n\nClaude Code скачает пакет, настроит агента и спросит куда устанавливать.\n\n⚠️ Промпт работает только у Вас. Если что-то пошло не так — нажмите /get снова.`,
     token_notify: (u, id) => `🔑 Выдан токен\nПользователь: @${u}\nТокен: <code>${id}</code>`,
   },
   de: {
@@ -315,7 +255,7 @@ const T = {
     knowledge: `<b>📚 Wissensbasis — So erhalten Sie Ihren persönlichen AI-Agenten</b>\n\n<b>Was ist Dirigent?</b>\nDirigent ist eine Fabrik für persönliche AI-Agenten auf Basis von Claude. Ihr Agent läuft auf Ihrem eigenen Server, kommuniziert 24/7 über Telegram, merkt sich Ihre Projekte und wird mit jedem Gespräch klüger.\n\n<b>Was Sie vorbereiten müssen:</b>\n\n1️⃣ <b>Claude Code</b> — auf Ihrem Computer installieren\nDownload: claude.ai/code (kostenlos)\nAbo: Pro — $20/Mon. oder Max — $100/Mon.\n\n2️⃣ <b>VPS-Server</b> — gemieteter Server für den 24/7-Betrieb\nPreis: ~5–10 €/Mon. (Hetzner, DigitalOcean u.a.)\nSystem: Ubuntu 22 oder 24\nWir helfen bei Auswahl und Einrichtung — schreiben Sie uns einfach.\n\n3️⃣ <b>15 Minuten Zeit</b>\nDen Rest erledigt Claude Code automatisch.\n\n<b>So läuft es ab:</b>\n1. Sie bezahlen → schreiben Sie uns @tervica11\n2. Wir schalten Sie in diesem Bot frei\n3. Klicken Sie «Zugang erhalten» → erhalten Ihren Token\n4. Token in Claude Code einfügen → Agent installiert sich selbst\n\n<b>Preis: 1.000 €</b> — Einmalzahlung\nInklusive: Installation, Einrichtung, Support beim Start.\n\nBereit? Schreiben Sie <b>@tervica11</b>`,
     no_username: `⚠️ Sie haben keinen Telegram-Benutzernamen.\n\nGehen Sie zu Einstellungen → legen Sie einen Benutzernamen fest und versuchen Sie es erneut.`,
     no_access: (u) => `🔒 Ihr Benutzername <code>@${u}</code> wurde nicht in der Zugriffsliste gefunden.\n\nUm Zugang zu erhalten — schreiben Sie <b>@tervica11</b>.`,
-    token_issued: (prompt) => `✅ Zugang bestätigt! Hier ist Ihr Installations-Prompt:\n\n<pre>${prompt}</pre>\n\n<b>So verwenden Sie ihn:</b>\n1. Öffnen Sie Claude Code auf Ihrem Computer\n2. Fügen Sie den obigen Prompt ein und drücken Sie Enter\n3. Claude Code richtet den Agenten automatisch ein (~10–15 Min.)\n\n⚠️ Der Token ist einmalig. Bei Neuinstallation — tippen Sie erneut /get.`,
+    token_issued: (prompt) => `✅ Fertig, Ihr persönlicher Prompt für Claude Code:\n\n<pre>${prompt}</pre>\n\n<b>Was zu tun ist:</b>\n1. Öffnen Sie Claude Code auf dem Computer\n2. Kopieren Sie den gesamten Prompt-Text oben\n3. Fügen Sie ihn in Claude Code ein und drücken Sie Enter\n\nClaude Code lädt das Paket herunter, richtet den Agenten ein und fragt wohin installieren.\n\n⚠️ Der Prompt funktioniert nur bei Ihnen. Falls etwas schief läuft — tippen Sie erneut /get.`,
     token_notify: (u, id) => `🔑 Token ausgestellt\nBenutzer: @${u}\nToken: <code>${id}</code>`,
   }
 };
@@ -367,10 +307,21 @@ bot.callbackQuery("faq", async (ctx) => {
   await ctx.reply(T[getLang(ctx)].faq, { parse_mode: "HTML" });
 });
 
-// Кнопка — База знаний (сразу на языке пользователя)
+// Кнопка — База знаний → ссылка на сайт
 bot.callbackQuery("knowledge", async (ctx) => {
   await ctx.answerCallbackQuery();
-  await ctx.reply(T[getLang(ctx)].knowledge, { parse_mode: "HTML" });
+  const lang = getLang(ctx);
+  if (lang === "de") {
+    await ctx.reply(
+      `📚 <b>Wissensbasis Dirigent</b>\n\nÖffnen Sie den Link im Browser — dort finden Sie alles für die Installation des Agenten:\n\n🔗 <a href="https://dirigent-gray.vercel.app/docs.html">dirigent-gray.vercel.app/docs.html</a>`,
+      { parse_mode: "HTML", disable_web_page_preview: false }
+    );
+  } else {
+    await ctx.reply(
+      `📚 <b>База знаний Dirigent</b>\n\nОткройте ссылку в браузере — там всё необходимое для установки агента:\n\n🔗 <a href="https://dirigent-gray.vercel.app/docs.html">dirigent-gray.vercel.app/docs.html</a>`,
+      { parse_mode: "HTML", disable_web_page_preview: false }
+    );
+  }
 });
 
 // (устаревший обработчик — оставлен для совместимости со старыми сообщениями)

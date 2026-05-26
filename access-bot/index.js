@@ -442,6 +442,14 @@ bot.command("get", async (ctx) => {
   await handleGet(ctx);
 });
 
+// Экранирование HTML для вставки в <pre>
+function escapeHtml(text) {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
 async function handleGet(ctx) {
   const username = ctx.from?.username;
   const t = T[getLang(ctx)];
@@ -464,7 +472,7 @@ async function handleGet(ctx) {
   const tokenId = await issueToken(key);
   const prompt  = buildPrompt(key, tokenId, lang);
 
-  await ctx.reply(t.token_issued(prompt), { parse_mode: "HTML" });
+  await ctx.reply(t.token_issued(escapeHtml(prompt)), { parse_mode: "HTML" });
 
   // Уведомляем администратора (всегда на русском)
   await bot.api.sendMessage(

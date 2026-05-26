@@ -325,7 +325,7 @@ bot.callbackQuery("faq", async (ctx) => {
   await ctx.reply(T[getLang(ctx)].faq, { parse_mode: "HTML" });
 });
 
-// Кнопка — База знаний → проверяет whitelist, отдаёт прямую ссылку
+// Кнопка — База знаний → проверяет whitelist, генерирует токен, отдаёт личную ссылку
 bot.callbackQuery("knowledge", async (ctx) => {
   await ctx.answerCallbackQuery();
   const lang = getLang(ctx);
@@ -344,16 +344,20 @@ bot.callbackQuery("knowledge", async (ctx) => {
     return;
   }
 
-  const docsUrl = `https://dirigent-gray.vercel.app/docs.html`;
+  // Генерируем токен, сохраняем в Redis на 30 дней
+  const docsToken = uuidv4();
+  await redisSetEx(`docs:${docsToken}`, 2592000, { username, issued: new Date().toISOString() });
+
+  const docsUrl = `https://dirigent-gray.vercel.app/api/docs/${docsToken}`;
 
   if (lang === "de") {
     await ctx.reply(
-      `📚 <b>Ihre Wissensbasis ist verfügbar:</b>\n\n<a href="${docsUrl}">Wissensbasis öffnen →</a>\n\nInstallationsanleitungen, Architektur des Agenten, erste Schritte.`,
+      `📚 <b>Ihre persönliche Wissensbasis:</b>\n\n<a href="${docsUrl}">Wissensbasis öffnen →</a>\n\nLink ist 30 Tage gültig. Nur für Sie — Weitersenden funktioniert nicht.`,
       { parse_mode: "HTML" }
     );
   } else {
     await ctx.reply(
-      `📚 <b>Ваша база знаний доступна:</b>\n\n<a href="${docsUrl}">Открыть базу знаний →</a>\n\nИнструкции по установке, архитектура агента, первые шаги.`,
+      `📚 <b>Ваша персональная база знаний:</b>\n\n<a href="${docsUrl}">Открыть базу знаний →</a>\n\nСсылка действительна 30 дней. Только для Вас — пересылка другому не сработает.`,
       { parse_mode: "HTML" }
     );
   }

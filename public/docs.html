@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dirigent — Wissensbasis / База знаний</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0f0f13;
+      color: #e8e8f0;
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      border-bottom: 1px solid #2a2a4a;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #6c63ff, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
+
+    .lang-switch {
+      display: flex;
+      gap: 8px;
+    }
+
+    .lang-btn {
+      background: #2a2a4a;
+      border: 1px solid #3a3a6a;
+      color: #a0a0c0;
+      padding: 6px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.2s;
+    }
+
+    .lang-btn.active {
+      background: #6c63ff;
+      border-color: #6c63ff;
+      color: #fff;
+    }
+
+    .lang-btn:hover:not(.active) {
+      background: #3a3a5a;
+      color: #e0e0f0;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .hero h1 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #e8e8f8, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      color: #8080a0;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .section {
+      background: #16162a;
+      border: 1px solid #2a2a4a;
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 20px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .section-icon {
+      font-size: 24px;
+      width: 44px;
+      height: 44px;
+      background: #1e1e38;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #d0d0f0;
+    }
+
+    .section-arrow {
+      margin-left: auto;
+      color: #4040608;
+      font-size: 18px;
+      transition: transform 0.2s;
+    }
+
+    .section.open .section-arrow {
+      transform: rotate(180deg);
+    }
+
+    .section-body {
+      display: none;
+      color: #9090b0;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .section.open .section-body {
+      display: block;
+    }
+
+    .section-body p {
+      margin-bottom: 12px;
+    }
+
+    .section-body ul {
+      padding-left: 20px;
+      margin-bottom: 12px;
+    }
+
+    .section-body li {
+      margin-bottom: 8px;
+    }
+
+    .section-body strong {
+      color: #c0c0e0;
+    }
+
+    .step {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 20px;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #6c63ff, #a78bfa);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      color: #fff;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .step-content strong {
+      color: #d0d0f0;
+      display: block;
+      margin-bottom: 4px;
+      font-size: 15px;
+    }
+
+    .step-content span {
+      color: #8080a0;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .highlight-box {
+      background: #1e1e3a;
+      border: 1px solid #3a3a6a;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 16px 0;
+    }
+
+    .highlight-box .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #6060a0;
+      margin-bottom: 6px;
+    }
+
+    .highlight-box .value {
+      font-size: 18px;
+      font-weight: 700;
+      color: #a78bfa;
+    }
+
+    .highlight-box .sub {
+      font-size: 13px;
+      color: #6060a0;
+      margin-top: 4px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #2a2a4a;
+      border: 1px solid #4040708;
+      border-radius: 6px;
+      padding: 3px 10px;
+      font-size: 13px;
+      color: #9090c0;
+      margin: 3px;
+    }
+
+    .cta {
+      text-align: center;
+      margin-top: 48px;
+      padding: 36px;
+      background: linear-gradient(135deg, #1a1a38, #1e1e3a);
+      border: 1px solid #3a3a6a;
+      border-radius: 20px;
+    }
+
+    .cta h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #d0d0f0;
+      margin-bottom: 10px;
+    }
+
+    .cta p {
+      color: #8080a0;
+      margin-bottom: 20px;
+      font-size: 15px;
+    }
+
+    .cta a {
+      display: inline-block;
+      background: linear-gradient(135deg, #6c63ff, #a78bfa);
+      color: #fff;
+      text-decoration: none;
+      padding: 14px 32px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 16px;
+      transition: opacity 0.2s;
+    }
+
+    .cta a:hover { opacity: 0.85; }
+
+    /* Language visibility */
+    [data-lang] { display: none; }
+    body.lang-de [data-lang="de"] { display: block; }
+    body.lang-ru [data-lang="ru"] { display: block; }
+    body.lang-de [data-lang="de"].inline,
+    body.lang-ru [data-lang="ru"].inline { display: inline; }
+  </style>
+</head>
+<body class="lang-de">
+
+<header>
+  <div class="logo">🎼 Dirigent</div>
+  <div class="lang-switch">
+    <button class="lang-btn active" onclick="setLang('de')">🇩🇪 DE</button>
+    <button class="lang-btn" onclick="setLang('ru')">🇷🇺 RU</button>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div data-lang="de">
+      <h1>Wissensbasis</h1>
+      <p>Alles, was Sie für die Installation und den Start<br>Ihres persönlichen AI-Agenten benötigen.</p>
+    </div>
+    <div data-lang="ru">
+      <h1>База знаний</h1>
+      <p>Всё необходимое для установки и запуска<br>вашего персонального AI-агента.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 1: Was ist Dirigent -->
+  <div class="section open" onclick="toggleSection(this)">
+    <div class="section-header">
+      <div class="section-icon">🤖</div>
+      <div data-lang="de" class="section-title">Was ist Dirigent?</div>
+      <div data-lang="ru" class="section-title">Что такое Dirigent?</div>
+      <div class="section-arrow">▾</div>
+    </div>
+    <div class="section-body">
+      <div data-lang="de">
+        <p>Dirigent ist Ihr persönlicher AI-Agent auf Basis von Claude Code. Er lebt auf Ihrem eigenen Server und kommuniziert mit Ihnen über Telegram — 24 Stunden am Tag, 7 Tage die Woche.</p>
+        <ul>
+          <li><strong>Merkt sich alles</strong> — Ihre Projekte, Vorlieben, laufende Aufgaben</li>
+          <li><strong>Versteht Sprache</strong> — Sprachnachrichten, Fotos, Dokumente</li>
+          <li><strong>Arbeitet aktiv</strong> — schreibt Code, erstellt Inhalte, verwaltet Aufgaben</li>
+          <li><strong>Gehört nur Ihnen</strong> — läuft auf Ihrem Server, Ihre Daten bleiben privat</li>
+          <li><strong>Wird klüger</strong> — mit jedem Gespräch lernt er Sie besser kennen</li>
+        </ul>
+      </div>
+      <div data-lang="ru">
+        <p>Dirigent — это ваш персональный AI-агент на базе Claude Code. Он живёт на вашем сервере и общается с вами через Telegram — 24 часа в сутки, 7 дней в неделю.</p>
+        <ul>
+          <li><strong>Всё помнит</strong> — ваши проекты, предпочтения, текущие задачи</li>
+          <li><strong>Понимает речь</strong> — голосовые, фото, документы</li>
+          <li><strong>Работает активно</strong> — пишет код, создаёт контент, ведёт задачи</li>
+          <li><strong>Только ваш</strong> — на вашем сервере, данные приватны</li>
+          <li><strong>Умнеет</strong> — с каждым разговором знает вас лучше</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: Was vorbereiten -->
+  <div class="section" onclick="toggleSection(this)">
+    <div class="section-header">
+      <div class="section-icon">📋</div>
+      <div data-lang="de" class="section-title">Was Sie vorbereiten müssen</div>
+      <div data-lang="ru" class="section-title">Что нужно подготовить</div>
+      <div class="section-arrow">▾</div>
+    </div>
+    <div class="section-body">
+      <div data-lang="de">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <strong>Claude Code — auf Ihrem Computer installieren</strong>
+            <span>Download: <a href="https://claude.ai/code" target="_blank" style="color:#a78bfa;">claude.ai/code</a> (kostenlos)<br>
+            Abo erforderlich: Claude Pro — $20/Monat oder Max — $100/Monat</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <strong>VPS-Server — für den 24/7-Betrieb des Agenten</strong>
+            <span>Preis: ~5–10 €/Monat (Hetzner, DigitalOcean, Contabo u.a.)<br>
+            System: Ubuntu 22 oder 24 LTS<br>
+            Wir helfen bei Auswahl und Einrichtung — schreiben Sie uns.</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <strong>15 Minuten Zeit</strong>
+            <span>Den Rest erledigt Claude Code automatisch.</span>
+          </div>
+        </div>
+      </div>
+      <div data-lang="ru">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <strong>Claude Code — установить на компьютер</strong>
+            <span>Скачать: <a href="https://claude.ai/code" target="_blank" style="color:#a78bfa;">claude.ai/code</a> (бесплатно)<br>
+            Нужна подписка: Claude Pro — $20/мес или Max — $100/мес</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <strong>VPS-сервер — для работы агента 24/7</strong>
+            <span>Цена: ~5–10 €/мес (Hetzner, DigitalOcean, Contabo и др.)<br>
+            Система: Ubuntu 22 или 24 LTS<br>
+            Помогаем выбрать и настроить — просто напишите нам.</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <strong>15 минут времени</strong>
+            <span>Всё остальное Claude Code сделает сам.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: Wie es abläuft -->
+  <div class="section" onclick="toggleSection(this)">
+    <div class="section-header">
+      <div class="section-icon">🚀</div>
+      <div data-lang="de" class="section-title">So läuft die Installation ab</div>
+      <div data-lang="ru" class="section-title">Как проходит установка</div>
+      <div class="section-arrow">▾</div>
+    </div>
+    <div class="section-body">
+      <div data-lang="de">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <strong>Zugang erhalten</strong>
+            <span>Sie bezahlen → schreiben uns @tervica11 → wir schalten Sie im Bot frei</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <strong>Prompt holen</strong>
+            <span>Im Bot auf «▶ Prompt erhalten» klicken → persönlichen Installations-Prompt erhalten</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <strong>In Claude Code einfügen</strong>
+            <span>Claude Code öffnen → Prompt einfügen → Enter drücken</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <strong>Claude Code installiert alles</strong>
+            <span>Lädt das Paket herunter → richtet den Agenten ein → fragt wohin installieren (Server oder Computer)</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-content">
+            <strong>Agent ist bereit</strong>
+            <span>Schreiben Sie Ihrem Agenten in Telegram — er antwortet sofort</span>
+          </div>
+        </div>
+      </div>
+      <div data-lang="ru">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <strong>Получить доступ</strong>
+            <span>Оплачиваете → пишете нам @tervica11 → мы открываем доступ в боте</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <strong>Получить промпт</strong>
+            <span>В боте нажать «▶ Получить промпт» → получить персональный промпт</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <strong>Вставить в Claude Code</strong>
+            <span>Открыть Claude Code → вставить промпт → нажать Enter</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <strong>Claude Code устанавливает всё</strong>
+            <span>Скачивает пакет → настраивает агента → спрашивает куда ставить (сервер или компьютер)</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-content">
+            <strong>Агент готов</strong>
+            <span>Пишите вашему агенту в Telegram — он сразу отвечает</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: Preis -->
+  <div class="section" onclick="toggleSection(this)">
+    <div class="section-header">
+      <div class="section-icon">💎</div>
+      <div data-lang="de" class="section-title">Preis und was enthalten ist</div>
+      <div data-lang="ru" class="section-title">Стоимость и что входит</div>
+      <div class="section-arrow">▾</div>
+    </div>
+    <div class="section-body">
+      <div data-lang="de">
+        <div class="highlight-box">
+          <div class="label">Preis</div>
+          <div class="value">1.000 €</div>
+          <div class="sub">Einmalzahlung — keine monatlichen Gebühren von unserer Seite</div>
+        </div>
+        <p><strong>Enthalten:</strong></p>
+        <ul>
+          <li>Persönliches Agenten-Paket (Dateien der Persönlichkeit, Gedächtnis, Ziele)</li>
+          <li>Installation und Einrichtung durch Claude Code</li>
+          <li>Unterstützung beim ersten Start</li>
+          <li>Lebenslange Updates des Agenten-Pakets</li>
+        </ul>
+        <p><strong>Zusätzliche monatliche Kosten:</strong></p>
+        <ul>
+          <li>Claude-Abo: Pro $20/Mon. oder Max $100/Mon.</li>
+          <li>VPS-Server: ~5–10 €/Mon.</li>
+        </ul>
+      </div>
+      <div data-lang="ru">
+        <div class="highlight-box">
+          <div class="label">Стоимость</div>
+          <div class="value">1 000 €</div>
+          <div class="sub">Разовый платёж — без ежемесячных платежей с нашей стороны</div>
+        </div>
+        <p><strong>Входит:</strong></p>
+        <ul>
+          <li>Персональный пакет агента (файлы личности, память, цели)</li>
+          <li>Установка и настройка через Claude Code</li>
+          <li>Поддержка при первом запуске</li>
+          <li>Пожизненные обновления пакета агента</li>
+        </ul>
+        <p><strong>Дополнительные ежемесячные расходы:</strong></p>
+        <ul>
+          <li>Подписка Claude: Pro $20/мес или Max $100/мес</li>
+          <li>VPS-сервер: ~5–10 €/мес</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: FAQ -->
+  <div class="section" onclick="toggleSection(this)">
+    <div class="section-header">
+      <div class="section-icon">❓</div>
+      <div data-lang="de" class="section-title">Häufige Fragen</div>
+      <div data-lang="ru" class="section-title">Частые вопросы</div>
+      <div class="section-arrow">▾</div>
+    </div>
+    <div class="section-body">
+      <div data-lang="de">
+        <p><strong>Brauche ich technische Kenntnisse?</strong><br>
+        Nein. Claude Code führt alles automatisch durch und erklärt jeden Schritt.</p>
+
+        <p><strong>Wo laufen meine Daten?</strong><br>
+        Auf Ihrem eigenen Server. Wir haben keinen Zugriff darauf.</p>
+
+        <p><strong>Was ist, wenn etwas nicht funktioniert?</strong><br>
+        Schreiben Sie @tervica11 — wir helfen sofort.</p>
+
+        <p><strong>Kann ich den Agenten später erweitern?</strong><br>
+        Ja. Claude Code kann jederzeit neue Fähigkeiten, Skills und Wissensdatenbanken hinzufügen.</p>
+
+        <p><strong>Funktioniert es auf Mac und Windows?</strong><br>
+        Claude Code läuft auf Mac und Windows. Der Agent läuft am besten auf einem Linux-VPS.</p>
+      </div>
+      <div data-lang="ru">
+        <p><strong>Нужны ли технические знания?</strong><br>
+        Нет. Claude Code всё делает автоматически и объясняет каждый шаг.</p>
+
+        <p><strong>Где хранятся мои данные?</strong><br>
+        На вашем сервере. У нас нет к ним доступа.</p>
+
+        <p><strong>Что если что-то не работает?</strong><br>
+        Напишите @tervica11 — поможем сразу.</p>
+
+        <p><strong>Можно ли расширить агента позже?</strong><br>
+        Да. Claude Code в любое время добавит новые навыки, скиллы и базы знаний.</p>
+
+        <p><strong>Работает ли на Mac и Windows?</strong><br>
+        Claude Code работает на Mac и Windows. Агент лучше всего работает на Linux VPS.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta">
+    <div data-lang="de">
+      <h2>Bereit für Ihren persönlichen Agenten?</h2>
+      <p>Schreiben Sie uns — wir schalten Sie frei und begleiten die Installation.</p>
+      <a href="https://t.me/tervica11" target="_blank">✉️ Schreiben Sie @tervica11</a>
+    </div>
+    <div data-lang="ru">
+      <h2>Готовы получить своего агента?</h2>
+      <p>Напишите нам — откроем доступ и поможем с установкой.</p>
+      <a href="https://t.me/tervica11" target="_blank">✉️ Написать @tervica11</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function setLang(lang) {
+    document.body.className = 'lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent.toLowerCase().includes(lang));
+    });
+    localStorage.setItem('dirigent-lang', lang);
+  }
+
+  function toggleSection(el) {
+    el.classList.toggle('open');
+  }
+
+  // Restore language preference
+  const saved = localStorage.getItem('dirigent-lang') || 'de';
+  setLang(saved);
+</script>
+</body>
+</html>

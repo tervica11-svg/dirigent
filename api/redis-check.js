@@ -1,57 +1,46 @@
-/**
- * Диагностика Redis — Vercel side
- * GET /api/redis-check         → проверяет env vars + пишет тест-ключ и читает его
- * GET /api/redis-check?key=X   → читает конкретный ключ
- */
 const UPSTASH_URL   = process.env.UPSTASH_REDIS_REST_URL;
 const UPSTASH_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
 
 module.exports = async function handler(req, res) {
   if (!UPSTASH_URL || !UPSTASH_TOKEN) {
-    return res.json({ error: 'UPSTASH env vars NOT SET on Vercel' });
+    return res.json({ error: 'UPSTASH env vars NOT SET', url: String(UPSTASH_URL) });
   }
 
   const { key } = req.query;
 
-  // Читаем конкретный ключ
   if (key) {
     try {
       const r = await fetch(`${UPSTASH_URL}/get/${encodeURIComponent(key)}`, {
         headers: { Authorization: `Bearer ${UPSTASH_TOKEN}` },
       });
-      const json = await r.json();
-      return res.json({ key, found: !!json.result, raw: json.result, upstash_url: UPSTASH_URL });
+      const text = await r.text();
+      return res.json({ key, status: r.status, raw: text });
     } catch (e) {
       return res.json({ error: e.message });
     }
   }
 
-  // Round-trip тест: пишем test:ping → читаем обратно
+  // Round-trip
+  const testKey = `test:ping-${Date.now()}`;
   try {
-    const testKey = `test:ping-${Date.now()}`;
-    const testVal = 'pong';
-
-    // Пишем через SET с EX
-    const writeRes = await fetch(`${UPSTASH_URL}/set/${encodeURIComponent(testKey)}`, {
+    const wRes = await fetch(`${UPSTASH_URL}/set/${encodeURIComponent(testKey)}`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${UPSTASH_TOKEN}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify(testVal),
+      body: JSON.stringify('pong'),
     });
-    const writeJson = await writeRes.json();
+    const wText = await wRes.text();
 
-    // Читаем обратно
-    const readRes = await fetch(`${UPSTASH_URL}/get/${encodeURIComponent(testKey)}`, {
+    const rRes = await fetch(`${UPSTASH_URL}/get/${encodeURIComponent(testKey)}`, {
       headers: { Authorization: `Bearer ${UPSTASH_TOKEN}` },
     });
-    const readJson = await readRes.json();
+    const rText = await rRes.text();
 
     return res.json({
-      upstash_url: UPSTASH_URL,
-      write_result: writeJson.result,
-      read_result: readJson.result,
-      round_trip_ok: readJson.result === testVal || readJson.result === `"${testVal}"`,
+      url: UPSTASH_URL,
+      write_status: wRes.status, write_raw: wText,
+      read_status: rRes.status,  read_raw: rText,
     });
   } catch (e) {
-    return res.json({ error: e.message });
+    return res.json({ error: e.message, url: UPSTASH_URL });
   }
 };

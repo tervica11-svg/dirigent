@@ -325,38 +325,35 @@ bot.callbackQuery("faq", async (ctx) => {
   await ctx.reply(T[getLang(ctx)].faq, { parse_mode: "HTML" });
 });
 
-// Кнопка — База знаний → предлагает /docs
+// Кнопка — База знаний → проверяет whitelist, отдаёт прямую ссылку
 bot.callbackQuery("knowledge", async (ctx) => {
   await ctx.answerCallbackQuery();
   const lang = getLang(ctx);
-  if (lang === "de") {
-    await ctx.reply(`📚 Schreiben Sie <b>/docs</b> — ich sende Ihnen einen persönlichen Link zur Wissensbasis.`, { parse_mode: "HTML" });
-  } else {
-    await ctx.reply(`📚 Напишите <b>/docs</b> — выдам персональную ссылку на базу знаний.`, { parse_mode: "HTML" });
+  const username = ctx.from?.username;
+
+  if (!username) {
+    await ctx.reply(T[lang].no_username);
+    return;
   }
-});
 
-// /docs — персональная ссылка на базу знаний (с токеном, 30 дней)
-bot.command("docs", async (ctx) => {
-  const lang = getLang(ctx);
-  const username = ctx.from?.username || "user";
+  const whitelist = wl();
+  const key = normalizeUsername(username);
 
-  // Генерируем токен для доступа к docs
-  const docsToken = uuidv4();
-  const docsData  = { username, issued: new Date().toISOString() };
-  // TTL 30 дней = 2592000 секунд
-  await redisSetEx(`docs:${docsToken}`, 2592000, docsData);
+  if (!whitelist[key] || !whitelist[key].active) {
+    await ctx.reply(T[lang].no_access(username), { parse_mode: "HTML" });
+    return;
+  }
 
-  const docsUrl = `https://dirigent-gray.vercel.app/api/docs/${docsToken}?lang=${lang}`;
+  const docsUrl = `https://dirigent-gray.vercel.app/docs.html`;
 
   if (lang === "de") {
     await ctx.reply(
-      `📚 <b>Ihr persönlicher Link zur Wissensbasis:</b>\n\n<a href="${docsUrl}">${docsUrl}</a>\n\nÖffnen Sie im Browser. Nach dem ersten Aufruf bleibt die Autorisierung 30 Tage gültig. Der Link funktioniert nur für Sie.`,
+      `📚 <b>Ihre Wissensbasis ist verfügbar:</b>\n\n<a href="${docsUrl}">Wissensbasis öffnen →</a>\n\nInstallationsanleitungen, Architektur des Agenten, erste Schritte.`,
       { parse_mode: "HTML" }
     );
   } else {
     await ctx.reply(
-      `📚 <b>Ваша персональная ссылка на базу знаний:</b>\n\n<a href="${docsUrl}">${docsUrl}</a>\n\nОткройте в браузере. После первого захода авторизация запомнится на 30 дней. Ссылка работает только у Вас.`,
+      `📚 <b>Ваша база знаний доступна:</b>\n\n<a href="${docsUrl}">Открыть базу знаний →</a>\n\nИнструкции по установке, архитектура агента, первые шаги.`,
       { parse_mode: "HTML" }
     );
   }

@@ -33,6 +33,7 @@ const __dir   = dirname(fileURLToPath(import.meta.url));
 const DATA    = join(__dir, "data");
 const WL_FILE = join(DATA, "whitelist.json");
 const TK_FILE = join(DATA, "tokens.json");
+const LG_FILE = join(DATA, "langs.json");
 
 // URL инструкции установки (INSTALL-BONUS.md в репо Dirigent)
 const INSTALL_URL = "https://raw.githubusercontent.com/tervica11-svg/dirigent/main/INSTALL-BONUS.md";
@@ -239,12 +240,20 @@ function buildPrompt(username, tokenId, lang = "ru") {
 
 const bot = new Bot(BOT_TOKEN);
 
-// Хранилище выбранного языка по userId (сбрасывается при рестарте бота)
-const userLang = new Map();
+// Хранилище выбранного языка по userId (персистентное — не сбрасывается при рестарте)
+function loadLangs() { return loadJSON(LG_FILE, {}); }
+function saveLangs(d) { saveJSON(LG_FILE, d); }
+
+function setLang(userId, lang) {
+  const langs = loadLangs();
+  langs[String(userId)] = lang;
+  saveLangs(langs);
+}
 
 // Получить язык пользователя (default: ru)
 function getLang(ctx) {
-  return userLang.get(ctx.from?.id) || "ru";
+  const langs = loadLangs();
+  return langs[String(ctx.from?.id)] || "ru";
 }
 
 // Тексты на двух языках
@@ -303,14 +312,14 @@ bot.command("start", async (ctx) => {
 // Выбор языка — русский
 bot.callbackQuery("lang_ru", async (ctx) => {
   await ctx.answerCallbackQuery();
-  userLang.set(ctx.from.id, "ru");
+  setLang(ctx.from.id, "ru");
   await showMainMenu(ctx, "ru");
 });
 
 // Выбор языка — немецкий
 bot.callbackQuery("lang_de", async (ctx) => {
   await ctx.answerCallbackQuery();
-  userLang.set(ctx.from.id, "de");
+  setLang(ctx.from.id, "de");
   await showMainMenu(ctx, "de");
 });
 

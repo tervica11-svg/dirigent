@@ -677,6 +677,65 @@ bot.command("update", async (ctx) => {
   });
 });
 
+// ─── АВТООБНОВЛЕНИЕ ───────────────────────────────────────────────────────────
+
+const PROJECT_DIR  = join(__dirname, "..");
+const GITHUB_REPO  = "tervica11-svg/dirigent";
+const VERSION_FILE = join(PROJECT_DIR, ".last-sha");
+
+async function getRemoteSha() {
+  try {
+    const res = await fetch(
+      `https://api.github.com/repos/${GITHUB_REPO}/git/refs/heads/main`,
+      { headers: { "User-Agent": "dirigent-bot" } }
+    );
+    const json = await res.json();
+    return json?.object?.sha || null;
+  } catch { return null; }
+}
+
+function getLocalSha() {
+  try { return readFileSync(VERSION_FILE, "utf8").trim(); } catch { return ""; }
+}
+
+async function checkAndUpdate() {
+  const remote = await getRemoteSha();
+  const local  = getLocalSha();
+  if (!remote || remote === local) return;
+
+  console.log(`🔄 Новый коммит: ${remote.slice(0,7)} (был ${local.slice(0,7)||"?"}). Обновляюсь...`);
+
+  // Уведомляем admin
+  try {
+    await bot.api.sendMessage(ADMIN_ID, `🔄 Обнаружен новый коммит <code>${remote.slice(0,7)}</code>. Запускаю обновление...`, { parse_mode: "HTML" });
+  } catch {}
+
+  const { exec } = await import("child_process");
+
+  const pullCmd = `chown -R $(whoami):$(whoami) ${PROJECT_DIR}/.git 2>/dev/null; cd ${PROJECT_DIR} && git pull 2>&1`;
+
+  exec(pullCmd, async (err, stdout) => {
+    const out = (stdout || "").trim().slice(0, 300);
+    console.log("git pull:", out);
+
+    // Сохраняем новый SHA
+    try { writeFileSync(VERSION_FILE, remote); } catch {}
+
+    try {
+      await bot.api.sendMessage(ADMIN_ID, `✅ git pull:\n<pre>${out || "OK"}</pre>\nПерезапускаю...`, { parse_mode: "HTML" });
+    } catch {}
+
+    exec("sudo /usr/bin/systemctl restart dirigent-access", async (err2) => {
+      if (!err2) console.log("✅ Бот перезапущен.");
+      else console.error("⚠️ Не удалось перезапустить:", err2.message);
+    });
+  });
+}
+
+// Проверяем сразу при старте (через 10 сек) и потом каждые 30 минут
+setTimeout(checkAndUpdate, 10_000);
+setInterval(checkAndUpdate, 30 * 60 * 1000);
+
 // ─── ЗАПУСК ───────────────────────────────────────────────────────────────────
 
 // Создаём папку data если нет

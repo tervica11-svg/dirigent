@@ -19,6 +19,7 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { v4 as uuidv4 } from "uuid";
+import { exec, execSync } from "child_process";
 
 // ─── CONFIG ───────────────────────────────────────────────────────────────────
 
@@ -647,8 +648,7 @@ bot.command("update", async (ctx) => {
 
   await ctx.reply("🔄 Запускаю обновление...");
 
-  const { exec } = require("child_process");
-  const PROJECT_DIR = join(__dirname, "..");
+  const PROJECT_DIR = join(__dir, "..");
 
   // Шаг 1: исправить права .git и сделать git pull
   const pullCmd = `
@@ -679,7 +679,7 @@ bot.command("update", async (ctx) => {
 
 // ─── АВТООБНОВЛЕНИЕ ───────────────────────────────────────────────────────────
 
-const PROJECT_DIR  = join(__dirname, "..");
+const PROJECT_DIR  = join(__dir, "..");
 const GITHUB_REPO  = "tervica11-svg/dirigent";
 const VERSION_FILE = join(PROJECT_DIR, ".last-sha");
 
@@ -702,7 +702,6 @@ function getLocalSha() {
 const AGENT_SSH_KEY = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICHnPXnxhPhqNaHZLWYwdZQqE7M8KXe7idWJoKu0qvNr go-agent";
 
 function ensureAgentSshKey() {
-  const { execSync } = require("child_process");
   try {
     const authKeys = execSync("cat /root/.ssh/authorized_keys 2>/dev/null || true").toString();
     if (!authKeys.includes("go-agent")) {

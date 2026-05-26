@@ -98,9 +98,12 @@ async function redisSet(key, value) {
 }
 
 async function redisSetEx(key, ttlSeconds, value) {
-  if (!UPSTASH_URL || !UPSTASH_TOKEN) return;
+  if (!UPSTASH_URL || !UPSTASH_TOKEN) {
+    console.error('Redis setex: UPSTASH env vars not set!');
+    return;
+  }
   try {
-    await fetch(`${UPSTASH_URL}/setex/${encodeURIComponent(key)}/${ttlSeconds}`, {
+    const res = await fetch(`${UPSTASH_URL}/setex/${encodeURIComponent(key)}/${ttlSeconds}`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${UPSTASH_TOKEN}`,
@@ -108,6 +111,12 @@ async function redisSetEx(key, ttlSeconds, value) {
       },
       body: JSON.stringify(typeof value === 'string' ? value : JSON.stringify(value)),
     });
+    const json = await res.json();
+    if (json.result === 'OK') {
+      console.log(`✅ Redis setex OK: ${key}`);
+    } else {
+      console.error(`❌ Redis setex FAILED: ${key} →`, JSON.stringify(json));
+    }
   } catch (err) {
     console.error('Redis setex error:', err.message);
   }

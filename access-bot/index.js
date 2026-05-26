@@ -95,6 +95,22 @@ async function redisSet(key, value) {
   }
 }
 
+async function redisSetEx(key, ttlSeconds, value) {
+  if (!UPSTASH_URL || !UPSTASH_TOKEN) return;
+  try {
+    await fetch(`${UPSTASH_URL}/setex/${encodeURIComponent(key)}/${ttlSeconds}`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${UPSTASH_TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(typeof value === 'string' ? value : JSON.stringify(value)),
+    });
+  } catch (err) {
+    console.error('Redis setex error:', err.message);
+  }
+}
+
 async function redisRevoke(key) {
   if (!UPSTASH_URL || !UPSTASH_TOKEN) return;
   try {
@@ -175,11 +191,12 @@ function buildPrompt(username, tokenId, lang = "ru") {
       `Schritt 3: Frage mich — wohin soll der Agent installiert werden:`,
       ``,
       `Variante A — auf Server (VPS, läuft 24/7):`,
-      `Frage mich in einer Nachricht: 1) IP-Adresse 2) Root-Passwort 3) Telegram-Bot-Token von @BotFather (optional)`,
+      `Frage mich in einer Nachricht: 1) IP-Adresse 2) Root-Passwort 3) Telegram-Bot-Token von @BotFather (wenn ich einen Bot möchte)`,
       `Dann lese server/INSTALL-SERVER.md und folge den Schritten.`,
+      `Zuerst Installation auf dem Server, dann Interview mit 10 Fragen.`,
       ``,
       `Variante B — auf diesen Computer:`,
-      `Lese INSTALL.md und führe die Installation durch.`,
+      `Lese INSTALL.md und führe das Interview mit 10 Fragen durch.`,
       ``,
       `Alle Dateien befinden sich im entpackten Ordner ~/dirigent.`,
     ].join("\n");
@@ -206,11 +223,12 @@ function buildPrompt(username, tokenId, lang = "ru") {
     `Шаг 3: спроси меня — куда установить Агента:`,
     ``,
     `Вариант A — на сервер (VPS, работает 24/7):`,
-    `Спроси у меня одним сообщением: 1) IP-адрес сервера 2) Пароль root 3) Токен Telegram-бота от @BotFather (опционально)`,
+    `Спроси у меня одним сообщением: 1) IP-адрес сервера 2) Пароль root 3) Токен Telegram-бота от @BotFather (если хочу бота)`,
     `Потом прочитай server/INSTALL-SERVER.md и выполняй по шагам.`,
+    `Сначала установка на сервер, потом интервью из 10 вопросов.`,
     ``,
     `Вариант B — на этот компьютер:`,
-    `Прочитай INSTALL.md и проведи установку.`,
+    `Прочитай INSTALL.md и проведи интервью из 10 вопросов.`,
     ``,
     `Все файлы лежат в распакованной папке ~/dirigent.`,
   ].join("\n");
@@ -241,7 +259,7 @@ const T = {
     knowledge: `<b>📚 База знаний — Как получить личного AI-агента</b>\n\n<b>Что такое Dirigent?</b>\nDirigent — это завод персональных AI-агентов на базе Claude. Ваш агент живёт на вашем сервере, общается с вами в Telegram 24/7, помнит проекты и становится умнее с каждым разговором.\n\n<b>Что нужно подготовить:</b>\n\n1️⃣ <b>Claude Code</b> — установить на ваш компьютер\nСкачать: claude.ai/code (бесплатно)\nПодписка: Pro — $20/мес или Max — $100/мес\n\n2️⃣ <b>VPS-сервер</b> — арендованный сервер для работы агента 24/7\nЦена: ~5–10 €/мес (Hetzner, DigitalOcean, TimeWeb и др.)\nСистема: Ubuntu 22 или 24\nПомогаем выбрать и настроить — просто напишите нам.\n\n3️⃣ <b>15 минут свободного времени</b>\nВсё остальное Claude Code сделает сам.\n\n<b>Как это происходит:</b>\n1. Вы оплачиваете → пишете нам @tervica11\n2. Мы открываем вам доступ в этом боте\n3. Нажимаете «Получить доступ» → получаете токен\n4. Вставляете токен в Claude Code → агент устанавливается сам\n\n<b>Стоимость: 1 000 €</b> — разовый платёж\nВключает: установку, настройку, поддержку при старте.\n\nГотовы? Напишите <b>@tervica11</b>`,
     no_username: `⚠️ У вас не установлен username в Telegram.\n\nЗайдите в Настройки → задайте имя пользователя, затем попробуйте снова.`,
     no_access: (u) => `🔒 Ваш username <code>@${u}</code> не найден в списке доступа.\n\nЧтобы получить доступ — напишите <b>@tervica11</b>.`,
-    token_issued: (prompt) => `✅ Готово, Ваш персональный промпт для Claude Code:\n\n<pre>${prompt}</pre>\n\n<b>Что сделать:</b>\n1. Откройте Claude Code на компьютере\n2. Скопируйте весь текст промпта выше\n3. Вставьте в Claude Code и нажмите Enter\n\nClaude Code скачает пакет, настроит агента и спросит куда устанавливать.\n\n⚠️ Промпт работает только у Вас. Если что-то пошло не так — нажмите /get снова.`,
+    token_issued: (prompt) => `✅ Готово, Ваш персональный промпт для Claude Code:\n\n<pre>${prompt}</pre>\n\n<b>Что сделать:</b>\n1. Откройте Claude Code на компьютере\n2. Скопируйте текст промпта выше целиком\n3. Вставьте в Claude Code и нажмите Enter\n\n<b>Что произойдёт:</b>\n— Claude Code скачает и распакует Ваш пакет\n— Поставит водяной знак с Вашим Telegram\n— Спросит куда ставим: на сервер или на компьютер\n— Если на сервер — установит всё на VPS\n— Проведёт интервью из 10 вопросов о Вас и заполнит шаблоны\n— Покажет превью каждого файла на подтверждение\n— Запустит Telegram-бота (если дали токен)\n\nПромпт работает только у Вас. Пересылка коллеге не сработает.\nЕсли что-то пошло не так — нажмите /get снова.`,
     token_notify: (u, id) => `🔑 Выдан токен\nПользователь: @${u}\nТокен: <code>${id}</code>`,
   },
   de: {
@@ -255,7 +273,7 @@ const T = {
     knowledge: `<b>📚 Wissensbasis — So erhalten Sie Ihren persönlichen AI-Agenten</b>\n\n<b>Was ist Dirigent?</b>\nDirigent ist eine Fabrik für persönliche AI-Agenten auf Basis von Claude. Ihr Agent läuft auf Ihrem eigenen Server, kommuniziert 24/7 über Telegram, merkt sich Ihre Projekte und wird mit jedem Gespräch klüger.\n\n<b>Was Sie vorbereiten müssen:</b>\n\n1️⃣ <b>Claude Code</b> — auf Ihrem Computer installieren\nDownload: claude.ai/code (kostenlos)\nAbo: Pro — $20/Mon. oder Max — $100/Mon.\n\n2️⃣ <b>VPS-Server</b> — gemieteter Server für den 24/7-Betrieb\nPreis: ~5–10 €/Mon. (Hetzner, DigitalOcean u.a.)\nSystem: Ubuntu 22 oder 24\nWir helfen bei Auswahl und Einrichtung — schreiben Sie uns einfach.\n\n3️⃣ <b>15 Minuten Zeit</b>\nDen Rest erledigt Claude Code automatisch.\n\n<b>So läuft es ab:</b>\n1. Sie bezahlen → schreiben Sie uns @tervica11\n2. Wir schalten Sie in diesem Bot frei\n3. Klicken Sie «Zugang erhalten» → erhalten Ihren Token\n4. Token in Claude Code einfügen → Agent installiert sich selbst\n\n<b>Preis: 1.000 €</b> — Einmalzahlung\nInklusive: Installation, Einrichtung, Support beim Start.\n\nBereit? Schreiben Sie <b>@tervica11</b>`,
     no_username: `⚠️ Sie haben keinen Telegram-Benutzernamen.\n\nGehen Sie zu Einstellungen → legen Sie einen Benutzernamen fest und versuchen Sie es erneut.`,
     no_access: (u) => `🔒 Ihr Benutzername <code>@${u}</code> wurde nicht in der Zugriffsliste gefunden.\n\nUm Zugang zu erhalten — schreiben Sie <b>@tervica11</b>.`,
-    token_issued: (prompt) => `✅ Fertig, Ihr persönlicher Prompt für Claude Code:\n\n<pre>${prompt}</pre>\n\n<b>Was zu tun ist:</b>\n1. Öffnen Sie Claude Code auf dem Computer\n2. Kopieren Sie den gesamten Prompt-Text oben\n3. Fügen Sie ihn in Claude Code ein und drücken Sie Enter\n\nClaude Code lädt das Paket herunter, richtet den Agenten ein und fragt wohin installieren.\n\n⚠️ Der Prompt funktioniert nur bei Ihnen. Falls etwas schief läuft — tippen Sie erneut /get.`,
+    token_issued: (prompt) => `✅ Fertig, Ihr persönlicher Prompt für Claude Code:\n\n<pre>${prompt}</pre>\n\n<b>Was zu tun ist:</b>\n1. Öffnen Sie Claude Code auf dem Computer\n2. Kopieren Sie den gesamten Prompt-Text oben\n3. Fügen Sie ihn in Claude Code ein und drücken Sie Enter\n\n<b>Was passiert:</b>\n— Claude Code lädt Ihr Paket herunter und entpackt es\n— Setzt Ihr Wasserzeichen mit Ihrem Telegram\n— Fragt wohin installieren: Server oder Computer\n— Auf Server: installiert alles auf dem VPS\n— Führt ein Interview mit 10 Fragen über Sie durch und füllt Vorlagen aus\n— Zeigt eine Vorschau jeder Datei zur Bestätigung\n— Startet den Telegram-Bot (wenn Sie einen Token angegeben haben)\n\nDer Prompt funktioniert nur bei Ihnen. Weiterleitung an andere klappt nicht.\nFalls etwas schief läuft — tippen Sie erneut /get.`,
     token_notify: (u, id) => `🔑 Token ausgestellt\nBenutzer: @${u}\nToken: <code>${id}</code>`,
   }
 };
@@ -307,19 +325,39 @@ bot.callbackQuery("faq", async (ctx) => {
   await ctx.reply(T[getLang(ctx)].faq, { parse_mode: "HTML" });
 });
 
-// Кнопка — База знаний → ссылка на сайт
+// Кнопка — База знаний → предлагает /docs
 bot.callbackQuery("knowledge", async (ctx) => {
   await ctx.answerCallbackQuery();
   const lang = getLang(ctx);
   if (lang === "de") {
+    await ctx.reply(`📚 Schreiben Sie <b>/docs</b> — ich sende Ihnen einen persönlichen Link zur Wissensbasis.`, { parse_mode: "HTML" });
+  } else {
+    await ctx.reply(`📚 Напишите <b>/docs</b> — выдам персональную ссылку на базу знаний.`, { parse_mode: "HTML" });
+  }
+});
+
+// /docs — персональная ссылка на базу знаний (с токеном, 30 дней)
+bot.command("docs", async (ctx) => {
+  const lang = getLang(ctx);
+  const username = ctx.from?.username || "user";
+
+  // Генерируем токен для доступа к docs
+  const docsToken = uuidv4();
+  const docsData  = { username, issued: new Date().toISOString() };
+  // TTL 30 дней = 2592000 секунд
+  await redisSetEx(`docs:${docsToken}`, 2592000, docsData);
+
+  const docsUrl = `https://dirigent-gray.vercel.app/api/docs/${docsToken}`;
+
+  if (lang === "de") {
     await ctx.reply(
-      `📚 <b>Wissensbasis Dirigent</b>\n\nÖffnen Sie den Link im Browser — dort finden Sie alles für die Installation des Agenten:\n\n🔗 <a href="https://dirigent-gray.vercel.app/docs.html">dirigent-gray.vercel.app/docs.html</a>`,
-      { parse_mode: "HTML", disable_web_page_preview: false }
+      `📚 <b>Ihr persönlicher Link zur Wissensbasis:</b>\n\n<a href="${docsUrl}">${docsUrl}</a>\n\nÖffnen Sie im Browser. Nach dem ersten Aufruf bleibt die Autorisierung 30 Tage gültig. Der Link funktioniert nur für Sie.`,
+      { parse_mode: "HTML" }
     );
   } else {
     await ctx.reply(
-      `📚 <b>База знаний Dirigent</b>\n\nОткройте ссылку в браузере — там всё необходимое для установки агента:\n\n🔗 <a href="https://dirigent-gray.vercel.app/docs.html">dirigent-gray.vercel.app/docs.html</a>`,
-      { parse_mode: "HTML", disable_web_page_preview: false }
+      `📚 <b>Ваша персональная ссылка на базу знаний:</b>\n\n<a href="${docsUrl}">${docsUrl}</a>\n\nОткройте в браузере. После первого захода авторизация запомнится на 30 дней. Ссылка работает только у Вас.`,
+      { parse_mode: "HTML" }
     );
   }
 });

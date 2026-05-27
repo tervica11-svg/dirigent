@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wissensbasis — Dirigent</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+      background: #f7f7f8;
+      color: #1a1a1a;
+      min-height: 100vh;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ───── HEADER ───── */
+    .header {
+      background: #fff;
+      border-bottom: 1px solid #e8e8e8;
+      padding: 0 32px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo {
+      font-size: 17px;
+      font-weight: 700;
+      color: #1a1a1a;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .logo span { color: #7c5cfc; }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: #888;
+    }
+
+    .breadcrumb a {
+      color: #888;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .breadcrumb a:hover { color: #7c5cfc; }
+
+    .breadcrumb-sep { color: #ccc; }
+
+    .header-nav {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .header-nav a {
+      font-size: 13px;
+      color: #666;
+      text-decoration: none;
+      cursor: pointer;
+      padding: 4px 0;
+      border-bottom: 2px solid transparent;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .header-nav a:hover,
+    .header-nav a.active { color: #7c5cfc; border-bottom-color: #7c5cfc; }
+
+    /* ───── MAIN ───── */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    /* ───── SECTION TITLE ───── */
+    .section-label {
+      font-size: 19px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 16px;
+    }
+
+    /* ───── START CARDS ───── */
+    .start-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .article-card {
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      border-radius: 10px;
+      padding: 16px 18px;
+      cursor: pointer;
+      transition: box-shadow 0.15s, border-color 0.15s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .article-card:hover {
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      border-color: #d0d0d0;
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #111;
+      line-height: 1.4;
+      flex: 1;
+    }
+
+    .card-time {
+      background: #f0f0f0;
+      color: #777;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 8px;
+      border-radius: 20px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: #888;
+      line-height: 1.5;
+    }
+
+    .start-row2 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+
+    /* ───── CATEGORIES ───── */
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .cat-card {
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      border-radius: 10px;
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: box-shadow 0.15s, border-color 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .cat-card:hover {
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      border-color: #d0d0d0;
+    }
+
+    .cat-icon {
+      font-size: 24px;
+      width: 36px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .cat-info { min-width: 0; }
+
+    .cat-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: #111;
+      line-height: 1.3;
+    }
+
+    .cat-count {
+      font-size: 12px;
+      color: #999;
+      margin-top: 2px;
+    }
+
+    /* ───── FOOTER ───── */
+    .footer {
+      text-align: center;
+      font-size: 13px;
+      color: #aaa;
+      margin-top: 48px;
+      padding-bottom: 20px;
+    }
+
+    .footer a { color: #7c5cfc; text-decoration: none; }
+
+    /* ───── ARTICLE PAGE ───── */
+    .article-page { display: none; }
+
+    .article-meta {
+      font-size: 13px;
+      color: #999;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .article-meta .read-time {
+      background: #f0f0f0;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      color: #777;
+    }
+
+    .article-h1 {
+      font-size: 26px;
+      font-weight: 800;
+      color: #111;
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+
+    .article-tagline {
+      font-size: 15px;
+      color: #666;
+      font-style: italic;
+      margin-bottom: 32px;
+      padding-left: 14px;
+      border-left: 3px solid #7c5cfc;
+    }
+
+    .article-body h2 {
+      font-size: 19px;
+      font-weight: 700;
+      color: #111;
+      margin: 32px 0 12px;
+    }
+
+    .article-body h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #222;
+      margin: 20px 0 8px;
+    }
+
+    .article-body p {
+      color: #333;
+      margin-bottom: 14px;
+      line-height: 1.7;
+    }
+
+    .article-body ul, .article-body ol {
+      padding-left: 22px;
+      margin-bottom: 14px;
+      color: #333;
+    }
+
+    .article-body li {
+      margin-bottom: 7px;
+      line-height: 1.6;
+    }
+
+    .article-body strong { color: #111; }
+
+    .article-body code {
+      background: #f3f3f3;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 13px;
+      color: #d14;
+    }
+
+    .article-body pre {
+      background: #1e1e1e;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 14px 0;
+      overflow-x: auto;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 13px;
+      color: #d4d4d4;
+      line-height: 1.6;
+    }
+
+    .note-box {
+      background: #fdf8ff;
+      border: 1px solid #e0d4ff;
+      border-left: 4px solid #7c5cfc;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 14px 0;
+    }
+
+    .note-box.warning {
+      background: #fff9f0;
+      border-color: #fdd8a8;
+      border-left-color: #f59e0b;
+    }
+
+    .note-box.danger {
+      background: #fff5f5;
+      border-color: #fcc;
+      border-left-color: #ef4444;
+    }
+
+    .note-box p { margin-bottom: 0; }
+
+    .note-box strong { display: block; margin-bottom: 4px; }
+
+    .step-block {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      width: 30px;
+      height: 30px;
+      background: #7c5cfc;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+      color: #fff;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .step-content strong {
+      display: block;
+      color: #111;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .step-content span {
+      color: #555;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .route-box {
+      background: #f9f9f9;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 18px 20px;
+      margin: 16px 0;
+    }
+
+    .route-box pre {
+      background: none;
+      padding: 0;
+      color: #333;
+      font-size: 13px;
+    }
+
+    .tree-box {
+      background: #1e1e1e;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 14px 0;
+    }
+
+    .tree-box pre {
+      background: none;
+      padding: 0;
+      color: #c8d0e7;
+      font-size: 13px;
+    }
+
+    .next-articles {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid #eee;
+    }
+
+    .next-articles p {
+      font-size: 13px;
+      color: #999;
+      margin-bottom: 12px;
+    }
+
+    .next-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .next-card {
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      border-radius: 8px;
+      padding: 12px 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: border-color 0.15s;
+    }
+
+    .next-card:hover { border-color: #7c5cfc; }
+
+    .next-card span { font-size: 14px; font-weight: 500; color: #222; }
+
+    .next-card em { font-size: 12px; color: #aaa; font-style: normal; }
+
+    /* ───── RESPONSIVE ───── */
+    @media (max-width: 640px) {
+      .start-cards { grid-template-columns: 1fr; }
+      .start-row2 { grid-template-columns: 1fr; }
+      .categories-grid { grid-template-columns: repeat(2, 1fr); }
+      .header-nav { display: none; }
+      .container { padding: 24px 16px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header class="header">
+  <div class="header-left">
+    <a class="logo" onclick="showHome()">🎼 <span>Dirigent</span></a>
+    <div class="breadcrumb" id="breadcrumb" style="display:none">
+      <div class="breadcrumb-sep">›</div>
+      <a onclick="showHome()">Wissensbasis</a>
+      <div class="breadcrumb-sep">›</div>
+      <span id="breadcrumb-title"></span>
+    </div>
+  </div>
+  <nav class="header-nav" id="top-nav">
+    <a onclick="openArticle('article-what')" class="active">Start</a>
+    <a onclick="showSection('arch')">Architektur</a>
+    <a onclick="showSection('bot')">Bot</a>
+    <a onclick="showSection('memory')">Gedächtnis</a>
+    <a onclick="showSection('skills')">Skills</a>
+  </nav>
+</header>
+
+<!-- ═══ HOME PAGE ═══ -->
+<div class="container" id="home-page">
+
+  <div class="section-label" style="margin-bottom:16px">Erste Schritte</div>
+
+  <div class="start-cards">
+    <div class="article-card" onclick="openArticle('article-what')">
+      <div class="card-top">
+        <div class="card-title">Was ist der Agenten-Konstruktor</div>
+        <div class="card-time">3 Min.</div>
+      </div>
+      <div class="card-desc">Kein Chatbot in der Tasche, sondern ein KI-Mitarbeiter in Ihrem Team.</div>
+    </div>
+
+    <div class="article-card" onclick="openArticle('article-install')">
+      <div class="card-top">
+        <div class="card-title">Agent installieren — vier Schritte bis zum fertigen Bot</div>
+        <div class="card-time">10 Min.</div>
+      </div>
+      <div class="card-desc">Wie ein Umzug in eine neue Wohnung — das Haus steht, die Möbel sind da, es fehlen nur noch...</div>
+    </div>
+
+    <div class="article-card" onclick="openArticle('article-map')">
+      <div class="card-top">
+        <div class="card-title">Die Karte des Agenten-Hauses — was wo auf dem Server liegt</div>
+        <div class="card-time">5 Min.</div>
+      </div>
+      <div class="card-desc">Der Agent hat drei Räume — Motor, Seele und Werkstatt. Kennen Sie die Karte, verlieren Sie sich nie...</div>
+    </div>
+  </div>
+
+  <div class="start-row2">
+    <div class="article-card" onclick="openArticle('article-first')">
+      <div class="card-top">
+        <div class="card-title">Erste Schritte am ersten Tag</div>
+        <div class="card-time">6 Min.</div>
+      </div>
+      <div class="card-desc">Versuchen Sie nicht, alles auf einmal zu lernen. Sechs einfache Szenarien — und der Agent gehört Ihnen.</div>
+    </div>
+  </div>
+
+  <div class="section-label">Alle Kategorien</div>
+
+  <div class="categories-grid">
+    <div class="cat-card" onclick="openArticle('article-what')">
+      <div class="cat-icon">🧠</div>
+      <div class="cat-info">
+        <div class="cat-name">Wie der Agent aufgebaut ist</div>
+        <div class="cat-count">7 Artikel</div>
+      </div>
+    </div>
+    <div class="cat-card" onclick="openArticle('article-install')">
+      <div class="cat-icon">💬</div>
+      <div class="cat-info">
+        <div class="cat-name">Bot in Telegram</div>
+        <div class="cat-count">5 Artikel</div>
+      </div>
+    </div>
+    <div class="cat-card" onclick="openArticle('article-map')">
+      <div class="cat-icon">📁</div>
+      <div class="cat-info">
+        <div class="cat-name">Gedächtnis des Agenten</div>
+        <div class="cat-count">5 Artikel</div>
+      </div>
+    </div>
+    <div class="cat-card" onclick="openArticle('article-first')">
+      <div class="cat-icon">🔧</div>
+      <div class="cat-info">
+        <div class="cat-name">Spezialistenteam</div>
+        <div class="cat-count">5 Artikel</div>
+      </div>
+    </div>
+    <div class="cat-card" onclick="openArticle('article-install')">
+      <div class="cat-icon">💻</div>
+      <div class="cat-info">
+        <div class="cat-name">VS Code Tunnel</div>
+        <div class="cat-count">4 Artikel</div>
+      </div>
+    </div>
+    <div class="cat-card" onclick="openArticle('article-install')">
+      <div class="cat-icon">📦</div>
+      <div class="cat-info">
+        <div class="cat-name">Projekte &amp; Deployment</div>
+        <div class="cat-count">4 Artikel</div>
+      </div>
+    </div>
+    <div class="cat-card" onclick="openArticle('article-first')">
+      <div class="cat-icon">🔌</div>
+      <div class="cat-info">
+        <div class="cat-name">Integrationen über MCP</div>
+        <div class="cat-count">3 Artikel</div>
+      </div>
+    </div>
+    <div class="cat-card" onclick="openArticle('article-first')">
+      <div class="cat-icon">🔍</div>
+      <div class="cat-info">
+        <div class="cat-name">Monitoring &amp; Trends</div>
+        <div class="cat-count">3 Artikel</div>
+      </div>
+    </div>
+    <div class="cat-card" onclick="openArticle('article-install')">
+      <div class="cat-icon">🛡️</div>
+      <div class="cat-info">
+        <div class="cat-name">Sicherheit</div>
+        <div class="cat-count">4 Artikel</div>
+      </div>
+    </div>
+    <div class="cat-card" onclick="openArticle('article-first')">
+      <div class="cat-icon">🔄</div>
+      <div class="cat-info">
+        <div class="cat-name">Updates &amp; Verlängerung</div>
+        <div class="cat-count">3 Artikel</div>
+      </div>
+    </div>
+    <div class="cat-card" onclick="openArticle('article-first')">
+      <div class="cat-icon">⚠️</div>
+      <div class="cat-info">
+        <div class="cat-name">Häufige Stolpersteine</div>
+        <div class="cat-count">4 Artikel</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    Support: <a href="https://t.me/dirigent_access_bot" target="_blank">@dirigent_access_bot</a>
+  </div>
+
+</div>
+
+
+<!-- ═══ ARTICLE: WAS IST DER AGENTEN-KONSTRUKTOR ═══ -->
+<div class="container article-page" id="article-what">
+  <div class="article-meta">
+    <span class="read-time">3 Min.</span>
+    <span>Aktualisiert 2026-05-26</span>
+  </div>
+  <h1 class="article-h1">Was ist der Agenten-Konstruktor</h1>
+  <p class="article-tagline">Kein Chatbot in der Tasche, sondern ein KI-Mitarbeiter in Ihrem Team.</p>
+
+  <div class="article-body">
+    <h2>Was ist der Agent</h2>
+
+    <div class="note-box">
+      <strong>Das Wesentliche</strong>
+      <p>Der Agent ist Ihr persönlicher KI-Mitarbeiter. Er hat Gedächtnis, Charakter, ein Spezialistenteam und Ihren eigenen Server. Er wird jeden Tag klüger und passt sich an Sie an.</p>
+    </div>
+
+    <p><strong>Was der Begriff bedeutet:</strong> «Agent» ist Ihr persönlicher Alleskönner mit dem Verstand von Claude Code. Er kann lesen, schreiben, rechnen, planen, Aufgaben erledigen und vieles mehr. Er kennt jeden Ihrer Tage.</p>
+
+    <p>Er kommuniziert über einen Telegram-Bot und kann Aktionen auf dem Server ausführen: Dateien lesen und schreiben, Daten analysieren, mit Code arbeiten, Websites und Inhalte erstellen, planen, Kunden antworten usw. Das ist kein Chatbot — nennen Sie ihn nie so, denn Chatbots können das alles nicht.</p>
+
+    <h2>Aus was er besteht</h2>
+
+    <p>Der Agent hat drei Bereiche auf dem Server — alle gehören Ihnen:</p>
+
+    <div class="tree-box">
+      <pre>
+🤖 Agent
+├── Persönlichkeit → ~/workspace/
+│     SOUL · MEMORY · USER · CLAUDE
+│
+├── Spezialisten → ~/workspace/.claude/skills/
+│     14 Spezialisten im Team
+│
+└── Projekte → ~/projects/
+      (Ordner mit Ihren Inhalten)</pre>
+    </div>
+
+    <p><strong>Persönlichkeit</strong> — das Herz des Agenten. Hier befinden sich die Dateien <code>SOUL.md</code> (Charakter), <code>MEMORY.md</code> (Gedächtnis über Sie), <code>GOALS.md</code> (Ihre Ziele). Beim ersten Mal vor dem Bot — kann über VS Code gestartet werden.</p>
+
+    <p><strong>Spezialisten</strong> — 14 Fachleute im Team: Designer, Entwickler, Marketingspezialist, Planer und andere. All das können Sie dem Agenten mit einem einzigen Befehl übertragen.</p>
+
+    <p><strong>Projekte</strong> — alle Aufgaben: Instagram-Posts, Notizen, Berichte, Content-Pläne usw. Jedes Projekt ist ein eigener Ordner. Jeder Ordner hat sein eigenes <code>memory/</code> (Aufgabennotizen) und sein eigenes <code>knowledge/</code> (Arbeitslinks).</p>
+
+    <h2>Wie er sich von ChatGPT unterscheidet</h2>
+
+    <p>Ein Chatbot vergisst das Gespräch, sobald Sie das Fenster schließen. Der Agent nicht:</p>
+    <ul>
+      <li>Startet sofort mit Kontext — weiß selbst, was offen ist, was erwartet wird, und entwickelt einen Plan</li>
+      <li>Merkt sich unbegrenzt viele Fakten — der Agent schreibt selbst ins Gedächtnis</li>
+      <li>Kennt Ihre Ziele und passt Ratschläge an Sie an</li>
+      <li>Wächst mit dem Agenten-Konstruktor — neue Fähigkeiten und Updates kommen, wenn sie erscheinen</li>
+    </ul>
+
+    <div class="note-box">
+      <strong>Mein Rat an Sie</strong>
+      <p>Wenn Sie etwas erledigen möchten — geben Sie dem Agenten einfach jede Aufgabe: einen Verkaufsbericht vorbereiten, schnell eine Landing Page erstellen, beim Instagram-Bild helfen. <strong>Kannst du das tun, was sollen wir machen?</strong> Lassen Sie den Agenten selbst erklären, was er kann und wo er Ihre Hilfe braucht.</p>
+      <p>So bei jeder Aufgabe. Einfach. Er lernt dabei. Je mehr Aufgaben er löst, desto schneller steigt Ihre Produktivität. Früher haben Sie alles selbst gemacht — jetzt übernimmt der Agent.</p>
+    </div>
+  </div>
+
+  <div class="next-articles">
+    <p>In dieser Kategorie</p>
+    <div class="next-grid">
+      <div class="next-card" onclick="openArticle('article-install')">
+        <span>Agent installieren — vier Schritte bis zum fertigen Bot</span>
+        <em>10 Min. →</em>
+      </div>
+      <div class="next-card" onclick="openArticle('article-map')">
+        <span>Die Karte des Agenten-Hauses — was wo auf dem Server liegt</span>
+        <em>5 Min. →</em>
+      </div>
+      <div class="next-card" onclick="openArticle('article-first')">
+        <span>Erste Schritte am ersten Tag</span>
+        <em>6 Min. →</em>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTICLE: INSTALLATION ═══ -->
+<div class="container article-page" id="article-install">
+  <div class="article-meta">
+    <span class="read-time">10 Min.</span>
+    <span>Aktualisiert 2026-05-26</span>
+  </div>
+  <h1 class="article-h1">Agent installieren — vier Schritte bis zum fertigen Bot</h1>
+  <p class="article-tagline">Wie ein Umzug in eine neue Wohnung — das Haus steht, die Möbel sind da, es fehlen nur noch die Schlüssel und der Einzug.</p>
+
+  <div class="article-body">
+    <p>Das ist die Hauptanleitung. Der vollständige Weg von null bis zu dem Moment, in dem Ihr Agent in Telegram «Guten Tag» antwortet. Nur vier Schritte. Schwierige — null. Kann Ihr Computer einen Browser öffnen und Text eingeben? Dann klappt alles.</p>
+
+    <p>Das Wichtigste: Die gesamte technische Arbeit erledigt Claude Code. Von Ihnen werden drei Angaben benötigt (IP-Adresse, Root-Passwort, Bot-Token). Claude Code verbindet sich mit dem Server und richtet den Agenten selbst ein.</p>
+
+    <div class="note-box warning">
+      <strong>Auf dieser Seite gibt es keine einzige Befehlszeile für das schwarze Terminal-Fenster.</strong>
+      <p>Alles, was Sie sehen werden, sind Befehle, die Claude Code dem Server für Sie diktiert. Wenn Sie irgendwo etwas manuell eingeben möchten — nicht nötig. Claude Code erledigt das selbst. Wenn Claude Code irgendwann Hilfe braucht — schreiben Sie dem Bot <code>/new</code>, er stellt einen neuen Token aus.</p>
+    </div>
+
+    <h2>Installationsroute</h2>
+
+    <div class="route-box">
+      <pre>
+🏁 Start
+  │
+  ├─ 1️⃣ VPS mieten                  (~5 Min. — Website des Hosters aufrufen)
+  ├─ 2️⃣ Bot bei @BotFather erstellen (~3 Min. — zwei Fragen, ein Token)
+  ├─ 3️⃣ Claude-Abo prüfen           (~1 Min.)
+  └─ 4️⃣ Installation über Claude Code starten (~30 Min., Claude Code erledigt alles)
+       ├─ Teil A. Server-Installation (lokales Claude Code + IP + Bot-Token)
+       └─ Teil B. Agenten-Konstruktor (@dirigent_access_bot → persönlicher Prompt)
+  │
+  ↓
+🎉 Fertig — schreiben Sie Ihrem Agenten in Telegram!</pre>
+    </div>
+
+    <h2>Schritt 1. Server mieten (~5 Minuten)</h2>
+
+    <p>Gehen Sie zu einem beliebigen Hoster und richten Sie einen VPS ein. Für deutschsprachige Nutzer empfehlen sich <strong>Hetzner</strong> (DE, sehr günstig und zuverlässig) oder <strong>DigitalOcean</strong>. Die Oberfläche ist intuitiv, der Support professionell.</p>
+
+    <p>Gehen Sie zum Bereich «Cloud Server» und klicken Sie auf «Server erstellen».</p>
+
+    <p>Wählen Sie als Parameter: <strong>2 CPU-Kerne, 4 GB RAM, 40 GB Festplatte, OS Ubuntu 24.04.</strong> Kostet etwa 5–10 €/Monat.</p>
+
+    <div class="note-box">
+      <p>Ein VPS ist ein gemieteter kleiner Computer im Internet, der rund um die Uhr läuft. Er steht im Rechenzentrum des Hosters, schaltet sich nicht aus und hat eine eigene IP-Adresse. Sie mieten ihn, erhalten die Zugangsdaten und richten ihn ein. Nötig, damit Ihr Agent rund um die Uhr arbeitet — auch wenn Ihr Laptop zugeklappt ist.</p>
+    </div>
+
+    <p>Etwa 30 Sekunden nach der Bezahlung erhalten Sie eine E-Mail vom Hoster mit drei Zeilen: <strong>IP-Adresse</strong> (z.B. 122.45.67.89), <strong>Login root</strong>, <strong>Passwort</strong>. Notieren Sie diese — sie werden in Schritt 4 benötigt.</p>
+
+    <h2>Schritt 2. Bot bei @BotFather erstellen (~3 Minuten)</h2>
+
+    <p>BotFather ist der offizielle Telegram-Bot, über den alle anderen erstellt werden. Jede Telegram-Bot-Anwendung erhält einen langen String — wie einen elektronischen Schlüssel. Mit diesem Token kann der Server dann im Namen Ihres Bots in Telegram schreiben.</p>
+
+    <div class="step-block">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <strong>Öffnen Sie @BotFather in Telegram</strong>
+        <span>Über die Suche finden, auf Start drücken</span>
+      </div>
+    </div>
+    <div class="step-block">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <strong>Schreiben Sie <code>/newbot</code></strong>
+        <span>BotFather fragt nach dem Bot-Namen (z.B. «Mein Agent»)</span>
+      </div>
+    </div>
+    <div class="step-block">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <strong>Username wählen</strong>
+        <span>Muss auf <code>_bot</code> enden, z.B. <code>meinagent_assistant_bot</code></span>
+      </div>
+    </div>
+    <div class="step-block">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <strong>Token kopieren</strong>
+        <span>BotFather sendet einen String wie <code>7123456789:AAF...</code> — das ist der Token. Zeigen Sie ihn nicht im Chat, veröffentlichen Sie ihn nicht. Er wird nur in Schritt 4 benötigt.</span>
+      </div>
+    </div>
+
+    <p>Der Bot antwortet noch nicht auf Nachrichten — das ist normal. Er erwacht nach Schritt 4.</p>
+
+    <h2>Schritt 3. Claude-Abo prüfen (~1 Minute)</h2>
+
+    <p>Öffnen Sie <strong>claude.ai</strong> im Browser und melden Sie sich an. Sie benötigen ein <strong>Pro</strong>- oder <strong>Max</strong>-Abo. Wenn der Status Free ist — schließen Sie Pro ab, das sind $20/Monat. Das Claude-Abo ist der Treibstoff Ihres Agenten — ohne es funktioniert nichts.</p>
+
+    <div class="note-box">
+      <p>Das Claude-Abo ist Ihr Konto auf claude.ai, über das Sie den normalen Chat nutzen. Der Agent arbeitet über dasselbe Abo — es gibt Limits, aber keine zusätzlichen Kosten, nur Pro oder Max muss aktiviert sein.</p>
+    </div>
+
+    <h2>Schritt 4. Installation über Claude Code starten (~30 Minuten)</h2>
+
+    <p>Letzter Schritt. Öffnen Sie Claude Code — die Anwendung auf Ihrem Computer (falls nicht vorhanden, installieren Sie sie unter <a href="https://claude.ai/code" target="_blank" style="color:#7c5cfc">claude.ai/code</a>).</p>
+
+    <p>Dann folgen zwei Teilschritte:</p>
+
+    <p><strong>Teil A. Server-Installation.</strong> Sie fügen in Claude Code den Befehl mit den Server-Daten ein. Claude Code verbindet sich per SSH mit Ihrem VPS, installiert die notwendigen Programme — Node.js, Claude Code CLI — erstellt Ordner auf dem Server, richtet den Telegram-Bot als 24/7-Dienst ein, verbindet den Server mit Ihrem VS Code über VS Code Tunnel und konfiguriert alles automatisch.</p>
+
+    <p><strong>Teil B. Agenten-Konstruktor.</strong> Wenn der Telegram-Bot auf <code>/start</code> antwortet — ist der Server bereit. Gehen Sie zu <strong>@dirigent_access_bot</strong>, klicken Sie auf «Prompt erhalten», erhalten Sie Ihren persönlichen Prompt und zeigen Sie ihn Claude Code.</p>
+
+    <div class="note-box">
+      <p>Der Prompt funktioniert einmalig — das ist das Sicherheitssystem. Falls etwas schiefgelaufen ist oder der Prompt gelöscht wurde — schreiben Sie dem Bot <code>/new</code>, er stellt einen neuen aus.</p>
+    </div>
+
+    <h2>Fertig — der Agenten-Konstruktor ist installiert</h2>
+
+    <p>Nach der Installation schreibt Claude Code einen kurzen Bericht: was installiert wurde, was übersprungen wurde, was beim Agenten nachgefragt werden kann. Schon nach wenigen Sekunden antwortet Ihr Agent auf die erste Nachricht in Telegram.</p>
+
+    <ul>
+      <li><strong>Server in der Cloud</strong> — der Agent arbeitet 24/7</li>
+      <li><strong>Telegram</strong> — Hauptkommunikation über Ihren Bot</li>
+      <li><strong>VS Code Tunnel</strong> — Sie können den Server von jedem Computer aus aufrufen, ohne Terminal, direkt über VS Code</li>
+    </ul>
+  </div>
+
+  <div class="next-articles">
+    <p>Weiterlesen</p>
+    <div class="next-grid">
+      <div class="next-card" onclick="openArticle('article-map')">
+        <span>Die Karte des Agenten-Hauses — was wo auf dem Server liegt</span>
+        <em>5 Min. →</em>
+      </div>
+      <div class="next-card" onclick="openArticle('article-first')">
+        <span>Erste Schritte am ersten Tag</span>
+        <em>6 Min. →</em>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTICLE: KARTE DES AGENTEN-HAUSES ═══ -->
+<div class="container article-page" id="article-map">
+  <div class="article-meta">
+    <span class="read-time">5 Min.</span>
+    <span>Aktualisiert 2026-05-26</span>
+  </div>
+  <h1 class="article-h1">Die Karte des Agenten-Hauses — was wo auf dem Server liegt</h1>
+  <p class="article-tagline">Der Agent hat drei Räume — Motor, Seele und Werkstatt. Kennen Sie die Karte, verlieren Sie sich nie.</p>
+
+  <div class="article-body">
+    <p>Wenn Sie über VS Code Tunnel zu Ihrem Agenten gelangen möchten — hilft Ihnen diese Karte. Es ist nicht zwingend nötig zu wissen, was in welchem Raum liegt. Aber die Karte zu kennen — damit Sie sich nie verlieren.</p>
+
+    <div class="note-box">
+      <strong>Das Wesentliche</strong>
+      <p>Der Agent hat <strong>drei Bereiche</strong> auf dem Server: System (Motor), Persönlichkeit (Seele) und Projekte (Werkstatt). Kennen Sie diese Karte — haben Sie immer Plan A, und wissen auch, was man nicht anfassen sollte.</p>
+    </div>
+
+    <h2>Die vollständige Karte</h2>
+
+    <div class="tree-box">
+      <pre>
+🏠 /home/agent/
+│
+├─ ~/.agent/        ← Motor (nicht anfassen)
+│   ├─ bot/             Telegram-Bot-Engine
+│   ├─ sessions/        Gesprächshistorie
+│   ├─ .env             API-Schlüssel
+│   └─ state.json       Modelleinstellungen, Limits
+│
+├─ ~/workspace/     ← Seele (bearbeiten erlaubt)
+│   ├─ SOUL.md          Charakter, Ton, Stil
+│   ├─ MEMORY.md        Langzeitgedächtnis über Sie
+│   ├─ GOALS.md         Ihre Ziele
+│   ├─ PROJECTS.md      Liste aktiver Projekte
+│   ├─ PREFERENCES.md   persönliche Regeln und APIs
+│   └─ memory/          Tagesjournal (JJJJ-MM-TT.md)
+│       .claude/skills/ ← 14 Spezialisten
+│
+└─ ~/projects/      ← Werkstatt (alle Aufgaben und Inhalte)
+    ├─ projekt-2024/
+    │   └─ memory/ · knowledge/
+    └─ landing-page/ · telegram-bot/ · content</pre>
+    </div>
+
+    <h2>Bereich 1 — Motor (<code>~/.agent/</code>)</h2>
+
+    <p>Das ist der Systemordner. Hier lebt der Bot selbst, API-Schlüssel, Einstellungen, Sitzungshistorie, Backups früherer Versionen. Der Agent darf dort <strong>nicht schreiben</strong> — nur lesen, damit nichts versehentlich kaputtgemacht wird.</p>
+
+    <div class="tree-box">
+      <pre>
+🔧 ~/.agent/
+  ├─ bot/           ← Telegram-Bot-Engine
+  │   ├─ index.js
+  │   └─ versions/  ← Backups alter Versionen (zum Zurückrollen)
+  ├─ sessions/      ← Gesprächshistorie (auto-gelöscht nach 7 Tagen)
+  ├─ traces/        ← Logs zur Fehlersuche
+  ├─ .env           ← API-Schlüssel (Zugriff nur für Eigentümer)
+  └─ state.json     ← Modelleinstellungen, Limits, Zeitplan</pre>
+    </div>
+
+    <div class="note-box danger">
+      <strong>Hier besser nicht manuell eingreifen</strong>
+      <p>Diese Dateien werden nur vom Agenten-Konstruktor bei Installation und Updates angefasst. Wenn hier etwas kaputt gemacht wird — hört der Agent auf zu funktionieren. Wollen Sie Einstellungen ändern (Modell, Limit, Zeitplan)? Nutzen Sie <code>/settings</code> im Chat mit dem Agenten — das ist sicher und komfortabel.</p>
+    </div>
+
+    <h2>Bereich 2 — Seele (<code>~/workspace/</code>)</h2>
+
+    <p>Das Herz lebt hier. Hier befinden sich die Dateien Ihres Agenten — wirklich Ihres: Charakter, Gedächtnis über Sie, Ihre Ziele, Ihre Vorlieben, Ihr Spezialistenteam. Hier wird alles aufgezeichnet — Sie können bedenkenlos bearbeiten.</p>
+
+    <div class="tree-box">
+      <pre>
+💜 ~/workspace/
+  ├─ SOUL.md         ← Charakter, Ton, Stil
+  ├─ MEMORY.md       ← Langzeitgedächtnis über Sie
+  ├─ GOALS.md        ← Ihre Ziele
+  ├─ USER.md         ← Ihr Profil
+  ├─ MISSION.md      ← Mission der Arbeit mit dem Agenten
+  ├─ PROJECTS.md     ← Liste aktiver Projekte
+  ├─ PREFERENCES.md  ← persönliche Regeln und APIs
+  ├─ LEARNED.md      ← gesammelte Erkenntnisse des Agenten
+  ├─ DATA-POLICY.md  ← Regeln zur Datenverarbeitung
+  │
+  ├─ .claude/skills/ ← 14 Spezialisten
+  ├─ memory/         ← Tagesjournal (JJJJ-MM-TT.md)
+  └─ content/        ← Content-Materialien</pre>
+    </div>
+
+    <div class="note-box">
+      <strong>Hier wirklich bedenkenlos arbeiten</strong>
+      <p>Wenn Sie den Charakter des Agenten ändern möchten — öffnen Sie <code>SOUL.md</code> und schreiben Sie. Eine Datei zum Gedächtnis hinzufügen? In <code>MEMORY.md</code> eintragen. Ziele aktualisieren? <code>GOALS.md</code> bearbeiten. Nichts geht kaputt. Beim nächsten Start liest der Agent einfach die aktualisierte Datei.</p>
+    </div>
+
+    <p><strong>Was der Begriff bedeutet:</strong> «DNA-Dateien» — das sind 8 Dateien mit einem besonderen Buchstaben (SOUL, MEMORY, GOALS usw.), die Information darüber tragen, wer Sie sind und was Sie anstreben. DNA — weil diese Dateien Ihren Agenten einzigartig machen.</p>
+
+    <h2>Bereich 3 — Werkstatt (<code>~/projects/</code>)</h2>
+
+    <p>Hier leben Ihre Aufgaben und alles wird dort abgelegt: Code, Notizen, Inhalte, Recherchen, Pläne. Jedes Projekt ist ein eigener Ordner. Jeder Ordner hat sein eigenes <code>memory/</code> (Aufgabennotizen) und sein eigenes <code>knowledge/</code> (Arbeitslinks). Wenn Sie dem Agenten sagen «Starte das Projekt für die neue Landing Page» — erstellt er hier einen Ordner und legt alles dort ab: Code, Notizen, Inhalte, Screenshots. Nach einem Monat können Sie zu diesem Projekt zurückkehren, und der Agent öffnet den Ordner — wie ein offizieller Mitarbeiter mit einem Arbeitsheft.</p>
+
+    <div class="note-box">
+      <strong>Mein Rat an Sie</strong>
+      <p>Wenn Sie gerade anfangen — öffnen Sie über VS Code Tunnel drei Dateien: <code>SOUL.md</code>, <code>MEMORY.md</code>, <code>GOALS.md</code>. Lesen Sie, was der Agent bereits über Sie weiß. Ergänzen Sie etwas Wichtiges, das gefehlt hat. In den ersten fünfzehn Minuten sollten Sie spüren, dass dieser Agent wirklich Ihrer ist.</p>
+    </div>
+  </div>
+
+  <div class="next-articles">
+    <p>Weiterlesen</p>
+    <div class="next-grid">
+      <div class="next-card" onclick="openArticle('article-first')">
+        <span>Erste Schritte am ersten Tag</span>
+        <em>6 Min. →</em>
+      </div>
+      <div class="next-card" onclick="openArticle('article-what')">
+        <span>Was ist der Agenten-Konstruktor</span>
+        <em>3 Min. →</em>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTICLE: ERSTE SCHRITTE AM ERSTEN TAG ═══ -->
+<div class="container article-page" id="article-first">
+  <div class="article-meta">
+    <span class="read-time">6 Min.</span>
+    <span>Aktualisiert 2026-05-26</span>
+  </div>
+  <h1 class="article-h1">Erste Schritte am ersten Tag</h1>
+  <p class="article-tagline">Versuchen Sie nicht, alles auf einmal zu lernen. Sechs einfache Szenarien — und der Agent gehört Ihnen.</p>
+
+  <div class="article-body">
+    <p>Also, der Agent ist installiert. Was nun? Wenn man versucht, sofort alles zu lernen, was er kann — schwindelt einem der Kopf. Deshalb lernen Sie den Agenten heute einfach kennen und probieren Sie 5–6 grundlegende Szenarien aus, eines nach dem anderen.</p>
+
+    <div class="note-box">
+      <strong>Die Hauptbotschaft</strong>
+      <p><strong>Ein Tag — eine Sache.</strong> Lernen Sie den Agenten heute kennen und probieren Sie 5–6 grundlegende Szenarien aus. Danach schauen Sie drei Mal täglich, was er geschrieben hat. Das ist völlig normal.</p>
+    </div>
+
+    <h2>Schritt 1 — Stellen Sie sich vor und erzählen Sie von sich</h2>
+
+    <p>Öffnen Sie jetzt den Chat mit dem Bot und schreiben Sie ihm etwas wie:</p>
+
+    <div class="route-box">
+      <pre>Hallo. Ich heiße Anna. Ich bin Inhaberin eines Nagelstudios in München.
+Ich arbeite seit 5 Jahren, habe 3 Mitarbeiterinnen und möchte online wachsen.
+Meine Aufgaben — Instagram pflegen und bei der Terminbuchung helfen.</pre>
+    </div>
+
+    <p>Nur ein paar Sätze über Sie, was Sie tun, was Sie erreichen möchten. Das reicht. Der Agent trägt Sie in die Datei <code>MEMORY.md</code> ein. Jedes folgende Gespräch beginnt der Agent bereits mit diesem Kontext.</p>
+
+    <div class="note-box">
+      <p><strong>Keine Sorge:</strong> Alles wird aufgezeichnet — aber alles liegt auf <strong>Ihrem Server</strong>, wir haben keinen Zugriff. Ihre Geschichte ist ein lebendiges Gedächtnis über Sie. Löschen Sie es — es ist für immer weg. Kopieren Sie es in ~/workspace/ — das ist Ihr persönliches Gedächtnis bei Ihnen.</p>
+    </div>
+
+    <h2>Schritt 2 — Stimme verbinden (für einige Jahre kostenlos)</h2>
+
+    <p>Sprachnachrichten sind praktisch: Eine Idee kurz eingesprochen, in den Chat geschickt — der Agent transkribiert sie und macht sich an die Arbeit. Für Spracherkennung empfehle ich <strong>Deepgram</strong> — exzellenter Dienst mit sehr guter Erkennung.</p>
+
+    <p>Deepgram verbinden — 6 Schritte:</p>
+    <ol>
+      <li>Öffnen Sie <code>console.deepgram.com</code></li>
+      <li>Registrieren Sie sich (oder melden Sie sich an, wenn Sie ein Konto haben)</li>
+      <li>Nach der Anmeldung landen Sie im Dashboard — auf dem Konto werden <strong>$200 Bonus</strong> gutgeschrieben</li>
+      <li>Im linken Menü <strong>API Keys</strong> finden → auf «Create a New API Key» klicken. Beliebigen Namen vergeben</li>
+      <li><strong>WICHTIG:</strong> Der Schlüssel wird nur <strong>einmal</strong> angezeigt. Sofort kopieren und in einem Passwort-Manager speichern. Danach ist er nicht mehr auffindbar</li>
+      <li>Dem Agenten sagen: <em>«Hier ist mein Deepgram-Schlüssel: [Schlüssel]. Bitte verbinde die Sprachfunktion»</em> — der Agent trägt den Schlüssel in die richtigen Einstellungen ein und meldet sich, wenn alles bereit ist</li>
+    </ol>
+
+    <p>Alles funktioniert. Sie können es gleich ausprobieren — nehmen Sie eine Sprachnachricht auf:</p>
+
+    <div class="route-box">
+      <pre>«Ich brauche einen Verkaufsbericht für letzten Monat.
+Die Zahlen liegen in einer Tabelle. Erstell mir eine Zusammenfassung —
+was gestiegen ist, was gefallen ist und was verbessert werden sollte.»</pre>
+    </div>
+
+    <p>Der Agent transkribiert die Sprachaufnahme und macht sich sofort an die Arbeit.</p>
+
+    <h2>Schritt 3 — Foto einer Aufgabe senden</h2>
+
+    <p>Fotografieren Sie irgendetwas — einen Screenshot, eine Visitenkarte, eine Tabelle, eine handgeschriebene Liste. Senden Sie es dem Bot mit einem kurzen Kommentar. Der Agent sieht das Bild und liest, was darauf steht. Das spart enorm Zeit: handgeschriebene Notizen in sauberen Text umwandeln, Screenshots von Tabellen in Daten, fremde Posts zur Analyse — der Agent überträgt alles in ein sauberes Format und speichert es im Projekt.</p>
+
+    <h2>Schritt 4 — Tagesplan erstellen lassen</h2>
+
+    <p>Morgens schreiben Sie dem Agenten, was Sie heute angehen möchten. Zum Beispiel:</p>
+
+    <div class="route-box">
+      <pre>Erstell mir einen Tagesplan. Das muss heute erledigt werden:
+— Kunden anrufen, Post für Instagram schreiben,
+Zeitplan entwickeln, noch einiges mehr.</pre>
+    </div>
+
+    <p>Der Agent erstellt eine priorisierte Liste mit einem Aktionsplan und konkreten Schritten.</p>
+
+    <h2>Schritt 5 — Erstes Projekt delegieren</h2>
+
+    <p>Wählen Sie eine echte Aufgabe aus dieser Woche. Beschreiben Sie sie dem Agenten per Sprachaufnahme oder Text. Zum Beispiel: «Schreib mir drei Varianten eines Posts über Herbstrabatte, ein Foto muss am Samstag aufgenommen werden».</p>
+
+    <p>Der Agent stellt Rückfragen und liefert Varianten. Ihre Aufgabe — nur auswählen, was Ihnen gefällt, und auf «Senden» drücken.</p>
+
+    <h2>Schritt 6 — Nächste Woche besprechen</h2>
+
+    <p>Sprechen Sie abends mit dem Agenten über Ihre Pläne: was Sie erledigen möchten, was Sie aufgeschoben haben, was Sie beschäftigt. Der Agent notiert alles im Gedächtnis und kennt am nächsten Morgen bereits den Kontext.</p>
+
+    <div class="note-box">
+      <strong>Mein Rat an Sie</strong>
+      <p>Wenn Sie gerade anfangen — öffnen Sie über VS Code Tunnel drei Dateien: <code>SOUL.md</code>, <code>MEMORY.md</code>, <code>GOALS.md</code>. Lesen Sie, was der Agent bereits über Sie weiß. Ergänzen Sie etwas Wichtiges, das gefehlt hat. In den ersten fünfzehn Minuten sollten Sie spüren, dass dieser Agent wirklich Ihrer ist.</p>
+      <p>All Ihre Daten liegen auf Ihrem Server — nicht bei uns. Wenn Sie alles mitnehmen möchten — laden Sie <code>~/workspace/</code> herunter und kopieren Sie es wohin Sie möchten.</p>
+    </div>
+  </div>
+
+  <div class="next-articles">
+    <p>In dieser Kategorie</p>
+    <div class="next-grid">
+      <div class="next-card" onclick="openArticle('article-what')">
+        <span>Was ist der Agenten-Konstruktor</span>
+        <em>3 Min. →</em>
+      </div>
+      <div class="next-card" onclick="openArticle('article-install')">
+        <span>Agent installieren — vier Schritte bis zum fertigen Bot</span>
+        <em>10 Min. →</em>
+      </div>
+      <div class="next-card" onclick="openArticle('article-map')">
+        <span>Die Karte des Agenten-Hauses — was wo auf dem Server liegt</span>
+        <em>5 Min. →</em>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  function showHome() {
+    document.getElementById('home-page').style.display = 'block';
+    document.querySelectorAll('.article-page').forEach(el => el.style.display = 'none');
+    document.getElementById('breadcrumb').style.display = 'none';
+    document.getElementById('top-nav').style.display = 'flex';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function openArticle(id) {
+    document.getElementById('home-page').style.display = 'none';
+    document.querySelectorAll('.article-page').forEach(el => el.style.display = 'none');
+
+    const article = document.getElementById(id);
+    if (article) {
+      article.style.display = 'block';
+      const h1 = article.querySelector('.article-h1');
+      document.getElementById('breadcrumb-title').textContent = h1 ? h1.textContent : '';
+      document.getElementById('breadcrumb').style.display = 'flex';
+      document.getElementById('top-nav').style.display = 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  function showSection(section) {
+    showHome();
+  }
+</script>
+</body>
+</html>

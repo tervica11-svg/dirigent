@@ -43,12 +43,14 @@ module.exports = async function handler(req, res) {
     return res.status(403).send(expiredPage());
   }
 
-  // 3. Отдаём docs.html
+  // 3. Отдаём docs.html (язык по ?lang= параметру)
   const { readFileSync } = require('fs');
   const { join } = require('path');
 
   try {
-    const html = readFileSync(join(process.cwd(), 'public', 'docs.html'), 'utf8');
+    const lang = (req.query.lang || 'ru').toLowerCase();
+    const filename = lang === 'de' ? 'docs-de.html' : 'docs.html';
+    const html = readFileSync(join(process.cwd(), 'public', filename), 'utf8');
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     res.setHeader('Cache-Control', 'private, max-age=3600');
     return res.send(html);

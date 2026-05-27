@@ -372,7 +372,7 @@ bot.callbackQuery("knowledge", async (ctx) => {
     console.error(`❌ Redis error saving docs token:`, e.message);
   }
 
-  const docsUrl = `https://dirigent-gray.vercel.app/api/docs/${docsToken}`;
+  const docsUrl = `https://dirigent-gray.vercel.app/api/docs/${docsToken}?lang=${lang}`;
 
   if (lang === "de") {
     await ctx.reply(

@@ -686,19 +686,35 @@
 <div class="container article-page" id="article-install">
   <div class="article-meta">
     <span class="read-time">10 Min.</span>
-    <span>Aktualisiert 2026-05-26</span>
+    <span>Aktualisiert 2026-05-27</span>
   </div>
   <h1 class="article-h1">Agent installieren — vier Schritte bis zum fertigen Bot</h1>
   <p class="article-tagline">Wie ein Umzug in eine neue Wohnung — das Haus steht, die Möbel sind da, es fehlen nur noch die Schlüssel und der Einzug.</p>
 
   <div class="article-body">
-    <p>Das ist die Hauptanleitung. Der vollständige Weg von null bis zu dem Moment, in dem Ihr Agent in Telegram «Guten Tag» antwortet. Nur vier Schritte. Schwierige — null. Kann Ihr Computer einen Browser öffnen und Text eingeben? Dann klappt alles.</p>
+    <p>Das ist die Hauptanleitung. Der vollständige Weg von null bis zu dem Moment, in dem Ihr Agent Sie persönlich begrüßt und sagt: «Guten Tag, bereit zur Arbeit». Vier Schritte, dreißig bis vierzig Minuten bei einer Tasse Tee. Kein schwarzes Terminal-Fenster wird benötigt.</p>
 
-    <p>Das Wichtigste: Die gesamte technische Arbeit erledigt Claude Code. Von Ihnen werden drei Angaben benötigt (IP-Adresse, Root-Passwort, Bot-Token). Claude Code verbindet sich mit dem Server und richtet den Agenten selbst ein.</p>
+    <p>Hier ist das Gesamtbild: Sie mieten einen kleinen Server im Internet, erstellen einen Telegram-Bot über @BotFather, prüfen Ihr Claude-Abo — und dann geht Claude Code auf Ihrem Laptop selbst auf den Server und richtet dort alles ein. Am Ende öffnen Sie den Server über VS Code und installieren den Agenten-Konstruktor mit einem Befehl.</p>
+
+    <p><strong>Das Wichtigste:</strong> Die gesamte technische Arbeit erledigt Claude Code. Von Ihnen werden drei «Tickets» benötigt (Server-IP + Passwort, Bot-Token, Claude-Abo) und Enter-Tastendrücke an den richtigen Stellen.</p>
 
     <div class="note-box warning">
       <strong>Auf dieser Seite gibt es keine einzige Befehlszeile für das schwarze Terminal-Fenster.</strong>
-      <p>Alles, was Sie sehen werden, sind Befehle, die Claude Code dem Server für Sie diktiert. Wenn Sie irgendwo etwas manuell eingeben möchten — nicht nötig. Claude Code erledigt das selbst. Wenn Claude Code irgendwann Hilfe braucht — schreiben Sie dem Bot <code>/new</code>, er stellt einen neuen Token aus.</p>
+      <p>Alles, was wie ein Befehl aussieht, ist entweder Text für den Chat mit Claude Code (er weiß selbst, was damit zu tun ist) oder ein Befehl, den Claude Code dem Server für Sie diktiert. Wenn die Anleitung irgendwann sagt «Terminal öffnen» — dann schauen Sie auf die falsche Seite.</p>
+    </div>
+
+    <h2>Was VOR dem Start vorbereitet werden muss</h2>
+
+    <ul>
+      <li><strong>VS Code und Claude Code auf dem Laptop.</strong> Installieren Sie VS Code (kostenlos, <a href="https://code.visualstudio.com/" target="_blank" style="color:#7c5cfc">code.visualstudio.com</a>), dann die Claude Code-Erweiterung (über den VS Code Marketplace, suchen Sie «Claude Code» von Anthropic). Einmal installiert — fertig. Das ist Ihr einziges «Werkzeug» bei dieser Installation.</li>
+      <li><strong>Claude-Abo — Pro oder Max.</strong> Pro reicht aus, Max ist komfortabler bei den Limits. Hauptsache, das Abo ist vorhanden und funktioniert auf Ihrem Laptop im normalen Claude-Chat.</li>
+      <li><strong>Telegram griffbereit.</strong> Darüber erstellen wir den Bot und holen am Ende den Prompt bei @dirigent_access_bot ab.</li>
+      <li><strong>VPS — gemieteter Server.</strong> Für deutschsprachige Nutzer empfehlen sich <a href="https://www.hetzner.com/" target="_blank" style="color:#7c5cfc">Hetzner</a> (DE, sehr günstig und zuverlässig) oder <a href="https://www.digitalocean.com/" target="_blank" style="color:#7c5cfc">DigitalOcean</a>.</li>
+    </ul>
+
+    <div class="note-box">
+      <p><strong>VS Code</strong> ist ein kostenloser Editor von Microsoft, in den Claude Code als Erweiterung eingebettet wird. Stellen Sie sich ihn als das Fenster vor, in dem Claude lebt. VS Code selbst tut nichts — er gibt Claude einfach ein Zuhause auf Ihrem Laptop.</p>
+      <p><strong>Claude Code</strong> ist Ihr intelligenter Assistent innerhalb von VS Code. Der, dem Sie Aufgaben in menschlicher Sprache geben: «Geh auf den Server, installiere das, verschiebe diese Dateien». Er erledigt alles selbst.</p>
     </div>
 
     <h2>Installationsroute</h2>
@@ -707,12 +723,12 @@
       <pre>
 🏁 Start
   │
-  ├─ 1️⃣ VPS mieten                  (~5 Min. — Website des Hosters aufrufen)
-  ├─ 2️⃣ Bot bei @BotFather erstellen (~3 Min. — zwei Fragen, ein Token)
-  ├─ 3️⃣ Claude-Abo prüfen           (~1 Min.)
-  └─ 4️⃣ Installation über Claude Code starten (~30 Min., Claude Code erledigt alles)
-       ├─ Teil A. Server-Installation (lokales Claude Code + IP + Bot-Token)
-       └─ Teil B. Agenten-Konstruktor (@dirigent_access_bot → persönlicher Prompt)
+  ├─ 1️⃣ VPS mieten                   (~5 Min. — Website des Hosters aufrufen)
+  ├─ 2️⃣ Bot bei @BotFather erstellen  (~3 Min. — zwei Fragen, ein Token)
+  ├─ 3️⃣ Claude-Abo prüfen            (~1 Min.)
+  └─ 4️⃣ Installation über Claude Code (~30 Min., Claude Code erledigt alles)
+         ├─ Teil A. Server-Installation (lokales Claude Code + IP + Bot-Token)
+         └─ Teil B. Agenten-Konstruktor (@dirigent_access_bot → persönlicher Prompt)
   │
   ↓
 🎉 Fertig — schreiben Sie Ihrem Agenten in Telegram!</pre>
@@ -720,84 +736,148 @@
 
     <h2>Schritt 1. Server mieten (~5 Minuten)</h2>
 
-    <p>Gehen Sie zu einem beliebigen Hoster und richten Sie einen VPS ein. Für deutschsprachige Nutzer empfehlen sich <strong>Hetzner</strong> (DE, sehr günstig und zuverlässig) oder <strong>DigitalOcean</strong>. Die Oberfläche ist intuitiv, der Support professionell.</p>
+    <p>Gehen Sie zu einem beliebigen Hoster und richten Sie einen VPS ein. Für deutschsprachige Nutzer empfehle ich <strong>Hetzner</strong> — günstigste Preise in Deutschland, zuverlässig, einfaches Interface. Wenn Ihnen DigitalOcean lieber ist — nehmen Sie das, die Schritte sind ähnlich.</p>
 
-    <p>Gehen Sie zum Bereich «Cloud Server» und klicken Sie auf «Server erstellen».</p>
-
-    <p>Wählen Sie als Parameter: <strong>2 CPU-Kerne, 4 GB RAM, 40 GB Festplatte, OS Ubuntu 24.04.</strong> Kostet etwa 5–10 €/Monat.</p>
+    <p>Gehen Sie zum Bereich «Cloud Server» und klicken Sie auf «Server erstellen». Wählen Sie als Parameter: <strong>2 CPU-Kerne, 4 GB RAM, 40 GB Festplatte, OS Ubuntu 24.04.</strong> Diese Parameter reichen für den Agenten aus und bieten Reserven für Speicher- und Projektwachstum auf Jahre hinaus.</p>
 
     <div class="note-box">
-      <p>Ein VPS ist ein gemieteter kleiner Computer im Internet, der rund um die Uhr läuft. Er steht im Rechenzentrum des Hosters, schaltet sich nicht aus und hat eine eigene IP-Adresse. Sie mieten ihn, erhalten die Zugangsdaten und richten ihn ein. Nötig, damit Ihr Agent rund um die Uhr arbeitet — auch wenn Ihr Laptop zugeklappt ist.</p>
+      <p>Ein VPS ist ein gemieteter kleiner Computer im Internet, der rund um die Uhr läuft. Er steht im Rechenzentrum des Hosters, schaltet sich nicht aus und hat eine eigene Adresse. Sie mieten ihn wie eine Wohnung — bezahlt, Schlüssel erhalten, eingezogen. Nötig, damit Ihr Agent rund um die Uhr arbeitet, auch wenn Ihr Laptop zugeklappt ist.</p>
     </div>
 
-    <p>Etwa 30 Sekunden nach der Bezahlung erhalten Sie eine E-Mail vom Hoster mit drei Zeilen: <strong>IP-Adresse</strong> (z.B. 122.45.67.89), <strong>Login root</strong>, <strong>Passwort</strong>. Notieren Sie diese — sie werden in Schritt 4 benötigt.</p>
+    <p>Etwa 30 Sekunden nach der Bezahlung erhalten Sie eine E-Mail vom Hoster mit drei Zeilen: <strong>IP-Adresse des Servers</strong> (z.B. 123.45.67.89), <strong>Login (root)</strong> und <strong>Passwort</strong>. Speichern Sie das an einem sicheren Ort — das sind die Schlüssel zur neuen Wohnung des Agenten.</p>
+
+    <div class="note-box warning">
+      <p>Wählen Sie einen Tarif mit ausreichend Speicher — der Agent sammelt mit der Zeit Gedächtnis, Tagesjournale und eine Knowledge-Base an, und der Platz geht schneller zur Neige als man denkt. 40 GB reichen für mehrere Jahre ruhigen Betriebs.</p>
+    </div>
+
+    <div class="note-box">
+      <strong>Ein Agent — ein Server</strong>
+      <p>Für einen Agenten ist es besser, einen eigenen VPS zu mieten. Wenn Sie später einen weiteren anlegen möchten — siedeln Sie ihn auf einem anderen Server an. So arbeitet jeder Agent stabiler und die Erinnerungen werden nicht durcheinander gebracht.</p>
+    </div>
 
     <h2>Schritt 2. Bot bei @BotFather erstellen (~3 Minuten)</h2>
 
-    <p>BotFather ist der offizielle Telegram-Bot, über den alle anderen erstellt werden. Jede Telegram-Bot-Anwendung erhält einen langen String — wie einen elektronischen Schlüssel. Mit diesem Token kann der Server dann im Namen Ihres Bots in Telegram schreiben.</p>
+    <p>Öffnen Sie @BotFather in Telegram, drücken Sie Start und schreiben Sie den Befehl <code>/newbot</code>. Er stellt zwei Fragen nacheinander:</p>
+    <ul>
+      <li><strong>Name des Bots</strong> — was die Nutzer sehen. Zum Beispiel: «Mein Agent» oder ein beliebiger schöner Name.</li>
+      <li><strong>Username</strong> — technischer Name. Muss auf <code>bot</code> oder <code>_bot</code> enden und eindeutig sein. Zum Beispiel: <code>anna_agent_bot</code>.</li>
+    </ul>
 
-    <div class="step-block">
-      <div class="step-num">1</div>
-      <div class="step-content">
-        <strong>Öffnen Sie @BotFather in Telegram</strong>
-        <span>Über die Suche finden, auf Start drücken</span>
-      </div>
-    </div>
-    <div class="step-block">
-      <div class="step-num">2</div>
-      <div class="step-content">
-        <strong>Schreiben Sie <code>/newbot</code></strong>
-        <span>BotFather fragt nach dem Bot-Namen (z.B. «Mein Agent»)</span>
-      </div>
-    </div>
-    <div class="step-block">
-      <div class="step-num">3</div>
-      <div class="step-content">
-        <strong>Username wählen</strong>
-        <span>Muss auf <code>_bot</code> enden, z.B. <code>meinagent_assistant_bot</code></span>
-      </div>
-    </div>
-    <div class="step-block">
-      <div class="step-num">4</div>
-      <div class="step-content">
-        <strong>Token kopieren</strong>
-        <span>BotFather sendet einen String wie <code>7123456789:AAF...</code> — das ist der Token. Zeigen Sie ihn nicht im Chat, veröffentlichen Sie ihn nicht. Er wird nur in Schritt 4 benötigt.</span>
-      </div>
+    <p>Danach sendet @BotFather einen Token — einen langen String wie <code>1234567890:AAEh-xxxx....</code> Kopieren Sie ihn und speichern Sie ihn neben der IP-Adresse des Servers.</p>
+
+    <div class="note-box">
+      <p>BotFather ist der offizielle Telegram-Bot, über den alle anderen erstellt werden. Er gibt jedem neuen Bot einen Token — einen langen String wie einen elektronischen Schlüssel. Mit diesem Token kann der Server dann im Namen Ihres Bots in Telegram schreiben.</p>
     </div>
 
-    <p>Der Bot antwortet noch nicht auf Nachrichten — das ist normal. Er erwacht nach Schritt 4.</p>
+    <div class="note-box warning">
+      <p><strong>Der Bot-Token ist das Passwort Ihres Bots.</strong> Zeigen Sie ihn nicht in Chats, veröffentlichen Sie ihn nicht. Falls er versehentlich bekannt wurde — bitten Sie @BotFather um den Befehl <code>/revoke</code>, wählen Sie den Bot aus, erhalten Sie einen neuen Token.</p>
+    </div>
+
+    <p>Der Bot antwortet noch nicht auf Nachrichten — das ist normal. Er erwacht nach Schritt 4, wenn der Server mit ihm Bekanntschaft macht.</p>
 
     <h2>Schritt 3. Claude-Abo prüfen (~1 Minute)</h2>
 
-    <p>Öffnen Sie <strong>claude.ai</strong> im Browser und melden Sie sich an. Sie benötigen ein <strong>Pro</strong>- oder <strong>Max</strong>-Abo. Wenn der Status Free ist — schließen Sie Pro ab, das sind $20/Monat. Das Claude-Abo ist der Treibstoff Ihres Agenten — ohne es funktioniert nichts.</p>
+    <p>Öffnen Sie <a href="https://claude.ai/" target="_blank" style="color:#7c5cfc">claude.ai</a> im Browser und melden Sie sich an. Wenn Sie im oberen Menü den Status <strong>Pro</strong> oder <strong>Max</strong> sehen — alles gut, weiter geht's. Wenn der Status Free ist — schließen Sie Pro in den Profileinstellungen ab.</p>
 
     <div class="note-box">
-      <p>Das Claude-Abo ist Ihr Konto auf claude.ai, über das Sie den normalen Chat nutzen. Der Agent arbeitet über dasselbe Abo — es gibt Limits, aber keine zusätzlichen Kosten, nur Pro oder Max muss aktiviert sein.</p>
+      <p>Das Claude-Abo ist Ihr Konto auf claude.ai, über das Sie den normalen Chat nutzen. Der Agent arbeitet über dasselbe Abo — Limits kommen von dort, für seinen Betrieb fallen keine zusätzlichen Kosten an.</p>
     </div>
+
+    <p>Stellen Sie sicher, dass Sie Login/Passwort des Claude-Kontos kennen — sie werden beim Autorisierungsschritt auf dem Server in Schritt 4 benötigt.</p>
 
     <h2>Schritt 4. Installation über Claude Code starten (~30 Minuten)</h2>
 
-    <p>Letzter Schritt. Öffnen Sie Claude Code — die Anwendung auf Ihrem Computer (falls nicht vorhanden, installieren Sie sie unter <a href="https://claude.ai/code" target="_blank" style="color:#7c5cfc">claude.ai/code</a>).</p>
+    <p>Der größte, aber interessanteste Schritt. Hier geht Claude Code auf dem Laptop selbst auf Ihren Server und installiert alles.</p>
 
-    <p>Dann folgen zwei Teilschritte:</p>
+    <p>Es gibt zwei Teile: zuerst den Server einrichten (Teil A, ~20 Minuten), dann den Agenten-Konstruktor über den persönlichen Prompt installieren (Teil B, ~2 Minuten).</p>
 
-    <p><strong>Teil A. Server-Installation.</strong> Sie fügen in Claude Code den Befehl mit den Server-Daten ein. Claude Code verbindet sich per SSH mit Ihrem VPS, installiert die notwendigen Programme — Node.js, Claude Code CLI — erstellt Ordner auf dem Server, richtet den Telegram-Bot als 24/7-Dienst ein, verbindet den Server mit Ihrem VS Code über VS Code Tunnel und konfiguriert alles automatisch.</p>
+    <h2>Teil A. Server-Installation mit lokalem Claude Code</h2>
 
-    <p><strong>Teil B. Agenten-Konstruktor.</strong> Wenn der Telegram-Bot auf <code>/start</code> antwortet — ist der Server bereit. Gehen Sie zu <strong>@dirigent_access_bot</strong>, klicken Sie auf «Prompt erhalten», erhalten Sie Ihren persönlichen Prompt und zeigen Sie ihn Claude Code.</p>
+    <p>Öffnen Sie VS Code auf dem Laptop. Erstellen Sie einen beliebigen Ordner auf dem Desktop — z.B. <code>agent-setup</code> — und öffnen Sie ihn in VS Code (File → Open Folder). Starten Sie Claude Code.</p>
 
-    <div class="note-box">
-      <p>Der Prompt funktioniert einmalig — das ist das Sicherheitssystem. Falls etwas schiefgelaufen ist oder der Prompt gelöscht wurde — schreiben Sie dem Bot <code>/new</code>, er stellt einen neuen aus.</p>
+    <p>Kopieren Sie diesen Installations-Prompt in Claude Code, ersetzen Sie die drei Werte durch Ihre eigenen und drücken Sie Enter:</p>
+
+    <div class="route-box">
+      <pre>Lade die Anleitung herunter von
+https://raw.githubusercontent.com/tervica11-svg/dirigent/main/server/INSTALL-SERVER.md
+und führe alles aus, was darin steht.
+
+IP: 123.45.67.89
+Passwort: ihr-server-passwort
+Telegram-Bot: 1234567890:AAEh-xxxxxxxxxxxxxxxxxxxxxxxx</pre>
+    </div>
+
+    <p>Ersetzen Sie:</p>
+    <ul>
+      <li><code>123.45.67.89</code> → Ihre echte IP aus der Hoster-E-Mail</li>
+      <li><code>ihr-server-passwort</code> → Ihr Root-Passwort</li>
+      <li><code>1234567890:AAEh-xxxx...</code> → Ihr Token von @BotFather</li>
+    </ul>
+
+    <div class="note-box warning">
+      <p>Passwort und Token schreiben Sie direkt in den Claude Code-Chat auf dem Laptop. Sie gehen nirgendwo weiter — Claude Code speichert sie nur in dieser Unterhaltung. Nach der Installation können Sie das Passwort über die Hoster-Oberfläche ändern und den Token über <code>/revoke</code> bei @BotFather.</p>
+    </div>
+
+    <p>Danach führt Sie Claude Code an der Hand. Er verbindet sich selbst mit dem Server, entfaltet die Programme, startet den Telegram-Bot als Dienst. Vor jedem Schritt erklärt er in einem Satz, was er tun wird, danach — was erreicht wurde.</p>
+
+    <p><strong>Was Claude Code Schritt für Schritt tun wird:</strong></p>
+    <ul>
+      <li>Verbindung mit Ihrem Server per SSH herstellen</li>
+      <li>Grundprogramme installieren — Node.js, Claude Code CLI</li>
+      <li>Einen eigenen Benutzer <code>agent</code> auf dem Server anlegen</li>
+      <li>Grundlegende Skills installieren (fertige Rollen: Autor, Scout, Entwickler, Designer)</li>
+      <li>Den Telegram-Bot als 24/7-Dienst starten</li>
+      <li>Sie einmalig um die Claude-Autorisierung auf dem Server bitten (über einen Link)</li>
+      <li>VS Code Tunnel einrichten, damit Sie den Server aus dem normalen VS Code öffnen können</li>
+    </ul>
+
+    <h2>Claude-Autorisierung auf dem Server</h2>
+
+    <p>Irgendwann wird Claude Code schreiben: «Öffnen Sie diesen Link, melden Sie sich mit Ihrem Claude-Konto an und klicken Sie auf Authorize». Das ist einmalig nötig — damit der Agent auf dem Server über Ihr Abo arbeiten kann. Öffnen Sie den Link im Browser, melden Sie sich wie gewohnt an, klicken Sie auf die große Schaltfläche <strong>Authorize</strong>.</p>
+
+    <div class="note-box warning">
+      <strong>Wenn der Browser einen Fehler anzeigt — kein Grund zur Panik</strong>
+      <p>Das ist eine bekannte Kleinigkeit bei Safari. Öffnen Sie einfach denselben Link in Chrome oder Firefox — es funktioniert auf Anhieb. Nichts ist kaputt.</p>
+    </div>
+
+    <p>Nach der Autorisierung kehren Sie zu Claude Code zurück und sagen «fertig» — er macht weiter.</p>
+
+    <p>Wenn die Installation abgeschlossen ist, schreibt Claude Code einen kurzen Bericht: was installiert wurde, was als nächstes zu tun ist. Der Telegram-Bot lebt zu diesem Zeitpunkt bereits — schreiben Sie Ihrem Bot in Telegram <code>/start</code>, er sollte antworten.</p>
+
+    <h2>Teil B. Agenten-Konstruktor installieren</h2>
+
+    <p>Wenn der Telegram-Bot auf <code>/start</code> geantwortet hat — ist der Server bereit. Jetzt installieren wir den Konstruktor.</p>
+
+    <p>Öffnen Sie <strong>@dirigent_access_bot</strong> in Telegram und klicken Sie auf «Prompt erhalten». Der Bot sendet Ihren persönlichen Prompt und eine Schritt-für-Schritt-Anleitung, was damit zu tun ist.</p>
+
+    <div class="note-box warning">
+      <p>Der Prompt ist persönlich und funktioniert einmalig — das ist das Sicherheitssystem. Falls etwas schiefgelaufen ist oder der Prompt verbraucht wurde — klicken Sie erneut auf «Prompt erhalten», der Bot stellt einen neuen aus.</p>
     </div>
 
     <h2>Fertig — der Agenten-Konstruktor ist installiert</h2>
 
-    <p>Nach der Installation schreibt Claude Code einen kurzen Bericht: was installiert wurde, was übersprungen wurde, was beim Agenten nachgefragt werden kann. Schon nach wenigen Sekunden antwortet Ihr Agent auf die erste Nachricht in Telegram.</p>
+    <p>Wenn der Konstruktor installiert ist, liest Ihr Agent automatisch die Kerndateien (CLAUDE.md, SOUL.md, MEMORY.md, GOALS.md) und begrüßt Sie. Schreiben Sie etwas — das ist bereits das erste Gespräch.</p>
+
+    <p><strong>Was Sie jetzt haben:</strong></p>
+    <ul>
+      <li>Server in der Cloud, arbeitet 24/7</li>
+      <li>Telegram-Bot antwortet auf Ihre Nachrichten über Ihr Claude-Abo</li>
+      <li>Agenten-Konstruktor ist installiert und wartet auf das erste Gespräch</li>
+      <li>VS Code Tunnel — Sie können den Server von jedem Computer mit VS Code aufrufen</li>
+    </ul>
+
+    <h2>Wenn etwas schiefgelaufen ist</h2>
 
     <ul>
-      <li><strong>Server in der Cloud</strong> — der Agent arbeitet 24/7</li>
-      <li><strong>Telegram</strong> — Hauptkommunikation über Ihren Bot</li>
-      <li><strong>VS Code Tunnel</strong> — Sie können den Server von jedem Computer aus aufrufen, ohne Terminal, direkt über VS Code</li>
+      <li><strong>Prompt bereits verwendet oder abgelaufen</strong> → klicken Sie erneut auf «Prompt erhalten». Ein Prompt funktioniert einmalig — das ist Absicht, aus Sicherheitsgründen.</li>
+      <li><strong>Claude Code sagt «Verbindung fehlgeschlagen»</strong> → wahrscheinlich blockiert der Provider den SSH-Port. Schreiben Sie an <strong>@tervica11</strong>, wir lösen das. Versuchen Sie nicht, es manuell zu reparieren.</li>
     </ul>
+
+    <div class="note-box">
+      <strong>Mein Rat an Sie</strong>
+      <p>Hetzen Sie bei der Installation nicht. Das passiert einmalig, und es ruhig zu tun ist wichtiger als schnell. Bevor Sie in Schritt 4 Enter drücken — prüfen Sie, ob Sie alle drei Platzhalter ersetzt haben. Das ist der häufigste kleine Fehler: «IP vergessen» oder «Passwort nicht ersetzt».</p>
+      <p>Und während das lokale Claude Code den Server einrichtet — sitzen Sie nicht daneben und aktualisieren Sie den Chat nicht alle 10 Sekunden. Das ist ein normaler Prozess, er arbeitet still. Machen Sie sich einen Tee, machen Sie eine Pause. Nach 15–20 Minuten kommen Sie zurück — Server und Bot sind bereit, es bleibt nur Teil B.</p>
+    </div>
   </div>
 
   <div class="next-articles">

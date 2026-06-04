@@ -1996,6 +1996,397 @@ Priorisiere selbst, basierend auf dem, was du über mich weißt.</pre>
 </div>
 
 
+<!-- ═══ ARTICLE: BOT-BEFEHLE ═══ -->
+<div class="container article-page" id="article-komandy">
+  <div class="article-meta">
+    <span class="read-time">7 Min</span>
+    <span>Aktualisiert 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">Bot-Befehle — kurze Referenz</h1>
+  <p class="article-tagline">Fünf Buttons für jeden Tag und fünf für besondere Fälle. Kennen Sie alle zehn — und der Agent liegt in Ihren Händen.</p>
+
+  <div class="article-body">
+
+    <p>Im Chat mit Ihrem Agenten stehen zehn Befehle zur Verfügung. Die meisten nutzen Sie täglich, einige halbjährlich, und ein paar vielleicht nie. Dieser Artikel ist eine kurze Referenz: was jeder Befehl tut, wann Sie ihn verwenden, und welche Gewohnheiten Ihnen helfen, Limit und Zeit zu sparen.</p>
+
+    <div class="note-box">
+      <p><strong>Das Wichtigste</strong></p>
+      <p>Fünf Befehle für die tägliche Arbeit — sichtbar im Telegram-Menü beim Tippen von /.<br>
+      Fünf für besondere Fälle — diese geben Sie manuell ein, wenn nötig.<br>
+      Kennen Sie alle zehn — und der Agent ist vollständig in Ihrer Hand.</p>
+    </div>
+
+    <h2 class="traffic-h2"><img src="/img/komandy/img_1_01.png" alt=""> Die fünf aus dem Telegram-Menü</h2>
+
+    <p>Diese Befehle erscheinen direkt im Vorschlag, wenn Sie im Chat mit dem Agenten «/» tippen.</p>
+
+    <h3>/start — Hauptmenü</h3>
+    <p>Wenn der Agent bereits eingerichtet ist — kurze Begrüßung mit Befehlsliste. Wenn der Agent gerade installiert wurde — startet die Einrichtung (Bootstrap): fragt Ihren Namen, Tätigkeit, Ziele. Die Antworten werden zu Persönlichkeitsdateien (USER.md, GOALS.md, MEMORY.md).</p>
+    <div class="note-box">
+      <p><strong>Wann verwenden:</strong></p>
+      <ul>
+        <li>Beim allerersten Mal nach der Installation — zwingend erforderlich, sonst wird der Agent nicht Ihr persönlicher.</li>
+        <li>Im Alltag — kaum, außer Sie haben die Befehle vergessen.</li>
+      </ul>
+    </div>
+
+    <h3><img src="/img/komandy/img_1_02.png" alt="⏹" style="width:18px;height:18px;vertical-align:middle;margin-right:5px;">/stop — Aufgabe anhalten</h3>
+    <p>Unterbricht, was der Agent gerade macht. Der Prozess wird sanft beendet (SIGTERM), nach 3 Sekunden hart (SIGKILL). «⏳ Denke nach...» wechselt zu «⏹ Aufgabe gestoppt».</p>
+    <div class="note-box">
+      <p><strong>Wann verwenden:</strong></p>
+      <ul>
+        <li>Der Agent schreibt länger als 5 Minuten und es scheint, als wäre er hängengeblieben. Manchmal ist das nur ein Eindruck — bei großen Aufgaben kann der Agent 10–20 Minuten denken.</li>
+        <li>Der Agent sendet plötzlich viele Nachrichten, ohne dass Sie es verlangt haben.</li>
+        <li>Sie haben es sich anders überlegt — langen Bericht angefordert, jetzt möchten Sie eine kurze Zusammenfassung.</li>
+      </ul>
+      <p><strong>Wichtig:</strong> /stop bricht nur die aktuelle Aufgabe ab. Der Gesprächskontext bleibt erhalten — Sie können sofort weitermachen.</p>
+    </div>
+
+    <h3>/reset — neue Sitzung <span style="font-size:13px;color:#888;font-weight:400;">(wichtigster Befehl zum Limit sparen)</span></h3>
+    <p>Löscht den Kontext der aktuellen Unterhaltung: Der Agent vergisst alles, was in dieser Sitzung besprochen wurde. Das Langzeitgedächtnis (MEMORY.md, USER.md, GOALS.md) bleibt unberührt — diese Dateien werden bei jedem Start neu gelesen.</p>
+
+    <div class="note-box">
+      <p><strong>Warum /reset Geld spart</strong></p>
+      <p>Das ist die wichtigste Gewohnheit im Umgang mit dem Agenten. Jede Nachricht in einer aktiven Sitzung überträgt den gesamten bisherigen Gesprächsverlauf — und Sie bezahlen dafür mit Tokens. Mit /reset beginnt die nächste Aufgabe mit leerem Kontext.</p>
+    </div>
+
+    <table class="data-table">
+      <thead><tr><th>Was NICHT verloren geht</th><th>Was verloren geht</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Persönlichkeitsdateien (SOUL.md, MEMORY.md, USER.md, GOALS.md)</td>
+          <td>Alles, was in dieser Sitzung besprochen wurde</td>
+        </tr>
+        <tr>
+          <td>Früher gesammeltes Wissen über Sie</td>
+          <td>«Du hast gerade gesagt, dass...» — nicht mehr bekannt</td>
+        </tr>
+        <tr>
+          <td>Alle Ihre Projekte in ~/projects/</td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note-box success">
+      <p>💬 <strong>Tipp:</strong> Gewöhnen Sie sich an — jeden Morgen mit /reset beginnen. Fünf Sekunden, die täglich echtes Geld sparen.</p>
+    </div>
+
+    <h3><img src="/img/komandy/img_3_04.png" alt="🔑" style="width:18px;height:18px;vertical-align:middle;margin-right:5px;">/settings — Einstellungen</h3>
+    <p>Öffnet ein Inline-Menü mit sechs Registerkarten: Modell, Modus, Umgebungsvariablen (API-Schlüssel), Zeitzone, Tageslimit, Neustart.</p>
+    <div class="note-box">
+      <p><strong>Wann verwenden:</strong> bei Ersteinrichtung, beim Hinzufügen neuer API-Schlüssel, beim Modellwechsel. <strong>Schlüssel niemals als normale Nachricht senden.</strong></p>
+    </div>
+
+    <h3>/status — Systemstatus</h3>
+    <p>Kurze Übersicht mit Ampel für Tagesverbrauch:</p>
+    <ul>
+      <li><img src="/img/komandy/img_3_05.png" alt="🟢" style="width:15px;height:15px;vertical-align:middle;"> <strong>grün</strong> — alles in Ordnung</li>
+      <li><img src="/img/komandy/img_3_06.png" alt="🟡" style="width:15px;height:15px;vertical-align:middle;"> <strong>gelb</strong> — nahe am Limit</li>
+      <li><img src="/img/komandy/img_3_07.png" alt="🔴" style="width:15px;height:15px;vertical-align:middle;"> <strong>rot</strong> — Limit erreicht, neue Anfragen bis morgen gesperrt</li>
+    </ul>
+
+    <h2 class="traffic-h2"><img src="/img/komandy/img_2_03.png" alt=""> Fünf Befehle für besondere Fälle</h2>
+
+    <p>Diese Befehle sind nicht im Menü sichtbar — Sie tippen sie manuell.</p>
+
+    <h3>/log · /privacy · /revoke · /grant · /telemetry</h3>
+
+    <table class="data-table">
+      <thead><tr><th>Befehl</th><th>Was es tut</th><th>Wann verwenden</th></tr></thead>
+      <tbody>
+        <tr><td><code>/log</code></td><td>Letzte 50 SSH-Zugriffseinträge</td><td>Monatlich zur Kontrolle</td></tr>
+        <tr><td><code>/privacy</code></td><td>Datenschutzrichtlinie (DATA-POLICY.md)</td><td>Einmal zu Beginn lesen</td></tr>
+        <tr><td><code>/revoke</code></td><td>Betreiber-SSH-Schlüssel entfernen</td><td>Bei Verdacht auf Kompromittierung</td></tr>
+        <tr><td><code>/grant</code></td><td>SSH-Zugang wiederherstellen</td><td>Nach /revoke, wenn Sie sich umentschieden haben</td></tr>
+        <tr><td><code>/telemetry</code></td><td>Telemetrie an/aus</td><td>Fast nie — Deaktivierung unterdrückt Update-Benachrichtigungen</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note-box warning">
+      <p><strong>Nach /revoke</strong> kommen keine Updates mehr und der Betreiber kann nicht helfen wenn etwas kaputt geht. Rückgängig über /grant.</p>
+    </div>
+
+    <h2>Ampel der Verfügbarkeit</h2>
+
+    <div class="note-box success">
+      <h3 class="traffic-h2" style="margin:0 0 8px 0;font-size:16px;"><img src="/img/komandy/img_5_10.png" alt="🟢"> ALLTÄGLICH</h3>
+      <p><code>/start</code> · <code>/stop</code> · <code>/reset</code> · <code>/settings</code> · <code>/status</code></p>
+    </div>
+
+    <div class="note-box" style="background:#fffbeb;border-color:#fde68a;border-left-color:#f59e0b;">
+      <h3 class="traffic-h2" style="margin:0 0 8px 0;font-size:16px;"><img src="/img/komandy/img_5_11.png" alt="🟡"> ZUGANG &amp; KONTROLLE</h3>
+      <p><code>/log</code> · <code>/privacy</code> · <code>/revoke</code> · <code>/grant</code> · <code>/telemetry</code></p>
+    </div>
+
+    <div class="note-box danger">
+      <h3 class="traffic-h2" style="margin:0 0 8px 0;font-size:16px;"><img src="/img/komandy/img_5_12.png" alt="🔴"> GEFÄHRLICH — ÜBERLEGEN SIE</h3>
+      <p><code>/revoke</code> · <code>/telemetry off</code> — kann rückgängig gemacht werden, aber besser nicht «zum Ausprobieren».</p>
+    </div>
+
+    <h2>Mein Rat</h2>
+    <div class="note-box">
+      <p><strong>Unterschied zwischen /stop und /reset:</strong></p>
+      <ul>
+        <li><code>/stop</code> — Aktion unterbrechen. Gedächtnis bleibt, sofort weitermachen möglich.</li>
+        <li><code>/reset</code> — Gespräch vergessen. Wir beginnen von vorn.</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="next-articles">
+    <div class="next-label">In diesem Abschnitt</div>
+    <div class="next-card" onclick="openArticle('article-settings-menu')">
+      <div class="next-icon">⚙️</div>
+      <div class="next-title">Menü /settings — Karte der Registerkarten</div>
+      <div class="next-desc">Sechs Schalter in einem Fenster</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-golos')">
+      <div class="next-icon">🎙️</div>
+      <div class="next-title">Sprache — Deepgram, Whisper und Tricks</div>
+      <div class="next-desc">Sprachsteuerung einrichten</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-media')">
+      <div class="next-icon">📸</div>
+      <div class="next-title">Was der Agent sieht — Fotos, Dokumente, Videos</div>
+      <div class="next-desc">Formate und Möglichkeiten</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-sessii')">
+      <div class="next-icon">🔄</div>
+      <div class="next-title">Sitzungen und /reset — wann Gespräch «vergessen»</div>
+      <div class="next-desc">Kontextverwaltung</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTICLE: MENÜ /SETTINGS ═══ -->
+<div class="container article-page" id="article-settings-menu">
+  <div class="article-meta">
+    <span class="read-time">7 Min</span>
+    <span>Aktualisiert 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">Menü /settings — Karte der Registerkarten</h1>
+  <p class="article-tagline">Sechs Schalter in einem Fenster. Jeden kennen — nützlich. Ohne Grund anfassen — nein.</p>
+
+  <div class="article-body">
+
+    <p>Der Befehl /settings öffnet das Haupteinstellungsmenü. Sechs Registerkarten mit allem, was Sie einstellen können: Claude-Modell, Ausgabenlimit, Zeitzone, API-Schlüssel. Standardmäßig alles vernünftig eingestellt — aber zu wissen, was in jeder Registerkarte steckt, ist nützlich.</p>
+
+    <div class="note-box">
+      <p><strong>Das Wichtigste</strong></p>
+      <p>Beim ersten Mal drei Registerkarten: <strong>🤖 Modell</strong> (Max-Abonnenten → Opus), <strong>🕐 Zeitzone</strong> und <strong>🔑 Umgebungsvariablen</strong> (Deepgram verbinden). Der Rest — für besondere Fälle.</p>
+    </div>
+
+    <h2 class="traffic-h2"><img src="/img/settings-menu/img_1_01.png" alt=""> Registerkarte 1 — Modell</h2>
+
+    <ul>
+      <li><img src="/img/settings-menu/img_1_06.png" alt="🟢" style="width:15px;height:15px;vertical-align:middle;"> <strong>Haiku</strong> — schnell, günstig, für einfache Aufgaben.</li>
+      <li><img src="/img/settings-menu/img_1_07.png" alt="🔵" style="width:15px;height:15px;vertical-align:middle;"> <strong>Sonnet</strong> — goldene Mitte, Standardmodell nach Installation.</li>
+      <li><img src="/img/settings-menu/img_1_08.png" alt="🟣" style="width:15px;height:15px;vertical-align:middle;"> <strong>Opus</strong> — intelligentestes Modell, für komplexe Analysen und lange Strategien.</li>
+    </ul>
+
+    <table class="data-table">
+      <thead><tr><th>Abonnement</th><th>Empfehlung</th></tr></thead>
+      <tbody>
+        <tr><td>Claude Max ab $100</td><td>Opus setzen und langfristig behalten.</td></tr>
+        <tr><td>Claude Pro $20</td><td>Sonnet behalten — Opus-Kontingent erschöpft sich schnell.</td></tr>
+      </tbody>
+    </table>
+
+    <h2 class="traffic-h2"><img src="/img/settings-menu/img_2_10.png" alt=""> Registerkarte 2 — Modus</h2>
+    <ul>
+      <li><img src="/img/settings-menu/img_2_11.png" alt="👤" style="width:15px;height:15px;vertical-align:middle;"> <strong>Normal</strong> — fragt vor riskanten Aktionen.</li>
+      <li><img src="/img/settings-menu/img_1_01.png" alt="🤖" style="width:15px;height:15px;vertical-align:middle;"> <strong>Auto</strong> — handelt selbstständig.</li>
+    </ul>
+
+    <h2 class="traffic-h2"><img src="/img/settings-menu/img_1_03.png" alt=""> Registerkarte 3 — Umgebungsvariablen</h2>
+
+    <table class="data-table">
+      <thead><tr><th>Dienst</th><th>Wofür</th></tr></thead>
+      <tbody>
+        <tr><td>🎤 Deepgram</td><td>Spracherkennung — ohne ihn kein Spracheingabe.</td></tr>
+        <tr><td>🐙 GitHub</td><td>Code und Repos: commit, push, pull, PR.</td></tr>
+        <tr><td>🗄 Supabase</td><td>Cloud-Datenbank für Projekte.</td></tr>
+        <tr><td>▲ Vercel</td><td>Website-Deployment.</td></tr>
+        <tr><td>🧠 OpenRouter</td><td>Zugang zu GPT, Gemini, DeepSeek, Bild-/Videogenerierung.</td></tr>
+        <tr><td><img src="/img/settings-menu/img_3_18.png" alt="🔍" style="width:15px;height:15px;vertical-align:middle;"> Voyage AI</td><td>Semantische Suche — findet nach Bedeutung, nicht nach exaktem Wortlaut.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note-box warning">
+      <p><strong>Schlüsselsicherheit:</strong> Schlüssel niemals «einfach so» in den Chat senden — immer über /settings → Umgebungsvariablen.</p>
+    </div>
+
+    <h2 class="traffic-h2"><img src="/img/settings-menu/img_1_02.png" alt=""> Registerkarte 4 — Zeitzone</h2>
+    <p>UTC, Europe/Moscow, Europe/Kiev, Asia/Almaty, Asia/Vladivostok, America/New_York, America/Los_Angeles. Einmal einstellen — und vergessen.</p>
+
+    <h2 class="traffic-h2"><img src="/img/settings-menu/img_4_22.png" alt=""> Registerkarte 5 — Limit</h2>
+    <p>Bei Pro/Max-Abonnement nicht relevant — zeigt nur Aktivitätsindikator. Wichtig nur bei API-Betrieb (eigener Anthropic- oder OpenRouter-Schlüssel).</p>
+    <ul>
+      <li><img src="/img/settings-menu/img_1_06.png" alt="🟢" style="width:15px;height:15px;vertical-align:middle;"> Bis 80% — alles gut.</li>
+      <li><img src="/img/settings-menu/img_5_30.png" alt="🟡" style="width:15px;height:15px;vertical-align:middle;"> Bei 80% — Warnung.</li>
+      <li><img src="/img/settings-menu/img_4_25.png" alt="🔴" style="width:15px;height:15px;vertical-align:middle;"> Bei 100% — neue Anfragen gesperrt bis morgen.</li>
+    </ul>
+
+    <h2 class="traffic-h2"><img src="/img/settings-menu/img_5_33.png" alt=""> Registerkarte 6 — Neustart</h2>
+    <p>Sicherer Bot-Neustart. Nichts geht verloren. Nötig nach manueller .env-Bearbeitung oder wenn der Agent sich seltsam verhält.</p>
+
+    <h2 class="traffic-h2"><img src="/img/settings-menu/img_1_05.png" alt="✖"> Registerkarte ✖ — Schließen</h2>
+    <p>Löscht die Menünachricht. Keine Änderungen.</p>
+
+    <h2>Was oft geöffnet wird und was kaum</h2>
+
+    <div class="note-box success">
+      <h3 class="traffic-h2" style="margin:0 0 8px 0;font-size:16px;"><img src="/img/settings-menu/img_1_06.png" alt="🟢"> OFT</h3>
+      <p><strong>🔑 Umgebungsvariablen</strong> — neuen Dienst-Schlüssel hinzufügen.</p>
+    </div>
+    <div class="note-box" style="background:#fffbeb;border-color:#fde68a;border-left-color:#f59e0b;">
+      <h3 class="traffic-h2" style="margin:0 0 8px 0;font-size:16px;"><img src="/img/settings-menu/img_5_30.png" alt="🟡"> HALBJÄHRLICH</h3>
+      <p><strong>🤖 Modell · 🛠 Modus · 🔄 Neustart</strong></p>
+    </div>
+    <div class="note-box danger">
+      <h3 class="traffic-h2" style="margin:0 0 8px 0;font-size:16px;"><img src="/img/settings-menu/img_4_25.png" alt="🔴"> EINMAL UND VERGESSEN</h3>
+      <p><strong>🕐 Zeitzone · 💰 Limit</strong> (für Abonnenten nicht anfassen)</p>
+    </div>
+
+    <h2>Mein Rat</h2>
+    <p>Beim ersten Mal das Menü durchgehen: Modell setzen, Zeitzone wählen, Deepgram verbinden. Danach monatelang /settings nicht ohne Grund öffnen — es funktioniert von selbst.</p>
+
+  </div>
+
+  <div class="next-articles">
+    <div class="next-label">In diesem Abschnitt</div>
+    <div class="next-card" onclick="openArticle('article-komandy')">
+      <div class="next-icon">📋</div>
+      <div class="next-title">Bot-Befehle — kurze Referenz</div>
+      <div class="next-desc">Alle zehn Befehle</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-golos')">
+      <div class="next-icon">🎙️</div>
+      <div class="next-title">Sprache — Deepgram, Whisper und Tricks</div>
+      <div class="next-desc">Sprachsteuerung einrichten</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-media')">
+      <div class="next-icon">📸</div>
+      <div class="next-title">Was der Agent sieht — Fotos, Dokumente, Videos</div>
+      <div class="next-desc">Formate und Möglichkeiten</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-sessii')">
+      <div class="next-icon">🔄</div>
+      <div class="next-title">Sitzungen und /reset — wann Gespräch «vergessen»</div>
+      <div class="next-desc">Kontextverwaltung</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTICLE: SPRACHE ═══ -->
+<div class="container article-page" id="article-golos">
+  <div class="article-meta">
+    <span class="read-time">7 Min</span>
+    <span>Aktualisiert 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">Sprache — Deepgram, Whisper und Tricks</h1>
+  <p class="article-tagline">Einmal einrichten — und jahrelang mit dem Agenten sprechen wie mit einem echten Assistenten.</p>
+
+  <div class="article-body">
+
+    <p>Sprache ist das praktischste Feature des Agenten. Sie gehen die Straße entlang, sprechen eine Aufgabe ein — der Agent transkribiert und legt los. In diesem Artikel: wie Sprache intern funktioniert, welche Verbindungsoptionen es gibt, und ein paar Lifehacks für maximalen Nutzen.</p>
+
+    <div class="note-box">
+      <p><strong>Das Wichtigste</strong></p>
+      <ul>
+        <li><strong>Deepgram</strong> (Cloud, hohe Genauigkeit) — $200 Gratisguthaben bei Registrierung reicht für Jahre.</li>
+        <li><strong>Whisper</strong> (lokal, dauerhaft kostenlos) — läuft auf Ihrem Server. Etwas schlechtere Qualität, 8 Min. Installation.</li>
+      </ul>
+      <p>In 99% der Fälle wird Deepgram gewählt — schnell, genau, und dank Bonus de facto kostenlos.</p>
+    </div>
+
+    <h2>Wie der Agent wählt</h2>
+    <ol>
+      <li>Deepgram-Schlüssel vorhanden → immer Deepgram.</li>
+      <li>Kein Schlüssel, Whisper installiert → Whisper.</li>
+      <li>Nichts → Menü beim ersten Sprach-Input.</li>
+    </ol>
+
+    <h2 class="traffic-h2"><img src="/img/golos/img_1_01.png" alt=""> Deepgram verbinden</h2>
+    <ol>
+      <li>console.deepgram.com → Registrierung → $200 Guthaben.</li>
+      <li>API Keys → Create a New API Key → Name (z.B. agent-factory).</li>
+      <li>Schlüssel kopieren (wird einmal angezeigt).</li>
+      <li>/settings → 🔑 Umgebungsvariablen → Deepgram → Schlüssel senden.</li>
+      <li>Bot löscht Nachricht, speichert sicher. Sprache funktioniert sofort.</li>
+    </ol>
+    <div class="note-box">
+      <p>Technisch: Modell <code>nova-2</code> mit <code>smart_format</code> — Zahlen, Daten und Satzzeichen automatisch formatiert. Transkription in 1–3 Sekunden.</p>
+    </div>
+
+    <h2 class="traffic-h2"><img src="/img/golos/img_2_02.png" alt=""> Whisper — kostenlose Alternative</h2>
+
+    <p>Lokal auf Ihrem Server, kein Internet, keine Rechnung.</p>
+    <p><strong>Wann Whisper:</strong> keine Daten nach außen geben möchten, oder grundsätzlich nie bezahlen.</p>
+    <p><strong>Nachteile:</strong> schlechtere Qualität, 8 Min. Installation, 5–15 Sek. Transkriptionszeit.</p>
+    <p>Installation: bei erster Sprachnachricht ohne Deepgram → Button «🔧 Whisper installieren».</p>
+
+    <h2>Lifehacks</h2>
+
+    <h3>Keine Angst vor langen Sprachnachrichten</h3>
+    <p>Telegram erlaubt unbegrenzt lange Sprachnachrichten. Sprechen Sie 5–10 Minuten — der Agent transkribiert alles. Ideal für: Projekt-Brief, detaillierte Aufgabenbeschreibung, «Gedankentagebuch» laut.</p>
+
+    <h3>Sprechen Sie natürlich</h3>
+    <p>«Hör mal, ich brauche morgen einen Verkaufsbericht für April. Zahlen in der Google-Tabelle. Was gestiegen ist, was gefallen, drei Hypothesen zur Verbesserung.» Je natürlicher die Sprache, desto besser versteht der Agent.</p>
+
+    <h3>Zahlen und Daten</h3>
+    <p>«Siebenhundertfünfzig Kunden im Juli» → <em>750 Kunden im Juli</em>. «Fünfzehnter Mai um neun» → <em>15. Mai um 9:00</em>. Das macht <code>smart_format</code>.</p>
+
+    <h2>Wann Text besser ist</h2>
+    <ul>
+      <li>API-Schlüssel und Passwörter — nie per Sprache.</li>
+      <li>Lange technische Begriffe oder Fremdnamen.</li>
+      <li>Komplexe Zahlentabellen.</li>
+    </ul>
+
+    <h2 class="traffic-h2"><img src="/img/golos/img_3_03.png" alt=""> Problembehebung</h2>
+
+    <p><strong>«Transkribiere...» hängt:</strong> Deepgram — normal 1–3 Sek., über 30 Sek. = Problem. /status prüfen, neu versuchen. Whisper — normal 5–15 Sek., bei schwachem Server bis 1 Min.</p>
+
+    <p><strong>Text mit Fehlern:</strong> Korrigieren per Text: «Ich meinte nicht X, sondern Y.»</p>
+
+    <p><strong>$200-Guthaben aufgebraucht:</strong> $5–10 nachladen (hunderte Stunden Transkription) oder auf Whisper umsteigen.</p>
+
+    <h2>Mein Rat</h2>
+    <p>Deepgram am ersten Tag einrichten — und dieses Thema für Jahre vergessen. Das Guthaben reicht so lange, dass Sie erst den Agenten kennenlernen, ein paar Projekte aufbauen, und dann erst die erste Rechnung sehen werden.</p>
+
+  </div>
+
+  <div class="next-articles">
+    <div class="next-label">In diesem Abschnitt</div>
+    <div class="next-card" onclick="openArticle('article-komandy')">
+      <div class="next-icon">📋</div>
+      <div class="next-title">Bot-Befehle — kurze Referenz</div>
+      <div class="next-desc">Alle zehn Befehle</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-settings-menu')">
+      <div class="next-icon">⚙️</div>
+      <div class="next-title">Menü /settings — Karte der Registerkarten</div>
+      <div class="next-desc">Sechs Schalter in einem Fenster</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-media')">
+      <div class="next-icon">📸</div>
+      <div class="next-title">Was der Agent sieht — Fotos, Dokumente, Videos</div>
+      <div class="next-desc">Formate und Möglichkeiten</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-sessii')">
+      <div class="next-icon">🔄</div>
+      <div class="next-title">Sitzungen und /reset — wann Gespräch «vergessen»</div>
+      <div class="next-desc">Kontextverwaltung</div>
+    </div>
+  </div>
+</div>
+
+
 <!-- ═══ SECTION HUB: WIE DER AGENT AUFGEBAUT IST ═══ -->
 <div class="container article-page" id="article-kak-ustroen">
   <div class="article-meta">

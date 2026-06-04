@@ -4461,18 +4461,20 @@ Einmalig:  .env lokal speichern (sicher aufbewahren!)
   <div class="article-body">
     <p>MCP ermöglicht dem Agenten, direkt mit externen Diensten zu arbeiten. Nicht durch Hin- und Herkopieren von Daten, sondern durch direkte Verbindung. Hier sind fünf Beispiele für Alltags- und Geschäftsaufgaben: was verbinden, wie konfigurieren, welche Befehle dem Agenten geben.</p>
 
-    <div class="note-box">
-      <b>Verbunden — genutzt</b><br>
-      Jeder MCP-Server gibt dem Agenten eine Reihe neuer Aktionen. Nach der Verbindung beschreiben Sie die Aufgabe einfach in normalen Worten — der Agent ruft die benötigte Aktion aus dem verbundenen Dienst selbst auf.
-    </div>
+    <h2>Hauptbotschaft</h2>
+    <h3>Verbunden — genutzt</h3>
+    <p>Jeder MCP-Server gibt dem Agenten eine Reihe neuer Aktionen. Nach der Verbindung beschreiben Sie die Aufgabe einfach in normalen Worten — der Agent ruft die benötigte Aktion aus dem verbundenen Dienst selbst auf.</p>
 
     <h2>1. Google Calendar — Tagesplanung</h2>
     <p>Nach der Verbindung des Kalenders sieht der Agent Ihren Terminplan, erstellt Ereignisse, sucht freie Zeitfenster und erinnert an Meetings.</p>
 
-    <p><b>Wie verbinden:</b> Sagen Sie dem Agenten:</p>
-    <div class="tree-box">«Verbinde MCP-Server Google Calendar»</div>
-    <p>Der Agent fügt in <code>~/.claude.json</code> ein:</p>
-    <div class="tree-box">{
+    <p><b>Wie verbinden:</b></p>
+    <p>Sagen Sie dem Agenten:</p>
+    <p>«Verbinde MCP-Server Google Calendar»<br>
+    Der Agent fügt in <code>~/.claude.json</code> ein:</p>
+    <div class="tree-box" style="padding:0">
+      <div style="background:#2d2d2d;padding:6px 14px;border-radius:8px 8px 0 0;font-size:12px;color:#aaa;font-family:inherit">📋 Kopieren</div>
+      <pre style="background:none;padding:14px 20px;color:#c8d0e7;font-size:13px;font-family:'SF Mono','Fira Code',monospace;margin:0;line-height:1.6">{
   "google-calendar": {
     "type": "http",
     "url": "adresse_ihres_mcp_servers",
@@ -4480,98 +4482,114 @@ Einmalig:  .env lokal speichern (sicher aufbewahren!)
       "Authorization": "Bearer ihr_token"
     }
   }
-}</div>
+}</pre>
+    </div>
 
-    <p><b>Was man tun kann:</b></p>
-    <div class="tree-box">«Welche Termine habe ich heute?»
-«Plane ein Meeting mit Anna für Donnerstag 15:00, Thema — Content-Plan-Besprechung»
-«Finde ein freies Zwei-Stunden-Fenster nächste Woche»
-«Erinnere mich jeden Morgen um 8:00, was für den Tag geplant ist»</div>
+    <p><b>Was man tun kann:</b><br>
+    «Welche Termine habe ich heute?»<br>
+    «Plane ein Meeting mit Anna für Donnerstag 15:00, Thema — Content-Plan-Besprechung»<br>
+    «Finde ein freies Zwei-Stunden-Fenster nächste Woche»<br>
+    «Erinnere mich jeden Morgen um 8:00, was für den Tag geplant ist»</p>
 
     <h2>2. Gmail — E-Mail ohne E-Mail zu öffnen</h2>
     <p>Der Agent liest den Posteingang, schreibt Entwürfe, antwortet auf E-Mails und sortiert nach Wichtigkeit. Sie öffnen keinen E-Mail-Client — alles über Telegram.</p>
 
-    <p><b>Was man tun kann:</b></p>
-    <div class="tree-box">«Zeig mir ungelesene E-Mails von heute»
-«Schreib eine Antwort an Thomas: Danke, alles erhalten, wir treffen uns am Mittwoch»
-«Finde alle E-Mails von der Sparkasse im letzten Monat»
-«Sortiere den Posteingang: was dringend, was kann warten, was Spam»</div>
+    <p><b>Was man tun kann:</b><br>
+    «Zeig mir ungelesene E-Mails von heute»<br>
+    «Schreib eine Antwort an Thomas: Danke, alles erhalten, wir treffen uns am Mittwoch»<br>
+    «Finde alle E-Mails von der Sparkasse im letzten Monat»<br>
+    «Sortiere den Posteingang: was dringend, was kann warten, was Spam»</p>
 
     <h2>3. Google Sheets — Tabellen und Berichte</h2>
     <p>Der Agent arbeitet direkt mit Tabellen: liest Daten, fügt Zeilen hinzu, berechnet Summen, erstellt Übersichten. Ideal für Buchhaltung, CRM, Finanzen.</p>
 
-    <p><b>Was man tun kann:</b></p>
-    <div class="tree-box">«Öffne Tabelle "Verkäufe April" und zeig die Summe der Spalte "Betrag"»
-«Füge zur Kundentabelle hinzu: Müller Hans, +49-123-456789, Anfrage für Beratung»
-«Erstelle eine Wochenzusammenfassung der Verkäufe aus Tabelle "CRM"»
-«Exportiere die Kundenliste, die seit mehr als 30 Tagen nicht gekauft haben»</div>
+    <p><b>Was man tun kann:</b><br>
+    «Öffne Tabelle "Verkäufe April" und zeig die Summe der Spalte "Betrag"»<br>
+    «Füge zur Kundentabelle hinzu: Müller Hans, +49-123-456789, Anfrage für Beratung»<br>
+    «Erstelle eine Wochenzusammenfassung der Verkäufe aus Tabelle "CRM"»<br>
+    «Exportiere die Kundenliste, die seit mehr als 30 Tagen nicht gekauft haben»</p>
 
     <h2>4. Pencil — Design-Mockups aus Telegram</h2>
-    <p>Dieser MCP-Server ist bereits auf Ihrem Server vorinstalliert. Der Agent kann Mockup-Dateien (<code>.pen</code>) öffnen, Texte, Farben ändern, Bilder exportieren.</p>
+    <p>Dieser MCP-Server ist bereits auf Ihrem Server aus der Box installiert. Der Agent kann Mockup-Dateien (<code>.pen</code>) öffnen, Texte und Farben ändern, Bilder exportieren.</p>
 
-    <p><b>Konfiguration (bereits in <code>~/.claude.json</code> vorhanden):</b></p>
-    <div class="tree-box">{
+    <p><b>Konfiguration</b> (bereits in <code>~/.claude.json</code> vorhanden):</p>
+    <div class="tree-box" style="padding:0">
+      <div style="background:#2d2d2d;padding:6px 14px;border-radius:8px 8px 0 0;font-size:12px;color:#aaa;font-family:inherit">📋 Kopieren</div>
+      <pre style="background:none;padding:14px 20px;color:#c8d0e7;font-size:13px;font-family:'SF Mono','Fira Code',monospace;margin:0;line-height:1.6">{
   "pencil": {
     "type": "stdio",
     "command": "/home/agent/.pencil/mcp/visual_studio_code/out/mcp-server-linux-x64",
     "args": ["--app", "visual_studio_code"],
     "env": {}
   }
-}</div>
+}</pre>
+    </div>
 
-    <p><b>Was man tun kann:</b></p>
-    <div class="tree-box">«Öffne das Visitenkarten-Mockup und ändere die Telefonnummer auf +49-000-000-0000»
-«Erstelle einen Screenshot der Hauptseite aus dem Mockup landing.pen»
-«Exportiere das Logo aus dem Mockup als PNG»</div>
+    <p><b>Was man tun kann:</b><br>
+    «Öffne das Visitenkarten-Mockup und ändere die Telefonnummer auf +49-000-000-0000»<br>
+    «Erstelle einen Screenshot der Hauptseite aus dem Mockup landing.pen»<br>
+    «Exportiere das Logo aus dem Mockup als PNG»</p>
 
     <h2>5. Website-Daten — Analyse und Monitoring</h2>
     <p>Supadata — ein MCP-Server für das Abrufen von Informationen von Webseiten. Nützlich für Wettbewerbsbeobachtung, Content-Sammlung, Marktanalyse.</p>
 
     <p><b>Konfiguration:</b></p>
-    <div class="tree-box">{
+    <div class="tree-box" style="padding:0">
+      <div style="background:#2d2d2d;padding:6px 14px;border-radius:8px 8px 0 0;font-size:12px;color:#aaa;font-family:inherit">📋 Kopieren</div>
+      <pre style="background:none;padding:14px 20px;color:#c8d0e7;font-size:13px;font-family:'SF Mono','Fira Code',monospace;margin:0;line-height:1.6">{
   "supadata": {
     "type": "http",
     "url": "https://mcp.supadata.dev/v1"
   }
-}</div>
+}</pre>
+    </div>
 
-    <p><b>Wie verbinden:</b> «Verbinde MCP-Server supadata, Typ http, URL: https://mcp.supadata.dev/v1»</p>
+    <p><b>Wie verbinden:</b><br>
+    «Verbinde MCP-Server supadata, Typ http, URL: https://mcp.supadata.dev/v1»</p>
 
-    <p><b>Was man tun kann:</b></p>
-    <div class="tree-box">«Hol den Text des Artikels von dieser URL und mach eine kurze Zusammenfassung»
-«Erstelle eine Transkription dieses YouTube-Videos»
-«Sammle Produktbeschreibungen von dieser Seite und formatiere sie als Tabelle»</div>
+    <p><b>Was man tun kann:</b><br>
+    «Hol den Text des Artikels von dieser URL und mach eine kurze Zusammenfassung»<br>
+    «Erstelle eine Transkription dieses YouTube-Videos»<br>
+    «Sammle Produktbeschreibungen von dieser Seite und formatiere sie als Tabelle»</p>
 
     <h2>Wie man beliebige neue MCP-Server verbindet</h2>
     <p>Für alle obigen Beispiele ist das Format gleich. Sagen Sie dem Agenten:</p>
-    <div class="tree-box">«Verbinde MCP-Server [Name], URL: [Adresse]»</div>
+    <p>«Verbinde MCP-Server [Name], URL: [Adresse]»</p>
     <p>Oder wenn der Server lokal läuft:</p>
-    <div class="tree-box">«Verbinde MCP-Server [Name], Befehl: npx [Paketname]»</div>
+    <p>«Verbinde MCP-Server [Name], Befehl: npx [Paketname]»</p>
     <p>Der Agent bearbeitet <code>~/.claude.json</code> selbst und verbindet sich mit dem Dienst. Detaillierte Anleitung mit Formaten — im Artikel «Wie man einen MCP-Server verbindet».</p>
 
     <h2>Übersichtstabelle</h2>
-    <table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+    <table class="data-table">
       <thead>
-        <tr style="background:#f0f0f5">
-          <th style="padding:10px 12px;text-align:left;border:1px solid #ddd">Aufgabe</th>
-          <th style="padding:10px 12px;text-align:left;border:1px solid #ddd">MCP-Server</th>
-          <th style="padding:10px 12px;text-align:left;border:1px solid #ddd">Wofür</th>
+        <tr>
+          <th>Aufgabe</th>
+          <th>MCP-Server</th>
+          <th>Wofür</th>
         </tr>
       </thead>
       <tbody>
-        <tr><td style="padding:10px 12px;border:1px solid #ddd">Planung</td><td style="padding:10px 12px;border:1px solid #ddd">Google Calendar</td><td style="padding:10px 12px;border:1px solid #ddd">Terminplan, Meetings, Erinnerungen</td></tr>
-        <tr><td style="padding:10px 12px;border:1px solid #ddd">E-Mail</td><td style="padding:10px 12px;border:1px solid #ddd">Gmail</td><td style="padding:10px 12px;border:1px solid #ddd">Lesen, Antworten, Sortieren</td></tr>
-        <tr><td style="padding:10px 12px;border:1px solid #ddd">Tabellen &amp; CRM</td><td style="padding:10px 12px;border:1px solid #ddd">Google Sheets</td><td style="padding:10px 12px;border:1px solid #ddd">Kundenverwaltung, Verkäufe, Berichte</td></tr>
-        <tr><td style="padding:10px 12px;border:1px solid #ddd">Design</td><td style="padding:10px 12px;border:1px solid #ddd">Pencil</td><td style="padding:10px 12px;border:1px solid #ddd">Mockups, Bilder, Visitenkarten</td></tr>
-        <tr><td style="padding:10px 12px;border:1px solid #ddd">Analyse</td><td style="padding:10px 12px;border:1px solid #ddd">Supadata</td><td style="padding:10px 12px;border:1px solid #ddd">Website-Daten, Video-Transkriptionen</td></tr>
+        <tr><td>Planung</td><td>Google Calendar</td><td>Terminplan, Meetings, Erinnerungen</td></tr>
+        <tr><td>E-Mail</td><td>Gmail</td><td>Lesen, Antworten, Sortieren</td></tr>
+        <tr><td>Tabellen &amp; CRM</td><td>Google Sheets</td><td>Kundenverwaltung, Verkäufe, Berichte</td></tr>
+        <tr><td>Design</td><td>Pencil</td><td>Mockups, Bilder, Visitenkarten</td></tr>
+        <tr><td>Analyse</td><td>Supadata</td><td>Website-Daten, Video-Transkriptionen</td></tr>
       </tbody>
     </table>
 
-    <div class="note-box">
-      <b>Mein Rat an Sie</b><br><br>
-      Beginnen Sie mit dem, was Sie täglich verwenden. Wenn Sie den ganzen Tag in der E-Mail sind — verbinden Sie Gmail. Wenn Sie Kunden in einer Tabelle verwalten — Google Sheets. Wenn Sie viele Termine haben — Google Calendar.<br><br>
-      Pencil ist bereits vorinstalliert. Supadata verbindet sich ohne Schlüssel — kostenlos.<br><br>
-      Verbinden Sie nicht alles auf einmal. Einen Dienst, ausprobiert, gewöhnt — dann den nächsten.
+    <h2>Mein Rat an Sie</h2>
+    <p>Beginnen Sie mit dem, was Sie täglich verwenden. Wenn Sie den ganzen Tag in der E-Mail sind — verbinden Sie Gmail. Wenn Sie Kunden in einer Tabelle verwalten — Google Sheets. Wenn Sie viele Termine haben — Google Calendar.</p>
+    <p>Pencil ist bereits vorinstalliert. Supadata verbindet sich ohne Schlüssel — kostenlos.</p>
+    <p>Verbinden Sie nicht alles auf einmal. Einen Dienst, ausprobiert, gewöhnt — dann den nächsten.</p>
+
+    <div style="margin-top:40px;padding-top:20px;border-top:1px solid #eee">
+      <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#aaa;margin-bottom:12px">In diesem Abschnitt</div>
+      <ul style="list-style:disc;padding-left:20px;color:#333;font-size:14px">
+        <li style="margin-bottom:6px"><span onclick="openArticle('article-mcp-what')" style="color:#7c5cfc;cursor:pointer">Was ist MCP und wozu braucht der Agent es</span></li>
+        <li style="margin-bottom:6px"><span onclick="openArticle('article-mcp-connect')" style="color:#7c5cfc;cursor:pointer">Wie man einen MCP-Server verbindet — Schritt-für-Schritt</span></li>
+        <li style="margin-bottom:6px"><strong>5 Beispiele — was man mit MCP machen kann</strong></li>
+      </ul>
+      <p style="margin-top:12px;font-size:13px;color:#999">Support: <a href="https://t.me/aibasis_bot" target="_blank" style="color:#7c5cfc;text-decoration:none">@aibasis_bot</a></p>
     </div>
   </div>
 

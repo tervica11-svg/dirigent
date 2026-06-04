@@ -4664,18 +4664,20 @@ Telegram-бот: 1234567890:AAEh-xxxxxxxxxxxxxxxxxxxxxxxx</pre>
   <div class="article-body">
     <p>MCP позволяет Агенту работать с внешними сервисами напрямую. Не через копирование данных туда-сюда, а через прямое подключение. Ниже пять примеров для повседневных и бизнес-задач: что подключить, как настроить, какие команды давать Агенту.</p>
 
-    <div class="note-box">
-      <b>Подключил — используй</b><br>
-      Каждый MCP-сервер даёт Агенту набор новых действий. После подключения Вы просто описываете задачу обычными словами — Агент сам вызывает нужное действие из подключённого сервиса.
-    </div>
+    <h2>Главное сообщение</h2>
+    <h3>Подключил — используй</h3>
+    <p>Каждый MCP-сервер даёт Агенту набор новых действий. После подключения Вы просто описываете задачу обычными словами — Агент сам вызывает нужное действие из подключённого сервиса.</p>
 
     <h2>1. Google Calendar — планирование дня</h2>
     <p>Подключив календарь, Агент видит Ваше расписание, создаёт события, ищет свободные окна и напоминает о встречах.</p>
 
-    <p><b>Как подключить:</b> скажите Агенту:</p>
-    <div class="tree-box">«Подключи MCP-сервер Google Calendar»</div>
-    <p>Агент добавит в <code>~/.claude.json</code>:</p>
-    <div class="tree-box">{
+    <p><b>Как подключить:</b></p>
+    <p>Скажите Агенту:</p>
+    <p>«Подключи MCP-сервер Google Calendar»<br>
+    Агент добавит в <code>~/.claude.json</code>:</p>
+    <div class="tree-box" style="padding:0">
+      <div style="background:#2d2d2d;padding:6px 14px;border-radius:8px 8px 0 0;font-size:12px;color:#aaa;font-family:inherit">📋 Скопировать</div>
+      <pre style="background:none;padding:14px 20px;color:#c8d0e7;font-size:13px;font-family:'SF Mono','Fira Code',monospace;margin:0;line-height:1.6">{
   "google-calendar": {
     "type": "http",
     "url": "адрес_вашего_mcp_сервера",
@@ -4683,98 +4685,114 @@ Telegram-бот: 1234567890:AAEh-xxxxxxxxxxxxxxxxxxxxxxxx</pre>
       "Authorization": "Bearer ваш_токен"
     }
   }
-}</div>
+}</pre>
+    </div>
 
-    <p><b>Что можно делать:</b></p>
-    <div class="tree-box">«Какие у меня встречи на сегодня?»
-«Поставь созвон с Настей на четверг в 15:00, тема — обсуждение контент-плана»
-«Найди свободное окно на следующей неделе для двухчасовой сессии»
-«Напоминай мне каждое утро в 8:00, что запланировано на день»</div>
+    <p><b>Что можно делать:</b><br>
+    «Какие у меня встречи на сегодня?»<br>
+    «Поставь созвон с Настей на четверг в 15:00, тема — обсуждение контент-плана»<br>
+    «Найди свободное окно на следующей неделе для двухчасовой сессии»<br>
+    «Напоминай мне каждое утро в 8:00, что запланировано на день»</p>
 
     <h2>2. Gmail — почта без открытия почты</h2>
     <p>Агент читает входящие, пишет черновики, отвечает на письма и сортирует по важности. Вы не открываете почтовый клиент — всё через Telegram.</p>
 
-    <p><b>Что можно делать:</b></p>
-    <div class="tree-box">«Покажи непрочитанные письма за сегодня»
-«Напиши ответ Алексею: спасибо, всё получил, встречаемся в среду»
-«Найди все письма от Сбербанка за последний месяц»
-«Отсортируй входящие: что срочно, что может подождать, что спам»</div>
+    <p><b>Что можно делать:</b><br>
+    «Покажи непрочитанные письма за сегодня»<br>
+    «Напиши ответ Алексею: спасибо, всё получил, встречаемся в среду»<br>
+    «Найди все письма от Сбербанка за последний месяц»<br>
+    «Отсортируй входящие: что срочно, что может подождать, что спам»</p>
 
     <h2>3. Google Sheets — таблицы и отчёты</h2>
     <p>Агент работает с таблицами напрямую: читает данные, добавляет строки, считает итоги, строит сводки. Идеально для учёта, CRM, финансов.</p>
 
-    <p><b>Что можно делать:</b></p>
-    <div class="tree-box">«Открой таблицу "Продажи апрель" и покажи итог по столбцу "Сумма"»
-«Добавь в таблицу клиентов: Иванов Пётр, +7-999-123-45-67, заявка на консультацию»
-«Сделай сводку по продажам за неделю из таблицы "CRM"»
-«Выгрузи список клиентов, которые не покупали больше 30 дней»</div>
+    <p><b>Что можно делать:</b><br>
+    «Открой таблицу "Продажи апрель" и покажи итог по столбцу "Сумма"»<br>
+    «Добавь в таблицу клиентов: Иванов Пётр, +7-999-123-45-67, заявка на консультацию»<br>
+    «Сделай сводку по продажам за неделю из таблицы "CRM"»<br>
+    «Выгрузи список клиентов, которые не покупали больше 30 дней»</p>
 
     <h2>4. Pencil — дизайн макетов из Telegram</h2>
     <p>Этот MCP-сервер уже установлен на Вашем сервере из коробки. Агент умеет открывать файлы макетов (<code>.pen</code>), менять текст, цвета, экспортировать картинки.</p>
 
-    <p><b>Конфигурация (уже есть в <code>~/.claude.json</code>):</b></p>
-    <div class="tree-box">{
+    <p><b>Конфигурация</b> (уже есть в <code>~/.claude.json</code>):</p>
+    <div class="tree-box" style="padding:0">
+      <div style="background:#2d2d2d;padding:6px 14px;border-radius:8px 8px 0 0;font-size:12px;color:#aaa;font-family:inherit">📋 Скопировать</div>
+      <pre style="background:none;padding:14px 20px;color:#c8d0e7;font-size:13px;font-family:'SF Mono','Fira Code',monospace;margin:0;line-height:1.6">{
   "pencil": {
     "type": "stdio",
     "command": "/home/agent/.pencil/mcp/visual_studio_code/out/mcp-server-linux-x64",
     "args": ["--app", "visual_studio_code"],
     "env": {}
   }
-}</div>
+}</pre>
+    </div>
 
-    <p><b>Что можно делать:</b></p>
-    <div class="tree-box">«Открой макет визитки и поменяй номер телефона на +7-999-000-00-00»
-«Сделай скриншот главной страницы из макета landing.pen»
-«Экспортируй логотип из макета в PNG»</div>
+    <p><b>Что можно делать:</b><br>
+    «Открой макет визитки и поменяй номер телефона на +7-999-000-00-00»<br>
+    «Сделай скриншот главной страницы из макета landing.pen»<br>
+    «Экспортируй логотип из макета в PNG»</p>
 
     <h2>5. Данные с сайтов — аналитика и мониторинг</h2>
     <p>Supadata — MCP-сервер для получения информации с веб-страниц. Полезен для мониторинга конкурентов, сбора контента, анализа рынка.</p>
 
     <p><b>Конфигурация:</b></p>
-    <div class="tree-box">{
+    <div class="tree-box" style="padding:0">
+      <div style="background:#2d2d2d;padding:6px 14px;border-radius:8px 8px 0 0;font-size:12px;color:#aaa;font-family:inherit">📋 Скопировать</div>
+      <pre style="background:none;padding:14px 20px;color:#c8d0e7;font-size:13px;font-family:'SF Mono','Fira Code',monospace;margin:0;line-height:1.6">{
   "supadata": {
     "type": "http",
     "url": "https://mcp.supadata.dev/v1"
   }
-}</div>
+}</pre>
+    </div>
 
-    <p><b>Как подключить:</b> «Подключи MCP-сервер supadata, тип http, URL: https://mcp.supadata.dev/v1»</p>
+    <p><b>Как подключить:</b><br>
+    «Подключи MCP-сервер supadata, тип http, URL: https://mcp.supadata.dev/v1»</p>
 
-    <p><b>Что можно делать:</b></p>
-    <div class="tree-box">«Достань текст статьи с этого URL и сделай краткую выжимку»
-«Получи расшифровку этого YouTube-видео»
-«Собери описания товаров с этой страницы и оформи в таблицу»</div>
+    <p><b>Что можно делать:</b><br>
+    «Достань текст статьи с этого URL и сделай краткую выжимку»<br>
+    «Получи расшифровку этого YouTube-видео»<br>
+    «Собери описания товаров с этой страницы и оформи в таблицу»</p>
 
     <h2>Как подключить любой новый MCP-сервер</h2>
     <p>Для всех примеров выше формат одинаковый. Скажите Агенту:</p>
-    <div class="tree-box">«Подключи MCP-сервер [название], URL: [адрес]»</div>
+    <p>«Подключи MCP-сервер [название], URL: [адрес]»</p>
     <p>Или если сервер запускается локально:</p>
-    <div class="tree-box">«Подключи MCP-сервер [название], команда: npx [имя-пакета]»</div>
+    <p>«Подключи MCP-сервер [название], команда: npx [имя-пакета]»</p>
     <p>Агент сам отредактирует <code>~/.claude.json</code> и подключится к сервису. Подробная инструкция с форматами — в статье «Как подключить MCP-сервер».</p>
 
     <h2>Сводная таблица</h2>
-    <table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:14px">
+    <table class="data-table">
       <thead>
-        <tr style="background:#f0f0f5">
-          <th style="padding:10px 12px;text-align:left;border:1px solid #ddd">Задача</th>
-          <th style="padding:10px 12px;text-align:left;border:1px solid #ddd">MCP-сервер</th>
-          <th style="padding:10px 12px;text-align:left;border:1px solid #ddd">Для чего</th>
+        <tr>
+          <th>Задача</th>
+          <th>MCP-сервер</th>
+          <th>Для чего</th>
         </tr>
       </thead>
       <tbody>
-        <tr><td style="padding:10px 12px;border:1px solid #ddd">Планирование</td><td style="padding:10px 12px;border:1px solid #ddd">Google Calendar</td><td style="padding:10px 12px;border:1px solid #ddd">Расписание, встречи, напоминания</td></tr>
-        <tr><td style="padding:10px 12px;border:1px solid #ddd">Почта</td><td style="padding:10px 12px;border:1px solid #ddd">Gmail</td><td style="padding:10px 12px;border:1px solid #ddd">Чтение, ответы, сортировка</td></tr>
-        <tr><td style="padding:10px 12px;border:1px solid #ddd">Таблицы и CRM</td><td style="padding:10px 12px;border:1px solid #ddd">Google Sheets</td><td style="padding:10px 12px;border:1px solid #ddd">Учёт клиентов, продажи, отчёты</td></tr>
-        <tr><td style="padding:10px 12px;border:1px solid #ddd">Дизайн</td><td style="padding:10px 12px;border:1px solid #ddd">Pencil</td><td style="padding:10px 12px;border:1px solid #ddd">Макеты, картинки, визитки</td></tr>
-        <tr><td style="padding:10px 12px;border:1px solid #ddd">Аналитика</td><td style="padding:10px 12px;border:1px solid #ddd">Supadata</td><td style="padding:10px 12px;border:1px solid #ddd">Данные с сайтов, расшифровки видео</td></tr>
+        <tr><td>Планирование</td><td>Google Calendar</td><td>Расписание, встречи, напоминания</td></tr>
+        <tr><td>Почта</td><td>Gmail</td><td>Чтение, ответы, сортировка</td></tr>
+        <tr><td>Таблицы и CRM</td><td>Google Sheets</td><td>Учёт клиентов, продажи, отчёты</td></tr>
+        <tr><td>Дизайн</td><td>Pencil</td><td>Макеты, картинки, визитки</td></tr>
+        <tr><td>Аналитика</td><td>Supadata</td><td>Данные с сайтов, расшифровки видео</td></tr>
       </tbody>
     </table>
 
-    <div class="note-box">
-      <b>Мой Вам совет</b><br><br>
-      Начните с того, чем пользуетесь каждый день. Если весь день в почте — подключите Gmail. Если ведёте клиентов в таблице — подключите Google Sheets. Если много встреч — Google Calendar.<br><br>
-      Pencil уже установлен из коробки. Supadata подключается без ключа — бесплатно.<br><br>
-      Не подключайте всё сразу. Один сервис, попробовали, привыкли — потом следующий.
+    <h2>Мой Вам совет</h2>
+    <p>Начните с того, чем пользуетесь каждый день. Если весь день в почте — подключите Gmail. Если ведёте клиентов в таблице — подключите Google Sheets. Если много встреч — Google Calendar.</p>
+    <p>Pencil уже установлен из коробки. Supadata подключается без ключа — бесплатно.</p>
+    <p>Не подключайте всё сразу. Один сервис, попробовали, привыкли — потом следующий.</p>
+
+    <div style="margin-top:40px;padding-top:20px;border-top:1px solid #eee">
+      <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#aaa;margin-bottom:12px">В ЭТОМ РАЗДЕЛЕ</div>
+      <ul style="list-style:disc;padding-left:20px;color:#333;font-size:14px">
+        <li style="margin-bottom:6px"><span onclick="openArticle('article-mcp-what')" style="color:#7c5cfc;cursor:pointer">Что такое MCP и зачем он Агенту</span></li>
+        <li style="margin-bottom:6px"><span onclick="openArticle('article-mcp-connect')" style="color:#7c5cfc;cursor:pointer">Как подключить MCP-сервер — пошаговая инструкция</span></li>
+        <li style="margin-bottom:6px"><strong>5 примеров — что можно сделать с MCP</strong></li>
+      </ul>
+      <p style="margin-top:12px;font-size:13px;color:#999">Поддержка: <a href="https://t.me/aibasis_bot" target="_blank" style="color:#7c5cfc;text-decoration:none">@aibasis_bot</a></p>
     </div>
   </div>
 

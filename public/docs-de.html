@@ -603,7 +603,7 @@
         <div class="cat-count">5 Artikel</div>
       </div>
     </div>
-    <div class="cat-card" onclick="openArticle('article-install')">
+    <div class="cat-card" onclick="openArticle('article-vscode-tunnel')">
       <div class="cat-icon">💻</div>
       <div class="cat-info">
         <div class="cat-name">VS Code Tunnel</div>
@@ -3784,6 +3784,241 @@ Nach der Installation erinnere mich, /reset zu machen.</pre></div>
     <div class="next-card" onclick="openArticle('article-15spec-writers')"><span>Drei Wortmeister — Post, Story, Skript</span><em>5 Min →</em></div>
     <div class="next-card" onclick="openArticle('article-15spec-analysts')"><span>Analyst, Interviewer, Reviewer — die drei, die denken</span><em>5 Min →</em></div>
     <div class="next-card" onclick="openArticle('article-15spec-devdesign')"><span>Entwickler und Designer — fertiges Produkt ohne Einstellung</span><em>6 Min →</em></div>
+  </div>
+</div>
+
+
+<!-- ═══ HUB: VS CODE TUNNEL ═══ -->
+<div class="container article-page" id="article-vscode-tunnel">
+  <div class="article-meta">
+    <span>4 Artikel</span>
+  </div>
+  <h1 class="article-h1">🖥 VS Code Tunnel</h1>
+  <p class="article-tagline">Fenster ins Büro des Agenten — sehen Sie seinen Arbeitsplatz aus jedem Browser.</p>
+
+  <div class="start-cards" style="margin-top:24px">
+    <div class="article-card" onclick="openArticle('article-vscode-what')">
+      <div class="card-top">
+        <div class="card-title">Was ist VS Code Tunnel und wozu wird es benötigt</div>
+        <div class="card-time">3 Min</div>
+      </div>
+      <div class="card-desc">Fenster ins Büro des Agenten – sehen Sie seinen Arbeitsplatz aus jedem Browser.</div>
+    </div>
+    <div class="article-card" onclick="openArticle('article-vscode-connect')">
+      <div class="card-top">
+        <div class="card-title">Wie man sich mit VS Code Tunnel verbindet</div>
+        <div class="card-time">3 Min</div>
+      </div>
+      <div class="card-desc">Verbindung zum Arbeitsplatz des Agenten in 3 Schritten.</div>
+    </div>
+    <div class="article-card" onclick="openArticle('article-vscode-files')">
+      <div class="card-top">
+        <div class="card-title">Arbeit mit Dateien und Terminal</div>
+        <div class="card-time">4 Min</div>
+      </div>
+      <div class="card-desc">Der Schreibtisch des Mitarbeiters ist offen – sehen, bearbeiten, starten.</div>
+    </div>
+  </div>
+  <div class="start-row2" style="margin-top:8px">
+    <div class="article-card" onclick="openArticle('article-vscode-dual')">
+      <div class="card-top">
+        <div class="card-title">Zwei Interfaces — Telegram und VS Code gleichzeitig</div>
+        <div class="card-time">3 Min</div>
+      </div>
+      <div class="card-desc">Zwei im selben Büro — einer gibt Aufgaben, der andere prüft das Ergebnis.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTICLE: WAS IST VS CODE TUNNEL ═══ -->
+<div class="container article-page" id="article-vscode-what">
+  <div class="article-meta">
+    <span class="read-time">3 Min</span>
+    <span>Aktualisiert 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">Was ist VS Code Tunnel und wozu wird es benötigt</h1>
+  <p class="article-tagline">Fenster ins Büro des Agenten. Sehen Sie seinen Arbeitsplatz aus jedem Browser — ohne SSH, ohne Port-Konfiguration.</p>
+
+  <div class="article-body">
+    <p>Der Agent lebt auf Ihrem Server. Alles was er tut — geschieht dort: Dateien werden dort erstellt, Code wird dort ausgeführt, Gedächtnis wird dort gespeichert. VS Code Tunnel ist der Weg, dort direkt aus dem Browser hineinzuschauen. Als würden Sie sich an den Arbeitsplatz des Agenten setzen und auf seinen Bildschirm schauen.</p>
+
+    <h2>Hauptbotschaft</h2>
+    <div class="note-box">
+      <strong>Kein SSH, kein FTP — das ist ein vollwertiger Editor</strong>
+      <p>VS Code Tunnel öffnet nicht nur einen Dateimanager — das ist ein vollwertiger VS Code direkt im Browser. Editor, Terminal, Dateisuche, Syntaxhervorhebung. Alles läuft auf dem Server, Sie sehen nur das Bild über den Browser.</p>
+    </div>
+
+    <h2>Wozu es benötigt wird</h2>
+    <ul>
+      <li><strong>Gedächtnis des Agenten lesen</strong> — <code>MEMORY.md</code>, <code>SOUL.md</code>, <code>GOALS.md</code> öffnen. Sehen was der Agent über Sie weiß und ergänzen wenn etwas Wichtiges fehlt.</li>
+      <li><strong>DNA-Dateien bearbeiten</strong> — Charakter, Ziele, Vorlieben direkt bearbeiten. Der Agent liest es beim nächsten Start.</li>
+      <li><strong>Beobachten was passiert</strong> — Dateien sehen die der Agent erstellt, Logs lesen, Arbeitsergebnisse prüfen.</li>
+    </ul>
+
+    <h2>Wie es technisch funktioniert</h2>
+    <p>VS Code Tunnel ist eine eingebaute Funktion von VS Code. Wenn sie auf dem Server aktiviert ist, wird ein gesicherter Tunnel über Microsoft-Server erstellt. Sie verbinden sich über <code>vscode.dev</code> im Browser — Autorisierung über GitHub-Konto. Keine Ports öffnen, kein SSH konfigurieren.</p>
+    <div class="tree-box"><pre>Ihr Browser → vscode.dev → Microsoft-Tunnel → Ihr Server
+                                                    ↓
+                                             ~/workspace/
+                                             ~/.agent/
+                                             Terminal</pre></div>
+
+    <div class="note-box">
+      <strong>Mein Rat an Sie</strong>
+      <p>Das Erste, was sich lohnt über VS Code Tunnel zu tun — <code>MEMORY.md</code> öffnen und lesen was der Agent bereits über Sie weiß. Ergänzen Sie wenn etwas Wichtiges fehlt. Diese fünfzehn Minuten am ersten Tag geben mehr als eine Stunde Chatten in Telegram.</p>
+    </div>
+  </div>
+
+  <div class="next-articles">
+    <div class="next-card" onclick="openArticle('article-vscode-connect')"><span>Wie man sich mit VS Code Tunnel verbindet</span><em>3 Min →</em></div>
+    <div class="next-card" onclick="openArticle('article-vscode-files')"><span>Arbeit mit Dateien und Terminal</span><em>4 Min →</em></div>
+    <div class="next-card" onclick="openArticle('article-vscode-dual')"><span>Zwei Interfaces — Telegram und VS Code gleichzeitig</span><em>3 Min →</em></div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTICLE: VERBINDUNG ═══ -->
+<div class="container article-page" id="article-vscode-connect">
+  <div class="article-meta">
+    <span class="read-time">3 Min</span>
+    <span>Aktualisiert 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">Wie man sich mit VS Code Tunnel verbindet</h1>
+  <p class="article-tagline">Verbindung zum Arbeitsplatz des Agenten in 3 Schritten.</p>
+
+  <div class="article-body">
+    <p>Die Verbindung zu VS Code Tunnel dauert weniger als eine Minute. Der Tunnel ist bereits bei der Installation des Agenten auf Ihrem Server eingerichtet — Sie müssen ihn nur öffnen.</p>
+
+    <h2>Hauptbotschaft</h2>
+    <div class="note-box">
+      <strong>Der Tunnel öffnet sich aus Telegram</strong>
+      <p>Keine Serveranmeldung, nichts starten. Schreiben Sie dem Bot <code>/tunnel</code> — Sie erhalten einen Link. Gehen Sie darauf — fertig.</p>
+    </div>
+
+    <h2>Drei Schritte zur Verbindung</h2>
+    <p><strong>Schritt 1.</strong> Schreiben Sie dem Bot in Telegram den Befehl <code>/tunnel</code>. Der Agent antwortet mit einem Link: <code>https://vscode.dev/tunnel/ihr-server/home/agent/workspace</code></p>
+    <p><strong>Schritt 2.</strong> Öffnen Sie den Link im Browser. Die Seite vscode.dev öffnet sich — klicken Sie „Allow" zur Autorisierung über GitHub.</p>
+    <p><strong>Schritt 3.</strong> Melden Sie sich über Ihr GitHub-Konto an. Nach wenigen Sekunden öffnet sich ein vollwertiger VS Code mit den Dateien des Agenten.</p>
+
+    <div class="tree-box"><pre>Telegram → /tunnel → vscode.dev-Link
+    ↓
+Browser → GitHub-Login → VS Code geöffnet</pre></div>
+
+    <div class="note-box">
+      <strong>Mein Rat an Sie</strong>
+      <p>Speichern Sie den Tunnel-Link nach der ersten Verbindung als Lesezeichen. So brauchen Sie nicht jedes Mal <code>/tunnel</code> zu schreiben — öffnen Sie einfach das Lesezeichen. Der Link ändert sich nicht solange der Agent auf demselben Server ist.</p>
+    </div>
+  </div>
+
+  <div class="next-articles">
+    <div class="next-card" onclick="openArticle('article-vscode-what')"><span>Was ist VS Code Tunnel und wozu wird es benötigt</span><em>3 Min →</em></div>
+    <div class="next-card" onclick="openArticle('article-vscode-files')"><span>Arbeit mit Dateien und Terminal</span><em>4 Min →</em></div>
+    <div class="next-card" onclick="openArticle('article-vscode-dual')"><span>Zwei Interfaces — Telegram und VS Code gleichzeitig</span><em>3 Min →</em></div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTICLE: DATEIEN UND TERMINAL ═══ -->
+<div class="container article-page" id="article-vscode-files">
+  <div class="article-meta">
+    <span class="read-time">4 Min</span>
+    <span>Aktualisiert 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">Arbeit mit Dateien und Terminal</h1>
+  <p class="article-tagline">Der Schreibtisch des Mitarbeiters ist offen — sehen, bearbeiten, starten.</p>
+
+  <div class="article-body">
+    <p>Wenn VS Code Tunnel geöffnet ist, liegt vor Ihnen der vollwertige Arbeitsplatz des Agenten. Ordner mit Dateien links, Editor in der Mitte, Terminal unten. Alles was der Agent tut und speichert — ist hier.</p>
+
+    <h2>Hauptbotschaft</h2>
+    <div class="note-box">
+      <strong>Bearbeiten Sie beliebig — der Agent liest beim nächsten Start</strong>
+      <p>Alle DNA-Dateien sind normaler Text. <code>MEMORY.md</code> geöffnet, einen Absatz geschrieben, gespeichert. In der nächsten Sitzung weiß der Agent das bereits. Nichts geht kaputt.</p>
+    </div>
+
+    <h2>Dateikarte — was wo liegt</h2>
+    <div class="tree-box"><pre>~/workspace/          ← DNA des Agenten
+├── SOUL.md           ← Charakter und Stil
+├── MEMORY.md         ← Langzeitgedächtnis (≤200 Zeilen)
+├── GOALS.md          ← aktuelle Ziele
+├── USER.md           ← Ihr Profil
+├── PREFERENCES.md    ← Vorlieben
+├── memory/           ← Tagesjournale
+└── knowledge/        ← thematische Nachschlagewerke
+
+~/projects/           ← Ihre Projekte
+~/.claude/skills/     ← Spezialisten des Teams</pre></div>
+
+    <h2>Was man tun kann</h2>
+    <ul>
+      <li><strong>Gedächtnis lesen</strong> — <code>MEMORY.md</code> öffnen und sehen was der Agent über Sie weiß</li>
+      <li><strong>DNA ergänzen</strong> — ein neues Ziel in <code>GOALS.md</code> schreiben, Stil in <code>SOUL.md</code> anpassen</li>
+      <li><strong>Journale einsehen</strong> — <code>memory/2026-06-04.md</code> öffnen und sehen was heute gemacht wurde</li>
+      <li><strong>Projekte prüfen</strong> — <code>~/projects/</code> besuchen und vom Agenten erstellte Dateien ansehen</li>
+    </ul>
+
+    <div class="note-box">
+      <strong>Was man NICHT anfassen sollte</strong>
+      <p>Ordner <code>~/.agent/</code> — Servicebereich. Besonders die Datei <code>~/.agent/.env</code> mit geheimen Schlüsseln. Lesen ist möglich, ohne Verständnis ändern — nicht empfehlenswert. Wenn Sie etwas geändert haben — muss der Bot neu gestartet werden.</p>
+    </div>
+  </div>
+
+  <div class="next-articles">
+    <div class="next-card" onclick="openArticle('article-vscode-what')"><span>Was ist VS Code Tunnel und wozu wird es benötigt</span><em>3 Min →</em></div>
+    <div class="next-card" onclick="openArticle('article-vscode-connect')"><span>Wie man sich mit VS Code Tunnel verbindet</span><em>3 Min →</em></div>
+    <div class="next-card" onclick="openArticle('article-vscode-dual')"><span>Zwei Interfaces — Telegram und VS Code gleichzeitig</span><em>3 Min →</em></div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTICLE: ZWEI INTERFACES ═══ -->
+<div class="container article-page" id="article-vscode-dual">
+  <div class="article-meta">
+    <span class="read-time">3 Min</span>
+    <span>Aktualisiert 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">Zwei Interfaces — Telegram und VS Code gleichzeitig</h1>
+  <p class="article-tagline">Zwei im selben Büro — einer gibt Aufgaben, der andere prüft das Ergebnis.</p>
+
+  <div class="article-body">
+    <p>Telegram und VS Code Tunnel sind keine Konkurrenten. Das sind zwei Fenster in die Arbeit des Agenten, jedes für seinen Zweck. Telegram — für Kommunikation und Aufgaben. VS Code — für Beobachtung und Bearbeitung. Zusammen geben sie ein vollständiges Bild dessen, was passiert.</p>
+
+    <h2>Hauptbotschaft</h2>
+    <div class="note-box">
+      <strong>Telegram spricht — VS Code zeigt</strong>
+      <p>Sie schreiben eine Aufgabe in Telegram. Der Agent führt sie aus. In VS Code Tunnel sehen Sie die erstellten Dateien, den geschriebenen Code, die vorgenommenen Änderungen. Zwei Bildschirme — vollständige Kontrolle.</p>
+    </div>
+
+    <h2>Was jedes Interface tut</h2>
+    <p><strong>Telegram-Bot:</strong></p>
+    <ul>
+      <li>Aufgaben geben: „schreib einen Post", „erstelle eine Landingpage"</li>
+      <li>Fertige Ergebnisse und Dateien empfangen</li>
+      <li>In natürlicher Sprache mit dem Agenten kommunizieren</li>
+      <li>Funktioniert vom Telefon — immer griffbereit</li>
+    </ul>
+    <p><strong>VS Code Tunnel:</strong></p>
+    <ul>
+      <li>Dateien sehen die der Agent erstellt</li>
+      <li>DNA-Dateien direkt bearbeiten</li>
+      <li>Terminal öffnen und Befehle ausführen</li>
+      <li>Logs prüfen und Probleme diagnostizieren</li>
+    </ul>
+
+    <h2>Das ideale Arbeitsszenario</h2>
+    <p>Telefon auf dem Tisch — Telegram geöffnet. Laptop daneben — Browser mit vscode.dev. Sie schreiben eine Aufgabe in Telegram, schauen in VS Code wie der Agent arbeitet. Eine Datei erscheint — Sie öffnen, lesen, bearbeiten falls nötig. Senden die Korrektur zurück über Telegram.</p>
+
+    <div class="note-box">
+      <strong>Mein Rat an Sie</strong>
+      <p>VS Code Tunnel muss nicht ständig geöffnet sein. Öffnen Sie es wenn Sie die Arbeit des Agenten von innen sehen wollen oder DNA-Dateien bearbeiten möchten. Für tägliche Aufgaben ist Telegram vollständig ausreichend.</p>
+    </div>
+  </div>
+
+  <div class="next-articles">
+    <div class="next-card" onclick="openArticle('article-vscode-what')"><span>Was ist VS Code Tunnel und wozu wird es benötigt</span><em>3 Min →</em></div>
+    <div class="next-card" onclick="openArticle('article-vscode-connect')"><span>Wie man sich mit VS Code Tunnel verbindet</span><em>3 Min →</em></div>
+    <div class="next-card" onclick="openArticle('article-vscode-files')"><span>Arbeit mit Dateien und Terminal</span><em>4 Min →</em></div>
   </div>
 </div>
 

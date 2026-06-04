@@ -485,6 +485,14 @@
       <div class="card-desc">Kein Chatbot in der Tasche, sondern ein KI-Mitarbeiter in Ihrem Team.</div>
     </div>
 
+    <div class="article-card" onclick="openArticle('article-evolution')">
+      <div class="card-top">
+        <div class="card-title">Agent-Evolution — wie Ihr Agent immer klüger wird</div>
+        <div class="card-time">3 Min.</div>
+      </div>
+      <div class="card-desc">Der Agenten-Konstruktor wächst jede Woche — Ihr Agent wächst mit ihm.</div>
+    </div>
+
     <div class="article-card" onclick="openArticle('article-install')">
       <div class="card-top">
         <div class="card-title">Agent installieren — vier Schritte bis zum fertigen Bot</div>
@@ -665,6 +673,95 @@
   <div class="next-articles">
     <p>In dieser Kategorie</p>
     <div class="next-grid">
+      <div class="next-card" onclick="openArticle('article-evolution')">
+        <span>Agent-Evolution — wie Ihr Agent immer klüger wird</span>
+        <em>3 Min. →</em>
+      </div>
+      <div class="next-card" onclick="openArticle('article-install')">
+        <span>Agent installieren — vier Schritte bis zum fertigen Bot</span>
+        <em>10 Min. →</em>
+      </div>
+      <div class="next-card" onclick="openArticle('article-map')">
+        <span>Die Karte des Agenten-Hauses — was wo auf dem Server liegt</span>
+        <em>5 Min. →</em>
+      </div>
+      <div class="next-card" onclick="openArticle('article-first')">
+        <span>Erste Schritte am ersten Tag</span>
+        <em>6 Min. →</em>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTICLE: AGENT-EVOLUTION ═══ -->
+<div class="container article-page" id="article-evolution">
+  <div class="article-meta">
+    <span class="read-time">3 Min.</span>
+    <span>Aktualisiert 2026-06-04</span>
+  </div>
+  <h1 class="article-h1">Agent-Evolution — wie Ihr Agent immer klüger wird</h1>
+  <p class="article-tagline">Der Agenten-Konstruktor wächst jede Woche — Ihr Agent wächst mit ihm.</p>
+
+  <div class="article-body">
+    <p>Der Agenten-Konstruktor entwickelt sich weiter. Neue Skills erscheinen, die Bot-Engine verbessert sich, neue Integrationen kommen heraus. Und all das können Sie buchstäblich mit einem einzigen Befehl zu Ihrem Agenten hinzufügen.</p>
+
+    <div class="note-box">
+      <strong>Das Wesentliche</strong>
+      <p>Ich aktualisiere den Agenten-Konstruktor — Sie installieren das Update mit einem einzigen Befehl <code>/new</code>. Ihr Agent wird klüger, ohne Neuinstallation und ohne Datenverlust.</p>
+    </div>
+
+    <h2>Wie funktioniert das Update</h2>
+
+    <p>Wenn eine neue Version erscheint:</p>
+    <ol>
+      <li>@jarchitect_bot schreibt Ihnen: «Update verfügbar»</li>
+      <li>Sie senden den Befehl <code>/new</code> an @jarchitect_bot</li>
+      <li>Der Bot sendet einen Installationsbefehl (<code>curl | bash</code>)</li>
+      <li>Sie öffnen das Terminal auf dem Server (über VS Code Tunnel)</li>
+      <li>Sie fügen den Befehl ein und starten ihn — 1-2 Minuten</li>
+      <li>Der Agent startet mit neuen Möglichkeiten neu</li>
+    </ol>
+
+    <h2>Was wird aktualisiert</h2>
+
+    <div class="tree-box">
+      <pre>
+✖ @jarchitect_bot /new
+      │
+      ↓ Befehl curl | bash
+      │
+  ┌───┴───┬─────────────────┬──────────────────┐
+  │       │                 │                  │
+✖ Skills 📄 Vorlagen    🤖 Bot-Engine    ⭐ Neue Features</pre>
+    </div>
+
+    <p><strong>Skills.</strong> Das sind die Spezialisten im Team Ihres Agenten. Es erschien <code>youtube-scenario</code> — der Agent kann Skripte schreiben. Neuer <code>report-builder</code> — erstellt Berichte nach Vorlage. Nach <code>/new</code> funktionieren alle neuen Skills sofort.</p>
+
+    <p><strong>Vorlagen</strong> (<code>CLAUDE.md</code>, <code>SERVICES.md</code> und andere technische Dateien). Sie verbessern sich, damit der Agent schneller und intelligenter arbeitet. Wie ein Firmware-Update für Ihr Telefon — das Telefon wird besser, Ihre Daten bleiben.</p>
+
+    <p><strong>Bot-Engine</strong> (<code>~/.agent/bot/index.js</code>). Neue Befehle, Beschleunigungen, Verbesserungen. Vor jedem Update wird ein Backup erstellt — Sie können zurückrollen.</p>
+
+    <h2>Was sich niemals ändert</h2>
+
+    <p>Kein Update <strong>berührt</strong> Ihre Persönlichkeit, Ihr Gedächtnis und Ihre Projekte. Die <code>SOUL.md</code>, die Sie für sich angepasst haben, die <code>MEMORY.md</code>, die der Agent monatelang aufgebaut hat, die Projekte in <code>~/projects/</code> — das gehört für immer Ihnen.</p>
+
+    <p>Die Engine wird leistungsfähiger — die Seele des Agenten bleibt Ihre.</p>
+
+    <div class="note-box">
+      <strong>Mein Rat an Sie</strong>
+      <p>Wenn Sie eine Update-Benachrichtigung sehen — starten Sie es. Das Gedächtnis geht nicht verloren, die Persönlichkeit wird nicht zurückgesetzt, die Projekte verschwinden nicht. Ein Backup wird automatisch vor jeder Installation erstellt.</p>
+      <p>Weitere Details zum Prozess — in einem eigenen Artikel im Bereich «🔄 Updates und Verlängerung».</p>
+    </div>
+  </div>
+
+  <div class="next-articles">
+    <p>In dieser Kategorie</p>
+    <div class="next-grid">
+      <div class="next-card" onclick="openArticle('article-what')">
+        <span>Was ist der Agenten-Konstruktor</span>
+        <em>3 Min. →</em>
+      </div>
       <div class="next-card" onclick="openArticle('article-install')">
         <span>Agent installieren — vier Schritte bis zum fertigen Bot</span>
         <em>10 Min. →</em>

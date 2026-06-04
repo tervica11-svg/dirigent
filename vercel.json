@@ -3,6 +3,10 @@
   "name": "dirigent",
   "routes": [
     {
+      "src": "/img/(.*)",
+      "dest": "/public/img/$1"
+    },
+    {
       "src": "/api/(.*)",
       "dest": "/api/$1"
     }

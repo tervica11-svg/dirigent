@@ -4201,6 +4201,272 @@ Telegram-бот: 1234567890:AAEh-xxxxxxxxxxxxxxxxxxxxxxxx</pre>
 </div>
 
 
+<!-- ═══ HUB: ПРОЕКТЫ И ДЕПЛОЙ ═══ -->
+<div class="container article-page" id="article-proekty">
+  <div class="article-meta">
+    <span>4 статьи</span>
+  </div>
+  <h1 class="article-h1">🗂 Проекты и деплой</h1>
+  <p class="article-tagline">Где живут Ваши проекты, как они попадают в интернет и как не потерять ничего важного.</p>
+
+  <div class="start-cards" style="margin-top:24px">
+    <div class="article-card" onclick="openArticle('article-proekty-how')">
+      <div class="card-top">
+        <div class="card-title">Как Агент работает с проектами</div>
+        <div class="card-time">5 мин</div>
+      </div>
+      <div class="card-desc">У Агента есть квартира (~/workspace/) и офисное здание (~/projects/). В квартире — личное, в здании — работа.</div>
+    </div>
+    <div class="article-card" onclick="openArticle('article-proekty-github')">
+      <div class="card-top">
+        <div class="card-title">GitHub — бэкап и совместная работа</div>
+        <div class="card-time">6 мин</div>
+      </div>
+      <div class="card-desc">GitHub — это сейф для Вашего кода. Всё что на сервере — копия. Всё что в GitHub — в безопасности.</div>
+    </div>
+    <div class="article-card" onclick="openArticle('article-proekty-vercel')">
+      <div class="card-top">
+        <div class="card-title">Деплой проектов через Vercel</div>
+        <div class="card-time">5 мин</div>
+      </div>
+      <div class="card-desc">Написали сайт — нажали кнопку — он в интернете. Vercel превращает папку с кодом в живой сайт.</div>
+    </div>
+  </div>
+  <div class="start-row2" style="margin-top:8px">
+    <div class="article-card" onclick="openArticle('article-proekty-backup')">
+      <div class="card-top">
+        <div class="card-title">Бэкапы — что сохранять и как не потерять</div>
+        <div class="card-time">4 мин</div>
+      </div>
+      <div class="card-desc">Сервер — как рабочий стол. Всё важное с рабочего стола должно быть скопировано в надёжное место.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTICLE: КАК АГЕНТ РАБОТАЕТ С ПРОЕКТАМИ ═══ -->
+<div class="container article-page" id="article-proekty-how">
+  <div class="article-meta">
+    <span class="read-time">5 мин</span>
+    <span>Обновлено 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">Как Агент работает с проектами</h1>
+  <p class="article-tagline">У Агента есть квартира и офисное здание. В квартире — личное. В здании — работа.</p>
+
+  <div class="article-body">
+    <p>Когда Агент создаёт что-то для Вас — он не разбрасывает файлы как попало. У него есть чёткая география: одно место для личных данных, другое — для проектов. Разобраться в этой географии — значит всегда знать где что искать.</p>
+
+    <h2>Главное сообщение</h2>
+    <div class="note-box">
+      <strong>Два места — две роли</strong>
+      <p><code>~/workspace/</code> — это квартира Агента. Здесь живёт его личность: память, цели, характер, предпочтения. <code>~/projects/</code> — это офисное здание. Здесь живут проекты, которые он делает для Вас.</p>
+    </div>
+
+    <h2>Карта территории</h2>
+    <div class="tree-box"><pre>~/workspace/              ← квартира Агента (ДНК)
+├── SOUL.md               ← характер
+├── MEMORY.md             ← долгосрочная память
+├── GOALS.md              ← цели
+├── memory/               ← дневники
+└── knowledge/            ← справочники
+
+~/projects/               ← офисное здание (проекты)
+├── мой-сайт/             ← каждый проект — своя папка
+├── telegram-bot/
+└── landing-page/</pre></div>
+
+    <h2>Как создаётся новый проект</h2>
+    <p>Когда Вы говорите «сделай мне бота» или «создай лендинг» — Агент создаёт папку в <code>~/projects/название-проекта/</code>. Там появляются все файлы: код, конфиги, документация. Каждый проект изолирован от других — удалить один проект не затронет остальные.</p>
+    <p>Назвать папку Агент спросит у Вас или придумает логичное имя сам. Например: <code>~/projects/telegram-bot/</code>, <code>~/projects/landing-course/</code>.</p>
+
+    <h2>Что Агент никогда не делает</h2>
+    <ul>
+      <li>Не кладёт проекты в <code>~/workspace/</code> — это личная зона, не рабочая</li>
+      <li>Не смешивает разные проекты в одну папку</li>
+      <li>Не удаляет файлы без явного запроса</li>
+    </ul>
+
+    <h2>Как смотреть проекты</h2>
+    <p>Через VS Code Tunnel — откройте папку <code>~/projects/</code> в проводнике слева. Увидите все папки проектов. Нажмите на любую — увидите содержимое. Или попросите Агента в Telegram: <em>«Покажи список моих проектов»</em>.</p>
+
+    <div class="note-box">
+      <strong>Мой Вам совет</strong>
+      <p>Договоритесь с Агентом об именовании с первого проекта. Например: только латиница, слова через дефис, без заглавных букв. Потом когда проектов станет десять — будете благодарны за порядок.</p>
+    </div>
+  </div>
+
+  <div class="next-articles">
+    <div class="next-card" onclick="openArticle('article-proekty-github')"><span>GitHub — бэкап и совместная работа</span><em>6 мин →</em></div>
+    <div class="next-card" onclick="openArticle('article-proekty-vercel')"><span>Деплой проектов через Vercel</span><em>5 мин →</em></div>
+    <div class="next-card" onclick="openArticle('article-proekty-backup')"><span>Бэкапы — что сохранять и как не потерять</span><em>4 мин →</em></div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTICLE: GITHUB ═══ -->
+<div class="container article-page" id="article-proekty-github">
+  <div class="article-meta">
+    <span class="read-time">6 мин</span>
+    <span>Обновлено 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">GitHub — бэкап и совместная работа</h1>
+  <p class="article-tagline">GitHub — это сейф для Вашего кода. Всё что на сервере — копия. Всё что в GitHub — в безопасности.</p>
+
+  <div class="article-body">
+    <p>Сервер может сломаться, VPS-провайдер может упасть, файл можно случайно удалить. GitHub страхует от всего этого: каждый коммит — это снимок состояния проекта, который хранится отдельно от Вашего сервера. Но GitHub — это не только бэкап. Это ещё и способ работать с проектом с любого компьютера и деплоить его одним нажатием.</p>
+
+    <h2>Главное сообщение</h2>
+    <div class="note-box">
+      <strong>git push = сохранить + застраховать</strong>
+      <p>Когда Агент делает <code>git push</code> — он не просто сохраняет файлы. Он отправляет копию в GitHub. Теперь у Вас два места с одинаковым кодом: сервер и GitHub. Один упадёт — другой останется.</p>
+    </div>
+
+    <h2>Три термина — просто</h2>
+    <ul>
+      <li><strong>Репозиторий (репо)</strong> — папка проекта в GitHub. Как папка на сервере, только в облаке.</li>
+      <li><strong>Коммит</strong> — снимок состояния файлов в момент времени. «Сохранил версию».</li>
+      <li><strong>Push</strong> — отправить коммиты из сервера в GitHub. «Залил в облако».</li>
+    </ul>
+
+    <h2>Как Агент работает с GitHub</h2>
+    <p>Агент умеет делать всё сам — Вам не нужно знать git-команды:</p>
+    <ul>
+      <li>Создать новый репозиторий на GitHub</li>
+      <li>Сделать коммит с описанием что изменилось</li>
+      <li>Запушить изменения</li>
+      <li>Показать историю изменений</li>
+      <li>Откатить к предыдущей версии если что-то пошло не так</li>
+    </ul>
+    <p>Просто скажите: <em>«Запушь проект в GitHub»</em> или <em>«Создай репозиторий для этого бота»</em>. Агент спросит название и сделает остальное.</p>
+
+    <h2>GitHub + Vercel = автодеплой</h2>
+    <p>Когда репозиторий подключён к Vercel, каждый <code>git push</code> автоматически деплоит сайт. Агент сделал правку — запушил — через минуту изменения в эфире. Без ручного деплоя, без кнопок.</p>
+
+    <div class="note-box">
+      <strong>Мой Вам совет</strong>
+      <p>Попросите Агента делать коммиты с понятными описаниями: не «update», а «добавил форму заявки на главную страницу». Через месяц когда будете смотреть историю — каждый коммит будет говорить что именно было сделано и когда.</p>
+    </div>
+  </div>
+
+  <div class="next-articles">
+    <div class="next-card" onclick="openArticle('article-proekty-how')"><span>Как Агент работает с проектами</span><em>5 мин →</em></div>
+    <div class="next-card" onclick="openArticle('article-proekty-vercel')"><span>Деплой проектов через Vercel</span><em>5 мин →</em></div>
+    <div class="next-card" onclick="openArticle('article-proekty-backup')"><span>Бэкапы — что сохранять и как не потерять</span><em>4 мин →</em></div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTICLE: VERCEL ═══ -->
+<div class="container article-page" id="article-proekty-vercel">
+  <div class="article-meta">
+    <span class="read-time">5 мин</span>
+    <span>Обновлено 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">Деплой проектов через Vercel</h1>
+  <p class="article-tagline">Написали сайт — нажали кнопку — он в интернете. Vercel превращает папку с кодом в живой сайт.</p>
+
+  <div class="article-body">
+    <p>Раньше чтобы опубликовать сайт нужно было настраивать сервер, покупать хостинг, разбираться с nginx. Vercel убрал всё это. Вы даёте ему репозиторий с GitHub — он сам строит и публикует сайт. Каждый раз когда Агент пушит изменения — Vercel автоматически обновляет сайт.</p>
+
+    <h2>Главное сообщение</h2>
+    <div class="note-box">
+      <strong>Vercel = хостинг + CDN + автодеплой в одном</strong>
+      <p>Не нужно покупать отдельный хостинг для сайтов. Vercel бесплатен для большинства проектов, даёт красивый URL и автоматически обновляет сайт при каждом push в GitHub.</p>
+    </div>
+
+    <h2>Как это работает</h2>
+    <div class="tree-box"><pre>Агент пишет код → git push → GitHub
+                                  ↓
+                              Vercel замечает push
+                                  ↓
+                          Vercel строит проект
+                                  ↓
+                    Сайт обновлён на vercel.app/ваш-домен</pre></div>
+
+    <h2>Что умеет Vercel</h2>
+    <ul>
+      <li>Публиковать React, Next.js, Vue, статические HTML/CSS/JS</li>
+      <li>Давать бесплатный домен вида <code>название.vercel.app</code></li>
+      <li>Подключать Ваш собственный домен (например <code>мой-сайт.com</code>)</li>
+      <li>Запускать серверный код (API endpoints) без отдельного сервера</li>
+      <li>Хранить переменные окружения (API-ключи) в безопасности</li>
+    </ul>
+
+    <h2>Как попросить Агента задеплоить</h2>
+    <p>Скажите: <em>«Задеплой проект на Vercel»</em>. Агент спросит:</p>
+    <ul>
+      <li>Есть ли уже репозиторий на GitHub (если нет — создаст)</li>
+      <li>Нужен ли свой домен или хватит vercel.app</li>
+      <li>Есть ли переменные окружения которые нужно добавить</li>
+    </ul>
+    <p>Дальше сам: создаст проект в Vercel, подключит GitHub, настроит автодеплой.</p>
+
+    <div class="note-box">
+      <strong>Мой Вам совет</strong>
+      <p>Vercel даёт уникальную ссылку на каждый деплой. Даже если что-то сломалось в новой версии — можно мгновенно откатиться на предыдущую прямо в панели Vercel. Агент может сделать это тоже: <em>«Откати Vercel на предыдущую версию»</em>.</p>
+    </div>
+  </div>
+
+  <div class="next-articles">
+    <div class="next-card" onclick="openArticle('article-proekty-how')"><span>Как Агент работает с проектами</span><em>5 мин →</em></div>
+    <div class="next-card" onclick="openArticle('article-proekty-github')"><span>GitHub — бэкап и совместная работа</span><em>6 мин →</em></div>
+    <div class="next-card" onclick="openArticle('article-proekty-backup')"><span>Бэкапы — что сохранять и как не потерять</span><em>4 мин →</em></div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTICLE: БЭКАПЫ ═══ -->
+<div class="container article-page" id="article-proekty-backup">
+  <div class="article-meta">
+    <span class="read-time">4 мин</span>
+    <span>Обновлено 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">Бэкапы — что сохранять и как не потерять</h1>
+  <p class="article-tagline">Сервер — как рабочий стол. Всё важное с рабочего стола должно быть скопировано в надёжное место.</p>
+
+  <div class="article-body">
+    <p>VPS-серверы надёжны, но не вечны. Провайдер может упасть, диск может сломаться, Вы можете случайно что-то удалить. Бэкап — это не паранойя, это гигиена. Три минуты настройки — и Вы спокойны.</p>
+
+    <h2>Главное сообщение</h2>
+    <div class="note-box">
+      <strong>Три вещи которые нужно бэкапить</strong>
+      <p>Не нужно бэкапить весь сервер. Нужно бэкапить три вещи: <code>~/workspace/</code> (ДНК Агента), <code>~/.agent/.env</code> (секретные ключи) и репозитории проектов в GitHub (код). Всё остальное можно восстановить заново.</p>
+    </div>
+
+    <h2>Что и куда бэкапить</h2>
+    <ul>
+      <li><strong>~/workspace/</strong> — папка с памятью и характером Агента. Бэкап: в GitHub (отдельный приватный репозиторий) или в Яндекс.Диск / Google Drive.</li>
+      <li><strong>~/.agent/.env</strong> — файл с токенами, API-ключами. Бэкап: только в зашифрованное место, не в облако без шифрования. Лучше — в менеджер паролей (1Password, Bitwarden).</li>
+      <li><strong>~/projects/*/</strong> — код проектов. Бэкап: в GitHub. Если проект запушен — он уже в безопасности.</li>
+    </ul>
+
+    <h2>Как попросить Агента сделать бэкап</h2>
+    <p>Скажите: <em>«Сделай бэкап workspace в GitHub»</em>. Агент создаст приватный репозиторий и запушит туда все ДНК-файлы. Периодически повторяйте или попросите Агента настроить автоматический бэкап раз в день.</p>
+
+    <h2>Если что-то случилось</h2>
+    <p>Если сервер упал и нужно развернуть Агента заново:</p>
+    <ul>
+      <li>Установить нового Агента на новый VPS</li>
+      <li>Скопировать <code>~/workspace/</code> из бэкапа</li>
+      <li>Восстановить <code>~/.agent/.env</code> из менеджера паролей</li>
+      <li>Клонировать проекты из GitHub</li>
+    </ul>
+    <p>Агент «вернётся к жизни» со всей памятью и проектами как будто ничего не было.</p>
+
+    <div class="note-box">
+      <strong>Мой Вам совет</strong>
+      <p>Проверьте бэкап хотя бы один раз — убедитесь что он действительно работает. Бэкап который никто не проверял — это не бэкап, это надежда. Попросите Агента: <em>«Проверь что бэкап workspace актуален»</em>.</p>
+    </div>
+  </div>
+
+  <div class="next-articles">
+    <div class="next-card" onclick="openArticle('article-proekty-how')"><span>Как Агент работает с проектами</span><em>5 мин →</em></div>
+    <div class="next-card" onclick="openArticle('article-proekty-github')"><span>GitHub — бэкап и совместная работа</span><em>6 мин →</em></div>
+    <div class="next-card" onclick="openArticle('article-proekty-vercel')"><span>Деплой проектов через Vercel</span><em>5 мин →</em></div>
+  </div>
+</div>
+
+
 <script>
   function showHome() {
     document.getElementById('home-page').style.display = 'block';

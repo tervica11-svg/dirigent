@@ -1427,6 +1427,102 @@ Telegram-бот: 1234567890:AAEh-xxxxxxxxxxxxxxxxxxxxxxxx</pre>
 </div>
 
 
+<!-- ═══ ARTICLE: ЧТО ПРОИСХОДИТ ПРИ КАЖДОМ ЗАПУСКЕ ═══ -->
+<div class="container article-page" id="article-zapusk">
+  <div class="article-meta">
+    <span class="read-time">4 мин</span>
+    <span>Обновлено 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">Что происходит при каждом запуске</h1>
+  <p class="article-tagline">Представьте сотрудника, который каждое утро перед работой читает папку с личным делом. Именно так Агент начинает каждый диалог.</p>
+
+  <div class="article-body">
+    <p>Когда Вы пишете Агенту первое сообщение в диалоге — прежде чем он ответит, происходит кое-что важное. Агент читает пять источников по порядку. Этот порядок прописан в <code>CLAUDE.md</code> и не меняется.</p>
+
+    <h2>Главное сообщение</h2>
+
+    <div class="note-box">
+      <strong>Без файлов — обычный чат</strong>
+      <p>Дословно из CLAUDE.md: «Без этих файлов ты — обычный чат. С ними — мой Агент». Именно чтение файлов при запуске делает Агента <em>Вашим</em> — с памятью, с личностью, с пониманием Ваших текущих задач.</p>
+    </div>
+
+    <h2>Последовательность запуска</h2>
+
+    <p>Из <code>CLAUDE.md</code> — дословно:</p>
+
+    <ol>
+      <li>
+        <p><code>SOUL.md</code> — личность и стиль работы.</p>
+        <p>Агент читает, кем он является, как обращается, что делает и чего не делает. Это первое, что он читает, — потому что стиль работы нужен с самого первого слова.</p>
+      </li>
+      <li>
+        <p><code>MEMORY.md</code> — долгосрочная память.</p>
+        <p>Кто Вы, Ваши проекты, ключевые решения, которые Агент должен помнить. Здесь постоянные факты — они не меняются от сессии к сессии.</p>
+      </li>
+      <li>
+        <p><code>GOALS.md</code> — что важно прямо сейчас.</p>
+        <p>Текущие цели и приоритеты. Агент понимает, на что делать упор в работе.</p>
+      </li>
+      <li>
+        <p>Файлы из <code>memory/</code> <strong>за последние 3 дня</strong> — последние решения и контекст.</p>
+        <p>Дневники сессий с деталями — что делали позавчера, вчера, сегодня. Здесь оперативный контекст: незаконченные задачи, договорённости, ход работы.</p>
+      </li>
+      <li>
+        <p><code>_progress.md</code> — если есть в проекте.</p>
+        <p>Если Агент в прошлой сессии работал над задачей и оставил файл прогресса — он прочитает его и продолжит с того места.</p>
+      </li>
+    </ol>
+
+    <h2>Почему именно такой порядок</h2>
+
+    <p>Сначала — личность (<code>SOUL.md</code>), потом — долгосрочная память (<code>MEMORY.md</code>), потом — текущие цели (<code>GOALS.md</code>), потом — оперативный контекст (дневники). Это логичный порядок: сначала Агент «вспоминает себя», потом «вспоминает Вас», потом понимает, что сейчас важно.</p>
+    <p>Если бы порядок был обратным — Агент знал бы последние события, но не знал бы, в каком стиле их обсуждать.</p>
+
+    <h2>Что значит «обычный чат»</h2>
+
+    <p>Если удалить все эти файлы или запустить Claude Code в пустой папке — Вы получите стандартный Claude без памяти и без персонализации. Он не знает Вашего имени, Ваших проектов, Ваших предпочтений. Именно наличие и качество этих файлов определяет, насколько Агент «чувствует» Вас.</p>
+
+    <h2>Мой Вам совет</h2>
+
+    <p>Если Агент вдруг начал вести себя «не так» — первым делом проверьте <code>SOUL.md</code> и <code>MEMORY.md</code>. Скорее всего, что-то в них изменилось или не было записано. Файлы — это единственная «память» между сессиями. Нет записи — нет памяти.</p>
+  </div>
+
+  <div class="next-articles">
+    <div class="next-label">В этом разделе</div>
+    <div class="next-card" onclick="openArticle('article-glossariy')">
+      <div class="next-icon">📖</div>
+      <div class="next-title">Глоссарий</div>
+      <div class="next-desc">Термины и понятия</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-soul-md')">
+      <div class="next-icon">🪪</div>
+      <div class="next-title">Что такое SOUL.md</div>
+      <div class="next-desc">Паспорт Агента</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-9files')">
+      <div class="next-icon">🗂️</div>
+      <div class="next-title">9 файлов, из которых сделан Агент</div>
+      <div class="next-desc">ДНК системы</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-svetofor')">
+      <div class="next-icon">🚦</div>
+      <div class="next-title">«Светофор»: что Агент делает сам, что показывает, что спрашивает</div>
+      <div class="next-desc">Уровни автономности</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-nastroyka')">
+      <div class="next-icon">⚙️</div>
+      <div class="next-title">Как настроить Агента под себя</div>
+      <div class="next-desc">Персонализация</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-server-map')">
+      <div class="next-icon">🗺️</div>
+      <div class="next-title">Где что живёт на сервере</div>
+      <div class="next-desc">Файловая структура</div>
+    </div>
+  </div>
+</div>
+
+
 <!-- ═══ ARTICLE: 9 ФАЙЛОВ ═══ -->
 <div class="container article-page" id="article-9files">
   <div class="article-meta">

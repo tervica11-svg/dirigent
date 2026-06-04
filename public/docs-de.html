@@ -1418,6 +1418,102 @@ Priorisiere selbst, basierend auf dem, was du über mich weißt.</pre>
 </div>
 
 
+<!-- ═══ ARTICLE: WAS BEI JEDEM START PASSIERT ═══ -->
+<div class="container article-page" id="article-zapusk">
+  <div class="article-meta">
+    <span class="read-time">4 Min</span>
+    <span>Aktualisiert 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">Was bei jedem Start passiert</h1>
+  <p class="article-tagline">Stellen Sie sich einen Mitarbeiter vor, der jeden Morgen vor der Arbeit seine Personalakte liest. Genau so beginnt der Agent jeden Dialog.</p>
+
+  <div class="article-body">
+    <p>Wenn Sie dem Agenten die erste Nachricht in einem Dialog schreiben — bevor er antwortet, passiert etwas Wichtiges. Der Agent liest fünf Quellen der Reihe nach. Diese Reihenfolge ist in <code>CLAUDE.md</code> festgelegt und ändert sich nicht.</p>
+
+    <h2>Hauptbotschaft</h2>
+
+    <div class="note-box">
+      <strong>Ohne Dateien — normaler Chat</strong>
+      <p>Wörtlich aus CLAUDE.md: «Ohne diese Dateien bist du ein normaler Chat. Mit ihnen bist du mein Agent.» Genau das Lesen der Dateien beim Start macht den Agenten zu <em>Ihrem</em> — mit Gedächtnis, mit Persönlichkeit, mit Verständnis Ihrer aktuellen Aufgaben.</p>
+    </div>
+
+    <h2>Startreihenfolge</h2>
+
+    <p>Aus <code>CLAUDE.md</code> — wörtlich:</p>
+
+    <ol>
+      <li>
+        <p><code>SOUL.md</code> — Persönlichkeit und Arbeitsstil.</p>
+        <p>Der Agent liest, wer er ist, wie er anspricht, was er tut und was er nicht tut. Das ist das Erste, was er liest — weil der Arbeitsstil vom allerersten Wort an benötigt wird.</p>
+      </li>
+      <li>
+        <p><code>MEMORY.md</code> — Langzeitgedächtnis.</p>
+        <p>Wer Sie sind, Ihre Projekte, wichtige Entscheidungen, die der Agent sich merken soll. Hier stehen dauerhafte Fakten — sie ändern sich nicht von Sitzung zu Sitzung.</p>
+      </li>
+      <li>
+        <p><code>GOALS.md</code> — was jetzt wichtig ist.</p>
+        <p>Aktuelle Ziele und Prioritäten. Der Agent versteht, worauf er in der Arbeit den Schwerpunkt legen soll.</p>
+      </li>
+      <li>
+        <p>Dateien aus <code>memory/</code> <strong>der letzten 3 Tage</strong> — letzte Entscheidungen und Kontext.</p>
+        <p>Sitzungstagebücher mit Details — was vorgestern, gestern, heute gemacht wurde. Hier ist der operative Kontext: unfertige Aufgaben, Vereinbarungen, Arbeitsstand.</p>
+      </li>
+      <li>
+        <p><code>_progress.md</code> — falls im Projekt vorhanden.</p>
+        <p>Wenn der Agent in der letzten Sitzung an einer Aufgabe gearbeitet und eine Fortschrittsdatei hinterlassen hat — liest er sie und macht dort weiter.</p>
+      </li>
+    </ol>
+
+    <h2>Warum genau diese Reihenfolge</h2>
+
+    <p>Zuerst — Persönlichkeit (<code>SOUL.md</code>), dann — Langzeitgedächtnis (<code>MEMORY.md</code>), dann — aktuelle Ziele (<code>GOALS.md</code>), dann — operativer Kontext (Tagebücher). Das ist eine logische Reihenfolge: zuerst «erinnert sich» der Agent an sich selbst, dann «erinnert er sich» an Sie, dann versteht er, was gerade wichtig ist.</p>
+    <p>Wäre die Reihenfolge umgekehrt — würde der Agent die letzten Ereignisse kennen, aber nicht wissen, in welchem Stil er sie besprechen soll.</p>
+
+    <h2>Was «normaler Chat» bedeutet</h2>
+
+    <p>Wenn Sie all diese Dateien löschen oder Claude Code in einem leeren Ordner starten — erhalten Sie einen Standard-Claude ohne Gedächtnis und ohne Personalisierung. Er kennt Ihren Namen nicht, Ihre Projekte nicht, Ihre Präferenzen nicht. Genau das Vorhandensein und die Qualität dieser Dateien bestimmt, wie sehr der Agent Sie «spürt».</p>
+
+    <h2>Mein Rat an Sie</h2>
+
+    <p>Wenn der Agent sich plötzlich «anders» verhält — prüfen Sie zuerst <code>SOUL.md</code> und <code>MEMORY.md</code>. Höchstwahrscheinlich hat sich etwas darin verändert oder wurde nicht notiert. Die Dateien sind das einzige «Gedächtnis» zwischen den Sitzungen. Keine Aufzeichnung — kein Gedächtnis.</p>
+  </div>
+
+  <div class="next-articles">
+    <div class="next-label">In diesem Abschnitt</div>
+    <div class="next-card" onclick="openArticle('article-glossariy')">
+      <div class="next-icon">📖</div>
+      <div class="next-title">Glossar</div>
+      <div class="next-desc">Begriffe und Konzepte</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-soul-md')">
+      <div class="next-icon">🪪</div>
+      <div class="next-title">Was ist SOUL.md</div>
+      <div class="next-desc">Der Pass des Agenten</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-9files')">
+      <div class="next-icon">🗂️</div>
+      <div class="next-title">9 Dateien, aus denen der Agent besteht</div>
+      <div class="next-desc">Die DNA des Systems</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-svetofor')">
+      <div class="next-icon">🚦</div>
+      <div class="next-title">«Ampel»: was der Agent selbst tut, was er zeigt, was er fragt</div>
+      <div class="next-desc">Autonomiestufen</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-nastroyka')">
+      <div class="next-icon">⚙️</div>
+      <div class="next-title">Wie Sie den Agenten anpassen</div>
+      <div class="next-desc">Personalisierung</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-server-map')">
+      <div class="next-icon">🗺️</div>
+      <div class="next-title">Was wo auf dem Server liegt</div>
+      <div class="next-desc">Dateistruktur</div>
+    </div>
+  </div>
+</div>
+
+
 <!-- ═══ ARTICLE: 9 DATEIEN ═══ -->
 <div class="container article-page" id="article-9files">
   <div class="article-meta">

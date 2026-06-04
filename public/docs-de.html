@@ -1051,116 +1051,165 @@ Telegram-Bot: 1234567890:AAEh-xxxxxxxxxxxxxxxxxxxxxxxx</pre>
 <div class="container article-page" id="article-map">
   <div class="article-meta">
     <span class="read-time">5 Min.</span>
-    <span>Aktualisiert 2026-05-26</span>
+    <span>Aktualisiert 2026-05-09</span>
   </div>
   <h1 class="article-h1">Die Karte des Agenten-Hauses — was wo auf dem Server liegt</h1>
   <p class="article-tagline">Der Agent hat drei Räume — Motor, Seele und Werkstatt. Kennen Sie die Karte, verlieren Sie sich nie.</p>
 
   <div class="article-body">
-    <p>Wenn Sie über VS Code Tunnel zu Ihrem Agenten gelangen möchten — hilft Ihnen diese Karte. Es ist nicht zwingend nötig zu wissen, was in welchem Raum liegt. Aber die Karte zu kennen — damit Sie sich nie verlieren.</p>
+    <p>Wenn Sie über VS Code Tunnel einen Blick zu Ihrem Agenten werfen möchten — hilft diese Karte seines Zuhauses. Damit Sie wissen, was in welchem Raum liegt und wo man besser nicht herumhantiert. Dieser Artikel ist ein kurzer Grundriss.</p>
+
+    <h2>Hauptbotschaft</h2>
 
     <div class="note-box">
-      <strong>Das Wesentliche</strong>
-      <p>Der Agent hat <strong>drei Bereiche</strong> auf dem Server: System (Motor), Persönlichkeit (Seele) und Projekte (Werkstatt). Kennen Sie diese Karte — haben Sie immer Plan A, und wissen auch, was man nicht anfassen sollte.</p>
+      <strong>Kernaussage</strong>
+      <p>Der Agent hat <strong>drei Bereiche</strong> auf dem Server: System (Motor), Persönlichkeit (Seele) und Projekte (Werkstatt). Kennen Sie diese Karte — verlieren Sie sich nie, was man anfassen darf und was nicht.</p>
     </div>
 
     <h2>Die vollständige Karte</h2>
 
-    <div class="tree-box">
-      <pre>
-🏠 /home/agent/
-│
-├─ ~/.agent/        ← Motor (nicht anfassen)
-│   ├─ bot/             Telegram-Bot-Engine
-│   ├─ sessions/        Gesprächshistorie
-│   ├─ .env             API-Schlüssel
-│   └─ state.json       Modelleinstellungen, Limits
-│
-├─ ~/workspace/     ← Seele (bearbeiten erlaubt)
-│   ├─ SOUL.md          Charakter, Ton, Stil
-│   ├─ MEMORY.md        Langzeitgedächtnis über Sie
-│   ├─ GOALS.md         Ihre Ziele
-│   ├─ PROJECTS.md      Liste aktiver Projekte
-│   ├─ PREFERENCES.md   persönliche Regeln und APIs
-│   └─ memory/          Tagesjournal (JJJJ-MM-TT.md)
-│       .claude/skills/ ← 14 Spezialisten
-│
-└─ ~/projects/      ← Werkstatt (alle Aufgaben und Inhalte)
-    ├─ projekt-2024/
-    │   └─ memory/ · knowledge/
-    └─ landing-page/ · telegram-bot/ · content</pre>
+    <div class="route-box">
+      <pre>🏠 /home/agent/
+ │
+ ├── 🔧 ~/.agent/          ← Motor (NICHT anfassen)
+ │    └─ bot · sessions · .env · state.json
+ │
+ ├── 💜 ~/workspace/       ← Seele (bedenkenlos bearbeiten)
+ │    └─ SOUL · MEMORY · GOALS · skills · memory/ · knowledge/
+ │
+ └── 🔨 ~/projects/        ← Werkstatt (Arbeitsprojekte)
+      └─ Landing Pages · Bots · Berichte · Content</pre>
     </div>
 
     <h2>Bereich 1 — Motor (<code>~/.agent/</code>)</h2>
 
-    <p>Das ist der Systemordner. Hier lebt der Bot selbst, API-Schlüssel, Einstellungen, Sitzungshistorie, Backups früherer Versionen. Der Agent darf dort <strong>nicht schreiben</strong> — nur lesen, damit nichts versehentlich kaputtgemacht wird.</p>
+    <p>Das ist der Systemordner. Hier lebt der Bot selbst, API-Schlüssel, Einstellungen, Sitzungshistorie, Backups früherer Versionen. Der Agent darf dort <strong>nicht schreiben</strong> — read-only, damit nichts versehentlich kaputtgemacht wird.</p>
 
-    <div class="tree-box">
-      <pre>
-🔧 ~/.agent/
-  ├─ bot/           ← Telegram-Bot-Engine
-  │   ├─ index.js
-  │   └─ versions/  ← Backups alter Versionen (zum Zurückrollen)
-  ├─ sessions/      ← Gesprächshistorie (auto-gelöscht nach 7 Tagen)
-  ├─ traces/        ← Logs zur Fehlersuche
-  ├─ .env           ← API-Schlüssel (Zugriff nur für Eigentümer)
-  └─ state.json     ← Modelleinstellungen, Limits, Zeitplan</pre>
+    <div class="route-box">
+      <pre>🔧 ~/.agent/
+ ├─ bot/           ← Telegram-Bot-Engine
+ │   ├─ index.js
+ │   └─ versions/  ← Backups alter Versionen (zum Zurückrollen)
+ ├─ sessions/      ← Gesprächshistorie (auto-gelöscht nach 7 Tagen)
+ ├─ traces/        ← Logs zur Fehlersuche
+ ├─ .env           ← API-Schlüssel (Zugriff nur für Eigentümer)
+ └─ state.json     ← Modelleinstellungen, Limits, Zeitplan</pre>
     </div>
 
     <div class="note-box danger">
       <strong>Hier besser nicht manuell eingreifen</strong>
-      <p>Diese Dateien werden nur vom Agenten-Konstruktor bei Installation und Updates angefasst. Wenn hier etwas kaputt gemacht wird — hört der Agent auf zu funktionieren. Wollen Sie Einstellungen ändern (Modell, Limit, Zeitplan)? Nutzen Sie <code>/settings</code> im Chat mit dem Agenten — das ist sicher und komfortabel.</p>
+      <p>Diese Dateien werden nur vom Bot «Agenten-Konstruktor» bei Installation und Updates angefasst. Wenn hier etwas kaputt gemacht wird — hört der Agent auf zu funktionieren. Wollen Sie Einstellungen ändern (Modell, Limit, Zeitplan)? Nutzen Sie <code>/settings</code> im Chat mit dem Agenten — das ist sicher und komfortabel.</p>
     </div>
 
     <h2>Bereich 2 — Seele (<code>~/workspace/</code>)</h2>
 
-    <p>Das Herz lebt hier. Hier befinden sich die Dateien Ihres Agenten — wirklich Ihres: Charakter, Gedächtnis über Sie, Ihre Ziele, Ihre Vorlieben, Ihr Spezialistenteam. Hier wird alles aufgezeichnet — Sie können bedenkenlos bearbeiten.</p>
+    <p>Das ist das Herz des Agenten. Hier lebt alles, was Ihren Agenten zu <em>Ihrem</em> macht: Charakter, Gedächtnis über Sie, Ihre Ziele, Ihre Vorlieben, Ihr Spezialistenteam. Hier können Sie bedenkenlos alles bearbeiten — nichts geht kaputt.</p>
 
-    <div class="tree-box">
-      <pre>
-💜 ~/workspace/
-  ├─ SOUL.md         ← Charakter, Ton, Stil
-  ├─ MEMORY.md       ← Langzeitgedächtnis über Sie
-  ├─ GOALS.md        ← Ihre Ziele
-  ├─ USER.md         ← Ihr Profil
-  ├─ MISSION.md      ← Mission der Arbeit mit dem Agenten
-  ├─ PROJECTS.md     ← Liste aktiver Projekte
-  ├─ PREFERENCES.md  ← persönliche Regeln und APIs
-  ├─ LEARNED.md      ← gesammelte Erkenntnisse des Agenten
-  ├─ DATA-POLICY.md  ← Regeln zur Datenverarbeitung
-  │
-  ├─ .claude/skills/ ← 14 Spezialisten
-  ├─ memory/         ← Tagesjournal (JJJJ-MM-TT.md)
-  └─ content/        ← Content-Materialien</pre>
+    <div class="route-box">
+      <pre>💜 ~/workspace/
+ │
+ ├─ Persönlichkeitsdateien (8 Hauptdateien des Agenten)
+ │   ├─ SOUL.md         ← Charakter, Ton, Stil
+ │   ├─ MEMORY.md       ← Langzeitgedächtnis über Sie
+ │   ├─ GOALS.md        ← Ihre aktuellen Ziele
+ │   ├─ USER.md         ← Ihr Profil (Rolle, Erfahrung, Kontext)
+ │   ├─ MISSION.md      ← Mission des Agenten
+ │   ├─ PROJECTS.md     ← Liste aktiver Projekte
+ │   ├─ PREFERENCES.md  ← Ihre Arbeitsvorlieben
+ │   └─ LEARNED.md      ← Erkenntnisse des Agenten aus der Arbeit mit Ihnen
+ │
+ ├─ Konfiguration
+ │   ├─ CLAUDE.md       ← Verhaltensregeln (was immer zu tun ist)
+ │   ├─ SERVICES.md     ← Katalog Ihrer Dienste und APIs
+ │   └─ DATA-POLICY.md  ← Richtlinien zur Datenverarbeitung
+ │
+ ├─ .claude/skills/     ← 14 Spezialisten (writer · designer · researcher...)
+ │
+ ├─ memory/             ← Tagebuch: JJJJ-MM-TT.md für jeden Tag
+ ├─ knowledge/          ← Wissensbasis (Artikel, Lösungen, Configs)
+ ├─ content/            ← Content-Materialien
+ └─ .media/             ← Fotos/Videos aus dem Chat (auto-gelöscht nach >7 Tagen)</pre>
     </div>
 
     <div class="note-box">
-      <strong>Hier wirklich bedenkenlos arbeiten</strong>
-      <p>Wenn Sie den Charakter des Agenten ändern möchten — öffnen Sie <code>SOUL.md</code> und schreiben Sie. Eine Datei zum Gedächtnis hinzufügen? In <code>MEMORY.md</code> eintragen. Ziele aktualisieren? <code>GOALS.md</code> bearbeiten. Nichts geht kaputt. Beim nächsten Start liest der Agent einfach die aktualisierte Datei.</p>
+      <strong>Hier bedenkenlos bearbeiten</strong>
+      <p>Das ist Ihre Zone. Charakter des Agenten ändern — öffnen Sie <code>SOUL.md</code> und schreiben Sie. Fakt ins Gedächtnis eintragen — ergänzen Sie <code>MEMORY.md</code>. Neues Ziel hinzufügen — tragen Sie es in <code>GOALS.md</code> ein. <strong>Nichts geht kaputt.</strong> Beim nächsten Start liest der Agent einfach die aktualisierte Version.</p>
     </div>
 
-    <p><strong>Was der Begriff bedeutet:</strong> «DNA-Dateien» — das sind 8 Dateien mit einem besonderen Buchstaben (SOUL, MEMORY, GOALS usw.), die Information darüber tragen, wer Sie sind und was Sie anstreben. DNA — weil diese Dateien Ihren Agenten einzigartig machen.</p>
+    <div class="note-box">
+      <strong>Begriff erklärt:</strong> «DNA-Dateien» — das sind 8 Dateien in Großbuchstaben (<code>SOUL</code>, <code>MEMORY</code>, <code>GOALS</code> usw.). Sie beschreiben den Agenten: wie er ist, was er sich merkt, wonach er strebt. DNA — weil genau diese Dateien Ihren Agenten einzigartig machen, anders als alle anderen.
+    </div>
 
     <h2>Bereich 3 — Werkstatt (<code>~/projects/</code>)</h2>
 
-    <p>Hier leben Ihre Aufgaben und alles wird dort abgelegt: Code, Notizen, Inhalte, Recherchen, Pläne. Jedes Projekt ist ein eigener Ordner. Jeder Ordner hat sein eigenes <code>memory/</code> (Aufgabennotizen) und sein eigenes <code>knowledge/</code> (Arbeitslinks). Wenn Sie dem Agenten sagen «Starte das Projekt für die neue Landing Page» — erstellt er hier einen Ordner und legt alles dort ab: Code, Notizen, Inhalte, Screenshots. Nach einem Monat können Sie zu diesem Projekt zurückkehren, und der Agent öffnet den Ordner — wie ein offizieller Mitarbeiter mit einem Arbeitsheft.</p>
+    <p>Hier leben Ihre Arbeitsprojekte: Landing Pages, Bots, Berichte, Recherchen, Content-Pläne. Jedes Projekt ist ein eigener Ordner. Jeder hat sein eigenes <code>memory/</code> (Projektnotizen) und <code>knowledge/</code> (Lösungen, Configs, wichtige Links).</p>
+
+    <div class="route-box">
+      <pre>🔨 ~/projects/
+ ├─ verkauf-2026-q2/
+ │   ├─ memory/     ← Projektnotizen
+ │   ├─ knowledge/  ← Lösungen, Configs, Leads
+ │   └─ ... (Projektdateien)
+ │
+ ├─ landing-herbst/
+ │   └─ ...
+ │
+ └─ telegram-bot-schule/
+     └─ ...</pre>
+    </div>
+
+    <p>Wenn Sie dem Agenten sagen «Starte ein Projekt für die neue Landing Page» — erstellt er hier einen eigenen Ordner und legt alles dort ab: Code, Notizen, Inhalte, Screenshots. Nach einem Monat können Sie zu diesem Projekt zurückkehren, und der Agent öffnet den Ordner — wie ein Büroangestellter, der in seine Kartei zurückgreift.</p>
+
+    <h2>Was darf man bearbeiten und was nicht — Ampelprinzip</h2>
+
+    <div class="note-box danger">
+      <strong>🔴 NICHT ANFASSEN</strong>
+      <p><code>~/.agent/</code> — Motor des Bots<br><em>hier schreibt nur der Bot «Agenten-Konstruktor» bei Installation und Updates</em></p>
+    </div>
+
+    <div class="note-box warning">
+      <strong>🟡 AGENT FÜHRT SELBST</strong>
+      <p><code>~/workspace/memory/</code><br><em>Tagebücher: lesen erlaubt, bearbeiten — nur bei gefundenem Fehler</em></p>
+    </div>
+
+    <div class="note-box">
+      <strong>🟢 BEDENKENLOS BEARBEITEN</strong>
+      <p><code>~/workspace/</code> — DNA-Dateien und Konfiguration<br>
+      <code>~/workspace/.claude/skills/</code> — Skills<br>
+      <code>~/workspace/knowledge/</code> — Wissensbasis<br>
+      <code>~/projects/</code> — Projekte<br>
+      <em>hier arbeiten Sie und der Agent gemeinsam</em></p>
+    </div>
 
     <div class="note-box">
       <strong>Mein Rat an Sie</strong>
-      <p>Wenn Sie gerade anfangen — öffnen Sie über VS Code Tunnel drei Dateien: <code>SOUL.md</code>, <code>MEMORY.md</code>, <code>GOALS.md</code>. Lesen Sie, was der Agent bereits über Sie weiß. Ergänzen Sie etwas Wichtiges, das gefehlt hat. In den ersten fünfzehn Minuten sollten Sie spüren, dass dieser Agent wirklich Ihrer ist.</p>
+      <p>Wenn Sie gerade anfangen — öffnen Sie über VS Code Tunnel drei Dateien: <code>SOUL.md</code>, <code>MEMORY.md</code>, <code>GOALS.md</code>. Lesen Sie, was der Agent bereits über Sie weiß. Ergänzen Sie, falls etwas Wichtiges fehlt. Das ist die nützlichste Viertelstunde am ersten Tag — Sie spüren sofort, dass dieser Agent wirklich Ihrer ist und nicht «einer von Tausenden».</p>
+      <p>Und noch etwas: <strong>Lassen Sie sich von der Anzahl der Dateien nicht einschüchtern.</strong> Auf der Karte sind es viele, aber im Alltag öffnen Sie drei bis vier Dateien, der Rest arbeitet still im Hintergrund. Die Karte brauchen Sie für den Moment «Wo liegen meine gestrigen Notizen?» — dann wissen Sie: <code>~/workspace/memory/2026-05-09.md</code>.</p>
     </div>
   </div>
 
   <div class="next-articles">
-    <p>Weiterlesen</p>
+    <p>In diesem Abschnitt</p>
     <div class="next-grid">
-      <div class="next-card" onclick="openArticle('article-first')">
-        <span>Erste Schritte am ersten Tag</span>
-        <em>6 Min. →</em>
-      </div>
       <div class="next-card" onclick="openArticle('article-what')">
         <span>Was ist der Agenten-Konstruktor</span>
         <em>3 Min. →</em>
+      </div>
+      <div class="next-card" onclick="openArticle('article-evolution')">
+        <span>Agent-Evolution — wie Ihr Agent immer klüger wird</span>
+        <em>4 Min. →</em>
+      </div>
+      <div class="next-card" onclick="openArticle('article-install')">
+        <span>Agent installieren — vier Schritte bis zum funktionierenden Bot</span>
+        <em>10 Min. →</em>
+      </div>
+      <div class="next-card" onclick="openArticle('article-map')">
+        <span><strong>Die Karte des Agenten-Hauses — was wo auf dem Server liegt</strong></span>
+        <em>5 Min. →</em>
+      </div>
+      <div class="next-card" onclick="openArticle('article-first')">
+        <span>Erste Schritte am ersten Tag</span>
+        <em>6 Min. →</em>
       </div>
     </div>
   </div>

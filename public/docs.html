@@ -360,6 +360,33 @@
       font-style: italic;
     }
 
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+    .data-table th {
+      background: #f5f5f5;
+      font-weight: 600;
+      text-align: left;
+      padding: 10px 14px;
+      border-bottom: 2px solid #e0e0e0;
+    }
+    .data-table td {
+      padding: 9px 14px;
+      border-bottom: 1px solid #f0f0f0;
+      vertical-align: top;
+    }
+    .data-table td code {
+      background: #f0f4ff;
+      color: #5b5ef4;
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+    .data-table tr:last-child td { border-bottom: none; }
+
     .step-block {
       display: flex;
       gap: 16px;
@@ -1395,6 +1422,114 @@ Telegram-бот: 1234567890:AAEh-xxxxxxxxxxxxxxxxxxxxxxxx</pre>
         <span><strong>Первые шаги в первый день</strong></span>
         <em>6 мин →</em>
       </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTICLE: 9 ФАЙЛОВ ═══ -->
+<div class="container article-page" id="article-9files">
+  <div class="article-meta">
+    <span class="read-time">5 мин</span>
+    <span>Обновлено 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">9 файлов, из которых сделан Агент</h1>
+  <p class="article-tagline">Разберите любого Агента по частям — внутри 9 обычных текстовых файлов.</p>
+
+  <div class="article-body">
+    <p>Вся личность, вся память, все правила — в папке <code>~/workspace/</code>.</p>
+    <p>Агент — это не программа с базой данных и сложным кодом внутри. Это Claude Code CLI, который читает набор текстовых файлов и действует согласно им. Девять файлов в папке <code>~/workspace/</code> — вот и весь «мозг». Понять, что в каждом, значит понять, как Агент вообще работает.</p>
+
+    <h2>Главное сообщение</h2>
+
+    <div class="note-box">
+      <strong>Файл = инструкция</strong>
+      <p>Каждый из 9 файлов — это текстовая инструкция для Агента. Нет файла — нет инструкции. Есть файл — Агент прочитал и применяет. Поэтому удалять эти файлы нельзя: Агент не «поломается», но потеряет часть себя.</p>
+    </div>
+
+    <h2>CLAUDE.md — правила работы</h2>
+
+    <p>Особый файл. Claude Code CLI автоматически читает его каждый раз, как только открывает папку <code>~/workspace/</code>. Здесь — короткие правила для всей работы: как обращаться, что делать с памятью, три уровня автономности, список файлов ДНК.</p>
+    <p>Этот файл не попадает в системный промпт через бота — CLI загружает его напрямую. Так что двойного чтения нет.</p>
+    <p><strong>Редактирует:</strong> клиент (через интервью при установке).</p>
+
+    <h2>8 файлов ДНК — личность и знания</h2>
+
+    <p>Это файлы, которые бот подкладывает в системный промпт каждой сессии:</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Файл</th>
+          <th>Что внутри</th>
+          <th>Кто редактирует</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><code>SOUL.md</code></td><td>Характер, тон, стиль общения</td><td>Клиент</td></tr>
+        <tr><td><code>USER.md</code></td><td>Профиль: кто Вы, сфера, контекст</td><td>Клиент</td></tr>
+        <tr><td><code>MEMORY.md</code></td><td>Постоянные факты, проекты, решения</td><td>Агент + клиент</td></tr>
+        <tr><td><code>MISSION.md</code></td><td>Главная цель — 1-2 предложения</td><td>Клиент</td></tr>
+        <tr><td><code>GOALS.md</code></td><td>3-5 текущих целей</td><td>Клиент</td></tr>
+        <tr><td><code>PROJECTS.md</code></td><td>Активные проекты</td><td>Клиент</td></tr>
+        <tr><td><code>PREFERENCES.md</code></td><td>Стиль работы, инструменты</td><td>Клиент</td></tr>
+        <tr><td><code>LEARNED.md</code></td><td>Выводы и паттерны</td><td>Только агент</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Зачем разделение «клиент / агент»</h2>
+
+    <p><strong>Клиент редактирует</strong> файлы с личностью и целями — Вы лучше знаете, кем должен быть Агент и чего Вы хотите. Агент не трогает эти файлы без просьбы.</p>
+    <p><strong>Агент ведёт</strong> файлы с памятью и выводами — <code>MEMORY.md</code> Агент дополняет после каждой значимой сессии, <code>LEARNED.md</code> наполняет самостоятельно. Вы можете дописывать в MEMORY.md вручную — это нормально.</p>
+
+    <h2>Что нельзя удалять</h2>
+
+    <p>Из CLAUDE.md:</p>
+    <ul>
+      <li><code>SOUL.md</code> — удалите, и Агент потеряет характер</li>
+      <li><code>MEMORY.md</code> — удалите, и Агент забудет всё, что знал о Вас</li>
+      <li><code>GOALS.md</code> — удалите, и Агент не будет знать, что для Вас важно сейчас</li>
+      <li><code>CLAUDE.md</code> — удалите, и Агент потеряет правила работы</li>
+      <li>Папки <code>memory/</code> и <code>knowledge/</code> — в них живёт накопленный контекст</li>
+      <li>Папку <code>.claude/</code> — там настройки и скиллы</li>
+    </ul>
+
+    <h2>Мой Вам совет</h2>
+
+    <p>Самый быстрый способ понять своего Агента — открыть <code>SOUL.md</code> и <code>MEMORY.md</code> и прочитать. Всё, что Агент «знает» о Вас — там. Если что-то не так — правьте прямо в файле. Агент применит изменения с следующего диалога.</p>
+  </div>
+
+  <div class="next-articles">
+    <div class="next-label">В этом разделе</div>
+    <div class="next-card" onclick="openArticle('article-glossariy')">
+      <div class="next-icon">📖</div>
+      <div class="next-title">Глоссарий</div>
+      <div class="next-desc">Термины и понятия</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-soul-md')">
+      <div class="next-icon">🪪</div>
+      <div class="next-title">Что такое SOUL.md</div>
+      <div class="next-desc">Паспорт Агента</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-zapusk')">
+      <div class="next-icon">🔄</div>
+      <div class="next-title">Что происходит при каждом запуске</div>
+      <div class="next-desc">Стартовая последовательность</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-svetofor')">
+      <div class="next-icon">🚦</div>
+      <div class="next-title">«Светофор»: что Агент делает сам, что показывает, что спрашивает</div>
+      <div class="next-desc">Уровни автономности</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-nastroyka')">
+      <div class="next-icon">⚙️</div>
+      <div class="next-title">Как настроить Агента под себя</div>
+      <div class="next-desc">Персонализация</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-server-map')">
+      <div class="next-icon">🗺️</div>
+      <div class="next-title">Где что живёт на сервере</div>
+      <div class="next-desc">Файловая структура</div>
     </div>
   </div>
 </div>

@@ -356,6 +356,33 @@
       font-style: italic;
     }
 
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+    .data-table th {
+      background: #f5f5f5;
+      font-weight: 600;
+      text-align: left;
+      padding: 10px 14px;
+      border-bottom: 2px solid #e0e0e0;
+    }
+    .data-table td {
+      padding: 9px 14px;
+      border-bottom: 1px solid #f0f0f0;
+      vertical-align: top;
+    }
+    .data-table td code {
+      background: #f0f4ff;
+      color: #5b5ef4;
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+    .data-table tr:last-child td { border-bottom: none; }
+
     .step-block {
       display: flex;
       gap: 16px;
@@ -1386,6 +1413,114 @@ Priorisiere selbst, basierend auf dem, was du über mich weißt.</pre>
         <span><strong>Erste Schritte am ersten Tag</strong></span>
         <em>6 Min. →</em>
       </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTICLE: 9 DATEIEN ═══ -->
+<div class="container article-page" id="article-9files">
+  <div class="article-meta">
+    <span class="read-time">5 Min</span>
+    <span>Aktualisiert 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">9 Dateien, aus denen der Agent besteht</h1>
+  <p class="article-tagline">Zerlegen Sie jeden Agenten in seine Einzelteile — darin befinden sich 9 einfache Textdateien.</p>
+
+  <div class="article-body">
+    <p>Gesamte Persönlichkeit, gesamtes Gedächtnis, alle Regeln — im Ordner <code>~/workspace/</code>.</p>
+    <p>Der Agent ist kein Programm mit Datenbank und komplexem Code. Es ist Claude Code CLI, das eine Reihe von Textdateien liest und entsprechend handelt. Neun Dateien im Ordner <code>~/workspace/</code> — das ist das gesamte „Gehirn". Wer versteht, was in jeder Datei steckt, versteht, wie der Agent funktioniert.</p>
+
+    <h2>Hauptbotschaft</h2>
+
+    <div class="note-box">
+      <strong>Datei = Anweisung</strong>
+      <p>Jede der 9 Dateien ist eine Textanweisung für den Agenten. Keine Datei — keine Anweisung. Datei vorhanden — der Agent hat sie gelesen und wendet sie an. Deshalb dürfen diese Dateien nicht gelöscht werden: Der Agent „bricht" nicht, verliert aber einen Teil von sich.</p>
+    </div>
+
+    <h2>CLAUDE.md — Arbeitsregeln</h2>
+
+    <p>Eine besondere Datei. Claude Code CLI liest sie jedes Mal automatisch, wenn es den Ordner <code>~/workspace/</code> öffnet. Hier stehen kurze Regeln für die gesamte Arbeit: Ansprache, Umgang mit dem Gedächtnis, drei Autonomiestufen, Liste der DNA-Dateien.</p>
+    <p>Diese Datei gelangt nicht über den Bot in den System-Prompt — CLI lädt sie direkt. Es gibt also keine doppelte Verarbeitung.</p>
+    <p><strong>Bearbeitet von:</strong> Kunde (über das Interview bei der Installation).</p>
+
+    <h2>8 DNA-Dateien — Persönlichkeit und Wissen</h2>
+
+    <p>Das sind die Dateien, die der Bot bei jeder Sitzung in den System-Prompt einfügt:</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Datei</th>
+          <th>Inhalt</th>
+          <th>Wer bearbeitet</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><code>SOUL.md</code></td><td>Charakter, Ton, Kommunikationsstil</td><td>Kunde</td></tr>
+        <tr><td><code>USER.md</code></td><td>Profil: wer Sie sind, Bereich, Kontext</td><td>Kunde</td></tr>
+        <tr><td><code>MEMORY.md</code></td><td>Dauerhafte Fakten, Projekte, Entscheidungen</td><td>Agent + Kunde</td></tr>
+        <tr><td><code>MISSION.md</code></td><td>Hauptziel — 1-2 Sätze</td><td>Kunde</td></tr>
+        <tr><td><code>GOALS.md</code></td><td>3-5 aktuelle Ziele</td><td>Kunde</td></tr>
+        <tr><td><code>PROJECTS.md</code></td><td>Aktive Projekte</td><td>Kunde</td></tr>
+        <tr><td><code>PREFERENCES.md</code></td><td>Arbeitsstil, Werkzeuge</td><td>Kunde</td></tr>
+        <tr><td><code>LEARNED.md</code></td><td>Erkenntnisse und Muster</td><td>Nur Agent</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Warum die Trennung «Kunde / Agent»</h2>
+
+    <p><strong>Der Kunde bearbeitet</strong> die Dateien mit Persönlichkeit und Zielen — Sie wissen am besten, wer der Agent sein soll und was Sie wollen. Der Agent berührt diese Dateien nicht ohne Aufforderung.</p>
+    <p><strong>Der Agent pflegt</strong> die Dateien mit Gedächtnis und Erkenntnissen — <code>MEMORY.md</code> ergänzt der Agent nach jeder bedeutsamen Sitzung, <code>LEARNED.md</code> füllt er eigenständig. Sie können MEMORY.md manuell ergänzen — das ist völlig normal.</p>
+
+    <h2>Was nicht gelöscht werden darf</h2>
+
+    <p>Aus CLAUDE.md:</p>
+    <ul>
+      <li><code>SOUL.md</code> — löschen Sie es, verliert der Agent seinen Charakter</li>
+      <li><code>MEMORY.md</code> — löschen Sie es, vergisst der Agent alles, was er über Sie wusste</li>
+      <li><code>GOALS.md</code> — löschen Sie es, weiß der Agent nicht mehr, was Ihnen gerade wichtig ist</li>
+      <li><code>CLAUDE.md</code> — löschen Sie es, verliert der Agent seine Arbeitsregeln</li>
+      <li>Ordner <code>memory/</code> und <code>knowledge/</code> — darin lebt der aufgebaute Kontext</li>
+      <li>Ordner <code>.claude/</code> — dort liegen Einstellungen und Skills</li>
+    </ul>
+
+    <h2>Mein Rat an Sie</h2>
+
+    <p>Der schnellste Weg, Ihren Agenten zu verstehen: <code>SOUL.md</code> und <code>MEMORY.md</code> öffnen und lesen. Alles, was der Agent über Sie „weiß", steht dort. Wenn etwas nicht stimmt — bearbeiten Sie es direkt in der Datei. Der Agent wendet die Änderungen ab dem nächsten Dialog an.</p>
+  </div>
+
+  <div class="next-articles">
+    <div class="next-label">In diesem Abschnitt</div>
+    <div class="next-card" onclick="openArticle('article-glossariy')">
+      <div class="next-icon">📖</div>
+      <div class="next-title">Glossar</div>
+      <div class="next-desc">Begriffe und Konzepte</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-soul-md')">
+      <div class="next-icon">🪪</div>
+      <div class="next-title">Was ist SOUL.md</div>
+      <div class="next-desc">Der Pass des Agenten</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-zapusk')">
+      <div class="next-icon">🔄</div>
+      <div class="next-title">Was bei jedem Start passiert</div>
+      <div class="next-desc">Startsequenz</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-svetofor')">
+      <div class="next-icon">🚦</div>
+      <div class="next-title">«Ampel»: was der Agent selbst tut, was er zeigt, was er fragt</div>
+      <div class="next-desc">Autonomiestufen</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-nastroyka')">
+      <div class="next-icon">⚙️</div>
+      <div class="next-title">Wie Sie den Agenten anpassen</div>
+      <div class="next-desc">Personalisierung</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-server-map')">
+      <div class="next-icon">🗺️</div>
+      <div class="next-title">Was wo auf dem Server liegt</div>
+      <div class="next-desc">Dateistruktur</div>
     </div>
   </div>
 </div>

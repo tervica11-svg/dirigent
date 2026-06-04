@@ -339,6 +339,22 @@
       border-left-color: #ef4444;
     }
 
+    .note-box.success {
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+      border-left-color: #22c55e;
+    }
+
+    .traffic-h2 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .traffic-h2 img {
+      width: 28px;
+      height: 28px;
+    }
+
     .note-box p { margin-bottom: 0; }
 
     .note-box strong { display: block; margin-bottom: 4px; }
@@ -1422,6 +1438,125 @@ Telegram-бот: 1234567890:AAEh-xxxxxxxxxxxxxxxxxxxxxxxx</pre>
         <span><strong>Первые шаги в первый день</strong></span>
         <em>6 мин →</em>
       </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTICLE: СВЕТОФОР ═══ -->
+<div class="container article-page" id="article-svetofor">
+  <div class="article-meta">
+    <span class="read-time">5 мин</span>
+    <span>Обновлено 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">«Светофор»: что Агент делает сам, что показывает, что спрашивает</h1>
+  <p class="article-tagline">Светофор стоит не только на дорогах. Каждое действие Агента проходит через три цвета — и это не случайность.</p>
+
+  <div class="article-body">
+    <p>У Агента нет инициативы делать всё что угодно. Каждое действие попадает в один из трёх уровней — зелёный, жёлтый, красный. Это правила из <code>CLAUDE.md</code>, которые определяют, насколько Агент действует самостоятельно. Система называется «светофор» и прописана дословно.</p>
+
+    <h2>Главное сообщение</h2>
+
+    <div class="note-box">
+      <strong>Обратимость — главный критерий</strong>
+      <p>Зелёный — то, что легко откатить или вообще не меняет состояние. Красный — то, что нельзя отменить или затрагивает внешние сервисы с деньгами. Жёлтый — посередине: делает, но показывает. Три вопроса: «Это меняет что-то?» → «Это можно откатить?» → «Это стоит денег?»</p>
+    </div>
+
+    <h2 class="traffic-h2">
+      <img src="/img/svetofor/img_1_01.png" alt="Зелёный">
+      Зелёный — делает сам
+    </h2>
+
+    <div class="note-box success">
+      <p>Агент выполняет без предупреждения:</p>
+      <ul>
+        <li><strong>Чтение и поиск по файлам</strong> в папке workspace</li>
+        <li><strong>Поиск в интернете</strong>, чтение публичных страниц</li>
+        <li><strong>Создание заметок</strong> в <code>memory/</code> и <code>knowledge/</code></li>
+      </ul>
+      <p>Это не меняет Ваши файлы и не затрагивает внешние сервисы. Агент может читать, искать и записывать заметки — и не будет каждый раз спрашивать разрешения.</p>
+    </div>
+
+    <h2 class="traffic-h2">
+      <img src="/img/svetofor/img_1_02.png" alt="Жёлтый">
+      Жёлтый — делает и показывает
+    </h2>
+
+    <div class="note-box warning">
+      <p>Агент выполняет, но сообщает о действии:</p>
+      <ul>
+        <li><strong>Создание и правка файлов</strong> в проекте</li>
+        <li><code>git status</code>, <code>git diff</code>, <code>git add</code>, <code>git commit</code></li>
+        <li><strong>Безопасные команды установки</strong>: npm, pip, brew</li>
+      </ul>
+      <p>Файл создан или изменён — Агент покажет, что именно сделал. Коммит добавлен — напишет об этом. Это действия, которые оставляют след и их можно проверить.</p>
+    </div>
+
+    <h2 class="traffic-h2">
+      <img src="/img/svetofor/img_1_03.png" alt="Красный">
+      Красный — стоп, спрашивает и ждёт
+    </h2>
+
+    <div class="note-box danger">
+      <p>Перед красными операциями Агент показывает план и ждёт <img src="/img/svetofor/img_1_04.png" alt="✔" style="width:16px;height:16px;vertical-align:middle;"> или <img src="/img/svetofor/img_1_05.png" alt="✖" style="width:16px;height:16px;vertical-align:middle;">:</p>
+      <ul>
+        <li><strong>Удаление</strong>: <code>rm</code>, <code>rm -rf</code>, удаление папок</li>
+        <li><strong>Деструктивный git</strong>: <code>push --force</code>, <code>reset --hard</code>, <code>branch -D</code></li>
+        <li><strong>Платные API и оплата</strong>: любые действия, которые стоят денег</li>
+        <li><strong>Всё необратимое</strong>: то, что нельзя откатить</li>
+      </ul>
+      <p>Если Агент что-то не сделал и написал план — значит это была красная операция. Так и должно быть.</p>
+    </div>
+
+    <h2>Заблокированные зоны</h2>
+
+    <p>Три пути на сервере, которые Агент не читает и не меняет ни при каком условии:</p>
+
+    <div class="tree-box">
+      <pre>~/.agent/.env        — секреты (токены, ключи)
+~/.agent/bot/        — код самого бота (read-only)
+~/.agent/state.json  — конфигурация бота</pre>
+    </div>
+
+    <p>Это не «жёлтое» и не «красное» — это запрет. Даже если Вы попросите — Агент откажет и объяснит почему.</p>
+
+    <h2>Мой Вам совет</h2>
+
+    <p>Если видите, что Агент постоянно спрашивает разрешение на что-то, что кажется Вам простым — проверьте, не попадает ли это действие в красный список. Скорее всего, Агент видит риск, который не очевиден с первого взгляда.</p>
+    <p>И наоборот: если Агент сделал что-то, не спросив — это зелёный или жёлтый уровень. Не значит, что он «своевольничает» — значит, правила разрешают это делать самостоятельно.</p>
+  </div>
+
+  <div class="next-articles">
+    <div class="next-label">В этом разделе</div>
+    <div class="next-card" onclick="openArticle('article-glossariy')">
+      <div class="next-icon">📖</div>
+      <div class="next-title">Глоссарий</div>
+      <div class="next-desc">Термины и понятия</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-soul-md')">
+      <div class="next-icon">🪪</div>
+      <div class="next-title">Что такое SOUL.md</div>
+      <div class="next-desc">Паспорт Агента</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-9files')">
+      <div class="next-icon">🗂️</div>
+      <div class="next-title">9 файлов, из которых сделан Агент</div>
+      <div class="next-desc">ДНК системы</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-zapusk')">
+      <div class="next-icon">🔄</div>
+      <div class="next-title">Что происходит при каждом запуске</div>
+      <div class="next-desc">Стартовая последовательность</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-nastroyka')">
+      <div class="next-icon">⚙️</div>
+      <div class="next-title">Как настроить Агента под себя</div>
+      <div class="next-desc">Персонализация</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-server-map')">
+      <div class="next-icon">🗺️</div>
+      <div class="next-title">Где что живёт на сервере</div>
+      <div class="next-desc">Файловая структура</div>
     </div>
   </div>
 </div>

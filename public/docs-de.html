@@ -335,6 +335,22 @@
       border-left-color: #ef4444;
     }
 
+    .note-box.success {
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+      border-left-color: #22c55e;
+    }
+
+    .traffic-h2 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .traffic-h2 img {
+      width: 28px;
+      height: 28px;
+    }
+
     .note-box p { margin-bottom: 0; }
 
     .note-box strong { display: block; margin-bottom: 4px; }
@@ -1413,6 +1429,125 @@ Priorisiere selbst, basierend auf dem, was du über mich weißt.</pre>
         <span><strong>Erste Schritte am ersten Tag</strong></span>
         <em>6 Min. →</em>
       </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTICLE: AMPEL ═══ -->
+<div class="container article-page" id="article-svetofor">
+  <div class="article-meta">
+    <span class="read-time">5 Min</span>
+    <span>Aktualisiert 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">«Ampel»: was der Agent selbst tut, was er zeigt, was er fragt</h1>
+  <p class="article-tagline">Ampeln gibt es nicht nur auf Straßen. Jede Aktion des Agenten durchläuft drei Farben — und das ist kein Zufall.</p>
+
+  <div class="article-body">
+    <p>Der Agent hat keine Initiative, alles Beliebige zu tun. Jede Aktion fällt in eine von drei Stufen — grün, gelb, rot. Das sind Regeln aus <code>CLAUDE.md</code>, die bestimmen, wie selbstständig der Agent handelt. Das System heißt «Ampel» und ist wörtlich festgelegt.</p>
+
+    <h2>Hauptbotschaft</h2>
+
+    <div class="note-box">
+      <strong>Umkehrbarkeit — das Hauptkriterium</strong>
+      <p>Grün — was leicht rückgängig zu machen ist oder den Zustand gar nicht ändert. Rot — was nicht widerrufbar ist oder externe Dienste mit Kosten betrifft. Gelb — dazwischen: tut es, zeigt es aber. Drei Fragen: «Ändert das etwas?» → «Kann man es rückgängig machen?» → «Kostet das Geld?»</p>
+    </div>
+
+    <h2 class="traffic-h2">
+      <img src="/img/svetofor/img_1_01.png" alt="Grün">
+      Grün — macht es selbst
+    </h2>
+
+    <div class="note-box success">
+      <p>Der Agent führt ohne Warnung aus:</p>
+      <ul>
+        <li><strong>Lesen und Suchen in Dateien</strong> im workspace-Ordner</li>
+        <li><strong>Internetsuche</strong>, Lesen öffentlicher Seiten</li>
+        <li><strong>Notizen erstellen</strong> in <code>memory/</code> und <code>knowledge/</code></li>
+      </ul>
+      <p>Das ändert Ihre Dateien nicht und betrifft keine externen Dienste. Der Agent kann lesen, suchen und Notizen schreiben — und wird jedes Mal keine Erlaubnis fragen.</p>
+    </div>
+
+    <h2 class="traffic-h2">
+      <img src="/img/svetofor/img_1_02.png" alt="Gelb">
+      Gelb — macht es und zeigt es
+    </h2>
+
+    <div class="note-box warning">
+      <p>Der Agent führt aus, meldet aber die Aktion:</p>
+      <ul>
+        <li><strong>Erstellen und Bearbeiten von Dateien</strong> im Projekt</li>
+        <li><code>git status</code>, <code>git diff</code>, <code>git add</code>, <code>git commit</code></li>
+        <li><strong>Sichere Installationsbefehle</strong>: npm, pip, brew</li>
+      </ul>
+      <p>Datei erstellt oder geändert — der Agent zeigt, was genau er getan hat. Commit hinzugefügt — schreibt darüber. Das sind Aktionen, die Spuren hinterlassen und überprüft werden können.</p>
+    </div>
+
+    <h2 class="traffic-h2">
+      <img src="/img/svetofor/img_1_03.png" alt="Rot">
+      Rot — Stopp, fragt und wartet
+    </h2>
+
+    <div class="note-box danger">
+      <p>Vor roten Operationen zeigt der Agent den Plan und wartet auf <img src="/img/svetofor/img_1_04.png" alt="✔" style="width:16px;height:16px;vertical-align:middle;"> oder <img src="/img/svetofor/img_1_05.png" alt="✖" style="width:16px;height:16px;vertical-align:middle;">:</p>
+      <ul>
+        <li><strong>Löschen</strong>: <code>rm</code>, <code>rm -rf</code>, Ordner löschen</li>
+        <li><strong>Destruktives Git</strong>: <code>push --force</code>, <code>reset --hard</code>, <code>branch -D</code></li>
+        <li><strong>Kostenpflichtige APIs und Bezahlung</strong>: alle Aktionen, die Geld kosten</li>
+        <li><strong>Alles Unwiderrufliche</strong>: was nicht rückgängig gemacht werden kann</li>
+      </ul>
+      <p>Wenn der Agent etwas nicht getan hat und einen Plan geschrieben hat — das war eine rote Operation. So soll es sein.</p>
+    </div>
+
+    <h2>Gesperrte Zonen</h2>
+
+    <p>Drei Pfade auf dem Server, die der Agent unter keinen Umständen liest oder ändert:</p>
+
+    <div class="tree-box">
+      <pre>~/.agent/.env        — Geheimnisse (Token, Schlüssel)
+~/.agent/bot/        — Code des Bots selbst (read-only)
+~/.agent/state.json  — Bot-Konfiguration</pre>
+    </div>
+
+    <p>Das ist weder «gelb» noch «rot» — das ist ein Verbot. Auch wenn Sie darum bitten — der Agent lehnt ab und erklärt warum.</p>
+
+    <h2>Mein Rat an Sie</h2>
+
+    <p>Wenn Sie sehen, dass der Agent ständig um Erlaubnis für etwas bittet, das Ihnen einfach erscheint — prüfen Sie, ob diese Aktion in die rote Liste fällt. Höchstwahrscheinlich sieht der Agent ein Risiko, das auf den ersten Blick nicht offensichtlich ist.</p>
+    <p>Und umgekehrt: wenn der Agent etwas getan hat, ohne zu fragen — das ist grüne oder gelbe Stufe. Das bedeutet nicht, dass er «eigenmächtig» handelt — es bedeutet, dass die Regeln dies erlauben.</p>
+  </div>
+
+  <div class="next-articles">
+    <div class="next-label">In diesem Abschnitt</div>
+    <div class="next-card" onclick="openArticle('article-glossariy')">
+      <div class="next-icon">📖</div>
+      <div class="next-title">Glossar</div>
+      <div class="next-desc">Begriffe und Konzepte</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-soul-md')">
+      <div class="next-icon">🪪</div>
+      <div class="next-title">Was ist SOUL.md</div>
+      <div class="next-desc">Der Pass des Agenten</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-9files')">
+      <div class="next-icon">🗂️</div>
+      <div class="next-title">9 Dateien, aus denen der Agent besteht</div>
+      <div class="next-desc">Die DNA des Systems</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-zapusk')">
+      <div class="next-icon">🔄</div>
+      <div class="next-title">Was bei jedem Start passiert</div>
+      <div class="next-desc">Startsequenz</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-nastroyka')">
+      <div class="next-icon">⚙️</div>
+      <div class="next-title">Wie Sie den Agenten anpassen</div>
+      <div class="next-desc">Personalisierung</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-server-map')">
+      <div class="next-icon">🗺️</div>
+      <div class="next-title">Was wo auf dem Server liegt</div>
+      <div class="next-desc">Dateistruktur</div>
     </div>
   </div>
 </div>

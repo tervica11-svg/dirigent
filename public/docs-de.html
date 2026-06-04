@@ -4472,9 +4472,10 @@ Einmalig:  .env lokal speichern (sicher aufbewahren!)
     <p>Sagen Sie dem Agenten:</p>
     <p>«Verbinde MCP-Server Google Calendar»<br>
     Der Agent fügt in <code>~/.claude.json</code> ein:</p>
-    <div class="tree-box" style="padding:0">
-      <div style="background:#2d2d2d;padding:6px 14px;border-radius:8px 8px 0 0;font-size:12px;color:#aaa;font-family:inherit">📋 Kopieren</div>
-      <pre style="background:none;padding:14px 20px;color:#c8d0e7;font-size:13px;font-family:'SF Mono','Fira Code',monospace;margin:0;line-height:1.6">{
+    <div style="margin:14px 0 0;background:#2a2a2a;padding:7px 16px;border-radius:8px 8px 0 0">
+      <span style="font-size:11px;color:#888">📋 Kopieren</span>
+    </div>
+    <pre style="margin-top:0;border-radius:0 0 8px 8px;margin-bottom:14px">{
   "google-calendar": {
     "type": "http",
     "url": "adresse_ihres_mcp_servers",
@@ -4483,7 +4484,6 @@ Einmalig:  .env lokal speichern (sicher aufbewahren!)
     }
   }
 }</pre>
-    </div>
 
     <p><b>Was man tun kann:</b><br>
     «Welche Termine habe ich heute?»<br>
@@ -4513,9 +4513,10 @@ Einmalig:  .env lokal speichern (sicher aufbewahren!)
     <p>Dieser MCP-Server ist bereits auf Ihrem Server aus der Box installiert. Der Agent kann Mockup-Dateien (<code>.pen</code>) öffnen, Texte und Farben ändern, Bilder exportieren.</p>
 
     <p><b>Konfiguration</b> (bereits in <code>~/.claude.json</code> vorhanden):</p>
-    <div class="tree-box" style="padding:0">
-      <div style="background:#2d2d2d;padding:6px 14px;border-radius:8px 8px 0 0;font-size:12px;color:#aaa;font-family:inherit">📋 Kopieren</div>
-      <pre style="background:none;padding:14px 20px;color:#c8d0e7;font-size:13px;font-family:'SF Mono','Fira Code',monospace;margin:0;line-height:1.6">{
+    <div style="margin:14px 0 0;background:#2a2a2a;padding:7px 16px;border-radius:8px 8px 0 0">
+      <span style="font-size:11px;color:#888">📋 Kopieren</span>
+    </div>
+    <pre style="margin-top:0;border-radius:0 0 8px 8px;margin-bottom:14px">{
   "pencil": {
     "type": "stdio",
     "command": "/home/agent/.pencil/mcp/visual_studio_code/out/mcp-server-linux-x64",
@@ -4523,7 +4524,6 @@ Einmalig:  .env lokal speichern (sicher aufbewahren!)
     "env": {}
   }
 }</pre>
-    </div>
 
     <p><b>Was man tun kann:</b><br>
     «Öffne das Visitenkarten-Mockup und ändere die Telefonnummer auf +49-000-000-0000»<br>
@@ -4534,15 +4534,15 @@ Einmalig:  .env lokal speichern (sicher aufbewahren!)
     <p>Supadata — ein MCP-Server für das Abrufen von Informationen von Webseiten. Nützlich für Wettbewerbsbeobachtung, Content-Sammlung, Marktanalyse.</p>
 
     <p><b>Konfiguration:</b></p>
-    <div class="tree-box" style="padding:0">
-      <div style="background:#2d2d2d;padding:6px 14px;border-radius:8px 8px 0 0;font-size:12px;color:#aaa;font-family:inherit">📋 Kopieren</div>
-      <pre style="background:none;padding:14px 20px;color:#c8d0e7;font-size:13px;font-family:'SF Mono','Fira Code',monospace;margin:0;line-height:1.6">{
+    <div style="margin:14px 0 0;background:#2a2a2a;padding:7px 16px;border-radius:8px 8px 0 0">
+      <span style="font-size:11px;color:#888">📋 Kopieren</span>
+    </div>
+    <pre style="margin-top:0;border-radius:0 0 8px 8px;margin-bottom:14px">{
   "supadata": {
     "type": "http",
     "url": "https://mcp.supadata.dev/v1"
   }
 }</pre>
-    </div>
 
     <p><b>Wie verbinden:</b><br>
     «Verbinde MCP-Server supadata, Typ http, URL: https://mcp.supadata.dev/v1»</p>

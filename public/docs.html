@@ -4675,9 +4675,10 @@ Telegram-бот: 1234567890:AAEh-xxxxxxxxxxxxxxxxxxxxxxxx</pre>
     <p>Скажите Агенту:</p>
     <p>«Подключи MCP-сервер Google Calendar»<br>
     Агент добавит в <code>~/.claude.json</code>:</p>
-    <div class="tree-box" style="padding:0">
-      <div style="background:#2d2d2d;padding:6px 14px;border-radius:8px 8px 0 0;font-size:12px;color:#aaa;font-family:inherit">📋 Скопировать</div>
-      <pre style="background:none;padding:14px 20px;color:#c8d0e7;font-size:13px;font-family:'SF Mono','Fira Code',monospace;margin:0;line-height:1.6">{
+    <div style="margin:14px 0 0;background:#2a2a2a;padding:7px 16px;border-radius:8px 8px 0 0">
+      <span style="font-size:11px;color:#888">📋 Скопировать</span>
+    </div>
+    <pre style="margin-top:0;border-radius:0 0 8px 8px;margin-bottom:14px">{
   "google-calendar": {
     "type": "http",
     "url": "адрес_вашего_mcp_сервера",
@@ -4686,7 +4687,6 @@ Telegram-бот: 1234567890:AAEh-xxxxxxxxxxxxxxxxxxxxxxxx</pre>
     }
   }
 }</pre>
-    </div>
 
     <p><b>Что можно делать:</b><br>
     «Какие у меня встречи на сегодня?»<br>
@@ -4716,9 +4716,10 @@ Telegram-бот: 1234567890:AAEh-xxxxxxxxxxxxxxxxxxxxxxxx</pre>
     <p>Этот MCP-сервер уже установлен на Вашем сервере из коробки. Агент умеет открывать файлы макетов (<code>.pen</code>), менять текст, цвета, экспортировать картинки.</p>
 
     <p><b>Конфигурация</b> (уже есть в <code>~/.claude.json</code>):</p>
-    <div class="tree-box" style="padding:0">
-      <div style="background:#2d2d2d;padding:6px 14px;border-radius:8px 8px 0 0;font-size:12px;color:#aaa;font-family:inherit">📋 Скопировать</div>
-      <pre style="background:none;padding:14px 20px;color:#c8d0e7;font-size:13px;font-family:'SF Mono','Fira Code',monospace;margin:0;line-height:1.6">{
+    <div style="margin:14px 0 0;background:#2a2a2a;padding:7px 16px;border-radius:8px 8px 0 0">
+      <span style="font-size:11px;color:#888">📋 Скопировать</span>
+    </div>
+    <pre style="margin-top:0;border-radius:0 0 8px 8px;margin-bottom:14px">{
   "pencil": {
     "type": "stdio",
     "command": "/home/agent/.pencil/mcp/visual_studio_code/out/mcp-server-linux-x64",
@@ -4726,7 +4727,6 @@ Telegram-бот: 1234567890:AAEh-xxxxxxxxxxxxxxxxxxxxxxxx</pre>
     "env": {}
   }
 }</pre>
-    </div>
 
     <p><b>Что можно делать:</b><br>
     «Открой макет визитки и поменяй номер телефона на +7-999-000-00-00»<br>
@@ -4737,15 +4737,15 @@ Telegram-бот: 1234567890:AAEh-xxxxxxxxxxxxxxxxxxxxxxxx</pre>
     <p>Supadata — MCP-сервер для получения информации с веб-страниц. Полезен для мониторинга конкурентов, сбора контента, анализа рынка.</p>
 
     <p><b>Конфигурация:</b></p>
-    <div class="tree-box" style="padding:0">
-      <div style="background:#2d2d2d;padding:6px 14px;border-radius:8px 8px 0 0;font-size:12px;color:#aaa;font-family:inherit">📋 Скопировать</div>
-      <pre style="background:none;padding:14px 20px;color:#c8d0e7;font-size:13px;font-family:'SF Mono','Fira Code',monospace;margin:0;line-height:1.6">{
+    <div style="margin:14px 0 0;background:#2a2a2a;padding:7px 16px;border-radius:8px 8px 0 0">
+      <span style="font-size:11px;color:#888">📋 Скопировать</span>
+    </div>
+    <pre style="margin-top:0;border-radius:0 0 8px 8px;margin-bottom:14px">{
   "supadata": {
     "type": "http",
     "url": "https://mcp.supadata.dev/v1"
   }
 }</pre>
-    </div>
 
     <p><b>Как подключить:</b><br>
     «Подключи MCP-сервер supadata, тип http, URL: https://mcp.supadata.dev/v1»</p>

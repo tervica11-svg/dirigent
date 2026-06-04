@@ -4025,37 +4025,43 @@ Browser → GitHub-Login → VS Code geöffnet</pre></div>
 <!-- ============================================================ -->
 <!-- PROJEKTE & DEPLOYMENT — HUB                                  -->
 <!-- ============================================================ -->
-<div class="container article-page" id="article-proekty" style="display:none">
+<div class="container article-page" id="article-proekty">
+  <div class="article-meta">
+    <span>4 Artikel</span>
+  </div>
   <h1 class="article-h1">📦 Projekte &amp; Deployment</h1>
-  <p class="article-subtitle">Wo liegen Projekte, wie funktioniert GitHub und wie landet Code automatisch online.</p>
+  <p class="article-tagline">Wo liegen Ihre Projekte, wie landen sie ins Internet und wie verliert man nichts Wichtiges.</p>
 
-  <div class="start-cards">
-    <div class="start-card" onclick="openArticle('article-proekty-how')">
-      <div class="start-card-icon">🗂️</div>
-      <div class="start-card-title">Wie Projekte organisiert sind</div>
-      <div class="start-card-desc">~/workspace/ vs ~/projects/ — Unterschied und Logik der Ordnerstruktur.</div>
-      <div class="start-card-time">5 Min</div>
+  <div class="start-cards" style="margin-top:24px">
+    <div class="article-card" onclick="openArticle('article-proekty-how')">
+      <div class="card-top">
+        <div class="card-title">Wie der Agent mit Projekten arbeitet</div>
+        <div class="card-time">5 Min</div>
+      </div>
+      <div class="card-desc">Der Agent hat eine Wohnung (~/workspace/) und ein Bürogebäude (~/projects/). In der Wohnung — Persönliches, im Gebäude — Arbeit.</div>
     </div>
-    <div class="start-card" onclick="openArticle('article-proekty-github')">
-      <div class="start-card-icon">🐙</div>
-      <div class="start-card-title">Was ist GitHub und warum brauchen wir es</div>
-      <div class="start-card-desc">Repository, Commit, Push — drei Begriffe, die alles erklären.</div>
-      <div class="start-card-time">6 Min</div>
+    <div class="article-card" onclick="openArticle('article-proekty-github')">
+      <div class="card-top">
+        <div class="card-title">GitHub — Backup und Zusammenarbeit</div>
+        <div class="card-time">6 Min</div>
+      </div>
+      <div class="card-desc">GitHub ist ein Tresor für Ihren Code. Alles auf dem Server ist eine Kopie. Alles auf GitHub ist in Sicherheit.</div>
     </div>
-    <div class="start-card" onclick="openArticle('article-proekty-vercel')">
-      <div class="start-card-icon">🚀</div>
-      <div class="start-card-title">Was ist Vercel und wie funktioniert Auto-Deployment</div>
-      <div class="start-card-desc">Push → GitHub → Vercel → Live-Website. Der vollständige Weg in 60 Sekunden.</div>
-      <div class="start-card-time">5 Min</div>
+    <div class="article-card" onclick="openArticle('article-proekty-vercel')">
+      <div class="card-top">
+        <div class="card-title">Deployment über Vercel</div>
+        <div class="card-time">5 Min</div>
+      </div>
+      <div class="card-desc">Code geschrieben — Knopf gedrückt — im Internet. Vercel verwandelt einen Ordner mit Code in eine lebendige Website.</div>
     </div>
   </div>
-
-  <div class="start-row2">
-    <div class="start-card" onclick="openArticle('article-proekty-backup')">
-      <div class="start-card-icon">💾</div>
-      <div class="start-card-title">Was und wie man sichert</div>
-      <div class="start-card-desc">Drei Dinge, die regelmäßig gesichert werden müssen, damit nichts verloren geht.</div>
-      <div class="start-card-time">4 Min</div>
+  <div class="start-row2" style="margin-top:8px">
+    <div class="article-card" onclick="openArticle('article-proekty-backup')">
+      <div class="card-top">
+        <div class="card-title">Backups — was sichern und wie nichts verlieren</div>
+        <div class="card-time">4 Min</div>
+      </div>
+      <div class="card-desc">Der Server ist wie ein Schreibtisch. Alles Wichtige vom Schreibtisch muss an einen sicheren Ort kopiert werden.</div>
     </div>
   </div>
 </div>
@@ -4063,7 +4069,7 @@ Browser → GitHub-Login → VS Code geöffnet</pre></div>
 <!-- ============================================================ -->
 <!-- ARTIKEL: Wie Projekte organisiert sind                       -->
 <!-- ============================================================ -->
-<div class="container article-page" id="article-proekty-how" style="display:none">
+<div class="container article-page" id="article-proekty-how">
   <h1 class="article-h1">🗂️ Wie Projekte organisiert sind</h1>
   <p class="article-meta">5 Min · Abschnitt: Projekte &amp; Deployment</p>
 
@@ -4115,7 +4121,7 @@ Browser → GitHub-Login → VS Code geöffnet</pre></div>
 <!-- ============================================================ -->
 <!-- ARTIKEL: Was ist GitHub                                      -->
 <!-- ============================================================ -->
-<div class="container article-page" id="article-proekty-github" style="display:none">
+<div class="container article-page" id="article-proekty-github">
   <h1 class="article-h1">🐙 Was ist GitHub und warum brauchen wir es</h1>
   <p class="article-meta">6 Min · Abschnitt: Projekte &amp; Deployment</p>
 
@@ -4164,7 +4170,7 @@ Browser → GitHub-Login → VS Code geöffnet</pre></div>
 <!-- ============================================================ -->
 <!-- ARTIKEL: Was ist Vercel                                      -->
 <!-- ============================================================ -->
-<div class="container article-page" id="article-proekty-vercel" style="display:none">
+<div class="container article-page" id="article-proekty-vercel">
   <h1 class="article-h1">🚀 Was ist Vercel und wie funktioniert Auto-Deployment</h1>
   <p class="article-meta">5 Min · Abschnitt: Projekte &amp; Deployment</p>
 
@@ -4215,7 +4221,7 @@ dirigent.vercel.app zeigt die aktuelle Version
 <!-- ============================================================ -->
 <!-- ARTIKEL: Was und wie man sichert                             -->
 <!-- ============================================================ -->
-<div class="container article-page" id="article-proekty-backup" style="display:none">
+<div class="container article-page" id="article-proekty-backup">
   <h1 class="article-h1">💾 Was und wie man sichert</h1>
   <p class="article-meta">4 Min · Abschnitt: Projekte &amp; Deployment</p>
 

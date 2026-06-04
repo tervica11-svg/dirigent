@@ -2559,6 +2559,171 @@ Priorisiere selbst, basierend auf dem, was du über mich weißt.</pre>
 </div>
 
 
+<!-- ═══ ARTICLE: SITZUNGEN UND /RESET ═══ -->
+<div class="container article-page" id="article-sessii">
+  <div class="article-meta">
+    <span class="read-time">7 Min</span>
+    <span>Aktualisiert 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">Sitzungen und /reset — wann Gespräch «vergessen»</h1>
+  <p class="article-tagline">Die Sitzung ist das Notizbuch des aktuellen Gesprächs. /reset — schließen und ein neues nehmen. Persönlichkeit und Gedächtnis des Agenten — seine Bücher im Regal, die bleiben.</p>
+
+  <div class="article-body">
+
+    <p>Jedes Mal wenn Sie dem Agenten schreiben, antwortet er nicht «von Null» — er erinnert sich an das gesamte vorherige Gespräch. Das ist die Sitzung. Zu verstehen wie sie funktioniert — nicht zwingend. Aber zu wissen wann man sie zurücksetzen soll — das ist die wichtigste Gewohnheit für alle, die täglich mit dem Agenten arbeiten.</p>
+
+    <div class="note-box">
+      <p><strong>Das Wichtigste</strong></p>
+      <p>Sitzung — das ist die Geschichte des aktuellen Gesprächs. Der Agent erinnert sich an alles was darin besprochen wurde.</p>
+      <p>/reset — schließt die Sitzung. Die nächste Nachricht beginnt auf einem leeren Blatt.</p>
+      <p><strong>Wichtig:</strong> bei /reset geht nur das Gespräch verloren. Persönlichkeit des Agenten, sein Gedächtnis über Sie, Ihre Ziele, Projekte — alles bleibt. Diese Dinge leben in Dateien, nicht in der Sitzung.</p>
+    </div>
+
+    <h2 class="traffic-h2"><img src="/img/sessii/img_1_01.png" alt=""> Was in der Sitzung gespeichert ist</h2>
+
+    <p>Die Sitzung ist die vollständige Gesprächsgeschichte für den aktuellen Unterhaltungszeitraum:</p>
+    <ul>
+      <li>Alle Ihre Nachrichten,</li>
+      <li>Alle Antworten des Agenten,</li>
+      <li>Alle Aktionen die er ausgeführt hat (Dateien gelesen, Programme installiert, im Internet gesucht),</li>
+      <li>Alle Daten die ihm zugekommen sind (Transkriptionen von Sprachnachrichten, Dokumenteninhalt, Links).</li>
+    </ul>
+    <p>Wenn Sie eine neue Nachricht schreiben — nimmt der Agent die gesamte Geschichte und sendet sie mit der neuen Frage an Claude. Deshalb kann er antworten «erinnerst du dich, du hast mir vor 20 Minuten von X erzählt» — er erinnert sich wirklich.</p>
+
+    <div class="note-box">
+      <p><strong>Technisch</strong> ist jede Sitzung eine Datei auf dem Server (<code>~/.claude/projects/.../sessionId.jsonl</code>), in die jede neue Nachricht geschrieben wird.</p>
+    </div>
+
+    <h2 class="traffic-h2"><img src="/img/sessii/img_1_02.png" alt=""> Was NICHT in der Sitzung ist — und bei /reset nicht verloren geht</h2>
+
+    <p>Das ist entscheidend zu verstehen. Wenn Sie /reset ausführen, vergisst der Agent nichts Wichtiges. Aus der Sitzung geht nur das Gespräch selbst. Es bleibt alles:</p>
+
+    <table class="data-table">
+      <thead><tr><th>Was bleibt</th><th>Wo gespeichert</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><img src="/img/sessii/img_1_03.png" alt="📚" style="width:15px;height:15px;vertical-align:middle;margin-right:5px;">Persönlichkeitsdateien — SOUL.md, MEMORY.md, USER.md, GOALS.md</td>
+          <td>~/workspace/ — bei jeder Anfrage neu gelesen</td>
+        </tr>
+        <tr>
+          <td><img src="/img/sessii/img_1_02.png" alt="📁" style="width:15px;height:15px;vertical-align:middle;margin-right:5px;">Alle Ihre Projekte in ~/projects/</td>
+          <td>Dateien auf dem Server, nicht an Sitzung gebunden</td>
+        </tr>
+        <tr>
+          <td><img src="/img/sessii/img_1_01.png" alt="📚" style="width:15px;height:15px;vertical-align:middle;margin-right:5px;">Wissensbasis in ~/workspace/knowledge/</td>
+          <td>Ihre Entscheidungen, Konfigurationen, wichtige Links</td>
+        </tr>
+        <tr>
+          <td><img src="/img/sessii/img_2_04.png" alt="🛠" style="width:15px;height:15px;vertical-align:middle;margin-right:5px;">Alle Skills und verbundene Dienste (Deepgram, GitHub, OpenRouter)</td>
+          <td>Konfiguration in /settings</td>
+        </tr>
+        <tr>
+          <td><img src="/img/sessii/img_2_05.png" alt="📝" style="width:15px;height:15px;vertical-align:middle;margin-right:5px;">Tagebücher in ~/workspace/memory/YYYY-MM-DD.md</td>
+          <td>Agent schreibt sie täglich selbst</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note-box success">
+      <p>💬 <strong>Einfache Analogie:</strong> die Sitzung ist Ihr Notizbuch für das aktuelle Gespräch. /reset — Notizbuch geschlossen, neues genommen. Alle Bücher des Agenten im Regal (Persönlichkeit, Gedächtnis, Projekte, Skills) sind unberührt.</p>
+    </div>
+
+    <h2>Warum /reset Limit spart</h2>
+
+    <p>Das ist das Wichtigste und am wenigsten Offensichtliche für neue Nutzer. Jede Nachricht in einer aktiven Sitzung verarbeitet Claude mit der <strong>gesamten bisherigen Geschichte</strong> — je länger das Gespräch, desto mehr Tokens kostet jede neue Antwort.</p>
+
+    <div class="note-box">
+      <p><strong>Einfaches Beispiel:</strong></p>
+      <ol>
+        <li>Morgens 2 Stunden Vertriebsplan besprochen. In der Sitzung ~30.000 Tokens Geschichte angesammelt.</li>
+        <li>Nach dem Mittagessen schreiben Sie «hilf mir einen Instagram-Post zu schreiben».</li>
+        <li><strong>Ohne /reset:</strong> Agent nimmt 30.000 Tokens Vertriebsgeschichte + neue Post-Anfrage. 99% der Geschichte — überflüssig. Aber Sie bezahlen dafür.</li>
+        <li><strong>Mit /reset:</strong> neue Sitzung, ~0 Tokens Geschichte. Verbrauch zigfach geringer.</li>
+      </ol>
+      <p>Bei aktiver Arbeit: 1 Stunde Gespräch = ~20.000–50.000 Tokens angesammelter Kontext. Ohne /reset-Gewohnheit kann man 5–10× mehr Kontingent verbrauchen als nötig.</p>
+    </div>
+
+    <h2 class="traffic-h2"><img src="/img/sessii/img_2_04.png" alt=""> Was der Agent automatisch macht</h2>
+
+    <h3>Auto-Komprimierung bei 90%</h3>
+    <p>Claude kann die Geschichte komprimieren, wenn sie fast das Limit erreicht (~200.000 Tokens bei Sonnet, ~1.000.000 bei Opus). Die Komprimierung ist ein automatisches «Zusammenfassen» alter Nachrichten. Sie werden es nicht bemerken, das Gespräch geht weiter. Aber das ist eine Notfallmaßnahme — deshalb bleibt /reset trotzdem die Hauptgewohnheit.</p>
+
+    <h3>Auto-Rotation bei 2 MB</h3>
+    <p>Wenn die Sitzungsdatei auf der Festplatte über 2 MB wächst — startet der Agent automatisch eine neue Sitzung. Sie erhalten eine Antwort, aber der Gesprächskontext wird zurückgesetzt. Das ist eine Absicherung für eine seltene Situation — tritt meist auf wenn Sie viele Fotos und Dokumente in einer Sitzung senden.</p>
+
+    <h3>Crash Recovery — Wiederherstellung nach Absturz</h3>
+    <p>Wenn der Agent mitten in einer Aufgabe abstürzt (z.B. Server-Neustart), speichert er die letzte Anfrage und die unfertige Antwort in <code>.crash_context.md</code>. Wenn Sie die nächste Nachricht schreiben — wird diese Information automatisch in die neue Anfrage eingemischt. Der Agent sagt «das war vor dem Absturz, ich mache weiter». Funktioniert einmal, danach wird die Datei gelöscht.</p>
+
+    <h2>Wann /reset obligatorisch ist</h2>
+
+    <ul>
+      <li><strong>Jeden Morgen</strong> — Überreste des gestrigen Gesprächs schließen. Gewohnheit Nummer eins.</li>
+      <li><strong>Vor einem neuen Thema</strong>, das nichts mit dem vorherigen zu tun hat.</li>
+      <li><strong>Nach einer großen Aufgabe</strong> (1–2 Stunden Gespräch) — eine frische Sitzung antwortet oft präziser.</li>
+      <li><strong>Wenn der Agent anfängt sich zu «verwirren»</strong> — seltsam antwortet, Themen vermischt, falsche Dinge tut. Oft hilft ein einfaches /reset.</li>
+      <li><strong>Vor einer sensiblen Aufgabe</strong> — Sie möchten nicht, dass Details aus früheren Gesprächen in die neue Anfrage einfließen.</li>
+    </ul>
+
+    <h2 class="traffic-h2"><img src="/img/sessii/img_2_06.png" alt=""> Häufige Fragen</h2>
+
+    <div class="note-box">
+      <p><strong>«Vergisst der Agent nach /reset wer ich bin?»</strong></p>
+      <p>Nein. Persönlichkeit (SOUL.md), Gedächtnis (MEMORY.md), Profil (USER.md), Ziele (GOALS.md) — alles Dateien auf dem Server, nicht in der Sitzung. Der Agent liest sie bei der nächsten Anfrage erneut.</p>
+    </div>
+
+    <div class="note-box">
+      <p><strong>«Gehen nach /reset meine Projekte verloren?»</strong></p>
+      <p>Nein. Alle Projekte in ~/projects/ — Dateien auf dem Server. Nach /reset sind sie vorhanden.</p>
+    </div>
+
+    <div class="note-box">
+      <p><strong>«Was ist besser — /reset oder einfach den Chat schließen?»</strong></p>
+      <p>/reset — besser. Das Schließen des Chats setzt nichts zurück: die Sitzung lebt auf dem Server, und wenn Sie zurückkehren — macht der Agent weiter wo er aufgehört hat. /reset ist der einzige Weg, mit einem leeren Blatt zu beginnen.</p>
+    </div>
+
+    <div class="note-box warning">
+      <p><strong>«Kann ich das Gespräch nach /reset wiederherstellen?»</strong></p>
+      <p>Nein — nach /reset wird die Sitzung aus der aktiven Liste gelöscht. Wenn das Gespräch wichtig war — bitten Sie den Agenten, das Ergebnis in ~/workspace/memory/YYYY-MM-DD.md zu speichern, <strong>bevor</strong> Sie /reset ausführen.</p>
+    </div>
+
+    <h2>Mein Rat</h2>
+
+    <div class="note-box success">
+      <p><strong>Merken Sie sich eine Formel:</strong></p>
+      <p style="font-size:16px;font-weight:600;text-align:center;margin:8px 0;">Jedes neue Thema = /reset. Jeden Morgen = /reset.</p>
+      <p>Diese 5 Sekunden sparen hunderte Dollar Kontingent im Monat und machen die Antworten des Agenten präziser. Noch keine Gewohnheit — pinnen Sie eine Erinnerung «/reset nicht vergessen» im Telegram-Chat mit dem Agenten, bis es zum Reflex wird.</p>
+    </div>
+
+    <p>Und denken Sie daran: /reset verliert nichts Wichtiges. Alle Ihre Daten, die Persönlichkeit des Agenten, Projekte, Skills — sind vorhanden. Nur das aktuelle Notizbuch des Gesprächs wird zurückgesetzt.</p>
+
+  </div>
+
+  <div class="next-articles">
+    <div class="next-label">In diesem Abschnitt</div>
+    <div class="next-card" onclick="openArticle('article-komandy')">
+      <div class="next-icon">📋</div>
+      <div class="next-title">Bot-Befehle — kurze Referenz</div>
+      <div class="next-desc">Alle zehn Befehle</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-settings-menu')">
+      <div class="next-icon">⚙️</div>
+      <div class="next-title">Menü /settings — Karte der Registerkarten</div>
+      <div class="next-desc">Sechs Schalter</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-golos')">
+      <div class="next-icon">🎙️</div>
+      <div class="next-title">Sprache — Deepgram, Whisper und Tricks</div>
+      <div class="next-desc">Sprachsteuerung einrichten</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-media')">
+      <div class="next-icon">📸</div>
+      <div class="next-title">Was der Agent sieht — Fotos, Dokumente, Videos</div>
+      <div class="next-desc">Formate und Möglichkeiten</div>
+    </div>
+  </div>
+</div>
+
+
 <!-- ═══ SECTION HUB: WIE DER AGENT AUFGEBAUT IST ═══ -->
 <div class="container article-page" id="article-kak-ustroen">
   <div class="article-meta">

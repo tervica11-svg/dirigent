@@ -1220,106 +1220,171 @@ Telegram-Bot: 1234567890:AAEh-xxxxxxxxxxxxxxxxxxxxxxxx</pre>
 <div class="container article-page" id="article-first">
   <div class="article-meta">
     <span class="read-time">6 Min.</span>
-    <span>Aktualisiert 2026-05-26</span>
+    <span>Aktualisiert 2026-05-09</span>
   </div>
   <h1 class="article-h1">Erste Schritte am ersten Tag</h1>
   <p class="article-tagline">Versuchen Sie nicht, alles auf einmal zu lernen. Sechs einfache Szenarien — und der Agent gehört Ihnen.</p>
 
   <div class="article-body">
-    <p>Also, der Agent ist installiert. Was nun? Wenn man versucht, sofort alles zu lernen, was er kann — schwindelt einem der Kopf. Deshalb lernen Sie den Agenten heute einfach kennen und probieren Sie 5–6 grundlegende Szenarien aus, eines nach dem anderen.</p>
+    <p>So, der Agent läuft auf dem Server, der Bot antwortet, alles funktioniert. Was jetzt? Wenn Sie versuchen, sofort «alles zu lernen, was er kann» — dreht sich der Kopf. Deshalb heute einfach sechs einfache Szenarien. Gehen Sie sie der Reihe nach durch — und am Abend gehört der Agent Ihnen.</p>
+
+    <h2>Hauptbotschaft</h2>
 
     <div class="note-box">
-      <strong>Die Hauptbotschaft</strong>
-      <p><strong>Ein Tag — eine Sache.</strong> Lernen Sie den Agenten heute kennen und probieren Sie 5–6 grundlegende Szenarien aus. Danach schauen Sie drei Mal täglich, was er geschrieben hat. Das ist völlig normal.</p>
+      <strong>Kernaussage</strong>
+      <p>Kein Stress. <strong>Ein Tag — ein Feature.</strong> Heute lernen Sie den Agenten einfach kennen und probieren 5–6 einfache Dinge aus. Die Tiefe erschließt sich nach und nach — jeden Tag ein bisschen mehr.</p>
     </div>
 
-    <h2>Schritt 1 — Stellen Sie sich vor und erzählen Sie von sich</h2>
+    <h2>Schritt 1 — Begrüßen Sie den Agenten und erzählen Sie von sich</h2>
 
-    <p>Öffnen Sie jetzt den Chat mit dem Bot und schreiben Sie ihm etwas wie:</p>
+    <p>Öffnen Sie jetzt den Chat mit Ihrem Bot und schreiben Sie ihm ungefähr so:</p>
 
     <div class="route-box">
-      <pre>Hallo. Ich heiße Anna. Ich bin Inhaberin eines Nagelstudios in München.
-Ich arbeite seit 5 Jahren, habe 3 Mitarbeiterinnen und möchte online wachsen.
-Meine Aufgaben — Instagram pflegen und bei der Terminbuchung helfen.</pre>
+      <pre>Hallo. Ich heiße Anna, ich bin Inhaberin eines Nagelstudios in München.
+Ich habe 4 Mitarbeiterinnen, 60–80 Kunden pro Woche. Ich möchte mit
+deiner Hilfe Ordnung in meine Arbeit bringen und alles automatisieren,
+was möglich ist.</pre>
     </div>
 
-    <p>Nur ein paar Sätze über Sie, was Sie tun, was Sie erreichen möchten. Das reicht. Der Agent trägt Sie in die Datei <code>MEMORY.md</code> ein. Jedes folgende Gespräch beginnt der Agent bereits mit diesem Kontext.</p>
+    <p>Nur ein paar Sätze: wer Sie sind, was Sie tun, was Sie erreichen möchten. Das reicht, damit der Agent Sie <strong>in sein Gedächtnis einträgt</strong> — in die Datei <code>MEMORY.md</code>. Jedes weitere Gespräch beginnt er dann bereits mit diesem Kontext.</p>
 
     <div class="note-box">
-      <p><strong>Keine Sorge:</strong> Alles wird aufgezeichnet — aber alles liegt auf <strong>Ihrem Server</strong>, wir haben keinen Zugriff. Ihre Geschichte ist ein lebendiges Gedächtnis über Sie. Löschen Sie es — es ist für immer weg. Kopieren Sie es in ~/workspace/ — das ist Ihr persönliches Gedächtnis bei Ihnen.</p>
+      <p><strong>Hinweis:</strong> Keine Sorge, dass «er etwas aufzeichnet». Alle Aufzeichnungen liegen auf Ihrem Server, in Ihrem Ordner <code>~/workspace/</code>. Das ist sein lebendiges Gedächtnis über Sie — und es bleibt für immer bei Ihnen.</p>
     </div>
 
     <h2>Schritt 2 — Stimme verbinden (für einige Jahre kostenlos)</h2>
 
-    <p>Sprachnachrichten sind praktisch: Eine Idee kurz eingesprochen, in den Chat geschickt — der Agent transkribiert sie und macht sich an die Arbeit. Für Spracherkennung empfehle ich <strong>Deepgram</strong> — exzellenter Dienst mit sehr guter Erkennung.</p>
+    <p>Sprachnachrichten sind die beliebteste Funktion, die Teilnehmer täglich nutzen. Sie gehen auf der Straße, sprechen eine Aufgabe in den Chat — der Agent transkribiert sie und macht sich an die Arbeit. Per Sprache ist es bequemer: Sie müssen nicht vom Weg, von Gedanken oder dem Kind auf dem Arm abgelenkt werden.</p>
 
-    <p>Deepgram verbinden — 6 Schritte:</p>
+    <p>Standardmäßig funktioniert die Sprache aber nicht — Sie müssen einen Spracherkennungsdienst anschließen. Die gute Nachricht: das ist kostenlos und dauert 3 Minuten. Wir nutzen <a href="https://console.deepgram.com" target="_blank" style="color:#7c5cfc">Deepgram</a> — den weltweit besten Dienst zur Spracherkennung. Der Hauptvorteil für uns: <strong>bei der Registrierung erhält jeder $200 Bonus</strong>. Das reicht für etwa <strong>770 Stunden Sprachnachrichten</strong> — also für einige Jahre Arbeit, ohne Abonnements oder Kartenzahlungen.</p>
+
+    <h3>Deepgram verbinden — 6 Schritte</h3>
     <ol>
-      <li>Öffnen Sie <code>console.deepgram.com</code></li>
-      <li>Registrieren Sie sich (oder melden Sie sich an, wenn Sie ein Konto haben)</li>
-      <li>Nach der Anmeldung landen Sie im Dashboard — auf dem Konto werden <strong>$200 Bonus</strong> gutgeschrieben</li>
-      <li>Im linken Menü <strong>API Keys</strong> finden → auf «Create a New API Key» klicken. Beliebigen Namen vergeben</li>
-      <li><strong>WICHTIG:</strong> Der Schlüssel wird nur <strong>einmal</strong> angezeigt. Sofort kopieren und in einem Passwort-Manager speichern. Danach ist er nicht mehr auffindbar</li>
-      <li>Dem Agenten sagen: <em>«Hier ist mein Deepgram-Schlüssel: [Schlüssel]. Bitte verbinde die Sprachfunktion»</em> — der Agent trägt den Schlüssel in die richtigen Einstellungen ein und meldet sich, wenn alles bereit ist</li>
+      <li>Öffnen Sie <a href="https://console.deepgram.com" target="_blank" style="color:#7c5cfc">console.deepgram.com</a> — das ist das Dashboard des Dienstes.</li>
+      <li>Registrieren Sie sich (oder melden Sie sich an, wenn Sie bereits ein Konto haben). Eine Bestätigungs-E-Mail kommt — normale Registrierung.</li>
+      <li>Nach der Anmeldung landen Sie im Dashboard. Auf dem Konto werden sofort <strong>$200</strong> gutgeschrieben — Sie sehen den Saldo in der Ecke.</li>
+      <li>Im linken Menü <strong>API Keys</strong> finden → auf <strong>Create a New API Key</strong> klicken. Beliebigen Namen vergeben (z.B. <code>agent-factory</code>), auf <strong>Create Key</strong> klicken.</li>
+      <li><strong>WICHTIG:</strong> Der Schlüssel wird <strong>nur einmal</strong> angezeigt. Sofort kopieren — in die Notizen auf dem Handy oder direkt in den Chat mit dem Agenten. Fenster geschlossen ohne Kopieren — Schlüssel verloren, neuer muss erstellt werden.</li>
+      <li>Im Chat mit dem Agenten <code>/settings</code> senden → <strong>Umgebungsvariablen</strong> → auf die Schaltfläche <strong>Deepgram</strong> tippen. Der Bot bittet Sie, den Schlüssel zu senden — schicken Sie ihn als Nachricht. Der Bot löscht Ihre Nachricht mit dem Schlüssel sofort und speichert ihn sicher auf dem Server.</li>
     </ol>
 
-    <p>Alles funktioniert. Sie können es gleich ausprobieren — nehmen Sie eine Sprachnachricht auf:</p>
+    <p>Fertig, Sprache funktioniert. Sie können es gleich ausprobieren — nehmen Sie eine Sprachnachricht auf:</p>
 
     <div class="route-box">
-      <pre>«Ich brauche einen Verkaufsbericht für letzten Monat.
-Die Zahlen liegen in einer Tabelle. Erstell mir eine Zusammenfassung —
-was gestiegen ist, was gefallen ist und was verbessert werden sollte.»</pre>
+      <pre>«Ich brauche einen Verkaufsbericht für letzten Monat. Die Zahlen liegen in einer Google-Tabelle, ich schicke gleich den Link. Erstell mir eine Zusammenfassung — was gestiegen ist, was gefallen ist, und drei Ideen zur Verbesserung.»</pre>
     </div>
 
-    <p>Der Agent transkribiert die Sprachaufnahme und macht sich sofort an die Arbeit.</p>
+    <p>Der Agent transkribiert die Sprache in Text und macht sich an die Arbeit.</p>
+
+    <div class="note-box">
+      <strong>Warum gerade Deepgram</strong>
+      <p>Man kann auch mit dem eingebauten Modell transkribieren, aber die Qualität bei Deepgram ist deutlich besser — besonders wenn Sie schnell sprechen oder einen Akzent haben. Und das Wichtigste: <strong>$200 Bonus — das ist kostenlos für Jahre im Voraus</strong> für eine Person. Wenn der Bonus irgendwann aufgebraucht ist — sind das Centbeträge pro Monat.</p>
+    </div>
 
     <h2>Schritt 3 — Foto einer Aufgabe senden</h2>
 
-    <p>Fotografieren Sie irgendetwas — einen Screenshot, eine Visitenkarte, eine Tabelle, eine handgeschriebene Liste. Senden Sie es dem Bot mit einem kurzen Kommentar. Der Agent sieht das Bild und liest, was darauf steht. Das spart enorm Zeit: handgeschriebene Notizen in sauberen Text umwandeln, Screenshots von Tabellen in Daten, fremde Posts zur Analyse — der Agent überträgt alles in ein sauberes Format und speichert es im Projekt.</p>
-
-    <h2>Schritt 4 — Tagesplan erstellen lassen</h2>
-
-    <p>Morgens schreiben Sie dem Agenten, was Sie heute angehen möchten. Zum Beispiel:</p>
+    <p>Fotografieren Sie irgendetwas — einen handgeschriebenen Zettel, einen Tabellen-Screenshot, eine Quittung, einen Plan. Senden Sie es dem Bot mit einem kurzen Kommentar:</p>
 
     <div class="route-box">
-      <pre>Erstell mir einen Tagesplan. Das muss heute erledigt werden:
-— Kunden anrufen, Post für Instagram schreiben,
-Zeitplan entwickeln, noch einiges mehr.</pre>
+      <pre>Hier das Foto — transkribiere es und erstelle eine Tabelle.</pre>
     </div>
 
-    <p>Der Agent erstellt eine priorisierte Liste mit einem Aktionsplan und konkreten Schritten.</p>
+    <p>Der Agent <strong>sieht das Bild</strong> und liest, was darauf steht. Das spart enorm Zeit für alltägliche Kleinigkeiten: handgeschriebene Aufgabenliste notiert — fotografiert — Agent hat es in ein sauberes Format übertragen und im Projekt gespeichert.</p>
 
-    <h2>Schritt 5 — Erstes Projekt delegieren</h2>
+    <h2>Schritt 4 — Tagesplan anfordern</h2>
 
-    <p>Wählen Sie eine echte Aufgabe aus dieser Woche. Beschreiben Sie sie dem Agenten per Sprachaufnahme oder Text. Zum Beispiel: «Schreib mir drei Varianten eines Posts über Herbstrabatte, ein Foto muss am Samstag aufgenommen werden».</p>
+    <p>Morgens, statt sich den Kopf zu zerbrechen «womit anfangen» — schreiben Sie dem Agenten:</p>
 
-    <p>Der Agent stellt Rückfragen und liefert Varianten. Ihre Aufgabe — nur auswählen, was Ihnen gefällt, und auf «Senden» drücken.</p>
+    <div class="route-box">
+      <pre>Erstell mir einen Plan für heute. Ich habe drei Aufgaben: Bericht
+vorbereiten, drei Kunden anrufen, Post für Instagram schreiben.
+Priorisiere selbst, basierend auf dem, was du über mich weißt.</pre>
+    </div>
 
-    <h2>Schritt 6 — Nächste Woche besprechen</h2>
+    <p>Im Agenten gibt es den Spezialisten <strong>«Tagesplaner»</strong> — einer von 14 in der Box. Er kann Aufgaben in Zeitblöcke aufteilen, Ihre Gewohnheiten berücksichtigen (wenn Sie diese in Schritt 1 erzählt haben) und einen fertigen Plan als übersichtliche Liste schicken.</p>
 
-    <p>Sprechen Sie abends mit dem Agenten über Ihre Pläne: was Sie erledigen möchten, was Sie aufgeschoben haben, was Sie beschäftigt. Der Agent notiert alles im Gedächtnis und kennt am nächsten Morgen bereits den Kontext.</p>
+    <div class="note-box">
+      <p><strong>Begriff erklärt:</strong> «Spezialist» ist eine kleine Rolle im Agenten, die auf eine Aufgabe zugeschnitten ist. Es gibt 14 davon in der Box: Autor, Designer, Scout, Entwickler, Texter, Tagesplaner und andere. Sie wählen nicht manuell — der Agent ruft selbst den richtigen, sobald er Ihre Aufgabe versteht.</p>
+    </div>
+
+    <h2>Schritt 5 — <code>/settings</code> erkunden</h2>
+
+    <p>Senden Sie im Chat mit dem Bot den Befehl <code>/settings</code> — ein Menü öffnet sich. Hier leben die Einstellungen Ihres Agenten: Modell, Limits, Zeitplan, Umgebungsvariablen (dort werden Sie später Schlüssel externer Dienste hinzufügen — Deepgram, OpenAI, Google und andere, wenn sie benötigt werden).</p>
+
+    <p>Schauen Sie einfach, was dort ist. Heute nichts einstellen — das ist eine Karte für die Zukunft. Das Wichtigste: Sie wissen, wohin Sie müssen, wenn der Agent einen neuen Schlüssel braucht.</p>
+
+    <div class="note-box danger">
+      <strong>Schlüssel niemals im Chat senden</strong>
+      <p>API-Schlüssel sind Passwörter Ihrer kostenpflichtigen Dienste. Wenn Sie einen Schlüssel als normale Nachricht senden — landet er im Telegram-Verlauf und kann geleakt werden. Nur über <code>/settings</code> → Menü → <strong>Umgebungsvariablen</strong>. Der Bot löscht die Nachricht mit dem Schlüssel sofort und speichert ihn sicher auf dem Server.</p>
+    </div>
+
+    <h2>Schritt 6 — Agent-Status abfragen</h2>
+
+    <p>Am Ende des Tages (oder gleich jetzt) — senden Sie <code>/status</code>. Der Bot zeigt kurz:</p>
+    <ul>
+      <li>Welches Modell aktiv ist (Claude 4.5 Sonnet oder ein anderes)</li>
+      <li>Wie viele Tokens heute und im Monat verbraucht wurden</li>
+      <li>Wie viel freier Speicherplatz auf dem Server ist</li>
+      <li>Aktive Sitzungen und Projekte</li>
+    </ul>
+
+    <p>Das ist nützlich, um einmal zu sehen — der Agent lebt, arbeitet und verbraucht ungefähr so viel. Danach schauen Sie dort einmal pro Woche vorbei, wenn Sie beurteilen möchten «was mein KI-Mitarbeiter mich kostet».</p>
+
+    <h2>Was sofort verfügbar ist und was nachgekauft werden muss</h2>
+
+    <div class="note-box">
+      <strong>🟢 SOFORT VERFÜGBAR</strong>
+      <p><code>Text · Fotos · Dokumente · Video · 14 Spezialisten · Gedächtnis · Ziele · Profil</code><br>
+      <em>funktioniert ab der ersten Minute nach der Installation, nichts muss nachgekauft werden</em></p>
+    </div>
+
+    <div class="note-box">
+      <strong>🔵 CLAUDE-SCHLÜSSEL</strong>
+      <p><code>Claude Code Token</code> — der Hauptschlüssel — das ist das «Gehalt» des Agenten. Funktioniert über Ihr Claude-Hauptabo — keine zusätzlichen Kosten.</p>
+    </div>
+
+    <div class="note-box">
+      <strong>🟡 KOSTENLOS, MUSS VERBUNDEN WERDEN</strong>
+      <p><code>Sprache · Deepgram</code> — $200 Bonus bei Registrierung — reicht für einige Jahre Sprachnachrichten. Verbindung in Schritt 2 oben.</p>
+    </div>
+
+    <div class="note-box warning">
+      <strong>🔴 KOSTENPFLICHTIGE OPTIONEN</strong>
+      <p><code>OpenAI · Gemini</code> — andere Modelle<br>
+      <code>Notion · Gmail · Calendar</code> — externe Dienste<br>
+      <em>werden über <code>/settings</code> nach Bedarf hinzugefügt</em></p>
+    </div>
 
     <div class="note-box">
       <strong>Mein Rat an Sie</strong>
-      <p>Wenn Sie gerade anfangen — öffnen Sie über VS Code Tunnel drei Dateien: <code>SOUL.md</code>, <code>MEMORY.md</code>, <code>GOALS.md</code>. Lesen Sie, was der Agent bereits über Sie weiß. Ergänzen Sie etwas Wichtiges, das gefehlt hat. In den ersten fünfzehn Minuten sollten Sie spüren, dass dieser Agent wirklich Ihrer ist.</p>
-      <p>All Ihre Daten liegen auf Ihrem Server — nicht bei uns. Wenn Sie alles mitnehmen möchten — laden Sie <code>~/workspace/</code> herunter und kopieren Sie es wohin Sie möchten.</p>
+      <p>Versuchen Sie heute nicht, alles auszuprobieren. <strong>Ein Tag — ein Szenario.</strong> Heute begrüßt und eine Sprachnachricht aufgenommen — das reicht. Morgen Tagesplan und Foto mit Aufgabe. Übermorgen schauen, was in <code>/settings</code> ist.</p>
+      <p>Und das Wichtigste: <strong>Kommunizieren Sie jeden Tag.</strong> Machen Sie keine Wochenpausen. Der Agent lernt mit Ihnen wie ein Kind — jedes Gespräch versteht er Sie ein bisschen besser, Ihren Stil, Ihre Aufgaben. Nach einem Monat regelmäßiger Kommunikation wird er erraten, was Sie brauchen, bevor Sie den Satz beendet haben.</p>
+      <p>Und erwarten Sie nicht, dass er von Anfang an perfekt ist. Wenn der Agent etwas falsch gemacht hat — sagen Sie ihm einfach: «Das ist falsch, weil [Grund]. Das nächste Mal mach es so.» Und fertig, er merkt es sich. Das ist <strong>keine Wut auf den Agenten, sondern das Trainieren des Agenten.</strong></p>
     </div>
   </div>
 
   <div class="next-articles">
-    <p>In dieser Kategorie</p>
+    <p>In diesem Abschnitt</p>
     <div class="next-grid">
       <div class="next-card" onclick="openArticle('article-what')">
         <span>Was ist der Agenten-Konstruktor</span>
         <em>3 Min. →</em>
       </div>
+      <div class="next-card" onclick="openArticle('article-evolution')">
+        <span>Agent-Evolution — wie Ihr Agent immer klüger wird</span>
+        <em>4 Min. →</em>
+      </div>
       <div class="next-card" onclick="openArticle('article-install')">
-        <span>Agent installieren — vier Schritte bis zum fertigen Bot</span>
+        <span>Agent installieren — vier Schritte bis zum funktionierenden Bot</span>
         <em>10 Min. →</em>
       </div>
       <div class="next-card" onclick="openArticle('article-map')">
         <span>Die Karte des Agenten-Hauses — was wo auf dem Server liegt</span>
         <em>5 Min. →</em>
+      </div>
+      <div class="next-card" onclick="openArticle('article-first')">
+        <span><strong>Erste Schritte am ersten Tag</strong></span>
+        <em>6 Min. →</em>
       </div>
     </div>
   </div>

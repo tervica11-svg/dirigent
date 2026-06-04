@@ -589,7 +589,7 @@
         <div class="cat-count">5 Artikel</div>
       </div>
     </div>
-    <div class="cat-card" onclick="openArticle('article-map')">
+    <div class="cat-card" onclick="openArticle('article-memory-md')">
       <div class="cat-icon">📁</div>
       <div class="cat-info">
         <div class="cat-name">Gedächtnis des Agenten</div>
@@ -2903,6 +2903,533 @@ Priorisiere selbst, basierend auf dem, was du über mich weißt.</pre>
       <div class="next-icon">🗺️</div>
       <div class="next-title">Was wo auf dem Server liegt</div>
       <div class="next-desc">Dateistruktur</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ SECTION: GEDÄCHTNIS DES AGENTEN ═══ -->
+<div class="container article-page" id="article-memory-md">
+  <div class="article-meta">
+    <span>5 Artikel</span>
+  </div>
+  <h1 class="article-h1">📁 Gedächtnis des Agenten</h1>
+  <p class="article-tagline">Drei Ebenen, drei Dateien — jede kennt ihre Aufgabe. Der Agent wird mit Ihnen Tag für Tag klüger.</p>
+
+  <div class="start-cards" style="margin-top:24px">
+    <div class="article-card" onclick="openArticle('article-memory-levels')">
+      <div class="card-top">
+        <div class="card-title">Drei Gedächtnisebenen des Agenten — warum er klüger ist als ChatGPT</div>
+        <div class="card-time">6 Min</div>
+      </div>
+      <div class="card-desc">Drei Hefte auf dem Schreibtisch eines tüchtigen Assistenten — Notizbuch, Tagebuch, Bibliothek. Jedes kennt seine Aufgabe.</div>
+    </div>
+    <div class="article-card" onclick="openArticle('article-soul-user')">
+      <div class="card-top">
+        <div class="card-title">SOUL.md und USER.md — Persönlichkeit des Agenten und Ihr Profil</div>
+        <div class="card-time">6 Min</div>
+      </div>
+      <div class="card-desc">Zwei Pässe des Agenten — wer er ist und wer Sie sind. Ohne sie ist er nur ein generischer Bot.</div>
+    </div>
+    <div class="article-card" onclick="openArticle('article-memory-file')">
+      <div class="card-top">
+        <div class="card-title">MEMORY.md — was für immer erinnert wird</div>
+        <div class="card-time">5 Min</div>
+      </div>
+      <div class="card-desc">Das Notizbuch, das immer auf der wichtigsten Seite aufgeschlagen ist. Nicht mehr als 200 Zeilen — sonst ertrinkt es.</div>
+    </div>
+  </div>
+  <div class="start-row2" style="margin-top:8px">
+    <div class="article-card" onclick="openArticle('article-diaries')">
+      <div class="card-top">
+        <div class="card-title">Tagesjournale — die Chronik des Arbeitstages</div>
+        <div class="card-time">5 Min</div>
+      </div>
+      <div class="card-desc">Die Seite des Tagesplaners für heute. Bis abends gefüllt, morgens ein neues leeres Blatt.</div>
+    </div>
+    <div class="article-card" onclick="openArticle('article-knowledge-dir')">
+      <div class="card-top">
+        <div class="card-title">knowledge/ — thematische Nachschlagewerke</div>
+        <div class="card-time">5 Min</div>
+      </div>
+      <div class="card-desc">Die Bibliothek im Rücken mit thematischen Ordnern. Eine Datei — ein Thema, man schlägt nach wenn nötig.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTIKEL: DREI GEDÄCHTNISEBENEN ═══ -->
+<div class="container article-page" id="article-memory-levels">
+  <div class="article-meta">
+    <span class="read-time">6 Min</span>
+    <span>Aktualisiert 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">Drei Gedächtnisebenen des Agenten — warum er klüger ist als ChatGPT</h1>
+  <p class="article-tagline">Drei Hefte auf dem Schreibtisch eines tüchtigen Assistenten — Notizbuch, Tagebuch, Bibliothek. Jedes kennt seine Aufgabe.</p>
+
+  <div class="article-body">
+    <p>Viele denken: «Der Agent ist einfach ChatGPT mit mehr Gedächtnis». Und verpassen dabei das Wesentliche. Der Agent hat nicht ein Gedächtnis — er hat <strong>drei Ebenen</strong>. Jede Ebene erfüllt ihre Aufgabe: eine erinnert für immer, eine führt die Tageschronik, eine speichert tiefe Nachschlagewerke zu Themen. Deshalb wird der Agent tatsächlich klüger mit Ihnen — und setzt sich nicht jeden Morgen wie ein Chatbot zurück.</p>
+
+    <h2>Die wichtigste Botschaft</h2>
+
+    <div class="note-box">
+      <strong>Das Gedächtnis gehört Ihnen, nicht uns</strong>
+      <p>Alle drei Gedächtnisebenen liegen im Ordner <code>~/workspace/</code> auf <strong>Ihrem Server</strong>. Das sind gewöhnliche Textdateien. Wenn Sie möchten, kopieren Sie den Ordner — und die gesamte «Seele» des Agenten liegt in Ihrer Tasche. Wir aktualisieren nur die Engine. Alles, was der Agent über Sie und Ihre Projekte weiß — gehört Ihnen.</p>
+    </div>
+
+    <h2>Warum drei und nicht eins</h2>
+
+    <p>Wenn beim Agenten alles in einem Haufen liegt, ertrinkt er entweder in Details («was haben wir im Februar gemacht?») oder vergisst Wichtiges («was ist Ihr Geschäft?»). Drei Ebenen — das sind drei Hefte auf dem Schreibtisch eines tüchtigen Assistenten:</p>
+    <ul>
+      <li><strong>Notizbuch</strong> — Schlüsselfakten über Sie. Wird jeden Tag neu gelesen.</li>
+      <li><strong>Tagebuch</strong> — was heute war. Ein Blatt pro Tag.</li>
+      <li><strong>Bibliothek</strong> — tiefe Nachschlagewerke zu Themen, die aufgetaucht sind.</li>
+    </ul>
+    <p>Jedes löst seine Aufgabe. Und zusammen erhalten Sie einen Agenten, der sich an das gestrige Gespräch erinnert, Ihren Stil kennt und dabei nicht in Details verloren geht.</p>
+
+    <h2>Gedächtniskarte</h2>
+
+    <div class="tree-box">
+      <pre>
+~/workspace/
+├── MEMORY.md          ← Ebene 1: Langzeitgedächtnis (≤200 Zeilen)
+├── memory/
+│   ├── 2026-05-10.md  ← Ebene 2: Tagesjournal
+│   ├── 2026-05-09.md
+│   └── ...
+└── knowledge/         ← Ebene 3: thematische Nachschlagewerke
+    ├── billing-flow.md
+    ├── server-setup.md
+    └── ...</pre>
+    </div>
+
+    <p>Alle drei sind gewöhnliche <code>.md</code>-Dateien. Sie öffnen sich in jedem Editor. Sie können hineinschauen, bearbeiten, ergänzen — der Agent liest beim nächsten Start alles neu.</p>
+
+    <h2>Ebene 1 — <code>MEMORY.md</code> (Notizbuch)</h2>
+
+    <p>Das sind <strong>die wichtigsten Fakten, die der Agent immer wissen muss</strong>. Wer Sie sind, womit Sie sich beschäftigen, welche Projekte Sie leiten, welche Vorlieben Sie haben. Wird jedes Mal neu gelesen, wenn Sie den Chat öffnen.</p>
+    <p>Eine Regel: <strong>nicht mehr als 200 Zeilen</strong>. Wenn es überfüllt ist — bereinigt der Agent selbst: löscht Veraltetes, fasst Duplikate zusammen, behält nur Lebendiges.</p>
+    <ul>
+      <li>«Ich heiße Thomas, ich leite einen Kurs über KI»</li>
+      <li>«Bot «Agenten-Konstruktor» — mein Hauptprodukt»</li>
+      <li>«Ich mag keine langen Antworten, komm auf den Punkt»</li>
+      <li>«Server auf Hetzner, Domain soundso, Backup auf Google Drive»</li>
+    </ul>
+
+    <h2>Ebene 2 — Tagesjournale <code>memory/YYYY-MM-DD.md</code></h2>
+
+    <p>Für jeden Tag — eine eigene Datei. Der Agent schreibt selbst hinein: was Sie heute besprochen haben, welche Aufgaben Sie erledigt haben, worüber Sie sich geeinigt haben. Ein Tag = eine Datei.</p>
+    <p>Warum so? Heute ein Landingpage, morgen Bot-Korrekturen, übermorgen ein Marketing-Gespräch. Wenn man alles in eine <code>MEMORY.md</code> kippt — ertrinkt sie in einer Woche. Wenn aber jeder Tag sein eigenes Blatt hat — sagen Sie entspannt «erinnerst du dich, was wir gestern zur Landingpage besprochen haben?» und der Agent öffnet die gestrige Datei und macht dort weiter.</p>
+
+    <h2>Ebene 3 — <code>knowledge/</code> (Nachschlagewerk-Bibliothek)</h2>
+
+    <p>Hierher wandern thematische Kenntnisse, die zu umfangreich für <code>MEMORY.md</code> sind, aber ständig gebraucht werden: Projektarchitektur, Server-Configs, gefundene Lösungen, Rezepte. Eine Datei = ein Thema.</p>
+    <p>Einfaches Beispiel: Sie haben dreimal gefragt «wie ist mein Backup eingestellt?» — der Agent löst es einmal, schreibt die Datei <code>knowledge/backup-config.md</code>, und diese Frage stellen Sie nie wieder.</p>
+
+    <h2>Was unterscheidet das von ChatGPT</h2>
+
+    <p>Bei ChatGPT ist das Gedächtnis <strong>deren</strong>. Es liegt auf den Servern von OpenAI, wird durch deren Regeln reguliert. Beim Agenten — ein Ordner auf Ihrem Server. Heruntergeladen, archiviert, übertragen — fertig. Gesprächsverlauf, Persönlichkeit, Fakten, Nachschlagewerke — das gehört Ihnen.</p>
+    <p>Noch ein wichtiges Detail: Der Agent <strong>entscheidet selbst, was wohin kommt</strong>. ChatGPT speichert den gesamten Strom der Reihe nach, der Agent strukturiert — Wichtiges in <code>MEMORY.md</code>, Chronik ins Tagebuch, Themen in <code>knowledge/</code>. Nach einem Monat sehen Sie eine durchdachte Wissenskarte — keine chaotische Chat-Ablage.</p>
+
+    <div class="note-box">
+      <strong>Mein Rat an Sie</strong>
+      <p>Fangen Sie nicht sofort an, alles von Hand zu bearbeiten. Benutzen Sie den Agenten einfach — er schreibt selbst. Wenn er einen neuen Fakt erfährt — trägt er ihn in <code>MEMORY.md</code> ein. Wenn der Tag endet — schließt er das Tagebuch. Wenn ein Thema groß wird — legt er eine Datei in <code>knowledge/</code> an.</p>
+      <p>Ihre Aufgabe — gelegentlich in <code>~/workspace/MEMORY.md</code> hineinschauen und lesen. Sagen Sie dem Agenten: «Korrigiere in MEMORY.md, dass ich nicht mehr mit X arbeite» — er korrigiert es. Diese Dateien gehören Ihnen.</p>
+    </div>
+  </div>
+
+  <div class="next-articles">
+    <p>In diesem Abschnitt</p>
+    <div class="next-grid">
+      <div class="next-card" onclick="openArticle('article-memory-levels')"><span>Drei Gedächtnisebenen des Agenten — warum er klüger ist als ChatGPT</span><em>6 Min →</em></div>
+      <div class="next-card" onclick="openArticle('article-soul-user')"><span>SOUL.md und USER.md — Persönlichkeit des Agenten und Ihr Profil</span><em>6 Min →</em></div>
+      <div class="next-card" onclick="openArticle('article-memory-file')"><span>MEMORY.md — was für immer erinnert wird</span><em>5 Min →</em></div>
+      <div class="next-card" onclick="openArticle('article-diaries')"><span>Tagesjournale — die Chronik des Arbeitstages</span><em>5 Min →</em></div>
+      <div class="next-card" onclick="openArticle('article-knowledge-dir')"><span>knowledge/ — thematische Nachschlagewerke</span><em>5 Min →</em></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTIKEL: SOUL.MD UND USER.MD ═══ -->
+<div class="container article-page" id="article-soul-user">
+  <div class="article-meta">
+    <span class="read-time">6 Min</span>
+    <span>Aktualisiert 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">SOUL.md und USER.md — Persönlichkeit des Agenten und Ihr Profil</h1>
+  <p class="article-tagline">Zwei Pässe des Agenten — wer er ist und wer Sie sind. Ohne sie ist er nur ein generischer Bot.</p>
+
+  <div class="article-body">
+    <p>Ihr Agent spricht nicht wie ein gewöhnlicher KI-Assistent. Er hat seine eigene Ausdrucksweise, seinen eigenen Ton, er spürt wann er einen Witz machen kann und wann es ernst ist. Das ist keine Magie. Das sind zwei kleine Textdateien auf Ihrem Server. Eine ist dafür zuständig, <strong>wie der Agent ist</strong>. Die andere — <strong>wer Sie sind</strong>.</p>
+
+    <h2>Die wichtigste Botschaft</h2>
+
+    <div class="note-box">
+      <strong>Zwei Dateien — zwei Bedeutungen</strong>
+      <p><code>SOUL.md</code> — Charakter des Agenten: wie er spricht, was er mag, was er nicht tut.</p>
+      <p><code>USER.md</code> — wer Sie sind: Name, Bereich, Gewohnheiten, Kommunikationston.</p>
+      <p>Der Agent liest beide vor jeder Antwort neu. Deshalb klingt er wie <strong>Ihrer</strong>, nicht wie ein generischer Bot.</p>
+    </div>
+
+    <h2><code>SOUL.md</code> — Persönlichkeit des Agenten</h2>
+
+    <p>Das ist die wichtigste Datei seiner «Seele». Sie liegt in <code>~/workspace/SOUL.md</code>. Dort steht, <strong>wie der Agent sein soll</strong>:</p>
+    <ul>
+      <li><strong>Name, Stil, Ton, Sprache</strong> — zum Beispiel «Jarvis, warmer älterer Kamerad, per Sie, auf Deutsch».</li>
+      <li><strong>Konstitution</strong> — fünf Prinzipien in Prioritätsreihenfolge. Das Wichtigste: «keine irreversiblen Aktionen ohne Bestätigung» (P1). Und «Ehrlichkeit» — wenn er es nicht weiß, sagt er «ich weiß es nicht», statt sich etwas auszudenken.</li>
+      <li><strong>Drift-Detektor</strong> — eine Liste von Antimustern, die der Agent bei sich selbst bemerkt. «Ich habe drei Antworten hintereinander als Liste gegeben» — stopp, auf lebendige Sprache umschalten.</li>
+      <li><strong>Antwortformat</strong> — kurze Absätze, ohne Hype-Emojis, ohne Floskeln «Natürlich!», «Tolle Frage!».</li>
+      <li><strong>Verbotene Muster</strong> — konkrete Phrasen und Gewohnheiten, von denen der Agent sich fernhält.</li>
+    </ul>
+
+    <div class="note-box warning">
+      <strong>🤔 Begriff: «Konstitution»</strong>
+      <p>Fünf Regeln des Agenten, die er sich selbst über alles andere stellt. Wenn Sie ihn um etwas Gefährliches bitten — hält er inne nicht weil er «es nicht kann», sondern weil er <strong>es sich selbst verboten hat</strong>.</p>
+    </div>
+
+    <p>Diese Datei wird bei der ersten Einrichtung gefüllt, aber danach können Sie alles ergänzen was Sie möchten. Sie wollen, dass der Agent Sie «Chef» nennt — schreiben Sie es hinein. Sie wollen, dass er das Wort «kurz gesagt» nicht benutzt — schreiben Sie es in die verbotenen Muster.</p>
+
+    <h2><code>USER.md</code> — Ihr Profil</h2>
+
+    <p>Das ist die Datei über Sie. Sie liegt in <code>~/workspace/USER.md</code>. Die Aufgabe ist einfach — dem Agenten erzählen, mit wem er spricht:</p>
+    <ul>
+      <li><strong>Name, Bereich, Rolle</strong> — «Thomas, Experte für KI im Geschäftsbereich, leite Kurs».</li>
+      <li><strong>Arbeitskontext</strong> — womit Sie sich beschäftigen, welche Aufgaben Sie lösen.</li>
+      <li><strong>Technisches Niveau</strong> — «habe an der Uni Python geschrieben, Landingpages gebaut, stehe Code gelassen gegenüber».</li>
+      <li><strong>Kommunikation</strong> — Text oder Sprache, Anredeform, wie viel Sie in einer Antwort lesen möchten.</li>
+    </ul>
+    <p>Wird natürlich gefüllt, im ersten Gespräch. Nach einer Woche Arbeit wird die Datei zum genauen Portrait — und der Agent hört auf, immer wieder dasselbe zu fragen.</p>
+
+    <h2>Wie sie zusammenwirken</h2>
+
+    <p>Stellen Sie sich vor: Sie schreiben «Erstelle einen Verkaufsbericht für April». Was beim Agenten in einer halben Sekunde passiert:</p>
+    <ol>
+      <li>Öffnet <code>SOUL.md</code> — «Ich bin Jarvis, per Sie, ohne Hype-Emojis, Aktionen wichtiger als Berichte».</li>
+      <li>Öffnet <code>USER.md</code> — «Das ist Thomas. Leitet Kurs. Mag keine langen Antworten».</li>
+      <li>Öffnet <code>MEMORY.md</code> — «Verkäufe im April — das betrifft den Kurs ‹Architekt›, Conversion-Zahlen gefragt».</li>
+      <li>Erst danach schreibt er die Antwort.</li>
+    </ol>
+    <p>Deshalb erhalten Sie «Ihren» Agenten, nicht einen für alle gleichen. Entfernen Sie <code>SOUL.md</code> — er wird höflich, aber gesichtslos. Entfernen Sie <code>USER.md</code> — er fragt jedes Mal «was ist eigentlich Ihr Geschäft?».</p>
+
+    <h2>Was Sie manuell ändern dürfen</h2>
+
+    <div class="note-box success">
+      <strong>✅ GERNE</strong>
+      <p><code>USER.md</code> — das betrifft Sie. Ändern Sie Bereich, Ton, Kontakte — der Agent sagt nur Danke. <code>SOUL.md</code> Abschnitte zu Stil und Ton — wenn Sie einen anderen Namen oder ein anderes Format möchten, schreiben Sie es. Die Konstitution P0–P4 nicht herauswerfen.</p>
+    </div>
+
+    <div class="note-box warning">
+      <strong>⚠ VORSICHTIG</strong>
+      <p><code>SOUL.md</code> Drift-Detektor und Verbotene Muster. Sie können eigene ergänzen, aber löschen Sie nicht alles auf einmal — ohne sie gleitet der Agent in den Roboter-Modus.</p>
+    </div>
+
+    <div class="note-box danger">
+      <strong>❌ NICHT ANFASSEN</strong>
+      <p>Prinzip P1 «No Irreversible Harm» — das ist die Versicherung gegen Datenverlust, Force-Push und Geldausgaben. Deaktivieren Sie es — Sie werden es bereuen. Dateien komplett löschen — ohne <code>SOUL.md</code> wird der Agent zur generischen KI.</p>
+    </div>
+
+    <div class="note-box">
+      <strong>Mein Rat an Sie</strong>
+      <p>Öffnen Sie jetzt beide Dateien wenigstens einmal und lesen Sie sie durch. Sagen Sie dem Agenten einfach: «Lies mir dein SOUL.md vor und erzähle, was darin über dich steht». Nach so einer «Inventur» entstehen meist zwei, drei Wünsche: «das hier ändern», «das hier hinzufügen». Sagen Sie es — der Agent bearbeitet es selbst und zeigt Ihnen das Diff. Kein Texteditor, keine Angst.</p>
+      <p>Diese zwei Dateien sind keine Einstellungen in einem Admin-Panel. Das sind <strong>lebendige Hefte</strong>, die mit Ihnen wachsen. Nach einem Monat lesen Sie sie erneut — und lächeln darüber, wie genau Sie dort beschrieben sind.</p>
+    </div>
+  </div>
+
+  <div class="next-articles">
+    <p>In diesem Abschnitt</p>
+    <div class="next-grid">
+      <div class="next-card" onclick="openArticle('article-memory-levels')"><span>Drei Gedächtnisebenen des Agenten — warum er klüger ist als ChatGPT</span><em>6 Min →</em></div>
+      <div class="next-card" onclick="openArticle('article-soul-user')"><span>SOUL.md und USER.md — Persönlichkeit des Agenten und Ihr Profil</span><em>6 Min →</em></div>
+      <div class="next-card" onclick="openArticle('article-memory-file')"><span>MEMORY.md — was für immer erinnert wird</span><em>5 Min →</em></div>
+      <div class="next-card" onclick="openArticle('article-diaries')"><span>Tagesjournale — die Chronik des Arbeitstages</span><em>5 Min →</em></div>
+      <div class="next-card" onclick="openArticle('article-knowledge-dir')"><span>knowledge/ — thematische Nachschlagewerke</span><em>5 Min →</em></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTIKEL: MEMORY.MD ═══ -->
+<div class="container article-page" id="article-memory-file">
+  <div class="article-meta">
+    <span class="read-time">5 Min</span>
+    <span>Aktualisiert 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">MEMORY.md — was für immer erinnert wird</h1>
+  <p class="article-tagline">Das Notizbuch, das immer auf der wichtigsten Seite aufgeschlagen ist. Nicht mehr als 200 Zeilen — sonst ertrinkt es.</p>
+
+  <div class="article-body">
+    <p><code>MEMORY.md</code> — das ist das oberste Regal des Agentengedächtnisses. Dort liegt, was er ohne Sie morgen nicht verstehen kann. Name, Projekte, Bereiche, Schlüsselregeln, wichtige Links. Alles, was <strong>immer im Kopf sein muss</strong>, nicht nur heute. Diese Datei liest der Agent jedes Mal neu, wenn Sie den Chat öffnen — deshalb beginnen Sie nie ein Gespräch von null.</p>
+
+    <h2>Die wichtigste Botschaft</h2>
+
+    <div class="note-box">
+      <strong>Die Hauptregel — 200 Zeilen</strong>
+      <p><code>MEMORY.md</code> lebt nach einer strengen Regel: <strong>nicht mehr als 200 Zeilen</strong>. Wenn es überfüllt ist — bringt der Agent selbst Ordnung: löscht Veraltetes, fasst Duplikate zusammen, behält nur Lebendiges. Ihre Aufgabe — gelegentlich hineinschauen und sagen «das hier ist nicht mehr aktuell, vergiss es».</p>
+    </div>
+
+    <h2>Was hineinkommt</h2>
+
+    <p>In <code>MEMORY.md</code> kommt, was <strong>Ihre Arbeit mit dem Agenten langfristig bestimmt</strong>:</p>
+    <ul>
+      <li><strong>Wer Sie sind</strong> — Name, Bereich, Rolle.</li>
+      <li><strong>Aktive Projekte</strong> — je Projekt eine Zeile.</li>
+      <li><strong>Tech-Stack und Tools</strong> — was Sie nutzen, was Sie nicht mögen.</li>
+      <li><strong>Persönliche Präferenzen</strong> — Arbeitsstil, Gewohnheiten, Ton. «Ich mag keine langen Antworten», «gib immer erst den Plan, dann die Aktionen».</li>
+      <li><strong>Schlüsselregeln und «rote Linien»</strong> — «Niemals direkt in main pushen ohne mein OK», «Deployment nur freitags».</li>
+      <li><strong>Wichtige Links</strong> — Repositories, Dashboards. Ohne Schlüssel und Passwörter — das ist kritisch.</li>
+    </ul>
+
+    <h2>Was nicht hineingehört</h2>
+
+    <p><code>MEMORY.md</code> ist kein Abstellraum. Was nur einmal gebraucht wird — das ins Tagesjournal. Was lang und thematisch ist — in <code>knowledge/</code>. Hierher — nur was Sie wollen, dass der Agent ständig im Kopf hat.</p>
+
+    <table class="data-table">
+      <thead><tr><th>Wohin</th><th>Was hineinschreiben</th></tr></thead>
+      <tbody>
+        <tr><td><code>MEMORY.md</code></td><td>Langzeitfakten, ≤ 200 Zeilen</td></tr>
+        <tr><td><code>memory/2026-05-10.md</code></td><td>«Heute Landingpage gebaut, auf Blau geeinigt»</td></tr>
+        <tr><td><code>knowledge/server-setup.md</code></td><td>Detaillierte Server-Config auf 5 Bildschirmen</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Wie das funktioniert — das Gedächtnis eines Menschen und eines Agenten</h2>
+
+    <p>Das Gedächtnis des Agenten ist wie Ihr eigenes aufgebaut, nur in Dateien aufgeteilt. Beim Menschen arbeiten drei Schichten:</p>
+    <ul>
+      <li><strong>Episodisch</strong> — was heute war. Wird einige Tage gespeichert, dann verblasst es.</li>
+      <li><strong>Langzeit</strong> — wer Sie sind, Schlüsselfakten des Lebens. Wird jahre-lang erinnert.</li>
+      <li><strong>Semantisch</strong> — Wissen und Fähigkeiten. Tiefes Verständnis.</li>
+    </ul>
+    <p>Jede Nacht sortiert das Gehirn Ereignisse und entscheidet: das hier — wichtig, ins Langzeitgedächtnis übertragen; das hier — vergessen. Wissenschaftler nennen das <strong>Gedächtniskonsolidierung</strong>. Beim Agenten — dasselbe, nur ohne Schlaf.</p>
+
+    <table class="data-table">
+      <thead><tr><th>Mensch</th><th>Agent</th></tr></thead>
+      <tbody>
+        <tr><td>Tagesereignisse (Hippocampus)</td><td><code>memory/YYYY-MM-DD.md</code></td></tr>
+        <tr><td>Langzeit (Großhirnrinde)</td><td><code>MEMORY.md</code></td></tr>
+        <tr><td>Semantisch (Wissen «wie es aufgebaut ist»)</td><td><code>knowledge/&lt;thema&gt;.md</code></td></tr>
+      </tbody>
+    </table>
+
+    <h2>Wann schreibt der Agent selbst, wann soll man bitten</h2>
+
+    <p><strong>Der Agent schreibt automatisch</strong> wenn Sie ihm etwas Wichtiges über sich oder Ihr Geschäft erzählt haben, eine Regel gegeben haben, die offensichtlich die gesamte Arbeit betrifft, oder dreimal dieselbe Frage gestellt haben.</p>
+
+    <p><strong>Bitten Sie explizit</strong> wenn Sie einen Fakt festhalten möchten: «Merke das für immer — unser Designer antwortet auf E-Mails nur bis mittags». Oder korrigieren: «In MEMORY.md steht, ich arbeite mit Salon X — wir haben uns getrennt, lösch das». Oder inventarisieren: «Lies mir dein MEMORY.md vor und sage mir, was veraltet aussieht».</p>
+
+    <h2>Was gespeichert werden darf und was nicht</h2>
+
+    <div class="note-box success">
+      <strong>✅ ERLAUBT</strong>
+      <p>Name, Bereich, Projekte. Namen von Diensten, Domains, Repositories (Link ja, Token — nein). Persönliche Arbeitsregeln: «Nur per Sie», «nicht lang schreiben», «Deployment freitags».</p>
+    </div>
+
+    <div class="note-box warning">
+      <strong>⚠ VORSICHTIG</strong>
+      <p>Daten von Kunden und Auftragnehmern — Namen und Telefonnummern nur wenn mit ihnen abgestimmt. Lange Geschichten — 5 Bildschirme über Architektur ist bereits <code>knowledge/architecture.md</code>.</p>
+    </div>
+
+    <div class="note-box danger">
+      <strong>❌ NIEMALS</strong>
+      <p>API-Schlüssel, Tokens, Passwörter — nur über /settings. Inhalt der .env — der Agent zeigt einen Schlüssel aus .env im Chat nie an.</p>
+    </div>
+
+    <div class="note-box">
+      <strong>Mein Rat an Sie</strong>
+      <p>Gewöhnen Sie sich eine einfache Gewohnheit an: <strong>einmal im Monat — Schreibtisch aufräumen</strong>. Sagen Sie dem Agenten: «Lies mir dein MEMORY.md vor und sage mir, was veraltet ist». Fünf Minuten — und das Notizbuch ist wieder frisch.</p>
+      <p>Merken Sie sich eine Formel: <strong>«Merke das für immer — …»</strong>. Wenn Sie dem Agenten etwas Wichtiges sagen — beginnen Sie den Satz einfach mit diesen Worten. Er entscheidet selbst, in welchen Teil der MEMORY.md er es einordnet.</p>
+    </div>
+  </div>
+
+  <div class="next-articles">
+    <p>In diesem Abschnitt</p>
+    <div class="next-grid">
+      <div class="next-card" onclick="openArticle('article-memory-levels')"><span>Drei Gedächtnisebenen des Agenten — warum er klüger ist als ChatGPT</span><em>6 Min →</em></div>
+      <div class="next-card" onclick="openArticle('article-soul-user')"><span>SOUL.md und USER.md — Persönlichkeit des Agenten und Ihr Profil</span><em>6 Min →</em></div>
+      <div class="next-card" onclick="openArticle('article-memory-file')"><span>MEMORY.md — was für immer erinnert wird</span><em>5 Min →</em></div>
+      <div class="next-card" onclick="openArticle('article-diaries')"><span>Tagesjournale — die Chronik des Arbeitstages</span><em>5 Min →</em></div>
+      <div class="next-card" onclick="openArticle('article-knowledge-dir')"><span>knowledge/ — thematische Nachschlagewerke</span><em>5 Min →</em></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTIKEL: TAGESJOURNALE ═══ -->
+<div class="container article-page" id="article-diaries">
+  <div class="article-meta">
+    <span class="read-time">5 Min</span>
+    <span>Aktualisiert 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">Tagesjournale — die Chronik des Arbeitstages</h1>
+  <p class="article-tagline">Die Seite des Tagesplaners für heute. Bis abends gefüllt, morgens ein neues leeres Blatt.</p>
+
+  <div class="article-body">
+    <p>Jeden Tag erscheint beim Agenten ein neues Blatt im Ordner <code>~/workspace/memory/</code>. Die Datei heißt nach dem Datum — <code>2026-05-10.md</code>. Der Agent trägt darin selbst, im Laufe des Tages, das Wichtigste ein: welche Aufgaben erledigt wurden, worüber man sich geeinigt hat, welche Probleme aufgetaucht sind, womit man aufgehört hat. Das ist sein <strong>Tagesjournal</strong>. Genau deshalb können Sie entspannt nach einer Woche sagen «erinnerst du dich, was wir am Mittwoch zur Landingpage besprochen haben?» — der Agent öffnet das passende Blatt und macht dort weiter.</p>
+
+    <h2>Die wichtigste Botschaft</h2>
+
+    <div class="note-box">
+      <strong>Das Journal ist kein Ablageort, sondern eine Ereignischronik</strong>
+      <p>Ins Journal kommt, was <strong>heute passiert ist</strong>: Aufgaben, Entscheidungen, Ergebnisse. Keine allgemeinen Regeln (das ist <code>MEMORY.md</code>), keine tiefen Nachschlagewerke (das ist <code>knowledge/</code>). Einfach eine Chronik. Ein Tag — eine Datei. Alte Tage werden nicht gelöscht — sie werden zum langen Gedächtnis «wie wir zusammengearbeitet haben».</p>
+    </div>
+
+    <h2>Was automatisch hineinkommt</h2>
+
+    <p>Der Agent schreibt ins Journal ohne Erinnerungen. Standardinhalt:</p>
+    <ul>
+      <li><strong>Aufgaben und ihr Status</strong> — was begonnen, was beendet, was aufgeschoben wurde.</li>
+      <li><strong>Getroffene Entscheidungen</strong> — «Thomas hat Blau für die Landingpage gewählt», «wir haben uns geeinigt, nur freitags zu deployen».</li>
+      <li><strong>Gefundene Probleme und Lösungen</strong> — «Senden über Deepgram hat nicht funktioniert → Schlüssel in /settings geprüft → OK».</li>
+      <li><strong>Tagesergebnis</strong> — kurze Notiz «was erledigt, was geblieben ist».</li>
+      <li><strong>Ihre Ideen und Beobachtungen</strong> — was Sie im Format «müsste man probieren», «hier ein Gedanke», «kommen wir darauf zurück» gesagt haben.</li>
+    </ul>
+
+    <h2>Wie sich das Journal von <code>MEMORY.md</code> unterscheidet</h2>
+
+    <p>Angenommen, Sie sagen: <em>«Heute haben wir eine neue Landingpage für den Kurs gestartet. Adresse — course.example.de. Und generell machen wir jetzt alle Landingpages auf Vercel, nicht mehr auf Tilda wie früher.»</em></p>
+    <ul>
+      <li>Im <strong>Tagesjournal</strong>: «2026-05-10 — neue Landingpage für den Kurs unter course.example.de gestartet». Das ist ein Ereignis.</li>
+      <li>In <strong>MEMORY.md</strong>: «Alle Landingpages werden jetzt auf Vercel gemacht (früher Tilda)». Das ist eine Regel für die gesamte weitere Arbeit.</li>
+    </ul>
+    <p>Ein Gespräch — zwei Einträge in verschiedenen Schichten. In einem halben Jahr finden Sie «wann haben wir diese Landingpage gestartet?» — das steht im Journal vom 10. Mai. Und «wie machen wir Landingpages?» — das steht in MEMORY.md, immer griffbereit.</p>
+
+    <h2>Wie man das benutzt</h2>
+
+    <ul>
+      <li>«Was haben wir gestern gemacht?» — der Agent öffnet das gestrige Blatt und erzählt.</li>
+      <li>«Was haben wir diese Woche gemacht?» — stellt eine Chronologie aus 5–7 Dateien zusammen.</li>
+      <li>«Erinnerst du dich, was wir am Montag zu X besprochen haben?» — findet die Erwähnung und gibt den Kontext.</li>
+      <li>«Wann haben wir diese Landingpage gestartet?» — geht durch die Journale und findet das Datum.</li>
+      <li>«Zeig die Ergebnisse der letzten drei Tage» — gibt eine kurze Zusammenfassung.</li>
+    </ul>
+    <p>Sie müssen kein genaues Datum nennen. Sprechen Sie menschlich — «gestern», «letzte Woche», «Anfang Mai» — der Agent findet es selbst.</p>
+
+    <h2>Was nicht ins Journal kommt</h2>
+
+    <ul>
+      <li>Technische Details auf 5 Bildschirmen — das ist <code>knowledge/&lt;thema&gt;.md</code>.</li>
+      <li>Regeln, die die gesamte Arbeit betreffen — das ist <code>MEMORY.md</code>.</li>
+      <li>Inhalt der .env, Schlüssel, Tokens — nirgendwohin, nur über /settings.</li>
+    </ul>
+    <p>Wenn Sie möchten, dass eine Notiz sicher ins Journal kommt — sagen Sie: «Schreib ins heutige Journal, dass …». Das funktioniert explizit.</p>
+
+    <h2>Was mit alten Tagen passieren soll</h2>
+
+    <p>Sie verschwinden nirgendwohin — sie liegen alle in <code>~/workspace/memory/</code>, angefangen vom ersten Tag. Nach einem Jahr gibt es 365 Dateien. Ein voller Ordner mit Journalen für ein Jahr belegt selten mehr als 5–10 Megabyte.</p>
+    <p>Manchmal schaut der Agent selbst in alte Journale. «Wann haben wir dieses Projekt zum ersten Mal besprochen?» — er geht ins Archiv und findet es. Das ist sein episodisches Langzeitgedächtnis: es verblasst nicht nach einem Monat, sondern liegt in voller Genauigkeit vor.</p>
+
+    <div class="note-box">
+      <strong>Mein Rat an Sie</strong>
+      <p>Versuchen Sie nicht, die Journale jeden Tag von Hand zu lesen. Fragen Sie den Agenten einfach <strong>einmal pro Woche, am Freitag</strong>: «Fasse die Wochenergebnisse zusammen — was haben wir geschafft, was ist geblieben». Er geht selbst durch 5 Dateien und gibt Ihnen eine Zusammenfassung. In einer Minute haben Sie das Bild «was ist eigentlich passiert».</p>
+      <p>Und merken Sie sich eine Phrase: <strong>«Schreib ins heutige Journal, dass …»</strong>. Nach einem Monat finden Sie es in 3 Sekunden.</p>
+    </div>
+  </div>
+
+  <div class="next-articles">
+    <p>In diesem Abschnitt</p>
+    <div class="next-grid">
+      <div class="next-card" onclick="openArticle('article-memory-levels')"><span>Drei Gedächtnisebenen des Agenten — warum er klüger ist als ChatGPT</span><em>6 Min →</em></div>
+      <div class="next-card" onclick="openArticle('article-soul-user')"><span>SOUL.md und USER.md — Persönlichkeit des Agenten und Ihr Profil</span><em>6 Min →</em></div>
+      <div class="next-card" onclick="openArticle('article-memory-file')"><span>MEMORY.md — was für immer erinnert wird</span><em>5 Min →</em></div>
+      <div class="next-card" onclick="openArticle('article-diaries')"><span>Tagesjournale — die Chronik des Arbeitstages</span><em>5 Min →</em></div>
+      <div class="next-card" onclick="openArticle('article-knowledge-dir')"><span>knowledge/ — thematische Nachschlagewerke</span><em>5 Min →</em></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTIKEL: KNOWLEDGE/ ═══ -->
+<div class="container article-page" id="article-knowledge-dir">
+  <div class="article-meta">
+    <span class="read-time">5 Min</span>
+    <span>Aktualisiert 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">knowledge/ — thematische Nachschlagewerke</h1>
+  <p class="article-tagline">Die Bibliothek im Rücken mit thematischen Ordnern. Eine Datei — ein Thema, man schlägt nach wenn nötig.</p>
+
+  <div class="article-body">
+    <p>Die dritte Gedächtnisebene — die am meisten unterschätzte. Aber genau sie verwandelt den Agenten vom «universellen Assistenten» in einen <strong>Experten für Ihre Angelegenheiten</strong>. Der Ordner <code>~/workspace/knowledge/</code> ist eine Bibliothek, in die der Agent im Laufe der Arbeit tiefe Nachschlagewerke ablegt: wie Ihr Server aufgebaut ist, wie Ihr Verkaufstrichter funktioniert. Und das nächste Mal «denkt» der Agent nicht neu nach, sondern öffnet sein Nachschlagewerk.</p>
+
+    <h2>Die wichtigste Botschaft</h2>
+
+    <div class="note-box">
+      <strong>Eine Datei — ein Thema, ohne Größenbegrenzung</strong>
+      <p>Im Unterschied zu <code>MEMORY.md</code> (≤200 Zeilen) gibt es bei <code>knowledge/</code> kein Limit. Jedes Thema lebt in seiner eigenen Datei — mal 5 Zeilen, mal 50 Bildschirme. Das ist das <strong>langfristige semantische Gedächtnis</strong> des Agenten: Wissen über Ihre Welt, für immer aufgebaut.</p>
+    </div>
+
+    <h2>Wann ein Thema hierher geht und nicht in <code>MEMORY.md</code></h2>
+
+    <p>Einfaches Merkmal: wenn die Beschreibung mehr als 5–7 Zeilen einnimmt und zu <strong>einem konkreten Bereich</strong> gehört, ist es besser in <code>knowledge/</code>.</p>
+    <ul>
+      <li>«Backup läuft täglich auf Google Drive» — kurzer Fakt, in <code>MEMORY.md</code>.</li>
+      <li>«Backup über Skript <code>~/scripts/backup.sh</code>, läuft per Cron um 03:00, verschlüsselt, WebDAV, Rotation 14 Tage, Log in <code>/var/log/backup.log</code>» — das ist bereits <code>knowledge/backup.md</code>.</li>
+    </ul>
+    <p><code>MEMORY.md</code> — zum Kennenlernen. <code>knowledge/</code> — für die Tiefe.</p>
+
+    <h2>Was normalerweise in <code>knowledge/</code> lebt</h2>
+
+    <ul>
+      <li><strong>Projektarchitektur</strong> — wie alles aufgebaut ist. <code>knowledge/architecture-project.md</code></li>
+      <li><strong>Server-Configs</strong> — Ports, Pfade, Variablen. <code>knowledge/server-prod.md</code></li>
+      <li><strong>Gefundene Lösungen</strong> — «wenn SSL nicht greift, machen wir X». <code>knowledge/troubleshooting.md</code></li>
+      <li><strong>Geschäftsprozesse</strong> — Verkaufstrichter, Kundenpfad. <code>knowledge/sales-funnel.md</code></li>
+      <li><strong>Kontakte und Zugänge nach Rollen</strong> — wer wofür zuständig ist, ohne Passwörter. <code>knowledge/team-roles.md</code></li>
+      <li><strong>Rezepte für wiederkehrende Aufgaben</strong> — «wie man eine neue Landingpage ausrollt». <code>knowledge/playbook-launch-landing.md</code></li>
+      <li><strong>Produkt- und Servicebeschreibungen</strong> — was wir verkaufen, worin der Wert liegt. <code>knowledge/products.md</code></li>
+    </ul>
+
+    <h2>Wie der Agent selbst entscheidet, ein Thema auszulagern</h2>
+
+    <ol>
+      <li><strong>Sie haben dasselbe 3 Mal gefragt.</strong> «Wie ist mein Backup eingestellt?» — der Agent löst es einmal und erstellt <code>knowledge/backup.md</code>. Beim nächsten Mal geht er direkt dorthin.</li>
+      <li><strong>Das Thema ist in MEMORY.md gewachsen.</strong> Der Eintrag ist länger als 7–10 Zeilen geworden — der Agent schlägt vor: «In ein eigenes Nachschlagewerk auslagern?». Sie stimmen zu — er verschiebt es und lässt in MEMORY.md nur einen kurzen Verweis.</li>
+      <li><strong>Sie haben direkt gebeten.</strong> «Lege ein Nachschlagewerk über unseren Verkaufstrichter an» — der Agent führt ein Mini-Interview durch und schreibt die Datei.</li>
+    </ol>
+    <p>Wenn Sie es beschleunigen möchten — sagen Sie einfach: «Das klingt nach einem eigenen Thema — leg ein Nachschlagewerk in knowledge/ an». Kein Nachdenken über Struktur, Dateinamen, Format. Der Agent macht es selbst.</p>
+
+    <h2>Wie man es benutzt</h2>
+
+    <p><strong>Gar nicht besonders.</strong> Wenn Sie eine Frage zum Thema stellen, prüft der Agent selbst — gibt es ein Nachschlagewerk? Wenn ja — öffnet er es und antwortet daraus.</p>
+    <ul>
+      <li>«Was habe ich zu X notiert?» — öffnet das entsprechende Nachschlagewerk.</li>
+      <li>«Zeig mir das Nachschlagewerk über den Server» — liest es im Chat vor.</li>
+      <li>«Ergänze <code>knowledge/&lt;thema&gt;.md</code> — jetzt haben wir auch Y» — ergänzt und zeigt das Diff.</li>
+      <li>«Vergiss X — wir benutzen es nicht mehr» — markiert die Datei als veraltet oder löscht sie nach Absprache.</li>
+    </ul>
+
+    <h2>Was hinein und was nicht</h2>
+
+    <div class="note-box success">
+      <strong>✅ IDEAL GEEIGNET</strong>
+      <p>Architektur und Configs — je genauer und vollständiger, desto besser orientiert sich der Agent danach. Rezepte für wiederkehrende Aufgaben — einmal beschrieben, dann «starte wie immer» bitten. Produktbeschreibungen — damit der Agent Texte in Ihrer Logik schreiben kann.</p>
+    </div>
+
+    <div class="note-box warning">
+      <strong>⚠ MIT VORSICHT</strong>
+      <p>Preise, Fristen, aktuelle Projekte — veralten schnell. Setzen Sie ein Datum an den Anfang der Datei und überprüfen Sie es einmal pro Quartal.</p>
+    </div>
+
+    <div class="note-box danger">
+      <strong>❌ NIEMALS</strong>
+      <p>Schlüssel, Passwörter, Tokens — nur über /settings. Personenbezogene Daten unter NDA — wenn Zweifel bestehen, lieber anonymisieren oder gar nicht speichern.</p>
+    </div>
+
+    <div class="note-box">
+      <strong>Mein Rat an Sie</strong>
+      <p>Benennen Sie Nachschlagewerke menschlich, wie Ordner auf dem Computer: <code>backup.md</code>, <code>server-prod.md</code>, <code>sales-funnel.md</code>. Kein <code>kb-v2-final-FINAL-geprüft.md</code> :)</p>
+      <p>Und versuchen Sie nicht, Nachschlagewerke im Voraus, auf leerem Platz zu schreiben. Das funktioniert so nicht. Gute Nachschlagewerke entstehen aus echten Aufgaben: etwas gemacht → wiederkehrendes Thema aufgetaucht → Agent hat Datei angelegt und aus der Diskussion gefüllt. Nach einem halben Jahr haben Sie 10–15 Nachschlagewerke — das ist die <strong>Karte Ihres Unternehmens</strong>, geschrieben vom Agenten nach der Arbeit mit Ihnen.</p>
+    </div>
+  </div>
+
+  <div class="next-articles">
+    <p>In diesem Abschnitt</p>
+    <div class="next-grid">
+      <div class="next-card" onclick="openArticle('article-memory-levels')"><span>Drei Gedächtnisebenen des Agenten — warum er klüger ist als ChatGPT</span><em>6 Min →</em></div>
+      <div class="next-card" onclick="openArticle('article-soul-user')"><span>SOUL.md und USER.md — Persönlichkeit des Agenten und Ihr Profil</span><em>6 Min →</em></div>
+      <div class="next-card" onclick="openArticle('article-memory-file')"><span>MEMORY.md — was für immer erinnert wird</span><em>5 Min →</em></div>
+      <div class="next-card" onclick="openArticle('article-diaries')"><span>Tagesjournale — die Chronik des Arbeitstages</span><em>5 Min →</em></div>
+      <div class="next-card" onclick="openArticle('article-knowledge-dir')"><span>knowledge/ — thematische Nachschlagewerke</span><em>5 Min →</em></div>
     </div>
   </div>
 </div>

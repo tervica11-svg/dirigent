@@ -617,7 +617,7 @@
         <div class="cat-count">4 Artikel</div>
       </div>
     </div>
-    <div class="cat-card" onclick="openArticle('article-first')">
+    <div class="cat-card" onclick="openArticle('article-mcp')">
       <div class="cat-icon">🔌</div>
       <div class="cat-info">
         <div class="cat-name">Integrationen über MCP</div>
@@ -4260,6 +4260,261 @@ Einmalig:  .env lokal speichern (sicher aufbewahren!)
     <div class="next-card" onclick="openArticle('article-proekty-how')"><span>Wie Projekte organisiert sind</span><em>5 Min →</em></div>
     <div class="next-card" onclick="openArticle('article-proekty-github')"><span>Was ist GitHub und warum brauchen wir es</span><em>6 Min →</em></div>
     <div class="next-card" onclick="openArticle('article-proekty-vercel')"><span>Was ist Vercel und Auto-Deployment</span><em>5 Min →</em></div>
+  </div>
+</div>
+
+<!-- ═══ HUB: INTEGRATIONEN ÜBER MCP ═══ -->
+<div class="container article-page" id="article-mcp">
+  <div class="article-meta">
+    <span>3 Artikel</span>
+  </div>
+  <h1 class="article-h1">🔌 Integrationen über MCP</h1>
+  <p class="article-tagline">MCP — die universelle Steckdose für den Agenten. Einen Dienst angeschlossen — der Agent kann einen neuen Trick.</p>
+
+  <div class="start-cards" style="margin-top:24px">
+    <div class="article-card" onclick="openArticle('article-mcp-what')">
+      <div class="card-top">
+        <div class="card-title">Was ist MCP und wozu braucht der Agent es</div>
+        <div class="card-time">4 Min</div>
+      </div>
+      <div class="card-desc">MCP ist eine universelle Steckdose. Der Agent steckt den Stecker ein — und bekommt Zugang zu einem neuen Dienst, ohne Programmierung.</div>
+    </div>
+    <div class="article-card" onclick="openArticle('article-mcp-connect')">
+      <div class="card-top">
+        <div class="card-title">Wie man einen MCP-Server verbindet — Schritt-für-Schritt</div>
+        <div class="card-time">6 Min</div>
+      </div>
+      <div class="card-desc">Eine JSON-Datei, zwei Zeilen Konfiguration — und der Agent beherrscht einen neuen Trick.</div>
+    </div>
+    <div class="article-card" onclick="openArticle('article-mcp-examples')">
+      <div class="card-top">
+        <div class="card-title">5 Beispiele — was man mit MCP machen kann</div>
+        <div class="card-time">7 Min</div>
+      </div>
+      <div class="card-desc">MCP verwandelt den Agenten vom Gesprächspartner zur Arbeitsmaschine. Kalender angeschlossen — der Agent plant Meetings.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ARTIKEL: WAS IST MCP ═══ -->
+<div class="container article-page" id="article-mcp-what">
+  <div class="article-meta">
+    <span class="read-time">4 Min</span>
+    <span>Aktualisiert 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">Was ist MCP und wozu braucht der Agent es</h1>
+  <p class="article-tagline">MCP ist eine universelle Steckdose. Der Agent steckt den Stecker ein — und bekommt Zugang zu einem neuen Dienst, ohne Programmierung.</p>
+
+  <div class="article-body">
+    <p>Ihr Agent kann mit Dateien arbeiten, im Internet suchen, Code schreiben. Aber manchmal braucht man mehr: ein Mockup im Design-Editor öffnen, Daten von einer Website abrufen, eine Automatisierung starten. Dafür gibt es MCP — ein Protokoll, das dem Agenten ermöglicht, sich mit externen Tools zu verbinden.</p>
+
+    <h2>Die universelle Steckdose</h2>
+    <div class="note-box">
+      MCP (Model Context Protocol) ist ein Standardanschluss zwischen dem Agenten und externen Diensten. Ein Protokoll, ein Verbindungspunkt, Dutzende Möglichkeiten. Sie müssen die API jedes Dienstes nicht verstehen — es reicht, den «Stecker» in die Konfiguration einzustecken.
+    </div>
+
+    <h2>Wie es funktioniert</h2>
+    <p><b>Ohne MCP</b> — der Agent kann im Internet suchen und mit Dateien auf dem Server arbeiten. Das reicht für viele Aufgaben, aber nicht für alle.</p>
+    <p><b>Mit MCP</b> — der Agent bekommt direkten Zugang zu externen Diensten: Kalender, E-Mail, Tabellen, Design-Editor. Er sieht die Möglichkeiten des Dienstes und ruft die benötigten Aktionen selbst auf — ohne Ihre Hilfe.</p>
+
+    <div class="tree-box">🖥 Agent (Claude Code CLI)
+│
+├── 📁 Dateien auf dem Server  (eingebaut)
+├── 🌐 Internet und curl       (eingebaut)
+│
+└── 🔌 MCP-Server              (~/.claude.json)
+    ├── pencil                 Design-Editor
+    ├── supadata               Website-Daten
+    └── ...                    beliebiger MCP-Server</div>
+
+    <h2>Was bereits vorinstalliert ist</h2>
+    <div class="note-box">
+      <b>Pencil</b> — ein Tool für die Arbeit mit Design-Mockups (Dateien <code>.pen</code>). Der Agent kann Mockups öffnen, deren Inhalt lesen, Änderungen vornehmen, Screenshots machen und Elemente exportieren. Alles direkt aus Telegram, ohne ein separates Programm zu öffnen. Pencil läuft lokal auf Ihrem Server und sendet keine Daten nach außen.
+    </div>
+
+    <h2>Zwei Verbindungstypen</h2>
+    <p><b>Lokal (stdio)</b> — das Programm läuft direkt auf Ihrem Server (Beispiel: Pencil). Daten verlassen den Server nicht — sicherer.</p>
+    <p><b>Cloud (http)</b> — der Agent wendet sich an einen Dienst im Internet (Beispiel: Supadata, Google Calendar). Daten werden über das Netzwerk übertragen — geeignet für externe Dienste.</p>
+
+    <h2>Wo die Konfiguration gespeichert ist</h2>
+    <p>Alle verbundenen MCP-Server sind in einer einzigen Datei gespeichert:</p>
+    <div class="tree-box">~/.claude.json  →  Abschnitt mcpServers</div>
+    <p>Claude Code liest diese Datei bei jedem Start. Neuen Server hinzugefügt — bei der nächsten Nachricht sieht der Agent ihn bereits.</p>
+
+    <h2>Unterschied zwischen MCP und API-Schlüsseln</h2>
+    <p>In <code>/settings</code> fügen Sie Schlüssel zu Diensten hinzu. Der Agent verwendet sie manuell — er bildet Anfragen an jeden Dienst selbst.</p>
+    <p>MCP funktioniert einfacher: Der Agent verbindet sich mit dem Dienst und sieht eine Liste fertiger Aktionen. Dann ruft er die benötigte auf — der Dienst kümmert sich selbst um die Details.</p>
+    <div class="note-box">
+      <b>Analogie:</b> Ein API-Schlüssel ist wie eine Telefonnummer. Sie rufen selbst an und sagen, was Sie brauchen. MCP ist wie ein Sekretär: Sie nennen die Aufgabe, und er weiß selbst, wen er anrufen und was er sagen soll.
+    </div>
+
+    <div class="note-box">
+      <b>Probieren Sie es jetzt aus:</b> Pencil ist bereits verbunden. Schicken Sie dem Agenten eine <code>.pen</code>-Datei oder bitten Sie: «Zeig mein Mockup». Wenn es funktioniert — MCP ist bei Ihnen richtig konfiguriert.
+    </div>
+  </div>
+
+  <div class="next-articles">
+    <div class="next-card" onclick="openArticle('article-mcp-connect')"><span>Wie man einen MCP-Server verbindet — Schritt-für-Schritt</span><em>6 Min →</em></div>
+    <div class="next-card" onclick="openArticle('article-mcp-examples')"><span>5 Beispiele — was man mit MCP machen kann</span><em>7 Min →</em></div>
+  </div>
+</div>
+
+<!-- ═══ ARTIKEL: WIE MCP VERBINDEN ═══ -->
+<div class="container article-page" id="article-mcp-connect">
+  <div class="article-meta">
+    <span class="read-time">6 Min</span>
+    <span>Aktualisiert 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">Wie man einen MCP-Server verbindet — Schritt-für-Schritt</h1>
+  <p class="article-tagline">Eine JSON-Datei, zwei Zeilen Konfiguration — und der Agent beherrscht einen neuen Trick.</p>
+
+  <div class="article-body">
+    <p>Die gesamte MCP-Konfiguration lebt in einer einzigen Datei — <code>~/.claude.json</code>. Neuen Server hinzufügen = einen Block in diese Datei eintragen. Entfernen = Block löschen. Kein Neustart — der Agent übernimmt die Änderungen bei der nächsten Nachricht.</p>
+
+    <div class="note-box">
+      <b>Eine Datei — alle Verbindungen:</b> <code>~/.claude.json</code> → Abschnitt <code>mcpServers</code>. Block hinzugefügt — Server verbunden. Block gelöscht — Server getrennt.
+    </div>
+
+    <h2>Methode 1: Den Agenten bitten</h2>
+    <p>Der einfachste Weg — sagen Sie dem Agenten direkt im Chat:</p>
+    <div class="tree-box">«Verbinde MCP-Server supadata, URL: https://mcp.supadata.dev/v1»</div>
+    <p>Der Agent liest <code>~/.claude.json</code> selbst, fügt einen neuen Eintrag in den Abschnitt <code>mcpServers</code> ein und schreibt die Datei zurück. Sie müssen keine Dateien von Hand öffnen.</p>
+
+    <h2>Methode 2: Über VS Code</h2>
+    <p>Wenn Sie VS Code Tunnel verbunden haben (<code>/connect</code>), können Sie die Datei manuell bearbeiten:</p>
+    <div class="tree-box">1. VS Code öffnen
+2. Datei ~/.claude.json öffnen
+3. Abschnitt "mcpServers" finden (oder erstellen, falls nicht vorhanden)
+4. Block des neuen Servers eintragen und speichern</div>
+
+    <h2>Konfigurationsformat</h2>
+    <p>Die Datei <code>~/.claude.json</code> sieht so aus:</p>
+    <div class="tree-box">{
+  "mcpServers": {
+    "pencil": {
+      "type": "stdio",
+      "command": "/home/agent/.pencil/mcp/visual_studio_code/out/mcpserver-linux-x64",
+      "args": ["--app", "visual_studio_code"],
+      "env": {}
+    },
+    "supadata": {
+      "type": "http",
+      "url": "https://mcp.supadata.dev/v1"
+    }
+  }
+}</div>
+
+    <h2>Typ stdio — Programm auf dem Server</h2>
+    <p>Wird verwendet, wenn der MCP-Server ein Programm ist, das auf Ihrem VPS läuft.</p>
+    <div class="tree-box">{
+  "type": "stdio",
+  "command": "/pfad/zum/programm",  // oder "npx", "node"
+  "args": ["argument1", "argument2"],
+  "env": {}  // Umgebungsvariablen (API-Schlüssel)
+}</div>
+    <p>Bei jedem Start startet Claude Code dieses Programm und kommuniziert über stdin/stdout. Wenn die Sitzung endet — wird der Prozess gestoppt.</p>
+
+    <h2>Typ http — Remote-Server</h2>
+    <p>Wird verwendet, wenn der MCP-Server in der Cloud unter einer URL läuft.</p>
+    <div class="tree-box">{
+  "type": "http",
+  "url": "https://server-adresse/pfad",
+  "headers": {
+    "Authorization": "Bearer ihr_token"
+  }
+}</div>
+
+    <h2>MCP-Server entfernen</h2>
+    <p><b>Über den Agenten:</b> Sagen Sie «Trenne MCP-Server supadata» — der Agent entfernt den Eintrag aus <code>~/.claude.json</code>.</p>
+    <p><b>Manuell:</b> Öffnen Sie <code>~/.claude.json</code> über VS Code, löschen Sie den Block des gewünschten Servers aus <code>mcpServers</code>, speichern Sie.</p>
+
+    <h2>Prüfen, was verbunden ist</h2>
+    <p>Bitten Sie den Agenten: «Welche MCP-Server habe ich verbunden?» — der Agent liest <code>~/.claude.json</code> und zeigt die Liste.</p>
+
+    <h2>Häufige Fehler</h2>
+    <div class="note-box">
+      <b>MCP-Server erscheint nicht nach dem Hinzufügen.</b> Der Agent liest die Konfiguration beim Start einer neuen Sitzung. Server während eines aktiven Gesprächs hinzugefügt — machen Sie <code>/reset</code>, und bei der nächsten Nachricht verbindet sich der Agent mit dem neuen Server.
+    </div>
+    <div class="note-box">
+      <b>Fehler «command not found» für stdio-Typ.</b> Das Programm ist nicht auf dem Server installiert. Wenn der MCP-Server <code>npx</code> erfordert — prüfen Sie, ob Node.js installiert ist. Wenn es eine Binärdatei ist — prüfen Sie den Pfad in <code>command</code> und die Ausführungsrechte (<code>chmod +x</code>).
+    </div>
+    <div class="note-box">
+      <b>Autorisierungsfehler für http-Typ.</b> Prüfen Sie, ob URL und Header korrekt angegeben sind. Wenn der Server einen API-Schlüssel erfordert — fügen Sie ihn in <code>headers</code> oder <code>env</code> ein.
+    </div>
+  </div>
+
+  <div class="next-articles">
+    <div class="next-card" onclick="openArticle('article-mcp-what')"><span>Was ist MCP und wozu braucht der Agent es</span><em>4 Min →</em></div>
+    <div class="next-card" onclick="openArticle('article-mcp-examples')"><span>5 Beispiele — was man mit MCP machen kann</span><em>7 Min →</em></div>
+  </div>
+</div>
+
+<!-- ═══ ARTIKEL: 5 BEISPIELE MCP ═══ -->
+<div class="container article-page" id="article-mcp-examples">
+  <div class="article-meta">
+    <span class="read-time">7 Min</span>
+    <span>Aktualisiert 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">5 Beispiele — was man mit MCP machen kann</h1>
+  <p class="article-tagline">MCP verwandelt den Agenten vom Gesprächspartner zur Arbeitsmaschine. Kalender verbunden — der Agent plant Meetings. E-Mail verbunden — er schreibt und antwortet.</p>
+
+  <div class="article-body">
+    <p>MCP ermöglicht dem Agenten, direkt mit externen Diensten zu arbeiten — nicht durch Hin- und Herkopieren von Daten, sondern durch direkte Verbindung. Hier sind fünf Beispiele für Alltags- und Geschäftsaufgaben.</p>
+
+    <div class="note-box">
+      Jeder MCP-Server gibt dem Agenten eine Reihe neuer Aktionen. Nach der Verbindung beschreiben Sie die Aufgabe einfach in normalen Worten — der Agent ruft die benötigte Aktion aus dem verbundenen Dienst selbst auf.
+    </div>
+
+    <h2>1. Google Calendar — Tagesplanung</h2>
+    <p>Nach der Verbindung des Kalenders sieht der Agent Ihren Terminplan, erstellt Ereignisse, sucht freie Zeitfenster und erinnert an Meetings.</p>
+    <div class="tree-box">«Welche Termine habe ich heute?»
+«Plane ein Meeting mit Anna für Donnerstag 15:00, Thema — Content-Plan-Besprechung»
+«Finde ein freies Zwei-Stunden-Fenster nächste Woche»
+«Erinnere mich jeden Morgen um 8:00, was für den Tag geplant ist»</div>
+
+    <h2>2. Gmail — E-Mail ohne E-Mail zu öffnen</h2>
+    <p>Der Agent liest den Posteingang, schreibt Entwürfe, antwortet auf E-Mails und sortiert nach Wichtigkeit. Sie öffnen keinen E-Mail-Client — alles über Telegram.</p>
+    <div class="tree-box">«Zeig mir ungelesene E-Mails von heute»
+«Schreib eine Antwort an Thomas: Danke, alles erhalten, wir treffen uns am Mittwoch»
+«Finde alle E-Mails von der Sparkasse im letzten Monat»
+«Sortiere den Posteingang: was dringend, was kann warten, was Spam»</div>
+
+    <h2>3. Google Sheets — Tabellen und Berichte</h2>
+    <p>Der Agent arbeitet direkt mit Tabellen: liest Daten, fügt Zeilen hinzu, berechnet Summen, erstellt Übersichten. Ideal für Buchhaltung, CRM, Finanzen.</p>
+    <div class="tree-box">«Öffne Tabelle "Verkäufe April" und zeig die Summe der Spalte "Betrag"»
+«Füge zur Kundentabelle hinzu: Müller Hans, +49-123-456789, Anfrage für Beratung»
+«Erstelle eine Wochenzusammenfassung der Verkäufe aus Tabelle "CRM"»
+«Exportiere die Kundenliste, die seit mehr als 30 Tagen nicht gekauft haben»</div>
+
+    <h2>4. Pencil — Design-Mockups aus Telegram</h2>
+    <p>Dieser MCP-Server ist bereits vorinstalliert. Der Agent kann Mockup-Dateien (<code>.pen</code>) öffnen, Texte und Farben ändern, Bilder exportieren — direkt aus Telegram.</p>
+    <div class="tree-box">«Öffne das Visitenkarten-Mockup und ändere die Telefonnummer auf +49-000-000-0000»
+«Erstelle einen Screenshot der Hauptseite aus dem Mockup landing.pen»
+«Exportiere das Logo aus dem Mockup als PNG»</div>
+
+    <h2>5. Website-Daten — Analyse und Monitoring</h2>
+    <p>Supadata — ein MCP-Server für das Abrufen von Informationen von Webseiten. Verbindet sich ohne API-Schlüssel, kostenlos. Nützlich für Wettbewerbsbeobachtung, Content-Sammlung, Marktanalyse.</p>
+    <div class="tree-box">«Hol den Text des Artikels von dieser URL und mach eine kurze Zusammenfassung»
+«Erstelle eine Transkription dieses YouTube-Videos»
+«Sammle Produktbeschreibungen von dieser Seite und formatiere sie als Tabelle»</div>
+
+    <div class="note-box">
+      <b>Übersicht:</b><br>
+      Planung → Google Calendar | Terminplan, Meetings, Erinnerungen<br>
+      E-Mail → Gmail | Lesen, Antworten, Sortieren<br>
+      Tabellen &amp; CRM → Google Sheets | Kundenverwaltung, Verkäufe, Berichte<br>
+      Design → Pencil | Mockups, Bilder, Visitenkarten (vorinstalliert)<br>
+      Analyse → Supadata | Website-Daten, Video-Transkriptionen (kostenlos)
+    </div>
+
+    <div class="note-box">
+      <b>Tipp:</b> Beginnen Sie mit dem, was Sie täglich verwenden. Wenn Sie den ganzen Tag in der E-Mail sind — verbinden Sie Gmail. Wenn Sie Kunden in einer Tabelle verwalten — Google Sheets. Wenn Sie viele Termine haben — Google Calendar. Verbinden Sie nicht alles auf einmal: einen Dienst, ausprobiert, gewöhnt — dann den nächsten.
+    </div>
+  </div>
+
+  <div class="next-articles">
+    <div class="next-card" onclick="openArticle('article-mcp-what')"><span>Was ist MCP und wozu braucht der Agent es</span><em>4 Min →</em></div>
+    <div class="next-card" onclick="openArticle('article-mcp-connect')"><span>Wie man einen MCP-Server verbindet — Schritt-für-Schritt</span><em>6 Min →</em></div>
   </div>
 </div>
 

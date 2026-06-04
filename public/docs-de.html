@@ -575,7 +575,7 @@
   <div class="section-label">Alle Kategorien</div>
 
   <div class="categories-grid">
-    <div class="cat-card" onclick="openArticle('article-what')">
+    <div class="cat-card" onclick="openArticle('article-9files')">
       <div class="cat-icon">🧠</div>
       <div class="cat-info">
         <div class="cat-name">Wie der Agent aufgebaut ist</div>
@@ -1429,6 +1429,106 @@ Priorisiere selbst, basierend auf dem, was du über mich weißt.</pre>
         <span><strong>Erste Schritte am ersten Tag</strong></span>
         <em>6 Min. →</em>
       </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTICLE: WAS WO AUF DEM SERVER LIEGT ═══ -->
+<div class="container article-page" id="article-server-map">
+  <div class="article-meta">
+    <span class="read-time">4 Min</span>
+    <span>Aktualisiert 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">Was wo auf dem Server liegt</h1>
+  <p class="article-tagline">Der Server ist eine Wohnung. Vier Zimmer mit unterschiedlichen Zugangsregeln. In eines — immer rein, das andere — nicht anfassen.</p>
+
+  <div class="article-body">
+    <p>Auf dem Server gibt es vier Ordner. Jeder mit eigenem Zweck und eigenen Regeln. Diese Struktur zu verstehen ist wichtig: davon hängt ab, wohin der Agent Dateien legt, woher er das Gedächtnis liest und was er niemals anfasst.</p>
+
+    <h2>Hauptbotschaft</h2>
+
+    <div class="note-box">
+      <strong>Workspace — nur für DNA und Gedächtnis</strong>
+      <p>Neue Projekte — nicht in workspace. Skills — nicht in workspace. Workspace — nur für DNA-Dateien und Gedächtnistagebücher. Diese Regel ist in <code>CLAUDE.md</code> und <code>ARCHITECTURE_CONTEXT</code> des Bots verankert.</p>
+    </div>
+
+    <h2>Ordnerkarte</h2>
+
+    <div class="tree-box">
+      <pre>/home/agent/
+├── .claude/              ← Claude Code-Einstellungen
+│   ├── settings.json     ← Ampelregeln
+│   └── skills/           ← Skills (Fähigkeiten des Agenten)
+│
+├── workspace/            ← Hauptarbeitsordner (cwd)
+│   ├── CLAUDE.md         ← Arbeitsregeln (liest CLI)
+│   ├── SOUL.md           ← Persönlichkeit
+│   ├── MEMORY.md         ← Langzeitgedächtnis
+│   ├── GOALS.md          ← aktuelle Ziele
+│   ├── USER.md, MISSION.md, PROJECTS.md, PREFERENCES.md, LEARNED.md
+│   ├── memory/           ← Tagestageb. (YYYY-MM-DD.md)
+│   ├── knowledge/        ← Nachschlagewerke und Anleitungen
+│   └── .media/           ← Mediendateien von Ihnen (Fotos, Dokumente)
+│
+├── projects/             ← Ordner für Projekte
+│   └── projektname/      ← jedes Projekt in eigenem Unterordner
+│
+└── .agent/               ← Bot-Dienstordner (nicht anfassen)</pre>
+    </div>
+
+    <h2>Vier Zonen und ihre Rolle</h2>
+
+    <h3><code>~/.claude/</code> — Einstellungen und Skills</h3>
+    <p>Hier leben die Claude Code-Einstellungen (<code>settings.json</code>) und Skills (<code>skills/</code>). Wenn Sie einen neuen Skill installieren — kommt er hierher. Der Agent kennt den gesamten <code>skills/</code>-Ordner auswendig bei jedem Start.</p>
+
+    <h3><code>~/workspace/</code> — DNA und Gedächtnis</h3>
+    <p>Hier «schaut» Claude Code CLI als Arbeitsordner rein. Von hier lädt es <code>CLAUDE.md</code> automatisch. Der Bot legt hier DNA-Dateien in den System-Prompt.</p>
+    <p><strong>Was hier gespeichert wird:</strong> nur DNA-Dateien, Gedächtnistagebücher (<code>memory/</code>), Wissensbasis (<code>knowledge/</code>) und Mediendateien von Ihnen (<code>.media/</code>).</p>
+    <p><strong>Was hier NICHT hinein kommt:</strong> neue Projekte — die leben in <code>~/projects/</code>.</p>
+
+    <h3><code>~/projects/</code> — neue Projekte</h3>
+    <p>Wenn der Agent etwas Neues erstellt — Landing Page, Bot, Skript, API — legt er es in <code>~/projects/name/</code>, nicht in workspace. So stören sich verschiedene Projekte nicht gegenseitig, und workspace bleibt sauber.</p>
+    <p>Jedes Projekt in eigenem Ordner: <code>~/projects/my-bot/</code>, <code>~/projects/landingv2/</code>, <code>~/projects/parser/</code>.</p>
+
+    <h3><code>~/.agent/</code> — Bot-Dienstordner (nicht anfassen)</h3>
+    <p>Hier lebt der Code des Telegram-Bots selbst, seine Konfiguration und Geheimnisse. Der Agent liest und ändert diesen Ordner nicht — das ist durch Regeln gesperrt. Wenn etwas am Bot nicht funktioniert — Neustart über <code>/settings</code>, nicht durch Eingriff in diesen Ordner.</p>
+
+    <h2>Mein Rat an Sie</h2>
+    <p>Wenn Sie nicht sicher sind, wohin der Agent eine Datei gelegt hat — fragen Sie direkt: <em>«Zeig die Struktur des workspace-Ordners»</em> oder <em>«Wo liegt Projekt X?»</em>. Der Agent gibt den genauen Pfad an. Das Kennen dieser Struktur spart Zeit, wenn man eine bestimmte Datei finden oder verstehen muss, was schiefgelaufen ist.</p>
+  </div>
+
+  <div class="next-articles">
+    <div class="next-label">In diesem Abschnitt</div>
+    <div class="next-card" onclick="openArticle('article-glossariy')">
+      <div class="next-icon">📖</div>
+      <div class="next-title">Glossar</div>
+      <div class="next-desc">Begriffe und Konzepte</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-soul-md')">
+      <div class="next-icon">🪪</div>
+      <div class="next-title">Was ist SOUL.md</div>
+      <div class="next-desc">Der Pass des Agenten</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-9files')">
+      <div class="next-icon">🗂️</div>
+      <div class="next-title">9 Dateien, aus denen der Agent besteht</div>
+      <div class="next-desc">Die DNA des Systems</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-zapusk')">
+      <div class="next-icon">🔄</div>
+      <div class="next-title">Was bei jedem Start passiert</div>
+      <div class="next-desc">Startsequenz</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-svetofor')">
+      <div class="next-icon">🚦</div>
+      <div class="next-title">«Ampel»: was der Agent selbst tut</div>
+      <div class="next-desc">Autonomiestufen</div>
+    </div>
+    <div class="next-card" onclick="openArticle('article-nastroyka')">
+      <div class="next-icon">⚙️</div>
+      <div class="next-title">Wie Sie den Agenten anpassen</div>
+      <div class="next-desc">Personalisierung</div>
     </div>
   </div>
 </div>

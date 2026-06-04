@@ -343,6 +343,23 @@
 
     .note-box strong { display: block; margin-bottom: 4px; }
 
+    .article-screenshot {
+      margin: 20px 0;
+      text-align: center;
+    }
+    .article-screenshot img {
+      max-width: 100%;
+      border-radius: 8px;
+      border: 1px solid #e8e8e8;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    }
+    .article-screenshot figcaption {
+      margin-top: 8px;
+      font-size: 13px;
+      color: #888;
+      font-style: italic;
+    }
+
     .step-block {
       display: flex;
       gap: 16px;
@@ -837,13 +854,30 @@
 
     <p>Идём на любой хостинг и заводим VPS. Я покажу на примере Beget — самый простой для новичка из России, поддержка на русском, оплата привычная, интерфейс понятный. Если Вам удобнее Timeweb или Digital Ocean — берите там, шаги похожие.</p>
 
-    <p>Заходите в раздел «Облачные серверы» и нажимаете «Создать сервер». В параметрах выбираете: <strong>2 ядра CPU, 4 ГБ RAM, 40 ГБ диск, ОС Ubuntu 24.04.</strong> Этих параметров хватит и на Агента, и есть запас на рост памяти и проектов на годы вперёд.</p>
+    <p>Заходите в раздел «Облачные серверы» и нажимаете «Создать сервер».</p>
+
+    <figure class="article-screenshot">
+      <img src="img/install/step_3_04.png" alt="Раздел «Облачные серверы» на Beget">
+      <figcaption>Скриншот — раздел «Облачные серверы» на Beget</figcaption>
+    </figure>
+
+    <p>В параметрах выбираете: <strong>2 ядра CPU, 4 ГБ RAM, 40 ГБ диск, ОС Ubuntu 24.04.</strong> Этих параметров хватит и на Агента, и есть запас на рост памяти и проектов на годы вперёд.</p>
+
+    <figure class="article-screenshot">
+      <img src="img/install/step_3_05.png" alt="Конфигуратор тарифа: 2 ядра, 4 ГБ, 40 ГБ, Ubuntu 24.04">
+      <figcaption>Скриншот — конфигуратор тарифа: 2 ядра, 4 ГБ, 40 ГБ, Ubuntu 24.04</figcaption>
+    </figure>
 
     <div class="note-box">
       <p><strong>VPS</strong> — это арендованный маленький компьютер в интернете, который включён 24/7. Стоит в дата-центре, никогда не выключается, имеет свой адрес. Вы арендуете его, как квартиру — заплатили, получили ключи, заехали. Нужен, чтобы Ваш Агент работал круглосуточно, даже когда Ваш ноутбук закрыт.</p>
     </div>
 
     <p>Через ~30 секунд после оплаты на почту от хостинга придёт письмо с тремя строчками: <strong>IP-адрес сервера</strong> (вида <code>123.45.67.89</code>), <strong>логин</strong> (<code>root</code>) и <strong>пароль</strong>. Сохраните это в надёжном месте — это ключи от новой квартиры Агента.</p>
+
+    <figure class="article-screenshot">
+      <img src="img/install/step_4_06.png" alt="Письмо с IP, логином и паролем сервера">
+      <figcaption>Скриншот — письмо с IP, логином и паролем сервера</figcaption>
+    </figure>
 
     <div class="note-box warning">
       <p>Тариф берите с запасом по диску — Агент со временем накопит память, дневники, knowledge-базу, и место уйдёт быстрее чем кажется. 40 ГБ хватит на несколько лет спокойной работы.</p>
@@ -863,6 +897,11 @@
     </ol>
 
     <p>После этого @BotFather пришлёт <strong>токен</strong> — длинную строку вида <code>1234567890:AAEh-xxxx....</code> Скопируйте его и сохраните рядом с IP-адресом сервера.</p>
+
+    <figure class="article-screenshot">
+      <img src="img/install/step_5_08.png" alt="Диалог с @BotFather: создание нового бота и получение токена">
+      <figcaption>Скриншот — диалог с @BotFather: создание нового бота и получение токена</figcaption>
+    </figure>
 
     <div class="note-box">
       <p><strong>BotFather</strong> — это официальный бот Telegram, через который создаются все остальные боты. Он выдаёт каждому новому боту токен — длинную строку, как электронный ключ. По этому токену сервер потом сможет писать в Telegram от имени Вашего бота.</p>
@@ -934,10 +973,20 @@ Telegram-бот: 1234567890:AAEh-xxxxxxxxxxxxxxxxxxxxxxxx</pre>
 
     <p>В какой-то момент Claude Code напишет: «откройте эту ссылку, войдите своим аккаунтом Claude и нажмите Authorize». Это нужно один раз — чтобы Агент на сервере мог работать через Вашу подписку. Откройте ссылку в браузере, войдите как обычно, нажмите большую кнопку <strong>Authorize</strong>.</p>
 
+    <figure class="article-screenshot">
+      <img src="img/install/step_7_11.png" alt="Кнопка «Authorize» для подтверждения доступа Claude Code к серверу">
+      <figcaption>Скриншот — кнопка «Authorize» для подтверждения доступа Claude Code к серверу</figcaption>
+    </figure>
+
     <div class="note-box warning">
       <strong>Если выдало ошибку в браузере — не пугайтесь</strong>
       <p>Это известная мелкая особенность Safari. Просто откройте ту же ссылку в Chrome или Firefox — заработает с первого раза. Ничего у Вас не сломалось.</p>
     </div>
+
+    <figure class="article-screenshot">
+      <img src="img/install/step_8_12.png" alt="Типичная ошибка браузера; решается переключением на Chrome или Firefox">
+      <figcaption>Скриншот — типичная ошибка браузера; решается переключением на Chrome или Firefox</figcaption>
+    </figure>
 
     <p>После авторизации вернитесь в Claude Code и скажите «готово» — он продолжит.</p>
 

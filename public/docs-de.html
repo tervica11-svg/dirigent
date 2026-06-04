@@ -339,6 +339,23 @@
 
     .note-box strong { display: block; margin-bottom: 4px; }
 
+    .article-screenshot {
+      margin: 20px 0;
+      text-align: center;
+    }
+    .article-screenshot img {
+      max-width: 100%;
+      border-radius: 8px;
+      border: 1px solid #e8e8e8;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    }
+    .article-screenshot figcaption {
+      margin-top: 8px;
+      font-size: 13px;
+      color: #888;
+      font-style: italic;
+    }
+
     .step-block {
       display: flex;
       gap: 16px;
@@ -827,13 +844,30 @@
 
     <p>Gehen Sie zu einem beliebigen Hoster und richten Sie einen VPS ein. Für deutschsprachige Nutzer empfehle ich <strong>Hetzner</strong> — günstigste Preise in Deutschland, zuverlässig, einfaches Interface. Wenn Ihnen DigitalOcean lieber ist — nehmen Sie das, die Schritte sind ähnlich.</p>
 
-    <p>Gehen Sie zum Bereich «Cloud Server» und klicken Sie auf «Server erstellen». Wählen Sie als Parameter: <strong>2 CPU-Kerne, 4 GB RAM, 40 GB Festplatte, OS Ubuntu 24.04.</strong> Diese Parameter reichen für den Agenten aus und bieten Reserven für Speicher- und Projektwachstum auf Jahre hinaus.</p>
+    <p>Gehen Sie zum Bereich «Cloud Server» und klicken Sie auf «Server erstellen».</p>
+
+    <figure class="article-screenshot">
+      <img src="img/install/step_3_04.png" alt="Bereich «Cloud Server» bei Beget">
+      <figcaption>Screenshot — Bereich «Cloud Server» bei Beget</figcaption>
+    </figure>
+
+    <p>Wählen Sie als Parameter: <strong>2 CPU-Kerne, 4 GB RAM, 40 GB Festplatte, OS Ubuntu 24.04.</strong> Diese Parameter reichen für den Agenten aus und bieten Reserven für Speicher- und Projektwachstum auf Jahre hinaus.</p>
+
+    <figure class="article-screenshot">
+      <img src="img/install/step_3_05.png" alt="Tarif-Konfigurator: 2 Kerne, 4 GB, 40 GB, Ubuntu 24.04">
+      <figcaption>Screenshot — Tarif-Konfigurator: 2 CPU-Kerne, 4 GB RAM, 40 GB, Ubuntu 24.04</figcaption>
+    </figure>
 
     <div class="note-box">
       <p><strong>VPS</strong> ist ein gemieteter kleiner Computer im Internet, der rund um die Uhr läuft. Er steht im Rechenzentrum des Hosters, schaltet sich nicht aus und hat eine eigene Adresse. Sie mieten ihn wie eine Wohnung — bezahlt, Schlüssel erhalten, eingezogen. Nötig, damit Ihr Agent rund um die Uhr arbeitet, auch wenn Ihr Laptop zugeklappt ist.</p>
     </div>
 
     <p>Etwa 30 Sekunden nach der Bezahlung erhalten Sie eine E-Mail vom Hoster mit drei Zeilen: <strong>IP-Adresse des Servers</strong> (z.B. <code>123.45.67.89</code>), <strong>Login</strong> (<code>root</code>) und <strong>Passwort</strong>. Speichern Sie das an einem sicheren Ort — das sind die Schlüssel zur neuen Wohnung des Agenten.</p>
+
+    <figure class="article-screenshot">
+      <img src="img/install/step_4_06.png" alt="E-Mail mit IP-Adresse, Login und Passwort des Servers">
+      <figcaption>Screenshot — E-Mail mit IP-Adresse, Login und Passwort des Servers</figcaption>
+    </figure>
 
     <div class="note-box warning">
       <p>Wählen Sie einen Tarif mit ausreichend Speicher — der Agent sammelt mit der Zeit Gedächtnis, Tagesjournale und eine Knowledge-Base an, und der Platz geht schneller zur Neige als man denkt. 40 GB reichen für mehrere Jahre ruhigen Betriebs.</p>
@@ -853,6 +887,11 @@
     </ol>
 
     <p>Danach sendet @BotFather einen <strong>Token</strong> — einen langen String wie <code>1234567890:AAEh-xxxx....</code> Kopieren Sie ihn und speichern Sie ihn neben der IP-Adresse des Servers.</p>
+
+    <figure class="article-screenshot">
+      <img src="img/install/step_5_08.png" alt="Dialog mit @BotFather: neuen Bot erstellen und Token erhalten">
+      <figcaption>Screenshot — Dialog mit @BotFather: neuen Bot erstellen und Token erhalten</figcaption>
+    </figure>
 
     <div class="note-box">
       <p><strong>BotFather</strong> ist der offizielle Telegram-Bot, über den alle anderen erstellt werden. Er gibt jedem neuen Bot einen Token — einen langen String wie einen elektronischen Schlüssel. Mit diesem Token kann der Server dann im Namen Ihres Bots in Telegram schreiben.</p>
@@ -924,10 +963,20 @@ Telegram-Bot: 1234567890:AAEh-xxxxxxxxxxxxxxxxxxxxxxxx</pre>
 
     <p>Irgendwann wird Claude Code schreiben: «Öffnen Sie diesen Link, melden Sie sich mit Ihrem Claude-Konto an und klicken Sie auf Authorize». Das ist einmalig nötig — damit der Agent auf dem Server über Ihr Abo arbeiten kann. Öffnen Sie den Link im Browser, melden Sie sich wie gewohnt an, klicken Sie auf die große Schaltfläche <strong>Authorize</strong>.</p>
 
+    <figure class="article-screenshot">
+      <img src="img/install/step_7_11.png" alt="Schaltfläche «Authorize» zur Bestätigung des Claude Code-Zugriffs auf den Server">
+      <figcaption>Screenshot — Schaltfläche «Authorize» zur Bestätigung des Zugriffs</figcaption>
+    </figure>
+
     <div class="note-box warning">
       <strong>Wenn der Browser einen Fehler anzeigt — kein Grund zur Panik</strong>
       <p>Das ist eine bekannte Kleinigkeit bei Safari. Öffnen Sie einfach denselben Link in Chrome oder Firefox — es funktioniert auf Anhieb. Nichts ist kaputt.</p>
     </div>
+
+    <figure class="article-screenshot">
+      <img src="img/install/step_8_12.png" alt="Typischer Browser-Fehler; lässt sich durch Wechsel zu Chrome oder Firefox lösen">
+      <figcaption>Screenshot — typischer Browser-Fehler; Lösung: Chrome oder Firefox verwenden</figcaption>
+    </figure>
 
     <p>Nach der Autorisierung kehren Sie zu Claude Code zurück und sagen «fertig» — er macht weiter.</p>
 

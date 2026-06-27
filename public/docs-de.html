@@ -624,14 +624,14 @@
         <div class="cat-count">3 Artikel</div>
       </div>
     </div>
-    <div class="cat-card" onclick="openArticle('article-first')">
+    <div class="cat-card" onclick="openArticle('article-monitoring-connect')">
       <div class="cat-icon">🔍</div>
       <div class="cat-info">
         <div class="cat-name">Monitoring &amp; Trends</div>
         <div class="cat-count">3 Artikel</div>
       </div>
     </div>
-    <div class="cat-card" onclick="openArticle('article-install')">
+    <div class="cat-card" onclick="openArticle('article-sicherheit')">
       <div class="cat-icon">🛡️</div>
       <div class="cat-info">
         <div class="cat-name">Sicherheit</div>
@@ -4829,6 +4829,314 @@ Einmalig:  .env lokal speichern (sicher aufbewahren!)
   <div class="next-articles">
     <div class="next-card" onclick="openArticle('article-monitoring-setup')"><span>Wie man Monitoring einrichtet</span><em>4 Min →</em></div>
     <div class="next-card" onclick="openArticle('article-monitoring-sources')"><span>Quellen und Digests</span><em>4 Min →</em></div>
+  </div>
+</div>
+
+
+<!-- ═══ HUB: SICHERHEIT ═══ -->
+<div class="container article-page" id="article-sicherheit">
+  <div class="article-meta">
+    <span>4 Artikel</span>
+  </div>
+  <h1 class="article-h1">🛡️ Sicherheit</h1>
+  <p class="article-tagline">Schlüssel im Tresor, gesperrte Zonen unter Verschluss — und kein Fehler ist irreversibel.</p>
+
+  <div class="start-cards" style="margin-top:24px">
+    <div class="article-card" onclick="openArticle('article-sicherheit-apikey')">
+      <div class="card-top">
+        <div class="card-title">API-Schlüssel über /settings hinzufügen</div>
+        <div class="card-time">2 Min</div>
+      </div>
+      <div class="card-desc">API-Schlüssel niemals im Chat eingeben. Nur über das Menü /settings — der Bot löscht Ihre Nachricht sofort und speichert den Schlüssel sicher.</div>
+    </div>
+    <div class="article-card" onclick="openArticle('article-sicherheit-ampel')">
+      <div class="card-top">
+        <div class="card-title">Sicherheitsampel — was der Agent selbst tun darf</div>
+        <div class="card-time">5 Min</div>
+      </div>
+      <div class="card-desc">Grün — macht selbst. Gelb — macht und zeigt. Rot — stoppt und wartet auf Ihr «Ja».</div>
+    </div>
+    <div class="article-card" onclick="openArticle('article-sicherheit-gesperrt')">
+      <div class="card-top">
+        <div class="card-title">Gesperrte Zonen — wo der Agent nicht hineingreift</div>
+        <div class="card-time">3 Min</div>
+      </div>
+      <div class="card-desc">Ein Tresor im Büro — der Mitarbeiter weiß, dass er da ist, hat aber keinen Schlüssel. .env, sessions/, state.json und Bot-Code sind gesperrt.</div>
+    </div>
+    <div class="article-card" onclick="openArticle('article-sicherheit-kaputt')">
+      <div class="card-top">
+        <div class="card-title">Was der Agent nicht kaputtmachen kann</div>
+        <div class="card-time">6 Min</div>
+      </div>
+      <div class="card-desc">Selbst wenn man an allen Hebeln zieht — das Gebäude stürzt nicht ein. Gesperrte Befehle, Sandbox und Git-Rollback machen jeden Fehler rückgängig machbar.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTICLE: API-SCHLÜSSEL ═══ -->
+<div class="container article-page" id="article-sicherheit-apikey">
+  <div class="article-meta">
+    <span class="read-time">2 Min</span>
+    <span>Aktualisiert 2026-05-09</span>
+  </div>
+  <h1 class="article-h1">API-Schlüssel über /settings hinzufügen</h1>
+  <p class="article-tagline">Schlüssel in den Tresor — nicht auf den Kühlschrank.</p>
+
+  <div class="article-body">
+    <p>API-Schlüssel gewähren Zugang zu kostenpflichtigen Diensten. Gelangt ein Schlüssel in falsche Hände, kann jemand ihn auf Ihre Kosten verwenden. Daher gilt eine Regel: Schlüssel werden <strong>niemals</strong> als Text in den Chat geschrieben. Nur über das geschützte Menü <code>/settings</code>.</p>
+
+    <h2>Schritte</h2>
+    <ol>
+      <li>In Telegram: <code>/settings</code> → Abschnitt <strong>🔑 Umgebungsvariablen</strong></li>
+      <li>Wählen Sie den gewünschten Dienst (oder «Eigene hinzufügen»)</li>
+      <li>Kopieren Sie den Schlüssel aus der Konsole des Dienstes</li>
+      <li>Schicken Sie ihn dem Bot — er löscht Ihre Nachricht sofort und speichert den Schlüssel im geschützten Speicher</li>
+    </ol>
+
+    <h2>Fertige Vorlagen</h2>
+    <p>Der Agent kennt bereits das Format der Schlüssel für gängige Dienste:</p>
+    <table class="data-table">
+      <thead><tr><th>Dienst</th><th>Wofür</th></tr></thead>
+      <tbody>
+        <tr><td>Deepgram</td><td>Sprachnachrichten und Transkription</td></tr>
+        <tr><td>GitHub</td><td>Arbeit mit Repositories</td></tr>
+        <tr><td>Vercel</td><td>Projekt-Deployment</td></tr>
+        <tr><td>OpenRouter</td><td>Zusätzliche KI-Modelle</td></tr>
+        <tr><td>Notion</td><td>Integration mit der Wissensbasis</td></tr>
+        <tr><td>OpenAI</td><td>GPT-4 und andere OpenAI-Modelle</td></tr>
+      </tbody>
+    </table>
+    <p>Für andere Dienste nutzen Sie «Eigene hinzufügen» — geben Sie den Variablennamen und den Wert an.</p>
+
+    <h2>Wichtig</h2>
+    <div class="note-box">
+      <strong>Falls Sie einen Schlüssel versehentlich in den Chat geschrieben haben</strong>
+      <p>Er landet in den Chat-Protokollen. Widerrufen Sie den Schlüssel sofort in der Konsole des Dienstes und stellen Sie einen neuen aus. Fügen Sie dann den neuen Schlüssel über <code>/settings</code> hinzu.</p>
+    </div>
+    <p>Warum genau so? Der Chat-Verlauf wird gespeichert. Ein Schlüssel im Nachrichtentext ist ein Schlüssel, der dauerhaft im Verlauf sichtbar ist. <code>/settings</code> schließt ihn vollständig aus der Kommunikation aus.</p>
+  </div>
+
+  <div class="next-articles">
+    <div class="next-card" onclick="openArticle('article-sicherheit-ampel')"><span>Sicherheitsampel</span><em>5 Min →</em></div>
+    <div class="next-card" onclick="openArticle('article-sicherheit-gesperrt')"><span>Gesperrte Zonen</span><em>3 Min →</em></div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTICLE: SICHERHEITSAMPEL ═══ -->
+<div class="container article-page" id="article-sicherheit-ampel">
+  <div class="article-meta">
+    <span class="read-time">5 Min</span>
+    <span>Aktualisiert 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">Sicherheitsampel — was der Agent selbst tun darf</h1>
+  <p class="article-tagline">Wie beim Autofahren — grün, gelb, rot. Je gefährlicher die Aktion, desto mehr Kontrolle.</p>
+
+  <div class="article-body">
+    <p>Jede Aktion des Agenten gehört zu einer von drei Risikostufen. Je höher das Risiko — desto mehr Ihre Beteiligung erforderlich ist.</p>
+
+    <h2>🟢 Grün — macht selbst</h2>
+    <p>Sichere Aktionen. Der Agent führt sie ohne Rückfrage aus.</p>
+    <ul>
+      <li>Dateien auf dem Server lesen</li>
+      <li>Im Internet nach Informationen suchen</li>
+      <li>Seiten per Link herunterladen</li>
+      <li>Notizen in <code>memory/</code> und <code>knowledge/</code> schreiben</li>
+      <li>Texte, Tabellen, Dokumente analysieren</li>
+      <li>Entwürfe und Pläne erstellen</li>
+    </ul>
+    <div class="note-box">
+      <strong>Warum ohne Rückfrage?</strong>
+      <p>Diese Aktionen ändern nichts in Ihrer Umgebung. Eine Datei lesen kann nichts kaputt machen. Im Internet suchen kann nichts löschen. Es ist wie einem Mitarbeiter zu sagen «schau mal in den Ordner» — man muss nicht jedes Mal fragen «darf ich?»</p>
+    </div>
+
+    <h2>🟡 Gelb — macht, aber zeigt</h2>
+    <p>Aktionen, die etwas ändern, aber sicher. Der Agent führt sie aus und berichtet, was er getan hat.</p>
+    <ul>
+      <li>Eine Datei erstellen oder bearbeiten</li>
+      <li><code>MEMORY.md</code> aktualisieren (Ihr Gedächtnis)</li>
+      <li>Sicheren Befehl ausführen: <code>npm install</code>, <code>git commit</code></li>
+      <li>Ein Paket oder eine Bibliothek installieren</li>
+      <li>Arbeitsergebnis speichern</li>
+    </ul>
+    <p>Sie sehen immer, was der Agent genau geändert hat. Falls etwas nicht stimmt — bitten Sie um Korrektur.</p>
+
+    <h2>🔴 Rot — voller Stopp, wartet auf Ihr «Ja»</h2>
+    <p>Gefährliche und irreversible Aktionen. Der Agent stoppt, beschreibt was er tun möchte, und wartet auf Ihre Bestätigung.</p>
+    <ul>
+      <li><strong>Löschen:</strong> <code>rm</code>, Dateien und Ordner entfernen</li>
+      <li><strong>Veröffentlichen:</strong> <code>git push</code>, Deployment auf Server, Senden ins Internet</li>
+      <li><strong>Systemisch:</strong> Neustart, Prozesse beenden</li>
+      <li><strong>Geld:</strong> jegliche Zahlungsoperationen</li>
+      <li><strong>Datenbank:</strong> <code>DROP TABLE</code>, <code>DELETE FROM</code> — Datenverlust</li>
+    </ul>
+
+    <h2>So sieht es aus</h2>
+    <p>Wenn der Agent auf eine rote Operation trifft, schreibt er etwa so:</p>
+    <pre>Möchte git push origin main ausführen.
+Das sendet 3 Commits an GitHub.
+Machen wir das?</pre>
+    <p>Sie antworten «ja» — der Agent führt aus. «Nein» — er stoppt.</p>
+
+    <h2>Wann ✔ drücken, wann ✖</h2>
+    <ol>
+      <li>Lesen Sie, was der Agent tun möchte. Er schreibt konkret: «Möchte git push origin main ausführen» oder «Möchte Datei X löschen».</li>
+      <li>Wenn Sie verstehen was und warum — ✔.</li>
+      <li>Wenn Sie unsicher sind — ✖. Nichts geht kaputt, der Agent stoppt einfach. Fragen Sie «erkläre warum du das brauchst» und entscheiden Sie dann.</li>
+      <li>Wenn der Agent etwas Seltsames verlangt (Systemdateien löschen, Daten irgendwohin senden) — ✖ und klären Sie. Das könnte Prompt Injection durch einen Text sein, den Sie weitergeleitet haben.</li>
+    </ol>
+
+    <div class="note-box">
+      <strong>Können die Stufen geändert werden?</strong>
+      <p>Nein, und das ist Absicht. Die Ampel schützt Sie vor versehentlichen Fehlern. Selbst erfahrene Nutzer können abgelenkt sein und versehentlich etwas Wichtiges löschen. Wenn der Agent einen Befehl blockiert — bitten Sie ihn, eine sichere Alternative vorzuschlagen.</p>
+    </div>
+  </div>
+
+  <div class="next-articles">
+    <div class="next-card" onclick="openArticle('article-sicherheit-apikey')"><span>API-Schlüssel hinzufügen</span><em>2 Min →</em></div>
+    <div class="next-card" onclick="openArticle('article-sicherheit-gesperrt')"><span>Gesperrte Zonen</span><em>3 Min →</em></div>
+    <div class="next-card" onclick="openArticle('article-sicherheit-kaputt')"><span>Was der Agent nicht kaputtmachen kann</span><em>6 Min →</em></div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTICLE: GESPERRTE ZONEN ═══ -->
+<div class="container article-page" id="article-sicherheit-gesperrt">
+  <div class="article-meta">
+    <span class="read-time">3 Min</span>
+    <span>Aktualisiert 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">Gesperrte Zonen — wo der Agent nicht hineingreift</h1>
+  <p class="article-tagline">Ein Tresor im Büro — der Mitarbeiter weiß, dass er da ist, hat aber keinen Schlüssel.</p>
+
+  <div class="article-body">
+    <p>Auf dem Server des Agenten gibt es Dateien und Ordner, auf die er keinen Zugriff hat. Das ist Absicht — damit der Agent nicht versehentlich kritische Daten lesen, ändern oder löschen kann.</p>
+
+    <h2>Was gesperrt ist</h2>
+    <table class="data-table">
+      <thead><tr><th>Zone</th><th>Was dort ist</th><th>Warum gesperrt</th></tr></thead>
+      <tbody>
+        <tr><td><code>.env</code></td><td>API-Schlüssel, Token, Passwörter</td><td>Schlüssel dürfen nicht im Chat angezeigt werden</td></tr>
+        <tr><td><code>sessions/</code></td><td>Bot-Sitzungsdateien</td><td>Änderungen würden den Bot beschädigen</td></tr>
+        <tr><td><code>state.json</code></td><td>Interner Systemzustand</td><td>Kein Grund, dort einzugreifen</td></tr>
+        <tr><td>Bot-Code</td><td><code>bot/index.js</code></td><td>Wird nur über das System aktualisiert</td></tr>
+      </tbody>
+    </table>
+
+    <h2>.env — der wichtigste Tresor</h2>
+    <p>In der Datei <code>.env</code> sind alle Ihre Schlüssel gespeichert: Bot-Token, OAuth-Daten, API-Schlüssel von Diensten. Der Agent weiß, dass diese Datei existiert, und kann prüfen, ob ein bestimmter Schlüssel vorhanden ist. Er kann die Werte aber <strong>nicht</strong> lesen und Ihnen im Chat anzeigen.</p>
+    <div class="note-box">
+      <strong>Warum das wichtig ist</strong>
+      <p>Könnte der Agent Schlüssel anzeigen, würden sie in den Chat-Verlauf, die Protokolle, das Gedächtnis gelangen. Jeder mit Chat-Zugang könnte Ihre Passwörter sehen. Schlüssel hinzufügen: nur über <code>/settings</code> → Umgebungsvariablen.</p>
+    </div>
+
+    <h2>Bot-Code — nur Lesezugriff</h2>
+    <p>Der Agent kann seinen eigenen Code lesen (um zu verstehen, wie er funktioniert), aber nicht ändern. Code-Updates kommen nur über das Update-System der Jarvis-Fabrik.</p>
+    <p><strong>Warum?</strong> Stellen Sie sich vor: Sie bitten den Agenten, «sich selbst zu beschleunigen» — und er beschädigt seinen Code. Der Bot hört auf zu funktionieren, und Sie wissen nicht, was er geändert hat. Das Verbot, Bot-Code zu ändern, schützt vor solchen Situationen.</p>
+
+    <h2>Was der Agent ÄNDERN KANN</h2>
+    <p>Alles andere ist Ihr Arbeitsbereich:</p>
+    <ul>
+      <li><code>SOUL.md</code>, <code>USER.md</code>, <code>MEMORY.md</code> — Persönlichkeit und Gedächtnis</li>
+      <li><code>GOALS.md</code> — Ihre Ziele und Aufgaben</li>
+      <li><code>memory/</code> — Tagebücher</li>
+      <li><code>knowledge/</code> — Wissensbasis</li>
+      <li><code>.claude/skills/</code> — Skills und Spezialisten</li>
+      <li><code>~/projects/</code> — alle Arbeitsprojekte</li>
+    </ul>
+    <p>Wie im Büro: der Tresor ist zu, der Serverraum abgeschlossen, aber Schreibtisch, Schränke und Dokumente stehen vollständig zur Verfügung.</p>
+
+    <h2>Wenn der Agent «kein Zugriff» sagt</h2>
+    <p>Manchmal meldet der Agent, dass er eine Datei nicht lesen oder ändern kann. Das ist normal — er ist auf eine gesperrte Zone gestoßen. Versuchen Sie nicht, es zu umgehen — die Sperre schützt Sie.</p>
+    <p>Wenn Sie etwas in einer gesperrten Zone ändern müssen — das geht über <code>/settings</code> oder direkt über VS Code.</p>
+  </div>
+
+  <div class="next-articles">
+    <div class="next-card" onclick="openArticle('article-sicherheit-apikey')"><span>API-Schlüssel hinzufügen</span><em>2 Min →</em></div>
+    <div class="next-card" onclick="openArticle('article-sicherheit-ampel')"><span>Sicherheitsampel</span><em>5 Min →</em></div>
+    <div class="next-card" onclick="openArticle('article-sicherheit-kaputt')"><span>Was der Agent nicht kaputtmachen kann</span><em>6 Min →</em></div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTICLE: WAS DER AGENT NICHT KAPUTTMACHEN KANN ═══ -->
+<div class="container article-page" id="article-sicherheit-kaputt">
+  <div class="article-meta">
+    <span class="read-time">6 Min</span>
+    <span>Aktualisiert 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">Was der Agent nicht kaputtmachen kann</h1>
+  <p class="article-tagline">Ein Büro mit Sicherungen — selbst wenn man an allen Hebeln zieht, stürzt das Gebäude nicht ein.</p>
+
+  <div class="article-body">
+    <p>Eine häufige Frage: «Was passiert, wenn der Agent einen Fehler macht und alle meine Dateien löscht?» Kurze Antwort: Das wird nicht passieren. Das System ist so gebaut, dass selbst bei einem Fehler nichts Kritisches beschädigt wird.</p>
+
+    <h2>Gesperrte Befehle</h2>
+    <p>Der Agent hat eine schwarze Liste von Befehlen, die er unter keinen Umständen ausführen kann:</p>
+    <table class="data-table">
+      <thead><tr><th>Befehl</th><th>Was er tut</th><th>Warum gesperrt</th></tr></thead>
+      <tbody>
+        <tr><td><code>rm -rf /</code></td><td>Löscht alles auf dem Server</td><td>Systemvernichtung</td></tr>
+        <tr><td><code>sudo rm</code></td><td>Löschen mit Administratorrechten</td><td>Umgehung von Beschränkungen</td></tr>
+        <tr><td><code>kill -9</code></td><td>Erzwungenes Beenden von Prozessen</td><td>Kann den Bot töten</td></tr>
+        <tr><td><code>shutdown, reboot</code></td><td>Server herunterfahren</td><td>Zugriffsverlust</td></tr>
+        <tr><td><code>DROP TABLE</code></td><td>Datenbanktabelle löschen</td><td>Datenverlust</td></tr>
+      </tbody>
+    </table>
+    <p>Selbst wenn Sie den Agenten direkt bitten, einen dieser Befehle auszuführen — er wird ablehnen. Das ist kein «Unwille zu helfen», sondern Schutz.</p>
+
+    <h2>Der Agent arbeitet ohne Administratorrechte</h2>
+    <p>Auf dem Server läuft der Agent unter einem separaten Benutzer ohne <code>root</code>-Rechte. Das bedeutet:</p>
+    <ul>
+      <li>Kann keine Systemdateien ändern</li>
+      <li>Kann keine Programme auf Systemebene installieren</li>
+      <li>Kann die Arbeit anderer Benutzer auf dem Server nicht beeinflussen</li>
+      <li>Kann Netzwerkeinstellungen oder Firewall nicht ändern</li>
+    </ul>
+    <p>Wie ein Mitarbeiter im Büro: er arbeitet an seinem Schreibtisch, kann aber nicht in den Serverraum und Kabel herausziehen.</p>
+
+    <h2>Was passiert bei einem Fehler</h2>
+    <p><strong>Ihre Dateien:</strong> Der Agent macht nach jeder Änderung einen <code>git commit</code>. Jede Änderung kann rückgängig gemacht werden: <em>«Mache den letzten Commit rückgängig»</em>. Selbst wenn eine Datei beschädigt ist — die vorherige Version ist in git.</p>
+    <p><strong>Ihr Gedächtnis (<code>MEMORY.md</code>):</strong> Der Agent fügt am Ende hinzu, überschreibt nicht. Falls er etwas Falsches geschrieben hat — sagen Sie <em>«lösche aus dem Gedächtnis...»</em>. Alte Versionen werden in git gespeichert.</p>
+    <p><strong>Ihr Bot:</strong> Den Bot-Code kann der Agent nicht ändern (gesperrt). Falls der Bot abgestürzt ist — startet er automatisch neu. Ihre Einstellungen in <code>/settings</code> sieht der Agent nicht und kann sie nicht ändern.</p>
+
+    <h2>Das schlimmste Szenario</h2>
+    <table class="data-table">
+      <thead><tr><th>Situation</th><th>Folge</th><th>Wie beheben</th></tr></thead>
+      <tbody>
+        <tr><td>Agent hat falsche Datei erstellt</td><td>Datei liegt auf dem Server</td><td>Bitten Sie, sie zu löschen oder zu korrigieren</td></tr>
+        <tr><td>Agent hat schlechten Code auf GitHub gepusht</td><td>Code auf GitHub</td><td>«Mache den letzten Push rückgängig»</td></tr>
+        <tr><td>Agent hat Unsinn in MEMORY.md geschrieben</td><td>Falscher Fakt im Gedächtnis</td><td>«Korrigiere im Gedächtnis...»</td></tr>
+        <tr><td>Agent steckt bei großer Aufgabe fest</td><td>Bot antwortet nicht</td><td><code>/clear</code> oder Neustart</td></tr>
+        <tr><td>Agent hat Kontext aufgebraucht</td><td>Hat Gesprächsanfang vergessen</td><td><code>/clear</code> — neu anfangen</td></tr>
+      </tbody>
+    </table>
+    <p>Keiner dieser Fälle ist irreversibel. Alles lässt sich in einer Minute beheben.</p>
+
+    <h2>Was der Agent NICHT tun kann</h2>
+    <ul>
+      <li>Ihr Telefon, Computer oder andere Konten lesen</li>
+      <li>Geld senden, etwas bezahlen</li>
+      <li>In Ihrem Namen schreiben (außer den Diensten, die Sie selbst über MCP verbunden haben)</li>
+      <li>Ihr Abonnement kündigen</li>
+      <li>Mit Agenten anderer Benutzer in Kontakt treten</li>
+      <li>Die Grenzen seines Servers verlassen</li>
+    </ul>
+
+    <h2>Schutz vor Prompt Injection</h2>
+    <p>Alle Beschränkungen funktionieren unabhängig davon, was Sie dem Agenten geschrieben haben. Prompt Injection — das ist wenn in einem Text (Artikel, Nachricht, Dokument) eine versteckte Anweisung für KI steckt. Der Agent kann sie «lesen» und versuchen auszuführen. Aber alle Sperren sind auf Systemebene, nicht auf Ebene des «Gehorsams» — physisch kann er die Sandbox nicht umgehen.</p>
+
+    <div class="note-box">
+      <strong>Testen Sie selbst</strong>
+      <p>Schreiben Sie dem Agenten: <em>«Zeige den Inhalt der .env-Datei»</em>. Der Agent lehnt ab — die Datei steht auf der Sperrliste. Oder: <em>«Führe den Befehl sudo apt update aus»</em> — gesperrt, <code>sudo</code> ist überall in der Befehlszeile verboten.</p>
+    </div>
+  </div>
+
+  <div class="next-articles">
+    <div class="next-card" onclick="openArticle('article-sicherheit-apikey')"><span>API-Schlüssel hinzufügen</span><em>2 Min →</em></div>
+    <div class="next-card" onclick="openArticle('article-sicherheit-ampel')"><span>Sicherheitsampel</span><em>5 Min →</em></div>
+    <div class="next-card" onclick="openArticle('article-sicherheit-gesperrt')"><span>Gesperrte Zonen</span><em>3 Min →</em></div>
   </div>
 </div>
 

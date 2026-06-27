@@ -637,7 +637,7 @@
       <div class="cat-icon">🔄</div>
       <div class="cat-info">
         <div class="cat-name">Обновления</div>
-        <div class="cat-count">2 статьи</div>
+        <div class="cat-count">3 статьи</div>
       </div>
     </div>
     <div class="cat-card" onclick="openArticle('article-zablokirovannye')">
@@ -5340,6 +5340,241 @@ Telegram-бот: 1234567890:AAEh-xxxxxxxxxxxxxxxxxxxxxxxx</pre>
     <div class="next-card" onclick="openArticle('article-security-apikey')"><span>Как добавить API-ключ</span><em>2 мин →</em></div>
     <div class="next-card" onclick="openArticle('article-security-svetofor')"><span>Светофор безопасности</span><em>5 мин →</em></div>
     <div class="next-card" onclick="openArticle('article-security-blocked')"><span>Заблокированные зоны</span><em>3 мин →</em></div>
+  </div>
+</div>
+
+
+<!-- ═══ HUB: ОБНОВЛЕНИЯ И ПРОДЛЕНИЕ ═══ -->
+<div class="container article-page" id="article-obnovleniya">
+  <div class="article-meta">
+    <span>3 статьи</span>
+  </div>
+  <h1 class="article-h1">🔄 Обновления и продление</h1>
+  <p class="article-tagline">Как обновление приложения на телефоне — нажали «Обновить», через минуту всё готово. Ваши данные при этом не затрагиваются.</p>
+
+  <div class="start-cards" style="margin-top:24px">
+    <div class="article-card" onclick="openArticle('article-updates-install')">
+      <div class="card-top">
+        <div class="card-title">Как устанавливать обновления</div>
+        <div class="card-time">4 мин</div>
+      </div>
+      <div class="card-desc">@jarchitect_bot присылает уведомление, Вы отправляете /new — и получаете одну команду установки. Память и настройки не трогаются.</div>
+    </div>
+    <div class="article-card" onclick="openArticle('article-updates-vscode')">
+      <div class="card-top">
+        <div class="card-title">Как обновить бота вручную через VS Code</div>
+        <div class="card-time">3 мин</div>
+      </div>
+      <div class="card-desc">Одна команда в терминале — и бот обновлён до последней версии. Резервная копия делается автоматически перед каждым обновлением.</div>
+    </div>
+    <div class="article-card" onclick="openArticle('article-updates-token')">
+      <div class="card-top">
+        <div class="card-title">Продление токена — когда и как</div>
+        <div class="card-time">3 мин</div>
+      </div>
+      <div class="card-desc">Токен обновляется сам при активном использовании. Если Агент перестал отвечать — два варианта восстановления за 2–3 минуты.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTICLE: КАК УСТАНАВЛИВАТЬ ОБНОВЛЕНИЯ ═══ -->
+<div class="container article-page" id="article-updates-install">
+  <div class="article-meta">
+    <span class="read-time">4 мин</span>
+    <span>Обновлено 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">Как устанавливать обновления</h1>
+  <p class="article-tagline">Как обновление приложения на телефоне — нажали «Обновить», через минуту всё готово.</p>
+
+  <div class="article-body">
+    <p>Конструктор Агентов обновляется по мере выхода новых версий. Вы получаете уведомление от <code>@jarchitect_bot</code> и устанавливаете обновление одной командой. Ваши данные при этом не затрагиваются.</p>
+
+    <h2>Что обновляется</h2>
+    <p>При обновлении Агент получает:</p>
+    <ul>
+      <li><strong>Новые скиллы</strong> — дополнительные специалисты в команде</li>
+      <li><strong>Улучшения ядра</strong> — бот работает стабильнее и умнее</li>
+      <li><strong>Исправления ошибок</strong> — если что-то работало криво, это чинится</li>
+      <li><strong>Новые интеграции</strong> — подключение к сервисам (Gmail, Calendar и др.)</li>
+    </ul>
+
+    <div class="note-box">
+      <strong>Главное</strong>
+      <p>Обновляется только «движок» Агента. Ваши файлы — память, дневники, цели, настройки — никогда не затрагиваются. Всё, что Агент знает о Вас, остаётся на месте.</p>
+    </div>
+
+    <h2>Что НЕ затрагивается при обновлении</h2>
+    <table class="data-table">
+      <thead><tr><th>Ваши файлы</th><th>Статус</th></tr></thead>
+      <tbody>
+        <tr><td><code>MEMORY.md</code> (долгосрочная память)</td><td>Не трогается</td></tr>
+        <tr><td><code>SOUL.md</code> (личность Агента)</td><td>Не трогается</td></tr>
+        <tr><td><code>GOALS.md</code> (Ваши задачи)</td><td>Не трогается</td></tr>
+        <tr><td>Дневники (<code>memory/</code>)</td><td>Не трогаются</td></tr>
+        <tr><td>База знаний (<code>knowledge/</code>)</td><td>Не трогается</td></tr>
+        <tr><td>Ключи и пароли (<code>.env</code>)</td><td>Не трогаются</td></tr>
+        <tr><td>Ваши проекты (<code>projects/</code>)</td><td>Не трогаются</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Как проходит обновление</h2>
+    <ol>
+      <li><code>@jarchitect_bot</code> присылает сообщение: «Доступно обновление»</li>
+      <li>Вы отправляете команду <code>/new</code> в <code>@jarchitect_bot</code></li>
+      <li>Бот присылает одну команду установки (<code>curl | bash</code>)</li>
+      <li>Вы открываете терминал на сервере (через VS Code Tunnel)</li>
+      <li>Вставляете команду и запускаете — установка займёт 1–2 минуты</li>
+      <li>Агент перезапускается и работает с новыми возможностями</li>
+    </ol>
+    <p>Не получили уведомление, но хотите проверить — просто напишите <code>/new</code> в <code>@jarchitect_bot</code>. Бот либо пришлёт команду установки, либо скажет что версия актуальна.</p>
+
+    <h2>Как часто приходят обновления</h2>
+    <p>Нет фиксированного графика. Обновления выходят по мере готовности — раз в неделю или несколько раз в месяц. <code>@jarchitect_bot</code> всегда сообщит, когда что-то новое есть.</p>
+
+    <h2>Если после обновления что-то не так</h2>
+    <p>Такое бывает редко, но если Агент стал вести себя странно:</p>
+    <ol>
+      <li><strong>Напишите ему:</strong> «Перезагрузись» — Агент перезапустится</li>
+      <li><strong>Зайдите в /settings</strong> → кнопка «Перезагрузить» — принудительный перезапуск</li>
+      <li><strong>Откатитесь:</strong> напишите <code>/new rollback</code> в <code>@jarchitect_bot</code> — вернётся предыдущая версия</li>
+    </ol>
+    <p>Перезагрузка безопасна. Агент не потеряет память и настройки — только текущий диалог начнётся заново.</p>
+  </div>
+
+  <div class="next-articles">
+    <div class="next-card" onclick="openArticle('article-updates-vscode')"><span>Обновить вручную через VS Code</span><em>3 мин →</em></div>
+    <div class="next-card" onclick="openArticle('article-updates-token')"><span>Продление токена</span><em>3 мин →</em></div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTICLE: ОБНОВИТЬ ВРУЧНУЮ ЧЕРЕЗ VS CODE ═══ -->
+<div class="container article-page" id="article-updates-vscode">
+  <div class="article-meta">
+    <span class="read-time">3 мин</span>
+    <span>Обновлено 2026-05-16</span>
+  </div>
+  <h1 class="article-h1">Как обновить бота вручную через VS Code</h1>
+  <p class="article-tagline">Одна команда в терминале — как нажать кнопку «обновить» на телефоне.</p>
+
+  <div class="article-body">
+    <p>Если Вы установили бота раньше и хотите получить новую версию — это можно сделать за 2 минуты. Одна команда в терминале, и бот обновлён. Все Ваши данные останутся на месте.</p>
+
+    <h2>Что нового в версии 2.0</h2>
+    <p>Обновляется только код бота. Все Ваши файлы — <code>SOUL.md</code>, <code>MEMORY.md</code>, дневники, настройки, проекты — остаются нетронутыми.</p>
+    <ul>
+      <li><strong>Семантическая память</strong> — бот запоминает контекст разговора между сессиями</li>
+      <li><strong>Меню настроек</strong> — <code>/settings</code> прямо в Telegram: модель, ключи, часовой пояс</li>
+      <li><strong>Анимация «думаю...»</strong> — видно что бот работает, с таймером</li>
+      <li><strong>Google Docs и Sheets</strong> — отправьте ссылку, бот сам загрузит содержимое</li>
+      <li><strong>Расписание</strong> — бот напомнит о важном в нужное время</li>
+      <li><strong>Команда /update</strong> — для будущих обновлений одной кнопкой</li>
+    </ul>
+
+    <h2>Пошаговая инструкция</h2>
+    <p><strong>Шаг 1. Откройте VS Code</strong><br>Откройте программу VS Code на Вашем компьютере. Обычная программа, не в браузере.</p>
+    <p><strong>Шаг 2. Подключитесь к серверу</strong></p>
+    <ol>
+      <li>На левой панели VS Code найдите иконку Remote Explorer (монитор с маленьким значком). Если не видите — нажмите <code>Ctrl+Shift+P</code>, напишите «Remote Explorer»</li>
+      <li>В панели найдите раздел <strong>Tunnels</strong> — там будет название Вашего сервера</li>
+      <li>Нажмите на него — VS Code подключится к серверу</li>
+    </ol>
+    <p><strong>Шаг 3. Откройте терминал</strong><br>Нажмите <code>Ctrl+`</code> (кнопка слева от цифры 1, там же где буква Ё). Внизу откроется тёмное окно с мигающим курсором.</p>
+    <p><strong>Шаг 4. Вставьте команду</strong></p>
+    <pre>cd /home/agent/.agent/bot && curl -fsSL \
+https://raw.githubusercontent.com/Ntmib/jarvis-architect/main/bot/updatebot.sh | bash</pre>
+    <p>Как вставить: правой кнопкой мыши в терминале → Paste. Или <code>Ctrl+Shift+V</code>. После вставки нажмите Enter.</p>
+    <p><strong>Шаг 5. Подождите 30–60 секунд.</strong> Вы увидите прогресс:</p>
+    <pre>=== Agent Bot Update ===
+[1/6] Downloading files...
+[2/6] Verifying critical files...
+[3/6] Syntax check...
+[4/6] Backing up current files...
+[5/6] Installing update...
+[6/6] Restarting bot...
+=== Update complete! Version: 2.0.0 ===</pre>
+    <p><strong>Шаг 6. Проверьте</strong><br>Напишите боту в Telegram <code>/status</code> — он покажет новую версию.</p>
+
+    <h2>Если что-то пошло не так</h2>
+    <p>Скрипт обновления делает резервную копию перед каждым обновлением. Если что-то пойдёт не так — бот автоматически откатится на предыдущую версию.</p>
+    <ul>
+      <li><strong>«Bot directory not found»</strong> — убедитесь, что Вы подключены к правильному серверу</li>
+      <li><strong>«Syntax error in new index.js»</strong> — обновление отменено автоматически, бот на старой версии. Напишите в поддержку</li>
+      <li><strong>Бот не отвечает</strong> — скрипт откатит сам. Если не помогло — напишите в поддержку</li>
+    </ul>
+
+    <div class="note-box">
+      <strong>После обновления</strong>
+      <p>В новой версии появилась команда <code>/update</code>. В будущем обновляться будет ещё проще — прямо из Telegram, без VS Code.</p>
+    </div>
+  </div>
+
+  <div class="next-articles">
+    <div class="next-card" onclick="openArticle('article-updates-install')"><span>Как устанавливать обновления</span><em>4 мин →</em></div>
+    <div class="next-card" onclick="openArticle('article-updates-token')"><span>Продление токена</span><em>3 мин →</em></div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTICLE: ПРОДЛЕНИЕ ТОКЕНА ═══ -->
+<div class="container article-page" id="article-updates-token">
+  <div class="article-meta">
+    <span class="read-time">3 мин</span>
+    <span>Обновлено 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">Продление токена — когда и как</h1>
+  <p class="article-tagline">Как продление паспорта — раз в несколько месяцев нужно обновить, и снова работает.</p>
+
+  <div class="article-body">
+    <p>Ваш Агент работает через Вашу личную подписку Claude. При установке была создана авторизация — токен доступа. Обычно он работает несколько месяцев без обслуживания, но иногда требует обновления.</p>
+
+    <h2>Как работает токен</h2>
+    <p>При установке Вы авторизовали Claude Code с Вашим аккаунтом Claude.ai. Система хранит токен на сервере и автоматически его обновляет при каждом использовании.</p>
+    <div class="note-box">
+      <strong>Простым языком</strong>
+      <p>Это как пропуск в офисное здание. Пока Агент работает активно — пропуск продлевается сам. Если Агент долго не использовался или произошёл сбой — пропуск нужно обновить вручную.</p>
+    </div>
+
+    <h2>Когда нужно Ваше участие</h2>
+    <p>В большинстве случаев — никогда. Но иногда токен может «протухнуть»:</p>
+    <ul>
+      <li>Если Агент не использовался <strong>больше месяца</strong></li>
+      <li>Если Вы <strong>сменили пароль</strong> в Claude.ai</li>
+      <li>Если произошёл <strong>сбой на стороне Anthropic</strong></li>
+    </ul>
+    <p>Признак: Агент перестаёт отвечать или пишет об ошибке авторизации.</p>
+
+    <h2>Что делать, если токен истёк</h2>
+    <p><strong>Вариант 1 — через @jarchitect_bot (быстро):</strong></p>
+    <ol>
+      <li>Откройте <code>@jarchitect_bot</code> в Telegram</li>
+      <li>Отправьте команду <code>/auth</code></li>
+      <li>Бот пришлёт ссылку — перейдите по ней и подтвердите доступ</li>
+      <li>Агент перезапустится и снова заработает</li>
+    </ol>
+    <p><strong>Вариант 2 — через VS Code Tunnel (если вариант 1 не помог):</strong></p>
+    <ol>
+      <li>Откройте VS Code, подключитесь к серверу через Tunnel</li>
+      <li>Откройте терминал и выполните: <code>claude login</code></li>
+      <li>Следуйте инструкциям — авторизуйтесь в браузере</li>
+      <li>Перезапустите Агента: <code>/settings</code> → «Перезагрузить»</li>
+    </ol>
+    <p>Вся процедура занимает 2–3 минуты. Ваши данные при этом не затрагиваются.</p>
+
+    <h2>Подписка Claude</h2>
+    <p>Агент работает на базе Вашей личной подписки Claude (Pro или Max). Вы оплачиваете её самостоятельно на claude.ai. Если подписка истечёт — Агент сообщит об ошибке доступа.</p>
+    <p>Видите «Claude API error» или «token expired» — сначала проверьте подписку на claude.ai. Если подписка активна — обновите токен через <code>/auth</code> в <code>@jarchitect_bot</code>.</p>
+
+    <div class="note-box">
+      <strong>Как проверить, что всё работает</strong>
+      <p>Напишите Агенту любое сообщение. Если ответил — токен в порядке, всё работает.</p>
+    </div>
+  </div>
+
+  <div class="next-articles">
+    <div class="next-card" onclick="openArticle('article-updates-install')"><span>Как устанавливать обновления</span><em>4 мин →</em></div>
+    <div class="next-card" onclick="openArticle('article-updates-vscode')"><span>Обновить вручную через VS Code</span><em>3 мин →</em></div>
   </div>
 </div>
 

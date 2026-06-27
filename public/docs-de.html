@@ -645,7 +645,7 @@
         <div class="cat-count">3 Artikel</div>
       </div>
     </div>
-    <div class="cat-card" onclick="openArticle('article-first')">
+    <div class="cat-card" onclick="openArticle('article-stolpersteine')">
       <div class="cat-icon">⚠️</div>
       <div class="cat-info">
         <div class="cat-name">Häufige Stolpersteine</div>
@@ -5371,6 +5371,271 @@ https://raw.githubusercontent.com/Ntmib/jarvis-architect/main/bot/updatebot.sh |
   <div class="next-articles">
     <div class="next-card" onclick="openArticle('article-updates-install')"><span>Wie man Updates installiert</span><em>4 Min →</em></div>
     <div class="next-card" onclick="openArticle('article-updates-vscode')"><span>Bot manuell aktualisieren</span><em>3 Min →</em></div>
+  </div>
+</div>
+
+
+<!-- ═══ HUB: HÄUFIGE STOLPERSTEINE ═══ -->
+<div class="container article-page" id="article-stolpersteine">
+  <h1 class="article-h1">Häufige Stolpersteine</h1>
+  <p class="article-tagline">Der Agent antwortet nicht, zeigt Fehler, «vergisst» alles — hier sind die Antworten auf die häufigsten Probleme.</p>
+
+  <div class="article-grid">
+    <div class="article-card" onclick="openArticle('article-stolpersteine-frozen')">
+      <div class="article-card-icon">🔇</div>
+      <div class="article-card-title">Agent antwortet nicht oder hängt</div>
+      <div class="article-card-desc">Was tun, wenn der Agent schweigt oder einfriert — Schritt-für-Schritt-Anleitung.</div>
+    </div>
+    <div class="article-card" onclick="openArticle('article-stolpersteine-errors')">
+      <div class="article-card-icon">🚨</div>
+      <div class="article-card-title">Fehler 401, 403, 404, 429 — was tun</div>
+      <div class="article-card-desc">Was jeder Fehlercode bedeutet und wie man ihn schnell behebt.</div>
+    </div>
+    <div class="article-card" onclick="openArticle('article-stolpersteine-memory')">
+      <div class="article-card-icon">🧠</div>
+      <div class="article-card-title">Probleme mit Gedächtnis und Kontext</div>
+      <div class="article-card-desc">Der Agent vergisst Aufgaben, wiederholt sich, verliert den Faden — Ursachen und Lösungen.</div>
+    </div>
+    <div class="article-card" onclick="openArticle('article-stolpersteine-faq')">
+      <div class="article-card-icon">❓</div>
+      <div class="article-card-title">Häufige Fragen (FAQ)</div>
+      <div class="article-card-desc">Kurze Antworten auf die häufigsten Fragen zur Arbeit mit dem Agenten.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTICLE: AGENT ANTWORTET NICHT ═══ -->
+<div class="container article-page" id="article-stolpersteine-frozen">
+  <div class="article-meta">
+    <span class="read-time">4 Min</span>
+    <span>Aktualisiert 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">Agent antwortet nicht oder hängt</h1>
+  <p class="article-tagline">Wenn der Agent schweigt — das ist kein Computerproblem. Es gibt immer einen Grund, und er lässt sich beheben.</p>
+
+  <div class="article-body">
+    <p>Der Agent hat aufgehört zu antworten. Was auch immer der Grund ist — hier ist die universelle Reihenfolge der Aktionen, die in 95% der Fälle hilft.</p>
+
+    <h2>Schritt-für-Schritt-Anleitung</h2>
+    <ol>
+      <li><strong>Warten Sie 2–3 Minuten.</strong> Manchmal verarbeitet der Agent eine schwere Aufgabe. Eine zweite Nachricht unterbricht den Prozess.</li>
+      <li><strong>Schreiben Sie <code>/cancel</code></strong> — das bricht die aktuelle Aufgabe ab, falls der Agent stecken geblieben ist.</li>
+      <li><strong>Schreiben Sie <code>/health</code></strong> — der Agent antwortet mit dem Systemstatus. Falls er geantwortet hat — ist alles in Ordnung.</li>
+      <li><strong>Warten Sie 10 Minuten und schreiben Sie erneut.</strong> Manchmal lädt die Anthropic-API, und Anfragen werden in eine Warteschlange gestellt.</li>
+      <li><strong>Schreiben Sie dem Support: @dirigent_access_bot</strong> — falls nichts geholfen hat.</li>
+    </ol>
+
+    <h2>Häufige Ursachen und Lösungen</h2>
+    <table class="data-table">
+      <thead><tr><th>Symptom</th><th>Ursache</th><th>Lösung</th></tr></thead>
+      <tbody>
+        <tr><td>Schweigt nach Aufgabe</td><td>Schwere Verarbeitung</td><td>3 Min warten, dann /cancel</td></tr>
+        <tr><td>Schreibt «...» und stoppt</td><td>API-Fehler</td><td>/cancel → Aufgabe wiederholen</td></tr>
+        <tr><td>Antwortet gar nicht</td><td>Dienst eingefroren</td><td>/health, dann Support</td></tr>
+        <tr><td>Fehler «timeout»</td><td>Lange Aufgabe</td><td>In Teilschritte aufteilen</td></tr>
+        <tr><td>Antwortet nach Update nicht</td><td>Neustart erforderlich</td><td>/settings → Neustart</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note-box">
+      <strong>Der Agent kann nicht dauerhaft einfrieren</strong>
+      <p>Er läuft auf einem Server mit automatischem Neustart. Falls er einige Minuten schweigt — liegt das an einer laufenden Aufgabe oder einem temporären API-Fehler, nicht an einem Serverausfall.</p>
+    </div>
+
+    <h2>Was man beim Support melden sollte</h2>
+    <p>Damit der Support schnell helfen kann, schreiben Sie:</p>
+    <ul>
+      <li>Wann ist das Problem aufgetreten (Datum und Uhrzeit)</li>
+      <li>Was haben Sie geschrieben, bevor der Agent verstummt ist</li>
+      <li>Was zeigt <code>/health</code> (Screenshot oder Text)</li>
+    </ul>
+  </div>
+
+  <div class="next-articles">
+    <div class="next-card" onclick="openArticle('article-stolpersteine-errors')"><span>Fehler 401, 403, 404, 429</span><em>3 Min →</em></div>
+    <div class="next-card" onclick="openArticle('article-stolpersteine-faq')"><span>Häufige Fragen (FAQ)</span><em>3 Min →</em></div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTICLE: FEHLER 401/403/404/429 ═══ -->
+<div class="container article-page" id="article-stolpersteine-errors">
+  <div class="article-meta">
+    <span class="read-time">3 Min</span>
+    <span>Aktualisiert 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">Fehler 401, 403, 404, 429 — was tun</h1>
+  <p class="article-tagline">Fehlercodes sind keine Katastrophe. Jeder Code bedeutet etwas Bestimmtes — und lässt sich in 1–2 Schritten beheben.</p>
+
+  <div class="article-body">
+    <p>Wenn der Agent einen Fehlercode sendet — das ist eine Diagnose, keine Fehlfunktion. Hier ist, was jeder Code bedeutet und was zu tun ist.</p>
+
+    <h2>Bedeutung der Fehlercodes</h2>
+    <table class="data-table">
+      <thead><tr><th>Code</th><th>Bedeutung</th><th>Lösung</th></tr></thead>
+      <tbody>
+        <tr><td><strong>401</strong></td><td>Nicht autorisiert — Token abgelaufen</td><td><code>/auth</code> bei @jarchitect_bot senden</td></tr>
+        <tr><td><strong>403</strong></td><td>Zugriff verweigert — Abonnement fehlt oder abgelaufen</td><td>Abonnement auf claude.ai prüfen</td></tr>
+        <tr><td><strong>404</strong></td><td>Nicht gefunden — falscher Befehl oder Datei</td><td>Befehl prüfen, <code>/help</code> senden</td></tr>
+        <tr><td><strong>429</strong></td><td>Zu viele Anfragen — Limit erreicht</td><td>1 Stunde warten, dann weiter</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Fehler 401 — Token abgelaufen</h2>
+    <p>Das häufigste Problem. Tritt auf, wenn:</p>
+    <ul>
+      <li>Der Agent lange nicht genutzt wurde</li>
+      <li>Das Passwort auf Claude.ai geändert wurde</li>
+      <li>Technischer Fehler bei Anthropic</li>
+    </ul>
+    <p><strong>Lösung:</strong> Senden Sie <code>/auth</code> an <code>@jarchitect_bot</code>. Ein Link kommt — folgen Sie ihm, autorisieren Sie sich. Fertig.</p>
+
+    <h2>Fehler 403 — Abonnement inaktiv</h2>
+    <p>Der Agent versucht die Claude-API zu nutzen, aber das Abonnement ist abgelaufen oder nicht vorhanden.</p>
+    <p><strong>Lösung:</strong> Gehen Sie auf claude.ai → Einstellungen → Abonnement. Stellen Sie sicher, dass Pro oder Max aktiv ist.</p>
+
+    <h2>Fehler 429 — Limit erreicht</h2>
+    <p>Claude hat ein Nachrichtenlimit pro Zeitraum. Bei intensiver Nutzung kann das Limit erreicht werden.</p>
+    <div class="note-box">
+      <strong>Das ist kein Fehler, sondern ein Schutz</strong>
+      <p>429 bedeutet: «Zu viele Anfragen, warten Sie bitte». Normalerweise erholt sich das System innerhalb von 1 Stunde. Falls es sich wiederholt — wechseln Sie zu einem Claude Max-Abonnement.</p>
+    </div>
+
+    <h2>Wo man Fehler sieht</h2>
+    <table class="data-table">
+      <thead><tr><th>Wo</th><th>Was zu suchen</th></tr></thead>
+      <tbody>
+        <tr><td>Telegram-Chat</td><td>Nachricht mit «error» oder Code</td></tr>
+        <tr><td>/health Befehl</td><td>Statuszeilen mit Fehlern</td></tr>
+        <tr><td>@dirigent_access_bot</td><td>Support-Diagnose</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="next-articles">
+    <div class="next-card" onclick="openArticle('article-stolpersteine-frozen')"><span>Agent antwortet nicht</span><em>4 Min →</em></div>
+    <div class="next-card" onclick="openArticle('article-stolpersteine-memory')"><span>Probleme mit Gedächtnis</span><em>4 Min →</em></div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTICLE: PROBLEME MIT GEDÄCHTNIS ═══ -->
+<div class="container article-page" id="article-stolpersteine-memory">
+  <div class="article-meta">
+    <span class="read-time">4 Min</span>
+    <span>Aktualisiert 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">Probleme mit Gedächtnis und Kontext</h1>
+  <p class="article-tagline">«Er hat alles vergessen» — das häufigste Missverständnis. Der Agent hat tatsächlich ein Gedächtnis, aber es funktioniert anders als das menschliche.</p>
+
+  <div class="article-body">
+    <p>Das Kurzzeitgedächtnis des Agenten — der Kontext — ist begrenzt. Wenn das Gespräch zu lang wird, «vergisst» er frühe Informationen. Das ist eine technische Einschränkung, keine Fehlfunktion.</p>
+
+    <h2>Häufige Probleme und Lösungen</h2>
+    <table class="data-table">
+      <thead><tr><th>Problem</th><th>Warum</th><th>Lösung</th></tr></thead>
+      <tbody>
+        <tr><td>Vergisst Aufgabe nach 20 Nachrichten</td><td>Kontext überfüllt</td><td>Neue Konversation + kurze Zusammenfassung</td></tr>
+        <tr><td>Wiederholt bereits Erledigtes</td><td>Verlor Aufgabenverfolg</td><td><code>/status</code> senden, um Erinnerung aufzufrischen</td></tr>
+        <tr><td>Kennt Ihren Namen/Stil nicht</td><td>Kein Langzeitgedächtnis</td><td>In MEMORY.md speichern — der Agent liest es</td></tr>
+        <tr><td>«Vergisst» Projekte zwischen Sitzungen</td><td>Kontext wird nicht gespeichert</td><td>Projekte in MEMORY.md oder Dateien</td></tr>
+        <tr><td>Gibt widersprüchliche Antworten</td><td>Kontextverlust</td><td>Neue Konversation beginnen</td></tr>
+        <tr><td>Vergisst Anweisungen mitten in Aufgabe</td><td>Langer Dialog</td><td>Schlüsselanweisungen wiederholen</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Wie das Gedächtnis des Agenten funktioniert</h2>
+    <p>Der Agent hat zwei Arten von Gedächtnis:</p>
+    <ul>
+      <li><strong>Kurzzeit (Kontext)</strong> — aktuelles Gespräch. Begrenzt auf ca. 200 000 Zeichen. Wenn es voll ist — verdichtet der Agent alten Inhalt.</li>
+      <li><strong>Langzeit (Dateien)</strong> — MEMORY.md, GOALS.md, Projektdateien. Das überlebt jede Sitzung.</li>
+    </ul>
+
+    <div class="note-box">
+      <strong>Wichtig für Langzeitgedächtnis</strong>
+      <p>Damit der Agent sich zwischen Sitzungen an Sie erinnert — bitten Sie ihn, wichtige Informationen in MEMORY.md zu speichern. Das ist Ihre persönliche Wissensdatenbank, die der Agent bei jeder neuen Konversation liest.</p>
+    </div>
+
+    <h2>Nützliche Gewohnheiten</h2>
+    <table class="data-table">
+      <thead><tr><th>Gewohnheit</th><th>Warum das hilft</th></tr></thead>
+      <tbody>
+        <tr><td>Neue Konversation für neue Aufgaben beginnen</td><td>Sauberer Kontext = bessere Antworten</td></tr>
+        <tr><td>Schlüsselinfo in MEMORY.md speichern</td><td>Der Agent liest es beim Start</td></tr>
+        <tr><td>Am Konversationsanfang kurze Zusammenfassung geben</td><td>Bringt Agenten schnell auf Stand</td></tr>
+        <tr><td>/status bei Aufgabenverfolgung</td><td>Zeigt, was der Agent gerade im Gedächtnis hat</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="next-articles">
+    <div class="next-card" onclick="openArticle('article-stolpersteine-errors')"><span>Fehler 401, 403, 404, 429</span><em>3 Min →</em></div>
+    <div class="next-card" onclick="openArticle('article-stolpersteine-faq')"><span>Häufige Fragen (FAQ)</span><em>3 Min →</em></div>
+  </div>
+</div>
+
+
+<!-- ═══ ARTICLE: FAQ ═══ -->
+<div class="container article-page" id="article-stolpersteine-faq">
+  <div class="article-meta">
+    <span class="read-time">3 Min</span>
+    <span>Aktualisiert 2026-05-10</span>
+  </div>
+  <h1 class="article-h1">Häufige Fragen (FAQ)</h1>
+  <p class="article-tagline">Kurze Antworten auf die häufigsten Fragen — ohne Umschweife.</p>
+
+  <div class="article-body">
+    <p>Hier sind die Fragen, die Nutzer am häufigsten stellen. Falls Ihre Frage hier nicht beantwortet ist — schreiben Sie dem Support: @dirigent_access_bot.</p>
+
+    <h2>Allgemeine Fragen</h2>
+
+    <p><strong>Kann der Agent meine Dateien löschen oder etwas beschädigen?</strong><br>
+    Nein. Er kann nur lesen und schreiben, wo Sie es erlaubt haben. Rote Aktionen (Löschen, Force-Push) erfordern Ihre Bestätigung.</p>
+
+    <p><strong>Sieht der Agent meine Passwörter und Nachrichten?</strong><br>
+    Der Agent arbeitet im Rahmen des von Ihnen bereitgestellten Kontexts. API-Schlüssel werden in .env-Dateien gespeichert und nicht in Antworten angezeigt.</p>
+
+    <p><strong>Was passiert, wenn das Claude-Abonnement ausläuft?</strong><br>
+    Der Agent hört auf zu antworten und sendet einen 403-Fehler. Abonnement erneuern auf claude.ai → Agent funktioniert wieder.</p>
+
+    <p><strong>Kann der Agent gleichzeitig mehrere Aufgaben ausführen?</strong><br>
+    Er bearbeitet Anfragen nacheinander. Falls Sie mehrere Aufgaben haben — listen Sie sie in einer Nachricht auf, er erledigt sie der Reihe nach.</p>
+
+    <h2>Nützliche Befehle</h2>
+    <table class="data-table">
+      <thead><tr><th>Befehl</th><th>Was er tut</th></tr></thead>
+      <tbody>
+        <tr><td><code>/help</code></td><td>Liste aller Befehle anzeigen</td></tr>
+        <tr><td><code>/status</code></td><td>Aktuellen Aufgabenstatus zeigen</td></tr>
+        <tr><td><code>/health</code></td><td>Systemgesundheit prüfen</td></tr>
+        <tr><td><code>/cancel</code></td><td>Aktuelle Aufgabe abbrechen</td></tr>
+        <tr><td><code>/auth</code></td><td>Token erneuern (bei @jarchitect_bot)</td></tr>
+        <tr><td><code>/settings</code></td><td>Agenteneinstellungen öffnen</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Unterstützte Formate</h2>
+    <table class="data-table">
+      <thead><tr><th>Was man schicken kann</th><th>Was der Agent tut</th></tr></thead>
+      <tbody>
+        <tr><td>Text</td><td>Aufgaben, Fragen, Anweisungen</td></tr>
+        <tr><td>Fotos und Screenshots</td><td>Analysiert und beschreibt</td></tr>
+        <tr><td>PDF-Dokumente</td><td>Liest und verarbeitet</td></tr>
+        <tr><td>Code-Snippets</td><td>Erklärt, korrigiert, verbessert</td></tr>
+        <tr><td>Links</td><td>Öffnet und analysiert den Inhalt</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note-box">
+      <strong>Nicht gefunden was Sie gesucht haben?</strong>
+      <p>Schreiben Sie dem Support direkt: <a href="https://t.me/dirigent_access_bot" target="_blank">@dirigent_access_bot</a>. Wir helfen in der Regel innerhalb von 24 Stunden.</p>
+    </div>
+  </div>
+
+  <div class="next-articles">
+    <div class="next-card" onclick="openArticle('article-stolpersteine-frozen')"><span>Agent antwortet nicht</span><em>4 Min →</em></div>
+    <div class="next-card" onclick="openArticle('article-stolpersteine-memory')"><span>Probleme mit Gedächtnis</span><em>4 Min →</em></div>
   </div>
 </div>
 
